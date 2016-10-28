@@ -5,6 +5,9 @@
 //  Created by Andreas Fink on 31.03.16.
 //  Copyright (c) 2016 Andreas Fink (andreas@fink.org)
 //
+// This source is dual licensed either under the GNU GENERAL PUBLIC LICENSE
+// Version 3 from 29 June 2007 and other commercial licenses available by
+// the author.
 
 #import "SccpTranslationTableNumber.h"
 
