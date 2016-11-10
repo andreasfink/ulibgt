@@ -661,7 +661,7 @@ static int digit_to_nibble(int digit)
         else
         {
             const char *str = msisdn.UTF8String;
-            int len = msisdn.length;
+            unsigned long len = msisdn.length;
             if( len > 1)
             {
                 char c1 = str[0];
