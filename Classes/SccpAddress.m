@@ -11,7 +11,7 @@
 #import "SccpAddress.h"
 #import <ulibmtp3/ulibmtp3.h>
 
-static int is_all_digits(const char *text, int startpos, int len);
+static int is_all_digits(const char *text, int startpos, unsigned long len);
 
 static int digit_to_nibble(int digit)
 {
@@ -962,7 +962,7 @@ static int digit_to_nibble(int digit)
 
 @end
 
-static int is_all_digits(const char *text, int startpos, int len)
+static int is_all_digits(const char *text, int startpos, unsigned long len)
 {
     int i=0;
     for(i=startpos;i<len;i++)
