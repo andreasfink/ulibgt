@@ -11,11 +11,12 @@
 
 #import <ulib/ulib.h>
 #import <ulibmtp3/ulibmtp3.h>
+#import "SccpGttRoutingTableAction.h"
 
 @class SccpL3Provider;
 
 /* this identifies the next hop of a SCCP message */
-@interface SccpNextHop : UMObject
+@interface SccpNextHop : SccpGttRoutingTableAction
 {
     BOOL            sendToSubsystem;    /* send it to internal subsystem */
     int             ssn;                /* which subsystem number to use */
