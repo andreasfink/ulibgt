@@ -1,6 +1,6 @@
 //
 //  SccpRoutingTable.h
-//  MessageMover
+//  ulibgt
 //
 //  Created by Andreas Fink on 22/05/15.
 //
@@ -11,6 +11,7 @@
 
 #import <ulib/ulib.h>
 
+/* a GTT Selector is basically a SCCP routing table */
 
 @class SccpApplicationGroup;
 @class SccpNextHop;

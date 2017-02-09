@@ -1,6 +1,6 @@
 //
 //  SccpGttRegistry.m
-//  MessageMover
+//  ulibgt
 //
 //  Created by Andreas Fink on 29/05/15.
 //

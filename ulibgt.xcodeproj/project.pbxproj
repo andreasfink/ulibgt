@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A6091FCA1CB567630076BD59 /* SccpVariant.h in Headers */ = {isa = PBXBuildFile; fileRef = A6091FC81CB567620076BD59 /* SccpVariant.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A66233BD1E4C46160095B5D8 /* SccpGttDigitEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A66233BB1E4C46160095B5D8 /* SccpGttDigitEntry.h */; };
+		A66233BE1E4C46160095B5D8 /* SccpGttDigitEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A66233BC1E4C46160095B5D8 /* SccpGttDigitEntry.m */; };
+		A66233C11E4C46C60095B5D8 /* SccpGttRoutingTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A66233BF1E4C46C60095B5D8 /* SccpGttRoutingTable.h */; };
+		A66233C21E4C46C60095B5D8 /* SccpGttRoutingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A66233C01E4C46C60095B5D8 /* SccpGttRoutingTable.m */; };
 		A68A22741B18B5DD00854472 /* ulibgt.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A22731B18B5DD00854472 /* ulibgt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A227A1B18B5DD00854472 /* ulibgt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A226E1B18B5DD00854472 /* ulibgt.framework */; };
 		A68A22811B18B5DD00854472 /* ulibgtTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A22801B18B5DD00854472 /* ulibgtTests.m */; };
@@ -58,6 +62,10 @@
 
 /* Begin PBXFileReference section */
 		A6091FC81CB567620076BD59 /* SccpVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpVariant.h; sourceTree = "<group>"; };
+		A66233BB1E4C46160095B5D8 /* SccpGttDigitEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpGttDigitEntry.h; sourceTree = "<group>"; };
+		A66233BC1E4C46160095B5D8 /* SccpGttDigitEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpGttDigitEntry.m; sourceTree = "<group>"; };
+		A66233BF1E4C46C60095B5D8 /* SccpGttRoutingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpGttRoutingTable.h; sourceTree = "<group>"; };
+		A66233C01E4C46C60095B5D8 /* SccpGttRoutingTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpGttRoutingTable.m; sourceTree = "<group>"; };
 		A68A226E1B18B5DD00854472 /* ulibgt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulibgt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A68A22721B18B5DD00854472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A68A22731B18B5DD00854472 /* ulibgt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ulibgt.h; sourceTree = "<group>"; };
@@ -75,21 +83,21 @@
 		A68A22931B18B93D00854472 /* SccpL3Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpL3Provider.m; sourceTree = "<group>"; };
 		A68A22941B18B93D00854472 /* SccpNextHop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpNextHop.h; sourceTree = "<group>"; };
 		A68A22951B18B93D00854472 /* SccpNextHop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpNextHop.m; sourceTree = "<group>"; };
-		A6ADC5D91CADBB2F00211137 /* SccpTranslationTableNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpTranslationTableNumber.h; sourceTree = "<group>"; };
-		A6ADC5DA1CADBB2F00211137 /* SccpTranslationTableNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpTranslationTableNumber.m; sourceTree = "<group>"; };
+		A6ADC5D91CADBB2F00211137 /* SccpTranslationTableNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SccpTranslationTableNumber.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A6ADC5DA1CADBB2F00211137 /* SccpTranslationTableNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SccpTranslationTableNumber.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A6ADC5DD1CADEA2C00211137 /* ulibmtp3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulibmtp3.framework; path = ../../../../../Library/Frameworks/ulibmtp3.framework; sourceTree = "<group>"; };
-		A6D03BD61CA4959600211137 /* SccpAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpAddress.h; sourceTree = "<group>"; };
-		A6D03BD71CA4959600211137 /* SccpAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpAddress.m; sourceTree = "<group>"; };
+		A6D03BD61CA4959600211137 /* SccpAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SccpAddress.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A6D03BD71CA4959600211137 /* SccpAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SccpAddress.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A6D03BDA1CA497D200211137 /* SccpAddressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpAddressIndicator.h; sourceTree = "<group>"; };
 		A6D03BDB1CA497D200211137 /* SccpAddressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpAddressIndicator.m; sourceTree = "<group>"; };
-		A6D03BDE1CA49DCD00211137 /* SccpNatureOfAddressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpNatureOfAddressIndicator.h; sourceTree = "<group>"; };
-		A6D03BDF1CA49DCD00211137 /* SccpNatureOfAddressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpNatureOfAddressIndicator.m; sourceTree = "<group>"; };
-		A6D03BE21CA49E0700211137 /* SccpSubSystemNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpSubSystemNumber.h; sourceTree = "<group>"; };
-		A6D03BE31CA49E0700211137 /* SccpSubSystemNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpSubSystemNumber.m; sourceTree = "<group>"; };
-		A6D03BE61CA49F0F00211137 /* SccpTypeOfNumberIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpTypeOfNumberIndicator.h; sourceTree = "<group>"; };
-		A6D03BE71CA49F0F00211137 /* SccpTypeOfNumberIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpTypeOfNumberIndicator.m; sourceTree = "<group>"; };
-		A6D03BEA1CA4A0E800211137 /* SccpNumberPlanIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpNumberPlanIndicator.h; sourceTree = "<group>"; };
-		A6D03BEB1CA4A0E800211137 /* SccpNumberPlanIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpNumberPlanIndicator.m; sourceTree = "<group>"; };
+		A6D03BDE1CA49DCD00211137 /* SccpNatureOfAddressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SccpNatureOfAddressIndicator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A6D03BDF1CA49DCD00211137 /* SccpNatureOfAddressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SccpNatureOfAddressIndicator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A6D03BE21CA49E0700211137 /* SccpSubSystemNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SccpSubSystemNumber.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A6D03BE31CA49E0700211137 /* SccpSubSystemNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SccpSubSystemNumber.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A6D03BE61CA49F0F00211137 /* SccpTypeOfNumberIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SccpTypeOfNumberIndicator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A6D03BE71CA49F0F00211137 /* SccpTypeOfNumberIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SccpTypeOfNumberIndicator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A6D03BEA1CA4A0E800211137 /* SccpNumberPlanIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SccpNumberPlanIndicator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A6D03BEB1CA4A0E800211137 /* SccpNumberPlanIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SccpNumberPlanIndicator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A6D43A2C1B3143600090FC94 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		A6F693F01B4E83630090FC94 /* configure.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
 		A6F694211B4E85980090FC94 /* Makefile.linux.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
@@ -167,6 +175,10 @@
 				A68A228D1B18B93D00854472 /* SccpApplicationGroup.m */,
 				A68A228E1B18B93D00854472 /* SccpGttRegistry.h */,
 				A68A228F1B18B93D00854472 /* SccpGttRegistry.m */,
+				A66233BF1E4C46C60095B5D8 /* SccpGttRoutingTable.h */,
+				A66233C01E4C46C60095B5D8 /* SccpGttRoutingTable.m */,
+				A66233BB1E4C46160095B5D8 /* SccpGttDigitEntry.h */,
+				A66233BC1E4C46160095B5D8 /* SccpGttDigitEntry.m */,
 				A68A22901B18B93D00854472 /* SccpGttSelector.h */,
 				A68A22911B18B93D00854472 /* SccpGttSelector.m */,
 				A68A22921B18B93D00854472 /* SccpL3Provider.h */,
@@ -213,10 +225,12 @@
 				A6D03BE01CA49DCD00211137 /* SccpNatureOfAddressIndicator.h in Headers */,
 				A68A22A21B18B93D00854472 /* SccpNextHop.h in Headers */,
 				A6D03BD81CA4959600211137 /* SccpAddress.h in Headers */,
+				A66233C11E4C46C60095B5D8 /* SccpGttRoutingTable.h in Headers */,
 				A6091FCA1CB567630076BD59 /* SccpVariant.h in Headers */,
 				A6D03BE41CA49E0700211137 /* SccpSubSystemNumber.h in Headers */,
 				A6D03BDC1CA497D200211137 /* SccpAddressIndicator.h in Headers */,
 				A6D03BEC1CA4A0E800211137 /* SccpNumberPlanIndicator.h in Headers */,
+				A66233BD1E4C46160095B5D8 /* SccpGttDigitEntry.h in Headers */,
 				A68A229F1B18B93D00854472 /* SccpL3Provider.h in Headers */,
 				A68A229C1B18B93D00854472 /* SccpGttSelector.h in Headers */,
 				A68A22961B18B93D00854472 /* SccpApplicationGroup.h in Headers */,
@@ -274,7 +288,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = "Andreas Fink";
+				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
 				TargetAttributes = {
 					A68A226D1B18B5DD00854472 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -349,6 +363,7 @@
 				A6ADC5DC1CADBB2F00211137 /* SccpTranslationTableNumber.m in Sources */,
 				A6D03BE11CA49DCD00211137 /* SccpNatureOfAddressIndicator.m in Sources */,
 				A68A229D1B18B93D00854472 /* SccpGttSelector.m in Sources */,
+				A66233C21E4C46C60095B5D8 /* SccpGttRoutingTable.m in Sources */,
 				A68A22A01B18B93D00854472 /* SccpL3Provider.m in Sources */,
 				A6D03BE51CA49E0700211137 /* SccpSubSystemNumber.m in Sources */,
 				A6D03BED1CA4A0E800211137 /* SccpNumberPlanIndicator.m in Sources */,
@@ -356,6 +371,7 @@
 				A68A229A1B18B93D00854472 /* SccpGttRegistry.m in Sources */,
 				A6D03BD91CA4959600211137 /* SccpAddress.m in Sources */,
 				A6D03BE91CA49F0F00211137 /* SccpTypeOfNumberIndicator.m in Sources */,
+				A66233BE1E4C46160095B5D8 /* SccpGttDigitEntry.m in Sources */,
 				A6D03BDD1CA497D200211137 /* SccpAddressIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

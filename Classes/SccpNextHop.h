@@ -1,6 +1,6 @@
 //
 //  SccpNextHop.h
-//  MessageMover
+//  ulibgt
 //
 //  Created by Andreas Fink on 22/05/15.
 //
