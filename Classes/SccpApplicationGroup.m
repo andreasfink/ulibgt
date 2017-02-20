@@ -14,10 +14,6 @@
 
 #include <stdlib.h>
 
-#ifdef LINUX
-// need this for arc4random_uniform 
-#include <bsd/stdlib.h>
-#endif
 
 @implementation SccpApplicationGroup
 
@@ -110,7 +106,8 @@
         }
 
         /* we pick a radnom entry out of the list weighted by the weight */
-        u_int32_t pick = arc4random_uniform(totalWeight);
+
+        u_int32_t pick = [UMUtil random:totalWeight];
         totalWeight = 0;
         for(SccpNextHop *entry in useableNextHops[prio])
         {
