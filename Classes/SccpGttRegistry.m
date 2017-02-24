@@ -119,20 +119,5 @@ static SccpGttRegistry *g_registry;
 
 
     }
-    cs7 instance 0 gtt address-conversion E212_E214
-    update in-address 000000 out-address 000000 np 7 nai 4  remove 6
-    update in-address 20201 out-address 3097 np 7 nai 4  remove 5
-    update in-address 20205 out-address 30694 np 7 nai 4  remove 5
-    update in-address 20209 out-address 30699 np 7 nai 4  remove 5
-    update in-address 20210 out-address 30693 np 7 nai 4  remove 5
-    update in-address 20402 out-address 00000 np 7 nai 4  remove 5
-    update in-address 20404 out-address 31654 np 7 nai 4  remove 5
-    update in-address 20408 out-address 31653 np 7 nai 4  remove 5
-    update in-address 20412 out-address 31626 np 7 nai 4  remove 5
-    update in-address 20416 out-address 31624 np 7 nai 4  remove 5
-    update in-address 20420 out-address 31628 np 7 nai 4  remove 5
-    update in-address 20601 out-address 32475 np 7 nai 4  remove 5
-    update in-address 20610 out-address 32495 np 7 nai 4  remove 5
-    update in-address 20620 out-address 32486 np 7 nai 4  remove 5
 }
 @end
