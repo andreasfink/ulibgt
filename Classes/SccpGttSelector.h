@@ -45,6 +45,6 @@
 @property(readwrite,assign) int             external;
 @property(readwrite,assign) int             internal;
 
--(SccpGttSelector *)initWithInstanceNameE164:(NSString *)name;
+- (SccpGttSelector *)initWithInstanceNameE164:(NSString *)name;
 
 @end
