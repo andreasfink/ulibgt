@@ -11,18 +11,25 @@
 
 #import <Foundation/Foundation.h>
 
-
-#import "SccpNextHop.h"
+#import "SccpVariant.h"
+#import "SccpAddressIndicator.h"
+#import "SccpNumberPlanIndicator.h"
+#import "SccpTypeOfNumberIndicator.h"
+#import "SccpNatureOfAddressIndicator.h"
+#import "SccpTTMap.h"
+#import "SccpSubSystemNumber.h"
+#import "SccpTranslationTableNumber.h"
+#import "SccpAddress.h"
+#import "SccpApplicationGroup.h"
 #import "SccpGttRegistry.h"
 #import "SccpGttSelector.h"
+#import "SccpGttRoutingTable.h"
+#import "SccpGttRoutingTableEntry.h"
+#import "SccpGttRoutingTableDigitNode.h"
 #import "SccpL3Provider.h"
-#import "SccpAddressIndicator.h"
-#import "SccpNatureOfAddressIndicator.h"
-#import "SccpTypeOfNumberIndicator.h"
-#import "SccpNumberPlanIndicator.h"
-#import "SccpSubSystemNumber.h"
-#import "SccpAddress.h"
+#import "SccpNextHop.h"
 
-#import "SccpApplicationGroup.h"
-
-
+#import "UMSyntaxGT.h"
+#import "UMSyntaxGT_addressConversion.h"
+#import "UMSyntaxGT_applicationGroup.h"
+#import "UMSyntaxGT_selector.h"

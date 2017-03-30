@@ -12,11 +12,23 @@
 
 #import <ulib/ulib.h>
 #import "SccpGttRoutingTableEntry.h"
+#import "SccpGttRoutingTableDigitNode.h"
+
+/* 
+ Entries are stored twice. Once by number in a dictionary so its easy to print and read from a file.
+ Secondly in a optimized digit tree for faster processing
+*/
 
 @interface SccpGttRoutingTable : UMObject
 {
-    SccpGttRoutingTableEntry *rootNode;
+    UMSynchronizedSortedDictionary *_entries;
+    SccpGttRoutingTableDigitNode   *_rootNode;
 }
 
+
+@property(readwrite,strong,atomic)  SccpGttRoutingTableDigitNode   *rootNode;
+
+- (void)entriesToDigitTree;
+- (SccpGttRoutingTableEntry *)findEntry:(NSString *)digits;
 
 @end

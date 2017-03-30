@@ -16,18 +16,19 @@
 
 @interface SccpGttRegistry : UMObject
 {
-    UMSynchronizedDictionary *entries;
+    UMSynchronizedDictionary *_entries;
+    UMSynchronizedDictionary *_linksetTranslationsIncoming;
+    UMSynchronizedDictionary *_linksetTranslationsOutgoing;
 }
+
 
 - (SccpGttSelector *)selectorForInstance:(NSString *)instance
                                       tt:(int)tt
                                      gti:(int)gti
                                       np:(int)np
-                                     nai:(int)nai
-                            internalOnly:(BOOL)internal_only
-                            externalOnly:(BOOL)external_only;
+                                     nai:(int)nai;
 
 - (void)addEntry:(SccpGttSelector *)sel;
-
+- (void)initWithConfigLines:(NSArray *)lines;
 
 @end

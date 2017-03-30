@@ -21,78 +21,33 @@ static SccpGttRegistry *g_registry;
     self = [super init];
     if(self)
     {
-        entries = [[UMSynchronizedDictionary alloc]init];
+        _entries = [[UMSynchronizedDictionary alloc]init];
     }
     return self;
 }
 
-+(SccpGttRegistry *)sharedInstance
-{
-    @synchronized(self)
-    {
-        if(g_registry == NULL)
-        {
-            g_registry = [[SccpGttRegistry alloc]init];
-        }
-    }
-    return g_registry;
-}
+
 - (SccpGttSelector *)selectorForInstance:(NSString *)instance
                                       tt:(int)tt
                                      gti:(int)gti
                                       np:(int)np
                                      nai:(int)nai
-                            internalOnly:(BOOL)internal_only
-                            externalOnly:(BOOL)external_only
 {
-    NSArray *keys = [entries allKeys];
-    for(id key in keys)
+    @synchronized (self)
     {
-        SccpGttSelector *entry = entries[key];
-        if(!entry)
-        {
-            continue;
-        }
-        if(![entry.sccp_instance isEqualToString:instance])
-        {
-            continue;
-        }
-        if(entry.tt != tt)
-        {
-            continue;
-        }
-        if(entry.gti != gti)
-        {
-            continue;
-        }
-        if(gti == 4)
-        {
-            if(entry.np != np)
-            {
-                continue;
-            }
-            if(entry.nai != nai)
-            {
-                continue;
-            }
-        }
-        if(internal_only  && (entry.internal == 0))
-        {
-            continue;
-        }
-        if(external_only  && (entry.external  == 0))
-        {
-            continue;
-        }
-        return entry;
+        NSString *key = [SccpGttSelector selectorKeyForTT:tt gti:gti np:np nai:nai];
+        return _entries[key];
     }
     return NULL;
 }
 
-- (void)addEntry:(SccpGttSelector *)sel
+- (void)addEntry:(SccpGttSelector *)gsel
 {
-    NSString *key = sel.gtt_selector;
-    entries[key]=sel;
+    @synchronized(self)
+    {
+        NSString *key = gsel.selectorKey;
+        _entries[key]=gsel;
+    }
 }
 
 - (void)initWithConfigLines:(NSArray *)lines
@@ -114,10 +69,6 @@ static SccpGttRegistry *g_registry;
         {
             continue;
         }
-
-
-
-
     }
 }
 @end

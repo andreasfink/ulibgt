@@ -14,17 +14,9 @@
 #import "SccpApplicationGroup.h"
 #import "SccpNextHop.h"
 #import "SccpL3Provider.h"
+#import "SccpGttRoutingTable.h"
 
 @implementation SccpGttSelector
-
-@synthesize sccp_instance;
-@synthesize gtt_selector;
-@synthesize tt;
-@synthesize gti;
-@synthesize np;
-@synthesize nai;
-@synthesize external;
-@synthesize internal;
 
 
 @synthesize defaultEntry;
@@ -34,39 +26,64 @@
     self = [super init];
     if(self)
     {
-        self.sccp_instance = name;
-        self.gti =4;
-        self.np = 1;
-        self.nai =4;
-        self.external = 1;
+        _sccp_instance = name;
+        _gti =4;
+        _np = 1;
+        _nai =4;
+        _external = 1;
     }
     return self;
 }
 
--(SccpNextHop *) routeToProvider:(NSString *)digits
+
+- (NSString *)selectorKey
 {
-    SccpNextHop *entry = NULL;
-    @synchronized(_entries)
+    return [SccpGttSelector selectorKeyForTT:_tt gti:_gti np:_np nai:_nai internalOnly:_internal externalOnly:_external];
+}
+
++ (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai  internalOnly:(int)internalOnly externalOnly:(int)externalOnly
+{
+    NSString *key;
+    if(gti==2)
     {
-        if([_entries count]>0)
+        if(internalOnly)
         {
-            NSUInteger n = [digits length];
-            while(n>0)
-            {
-                NSString *substring = [digits substringWithRange:NSMakeRange(0,n--)];
-                entry = _entries[substring];
-                if(entry)
-                {
-                    break;
-                }
-            }
+            return [NSString stringWithFormat:@"tt %d gti 2 internal",tt];
+        }
+        else if(externalOnly)
+        {
+            return [NSString stringWithFormat:@"tt %d gti 2 external",tt];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"tt %d gti 2",tt];
         }
     }
-    if(entry == NULL)
+    else
     {
-        entry = defaultEntry;
+        if(internalOnly)
+        {
+            return [NSString stringWithFormat:@"tt %d gti %d np %d nai %d internal",tt,gti,np,nai];
+        }
+        else if(externalOnly)
+        {
+            return [NSString stringWithFormat:@"tt %d gti %d np %d nai %d external",tt,gti,np,nai];
+        }
+        return [NSString stringWithFormat:@"tt %d gti %d np %d nai %d",tt,gti,np,nai];
     }
-    return entry;
+}
+
+
+-(SccpNextHop *) routeToProvider:(NSString *)digits
+{
+    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntry:digits];
+
+    SccpNextHop *nextHop = routingTableEntry.nextHop;
+    if(nextHop == NULL)
+    {
+        nextHop = defaultEntry;
+    }
+    return nextHop;
 }
 
 @end

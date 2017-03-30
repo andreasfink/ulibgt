@@ -13,7 +13,7 @@
 
 static int is_all_digits(const char *text, int startpos, unsigned long len);
 
-static int digit_to_nibble(int digit)
+int sccp_digit_to_nibble(int digit, int def)
 {
     switch(digit)
     {
@@ -58,7 +58,7 @@ static int digit_to_nibble(int digit)
         case 'f':
             return 0x0F;
     }
-    return 0;
+    return def;
 }
 
 
@@ -375,11 +375,11 @@ static int digit_to_nibble(int digit)
     {
         if( (i % 2) == 0)
         {
-            c1 = digit_to_nibble(addr[i]);
+            c1 = sccp_digit_to_nibble(addr[i],0);
         }
         else
         {
-            c2 = digit_to_nibble(addr[i]);
+            c2 = sccp_digit_to_nibble(addr[i],0);
             [packet appendByte:(c2 << 4 | c1)];
         }
     }

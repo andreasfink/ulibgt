@@ -8,12 +8,18 @@
 
 #import <ulib/ulib.h>
 
-#import "SccpGttRoutingTableAction.h"
+@class SccpGttRoutingTableAction;
+@class SccpNextHop;
+@class SccpApplicationGroup;
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
-    SccpGttRoutingTableEntry    *next[16];
-    SccpGttRoutingTableAction   *action;
+    NSString *_digits;
+    SccpNextHop *_nextHop;
 }
+
+@property(readwrite,atomic,strong)  NSString *digits;
+@property(readwrite,atomic,strong)  SccpNextHop *nextHop;
+
 @end
 

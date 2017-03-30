@@ -62,3 +62,5 @@
 + (SccpAddress *)anyAddress;
 - (SccpAddress *)anySsnAddress;
 @end
+
+int sccp_digit_to_nibble(int digit, int def);
