@@ -38,37 +38,18 @@
 
 - (NSString *)selectorKey
 {
-    return [SccpGttSelector selectorKeyForTT:_tt gti:_gti np:_np nai:_nai internalOnly:_internal externalOnly:_external];
+    return [SccpGttSelector selectorKeyForTT:_tt gti:_gti np:_np nai:_nai];
 }
 
-+ (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai  internalOnly:(int)internalOnly externalOnly:(int)externalOnly
+
++ (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai
 {
-    NSString *key;
     if(gti==2)
     {
-        if(internalOnly)
-        {
-            return [NSString stringWithFormat:@"tt %d gti 2 internal",tt];
-        }
-        else if(externalOnly)
-        {
-            return [NSString stringWithFormat:@"tt %d gti 2 external",tt];
-        }
-        else
-        {
-            return [NSString stringWithFormat:@"tt %d gti 2",tt];
-        }
+        return [NSString stringWithFormat:@"tt %d gti 2",tt];
     }
     else
     {
-        if(internalOnly)
-        {
-            return [NSString stringWithFormat:@"tt %d gti %d np %d nai %d internal",tt,gti,np,nai];
-        }
-        else if(externalOnly)
-        {
-            return [NSString stringWithFormat:@"tt %d gti %d np %d nai %d external",tt,gti,np,nai];
-        }
         return [NSString stringWithFormat:@"tt %d gti %d np %d nai %d",tt,gti,np,nai];
     }
 }

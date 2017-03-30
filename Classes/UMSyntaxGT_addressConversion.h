@@ -13,7 +13,4 @@
 
 }
 
-- (UMSyntaxGT_addressConversion *)initWithDelegate:(id<UMCommandActionProtocol>)delegate;
-
-
 @end

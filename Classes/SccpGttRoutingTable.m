@@ -17,7 +17,7 @@
 
 - (void)entriesToDigitTree
 {
-    SccpGttRoutingTableEntry *newRoot = [[SccpGttRoutingTableEntry alloc]init];
+    SccpGttRoutingTableDigitNode *newRoot = [[SccpGttRoutingTableDigitNode alloc]init];
 
     NSArray *keys = [_entries allKeys];
     for(id key in keys)
@@ -27,7 +27,7 @@
         NSString *digits = entry.digits;
 
         const char *str = digits.UTF8String;
-        int n = strlen(str);
+        int n = (int)strlen(str);
 
         SccpGttRoutingTableDigitNode *currentNode = newRoot;
         for(int i = 0;i<n;i++)
@@ -43,7 +43,7 @@
 - (SccpGttRoutingTableEntry *)findEntry:(NSString *)digits
 {
     const char *str = digits.UTF8String;
-    int n = strlen(str);
+    size_t n = strlen(str);
 
     SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
     for(int i = 0;i<n;i++)

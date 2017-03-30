@@ -56,10 +56,6 @@ static SccpGttRegistry *g_registry;
     /* first we look for config lines starting with "cs7" */
 
     NSCharacterSet *whitespace  = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    NSCharacterSet *quotes      = [NSCharacterSet characterSetWithCharactersInString:@"\""];
-
-    NSMutableArray *configFileSections = [[NSMutableArray alloc]init];
-    NSMutableArray *currentSection = [[NSMutableArray alloc]init];
 
     for(NSString *line in lines)
     {
