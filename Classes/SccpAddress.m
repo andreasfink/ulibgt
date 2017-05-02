@@ -644,7 +644,7 @@ int sccp_digit_to_nibble(int digit, int def)
     address = [NSString stringWithUTF8String:(const char *)&addr[0]];
 }
 
-- (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn
+- (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn variant:(UMMTP3Variant)var
 {
     self = [super init];
     if(self)
@@ -789,7 +789,7 @@ int sccp_digit_to_nibble(int digit, int def)
                     else if(c1 =='$') /* direct pointcode entry */
                     {
                         const char *pcstr = &msisdn.UTF8String[1];
-                        pc = [[UMMTP3PointCode alloc] initWithString:@(pcstr) variant:UMMTP3Variant_Undefined];
+                        pc = [[UMMTP3PointCode alloc] initWithString:@(pcstr) variant:var];
                         ai.globalTitleIndicator = SCCP_GTI_NONE;
                         ai.pointCodeIndicator = YES;
                     }

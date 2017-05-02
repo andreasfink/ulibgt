@@ -53,7 +53,7 @@
 - (SccpAddress *)initWithItuData:(NSData *)data;
 - (SccpAddress *)initWithAnsiData:(NSData *)data;
 - (SccpAddress *)initWithData:(NSData *)data;
-- (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn;
+- (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn variant:(UMMTP3Variant)var;
 - (NSDictionary *)dictionaryValue;
 - (UMSynchronizedSortedDictionary *)objectValue;
 - (NSString *)debugDescription;
