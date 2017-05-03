@@ -711,6 +711,22 @@ int sccp_digit_to_nibble(int digit, int def)
                         nai.nai= SCCP_NAI_INTERNATIONAL;
                         address = [msisdn substringFromIndex:4];
                     }
+                    else if([msisdn hasPrefix:@"pc:"]) /* pointcode */
+                    {
+                        address = [msisdn substringFromIndex:3];
+                        if(var == UMMTP3Variant_ANSI)
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_ONLY;
+                            pc = [[UMMTP3PointCode alloc]initWithString:address variant: var];
+                        }
+                        else
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                            pc = [[UMMTP3PointCode alloc]initWithString:address variant: var];
+                        }
+                        ai.pointCodeIndicator = YES;
+                    }
+
                     else if(    (c1 =='{')  /* ITU Encoding of the style { ai : nai : npi : digits : pointcode } */
                             ||  (c1 =='[')) /* ANSI Encoding of the style [ ai : nai : npi : digits : pointcode ] */
                     {
