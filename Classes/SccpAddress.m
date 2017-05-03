@@ -267,6 +267,8 @@ int sccp_digit_to_nibble(int digit, int def)
             case SCCP_GTI_ITU_TT_ONLY:
                 gt_pres = 1;
                 tt_pres = 1;
+                np_pres = 0;
+                nai_pres = 0;
                 break;
             case SCCP_GTI_ITU_TT_NP_ENCODING:
                 gt_pres = 1;
@@ -711,20 +713,113 @@ int sccp_digit_to_nibble(int digit, int def)
                         nai.nai= SCCP_NAI_INTERNATIONAL;
                         address = [msisdn substringFromIndex:4];
                     }
-                    else if([msisdn hasPrefix:@"pc:"]) /* pointcode */
+                    else if([msisdn hasPrefix:@"pc:"]) /* pointcode only */
                     {
-                        address = [msisdn substringFromIndex:3];
-                        if(var == UMMTP3Variant_ANSI)
+                        /*
+                            SYNTAX1:  pc:{pointcode}
+                            SYNTAX2:  pc:{pointcode}:{address}
+                            SYNTAX2b:  pc:{pointcode}:{+address}
+                            SYNTAX3:  pc:{pointcode}:{npi}:{address}
+                            SYNTAX4:  pc:{pointcode}:{nai}:{npi}:{address}
+
+                        examples:
+                            pc:1-99-1
+                            pc:6283
+                            pc:1-99-1:+173518158
+                            pc:6283:0:1:173518158
+                          */
+
+                        address = NULL;
+                        NSString *pcString = NULL;
+                        msisdn = [msisdn substringFromIndex:3];
+                        NSArray *components = [msisdn componentsSeparatedByString:@":"];
+                        if([components count]==1)
                         {
-                            ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_ONLY;
-                            pc = [[UMMTP3PointCode alloc]initWithString:address variant: var];
+                            /* syntax 1 pointcode */
+                            if(var == UMMTP3Variant_ANSI)
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_ONLY;
+                            }
+                            else
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                            }
+                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: var];
                         }
-                        else
+                        else if([components count]==2)
                         {
-                            ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
-                            pc = [[UMMTP3PointCode alloc]initWithString:address variant: var];
+                            /* syntax 2: pointcode,address */
+                            pcString = components[0];
+                            if(var == UMMTP3Variant_ANSI)
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
+                            }
+                            else
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                            }
+                            pc = [[UMMTP3PointCode alloc]initWithString:pcString variant: var];
+                            address = components[1];
+                            if([address hasPrefix:@"+"])
+                            {
+                                address = [address substringFromIndex:1];
+                                if(var == UMMTP3Variant_ANSI)
+                                {
+                                    ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
+                                }
+                                else
+                                {
+                                    ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                                }
+                                nai.nai = SCCP_NAI_INTERNATIONAL;
+                                npi.npi = SCCP_NPI_ISDN_E164;
+                            }
+                            else
+                            {
+                                if(var == UMMTP3Variant_ANSI)
+                                {
+                                    ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
+                                }
+                                else
+                                {
+                                    ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                                }
+                                nai.nai = SCCP_NAI_UNKNOWN;
+                                npi.npi = SCCP_NPI_ISDN_E164;
+                            }
                         }
-                        ai.pointCodeIndicator = YES;
+                        else if([components count]==3)
+                        {
+                            /* syntax 3: pointcode,nai,npi,address */
+                            if(var == UMMTP3Variant_ANSI)
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
+                            }
+                            else
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ITU_TT_NP_ENCODING;
+                            }
+                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: var];
+                            npi.npi = [components[1] intValue];
+                            address = components[2];
+                        }
+                        else if([components count]>3)
+                        {
+                            if(var == UMMTP3Variant_ANSI)
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
+                            }
+                            else
+                            {
+                                ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                            }
+                            /* syntax 3: pointcode,nai,npi,address */
+                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: var];
+                            nai.nai = [components[1] intValue];
+                            npi.npi = [components[2] intValue];
+                            address = components[3];
+                        }
+                        ai.pointCodeIndicator=YES;
                     }
 
                     else if(    (c1 =='{')  /* ITU Encoding of the style { ai : nai : npi : digits : pointcode } */
