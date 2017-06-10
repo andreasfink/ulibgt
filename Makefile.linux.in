@@ -10,8 +10,8 @@ CFLAGS=@CFLAGS@
 CONFIGURATION=Release
 LDFLAGS=@LDFLAGS@
 
-LIB=libulibgt.so
-PKGCONFIGFILE=ulibgt.pc
+LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
+PKGCONFIGFILE=@PROJECT_NAME@.pc
 
 MFILES = $(wildcard Classes/*.m)
 HFILES = version.h $(wildcard Classes/*.h)
@@ -29,7 +29,14 @@ ${LIB}: ${OFILES}
 install: ${LIB}
 	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
 	-mkdir -p ${DESTDIR}/usr/local/include/ulibgt
-	-install -b -g root -o root -m 644 ${LIB} ${DESTDIR}/usr/local/lib/
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}"
+	install -b -g root -o root -m 644 "${LIB}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"	
+	ln -s "${LIB}.${MAJORVER}.${MINORVER}.${REVISION}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
+	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
+	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
 	-install -b -g root -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
 	-mkdir -p ${DESTDIR}/usr/local/include/ulibgt
 	cp $(HFILES) ${DESTDIR}/usr/local/include/ulibgt
