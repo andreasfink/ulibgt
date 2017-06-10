@@ -586,6 +586,10 @@ PACKAGE_URL=''
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+SHARED_LIBRARY_EXTENSION
+REVISION
+MINORVER
+MAJORVER
 INSTALL_DATA
 INSTALL_SCRIPT
 INSTALL_PROGRAM
@@ -1818,6 +1822,9 @@ PROJECT_NAME="ulibgt"
 AUTHOR="Andreas Fink <andreas@fink.org>"
 CONFIG_DEFINE="ULIBGT_CONFIG"
 VERSION=`head -n 1 VERSION`
+MAJORVER=`echo $VERSION | cut -f1 -d.`
+MINORVER=`echo $VERSION | cut -f2 -d.`
+REVISION=`echo $VERSION | cut -f3 -d.`
 CONFIG_HEADER=ulibgt_config.h
 DEPENDENT_PKGCONFIGS="ulib"
 PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
@@ -1974,6 +1981,7 @@ case "$host" in
 	CFLAGS="$CFLAGS -D_REENTRANT=1 -DDARWIN=1 ${ARCH}"
 	LDFLAGS="-framework CoreFoundation -framework IOKit -framework Security  -F /Library/Frameworks ${FRAMEWORK}"
 	LIBTOOL="libtool -static -o"
+	SHARED_LIBRARY_EXTENSION=dylib
     ;;
 
   *-linux-*)
@@ -3087,6 +3095,11 @@ fi
 
 
 ./make_version
+
+
+
+
+
 
 ac_config_files="$ac_config_files Makefile.osx"
 
