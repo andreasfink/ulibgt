@@ -18,6 +18,6 @@
     NSMutableArray *_entries; /* entries of SccpNextHop objects */
 }
 
--(void)addNextHop:(SccpNextHop *)hop;
+- (void)addNextHop:(SccpNextHop *)hop;
 - (SccpNextHop *)pickHopUsingProviders:(UMSynchronizedDictionary *)allProviders;
 @end

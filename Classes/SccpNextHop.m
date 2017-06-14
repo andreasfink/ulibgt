@@ -55,21 +55,19 @@
 
 - (SccpNextHop *)pickHopUsingProviders:(UMSynchronizedDictionary *)allProviders
 {
-    @synchronized(allProviders)
+    NSArray *keys = [allProviders allKeys];
+    for(NSString *providerName in keys)
     {
-        NSArray *keys = [allProviders allKeys];
-        for(NSString *providerName in keys)
+        SccpL3Provider *prov = allProviders[providerName];
+        if([prov isAvailable])
         {
-            SccpL3Provider *prov = allProviders[providerName];
-            if([prov isAvailable])
+            if([prov dpcIsAvailable:dpc])
             {
-                if([prov dpcIsAvailable:dpc])
-                {
-                    return self;
-                }
+                return self;
             }
         }
     }
     return NULL;
 }
+
 @end

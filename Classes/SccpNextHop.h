@@ -21,15 +21,12 @@
     int             ssn;                /* which subsystem number to use */
     int             priority;           /* priority group 0...7 of this route */
     int             weight;             /* weight of this route */
-//  NSString        *nextDpc;           /* which pointcode to send over that instance */
-// NSString        *nextOpc;           /* which pointcode to send over that instance */
- 
     UMMTP3PointCode *opc;
     UMMTP3PointCode *dpc;
     int             ntt;                /* new translation type to use outbound, -1 for unchanged */
     NSString        *l3provider;        /* which MTP3 or M3UA instance to send it to */
     SccpL3Provider  *provider;
-    NSString *name;
+    NSString        *name;
 }
 
 @property(readwrite,assign) BOOL    sendToSubsystem;

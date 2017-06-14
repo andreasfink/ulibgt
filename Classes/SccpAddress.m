@@ -373,16 +373,24 @@ int sccp_digit_to_nibble(int digit, int def)
         }
     }
 
-    for(i=0;i<len;i++)
+    if(nai.nai == SCCP_NAI_ALPHANUMERIC)
     {
-        if( (i % 2) == 0)
+        NSData *addressData = [address unhexedData];
+        [packet appendData:addressData];
+    }
+    else
+    {
+        for(i=0;i<len;i++)
         {
-            c1 = sccp_digit_to_nibble(addr[i],0);
-        }
-        else
-        {
-            c2 = sccp_digit_to_nibble(addr[i],0);
-            [packet appendByte:(c2 << 4 | c1)];
+            if( (i % 2) == 0)
+            {
+                c1 = sccp_digit_to_nibble(addr[i],0);
+            }
+            else
+            {
+                c2 = sccp_digit_to_nibble(addr[i],0);
+                [packet appendByte:(c2 << 4 | c1)];
+            }
         }
     }
     if(odd)

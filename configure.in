@@ -14,6 +14,9 @@ PROJECT_NAME="ulibgt"
 AUTHOR="Andreas Fink <andreas@fink.org>"
 CONFIG_DEFINE="ULIBGT_CONFIG"
 VERSION=`head -n 1 VERSION`
+MAJORVER=`echo $VERSION | cut -f1 -d.`
+MINORVER=`echo $VERSION | cut -f2 -d.`
+REVISION=`echo $VERSION | cut -f3 -d.`
 CONFIG_HEADER=ulibgt_config.h
 DEPENDENT_PKGCONFIGS="ulib"
 PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
@@ -53,6 +56,7 @@ case "$host" in
 	CFLAGS="$CFLAGS -D_REENTRANT=1 -DDARWIN=1 ${ARCH}"
 	LDFLAGS="-framework CoreFoundation -framework IOKit -framework Security  -F /Library/Frameworks ${FRAMEWORK}"
 	LIBTOOL="libtool -static -o" 
+	SHARED_LIBRARY_EXTENSION=dylib
     ;;
 
   *-linux-*)
@@ -137,6 +141,11 @@ AC_CONFIG_SECTION([Generating output files])
 ./make_version
 dnl Final Output
 AC_SUBST(PROJECT_NAME)
+AC_SUBST(VERSION)
+AC_SUBST(MAJORVER)
+AC_SUBST(MINORVER)
+AC_SUBST(REVISION)
+AC_SUBST(SHARED_LIBRARY_EXTENSION)
 AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])
 AC_CONFIG_FILES([ulibgt.pc])

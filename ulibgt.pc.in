@@ -7,7 +7,7 @@ includedir=${prefix}/include
 
 Name: ulibgt
 Cflags: -I${includedir}
-Libs: -lbsd -L${libdir} -lulibgt
+Libs: -lbsd -L${libdir} -l:libulibgt.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@
 
 Description: universal global title library
 Version: 1.5.2

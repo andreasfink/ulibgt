@@ -66,21 +66,18 @@
     
     @synchronized(_entries)
     {
-        @synchronized(allProviders)
+        NSArray *keys = [allProviders allKeys];
+        for(NSString *providerName in keys)
         {
-            NSArray *keys = [allProviders allKeys];
-            for(NSString *providerName in keys)
+            SccpL3Provider *prov = allProviders[providerName];
+            if([prov isAvailable])
             {
-                SccpL3Provider *prov = allProviders[providerName];
-                if([prov isAvailable])
+                for(SccpNextHop *nextHop in _entries)
                 {
-                    for(SccpNextHop *nextHop in _entries)
+                    if([prov dpcIsAvailable:nextHop.dpc])
                     {
-                        if([prov dpcIsAvailable:nextHop.dpc])
-                        {
-                            int prio = nextHop.priority;
-                            [useableNextHops[prio] addObject:nextHop];
-                        }
+                        int prio = nextHop.priority;
+                        [useableNextHops[prio] addObject:nextHop];
                     }
                 }
             }
