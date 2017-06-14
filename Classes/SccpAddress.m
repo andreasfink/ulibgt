@@ -654,7 +654,22 @@ int sccp_digit_to_nibble(int digit, int def)
     address = [NSString stringWithUTF8String:(const char *)&addr[0]];
 }
 
-- (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn variant:(UMMTP3Variant)var
+- (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn variant:(UMMTP3Variant)mvar
+{
+    SccpVariant svar;
+    
+    if(mvar == UMMTP3Variant_ANSI)
+    {
+        svar = SCCP_VARIANT_ANSI;
+    }
+    else
+    {
+        svar = SCCP_VARIANT_ITU;
+    }
+    return [self initWithHumanReadableString:msisdn sccpVariant:svar mtp3Variant:mvar];
+}
+            
+- (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn sccpVariant:(SccpVariant)svar mtp3Variant:(UMMTP3Variant)mvar
 {
     self = [super init];
     if(self)
@@ -744,7 +759,7 @@ int sccp_digit_to_nibble(int digit, int def)
                         if([components count]==1)
                         {
                             /* syntax 1 pointcode */
-                            if(var == UMMTP3Variant_ANSI)
+                            if(svar == SCCP_VARIANT_ANSI)
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_ONLY;
                             }
@@ -752,26 +767,26 @@ int sccp_digit_to_nibble(int digit, int def)
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
                             }
-                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: var];
+                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: mvar];
                         }
                         else if([components count]==2)
                         {
                             /* syntax 2: pointcode,address */
                             pcString = components[0];
-                            if(var == UMMTP3Variant_ANSI)
+                            if(svar == SCCP_VARIANT_ANSI)
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
                             }
                             else
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                                pc = [[UMMTP3PointCode alloc]initWithString:pcString variant: mvar];
                             }
-                            pc = [[UMMTP3PointCode alloc]initWithString:pcString variant: var];
                             address = components[1];
                             if([address hasPrefix:@"+"])
                             {
                                 address = [address substringFromIndex:1];
-                                if(var == UMMTP3Variant_ANSI)
+                                if(svar == SCCP_VARIANT_ANSI)
                                 {
                                     ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
                                 }
@@ -784,7 +799,7 @@ int sccp_digit_to_nibble(int digit, int def)
                             }
                             else
                             {
-                                if(var == UMMTP3Variant_ANSI)
+                                if(svar == SCCP_VARIANT_ANSI)
                                 {
                                     ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
                                 }
@@ -799,7 +814,7 @@ int sccp_digit_to_nibble(int digit, int def)
                         else if([components count]==3)
                         {
                             /* syntax 3: pointcode,nai,npi,address */
-                            if(var == UMMTP3Variant_ANSI)
+                            if(svar == SCCP_VARIANT_ANSI)
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
                             }
@@ -807,13 +822,13 @@ int sccp_digit_to_nibble(int digit, int def)
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ITU_TT_NP_ENCODING;
                             }
-                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: var];
+                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: mvar];
                             npi.npi = [components[1] intValue];
                             address = components[2];
                         }
                         else if([components count]>3)
                         {
-                            if(var == UMMTP3Variant_ANSI)
+                            if(svar == SCCP_VARIANT_ANSI)
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
                             }
@@ -821,8 +836,8 @@ int sccp_digit_to_nibble(int digit, int def)
                             {
                                 ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
                             }
+                                pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: mvar];
                             /* syntax 3: pointcode,nai,npi,address */
-                            pc = [[UMMTP3PointCode alloc]initWithString:components[0] variant: var];
                             nai.nai = [components[1] intValue];
                             npi.npi = [components[2] intValue];
                             address = components[3];
@@ -908,7 +923,7 @@ int sccp_digit_to_nibble(int digit, int def)
                     else if(c1 =='$') /* direct pointcode entry */
                     {
                         const char *pcstr = &msisdn.UTF8String[1];
-                        pc = [[UMMTP3PointCode alloc] initWithString:@(pcstr) variant:var];
+                        pc = [[UMMTP3PointCode alloc] initWithString:@(pcstr) variant:mvar];
                         ai.globalTitleIndicator = SCCP_GTI_NONE;
                         ai.pointCodeIndicator = YES;
                     }
