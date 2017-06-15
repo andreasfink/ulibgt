@@ -63,6 +63,8 @@
 - (SccpAddress *)anyAddress;
 + (SccpAddress *)anyAddress;
 - (SccpAddress *)anySsnAddress;
+
+- (NSString *)stringValueE164;
 @end
 
 int sccp_digit_to_nibble(int digit, int def);

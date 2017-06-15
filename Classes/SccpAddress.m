@@ -1017,6 +1017,24 @@ int sccp_digit_to_nibble(int digit, int def)
 
 }
 
+
+- (NSString *)stringValueE164
+{
+    if(npi.npi != SCCP_NPI_ISDN_E164)
+        return NULL;
+    switch(nai.nai)
+    {
+        case  SCCP_NAI_INTERNATIONAL:
+            return [NSString stringWithFormat:@"+%@",address];
+        case  SCCP_NAI_UNKNOWN:
+        case SCCP_NAI_SUBSCRIBER:
+        case SCCP_NAI_RESERVED:
+        case SCCP_NAI_NATIONAL:
+            return address;
+    }
+    return NULL;
+}
+
 - (NSString *)debugDescription
 {
     NSMutableString *s = [[NSMutableString alloc]init];
