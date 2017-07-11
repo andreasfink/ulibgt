@@ -306,7 +306,10 @@ int sccp_digit_to_nibble(int digit, int def)
             gt_pres = 0;
         }
     }
-    
+
+#pragma unused (en_pres)
+#pragma unused(gt_pres)
+
     /* pointcode */
     if(ai.pointCodeIndicator)
     {
@@ -476,6 +479,7 @@ int sccp_digit_to_nibble(int digit, int def)
                 npi = [[SccpNumberPlanIndicator alloc]initWithInt:((x & 0xF0) > 4)];
                 int encoding = (x & 0x0F);
                 odd = (encoding & 0x01);
+#pragma unused(odd)
                 return;
             case 2: /* GT include tt only */
                 tt = [[SccpTranslationTableNumber alloc]initWithInt:bytes[p++]];
@@ -625,9 +629,8 @@ int sccp_digit_to_nibble(int digit, int def)
             odd = 0;
             break;
     }
-    
-    k = 0;
-    
+#pragma unused(odd)
+
     uint8_t addr[MAX_SCCP_DIGITS+2];
     memset(addr,0x00,sizeof(addr));
     k=0;
