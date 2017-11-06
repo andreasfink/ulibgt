@@ -30,4 +30,9 @@
     return [NSString stringWithFormat:@"TT_%d",tt];
 }
 
+- (SccpTranslationTableNumber *)copyWithZone:(NSZone *)zone
+{
+    return [[SccpTranslationTableNumber allocWithZone:zone]initWithInt:tt];
+}
+
 @end

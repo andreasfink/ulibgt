@@ -77,4 +77,10 @@
     }
     return [NSString stringWithFormat:@"TON_%@",str];
 }
+
+
+- (SccpTypeOfNumberIndicator *)copyWithZone:(NSZone *)zone
+{
+    return [[SccpTypeOfNumberIndicator allocWithZone:zone]initWithInt:ton];
+}
 @end

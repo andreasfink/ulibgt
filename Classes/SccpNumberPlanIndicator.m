@@ -80,4 +80,10 @@
     }
     return [NSString stringWithFormat:@"NPI_%@_%d",str,npi];
 }
+
+- (SccpNumberPlanIndicator *)copyWithZone:(NSZone *)zone
+{
+    return [[SccpNumberPlanIndicator allocWithZone:zone]initWithInt:npi];
+}
+
 @end

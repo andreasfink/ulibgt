@@ -58,4 +58,11 @@
     }
     return [NSString stringWithFormat:@"NAI_%@",str];
 }
+
+
+- (SccpNatureOfAddressIndicator *)copyWithZone:(NSZone *)zone
+{
+    return [[SccpNatureOfAddressIndicator allocWithZone:zone]initWithInt:nai];
+}
+
 @end

@@ -238,4 +238,11 @@
 
     return [self initWithInt:[n intValue]];
 }
+
+
+- (SccpSubSystemNumber *)copyWithZone:(NSZone *)zone
+{
+    return [[SccpSubSystemNumber allocWithZone:zone]initWithInt:ssn];
+}
+
 @end

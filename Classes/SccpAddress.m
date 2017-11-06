@@ -450,7 +450,7 @@ int sccp_digit_to_nibble(int digit, int def)
         int pc1 = bytes[p++];
         int pc2 = bytes[p++];
         int pc0 = pc1 + ((pc2 & 0x3F )<<8);
-        pc =[[UMMTP3PointCode alloc]initWitPc:pc0 variant:UMMTP3Variant_ITU];
+        pc =[[UMMTP3PointCode alloc]initWithPc:pc0 variant:UMMTP3Variant_ITU];
     }
     else
     {
@@ -589,7 +589,7 @@ int sccp_digit_to_nibble(int digit, int def)
         int pc2 = bytes[p++];
         int pc3 = bytes[p++];
         int pc0 = pc1 | (pc2<<8) | (pc3 << 16);
-        pc =[[UMMTP3PointCode alloc]initWitPc:pc0 variant:UMMTP3Variant_ANSI];
+        pc =[[UMMTP3PointCode alloc]initWithPc:pc0 variant:UMMTP3Variant_ANSI];
     }
     else
     {
@@ -941,6 +941,22 @@ int sccp_digit_to_nibble(int digit, int def)
         }
     }
     return self;
+}
+
+- (SccpAddress *)copyWithZone:(NSZone *)zone
+{
+    SccpAddress *g = [[SccpAddress allocWithZone:zone]init];
+    if(g)
+    {
+        g->ai = [ai copy];
+        g->nai = [nai copy];
+        g->npi = [npi copy];
+        g->ssn = [ssn copy];
+        g->tt = [tt copy];
+        g->address = [address copy];
+        g->pc = [pc copy];
+    }
+    return g;
 }
 
 - (NSDictionary *)dictionaryValue

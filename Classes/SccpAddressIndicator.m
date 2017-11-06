@@ -217,5 +217,10 @@
     return s;
 }
 
+- (SccpAddressIndicator *)copyWithZone:(NSZone *)zone
+{
+    return [[SccpAddressIndicator allocWithZone:zone]initWithInt:self.addressIndicator];
+}
+
 
 @end
