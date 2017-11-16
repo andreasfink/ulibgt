@@ -139,13 +139,18 @@ int sccp_digit_to_nibble(int digit, int def)
 
 - (void)setNpiFromInt:(int)i
 {
-    npi = [[SccpNumberPlanIndicator alloc]initWithInt:i];
-
+    if((npi) && (npi.npi != i))
+    {
+        npi = [[SccpNumberPlanIndicator alloc]initWithInt:i];
+    }
 }
 
 - (void)setSsnFromInt:(int)i
 {
-    ssn = [[SccpSubSystemNumber alloc]initWithInt:i];
+    if((ssn) && (ssn.ssn !=i))
+    {
+        ssn = [[SccpSubSystemNumber alloc]initWithInt:i];
+    }
     ai.subSystemIndicator = YES;
 }
 
