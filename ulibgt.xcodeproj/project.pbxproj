@@ -61,6 +61,11 @@
 		A6D43A2D1B3143600090FC94 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A6D43A2C1B3143600090FC94 /* VERSION */; };
 		A6D83D101E4C562900D04652 /* SccpGttRoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D83D0E1E4C562900D04652 /* SccpGttRoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D83D111E4C562900D04652 /* SccpGttRoutingTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D83D0F1E4C562900D04652 /* SccpGttRoutingTableEntry.m */; };
+		A6E7BF4C1FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF471FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf */; };
+		A6E7BF4D1FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF481FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf */; };
+		A6E7BF4E1FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF491FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf */; };
+		A6E7BF4F1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF4A1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf */; };
+		A6E7BF501FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF4B1FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +130,11 @@
 		A6D43A2C1B3143600090FC94 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		A6D83D0E1E4C562900D04652 /* SccpGttRoutingTableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpGttRoutingTableEntry.h; sourceTree = "<group>"; };
 		A6D83D0F1E4C562900D04652 /* SccpGttRoutingTableEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpGttRoutingTableEntry.m; sourceTree = "<group>"; };
+		A6E7BF471FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-200702-S!Amd1!PDF-E.pdf"; sourceTree = "<group>"; };
+		A6E7BF481FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-200805-I!!PDF-E-2.pdf"; sourceTree = "<group>"; };
+		A6E7BF491FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-201011-I!Amd2!PDF-E.pdf"; sourceTree = "<group>"; };
+		A6E7BF4A1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.213-198811-I!!PDF-E.pdf"; sourceTree = "<group>"; };
+		A6E7BF4B1FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-200805-I!!PDF-E.pdf"; sourceTree = "<group>"; };
 		A6F693F01B4E83630090FC94 /* configure.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
 		A6F694211B4E85980090FC94 /* Makefile.linux.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
 		A6F694221B4E85980090FC94 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
@@ -175,6 +185,7 @@
 				A666EEC21E89B69E004804CB /* Frameworks */,
 				A68A227D1B18B5DD00854472 /* ulibgtTests */,
 				A68A226F1B18B5DD00854472 /* Products */,
+				A6E7BF461FBECE2C00C53765 /* doc */,
 			);
 			sourceTree = "<group>";
 		};
@@ -260,6 +271,18 @@
 				A68A227F1B18B5DD00854472 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A6E7BF461FBECE2C00C53765 /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				A6E7BF471FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf */,
+				A6E7BF481FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf */,
+				A6E7BF4B1FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf */,
+				A6E7BF491FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf */,
+				A6E7BF4A1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf */,
+			);
+			path = doc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,8 +399,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6E7BF4E1FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf in Resources */,
 				A661D19F1E89218D00A5140C /* README.txt in Resources */,
+				A6E7BF4C1FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf in Resources */,
+				A6E7BF4D1FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf in Resources */,
 				A6D43A2D1B3143600090FC94 /* VERSION in Resources */,
+				A6E7BF501FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf in Resources */,
+				A6E7BF4F1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
