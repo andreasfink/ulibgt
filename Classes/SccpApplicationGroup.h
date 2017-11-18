@@ -16,6 +16,7 @@
 @interface SccpApplicationGroup : SccpNextHop
 {
     NSMutableArray *_entries; /* entries of SccpNextHop objects */
+    UMMutex *_lock;
 }
 
 - (void)addNextHop:(SccpNextHop *)hop;

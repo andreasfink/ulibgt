@@ -23,6 +23,7 @@
     if(self)
     {
         _entries = [[NSMutableArray alloc]init];
+        _lock = [[UMMutex alloc]init];
     }
     return self;
 }
@@ -34,26 +35,26 @@
 
 -(void)addNextHop:(SccpNextHop *)hop
 {
-    @synchronized(_entries)
-    {
-        [_entries addObject:hop];
-    }
+    [_lock lock];
+    [_entries addObject:hop];
+    [_lock unlock];
+
 }
 
 
 - (BOOL)isAvailable
 {
-    @synchronized(_entries)
+    BOOL r = NO;
+    [_lock lock];
+    for(SccpNextHop *e in _entries)
     {
-        for(SccpNextHop *e in _entries)
+        if(e.isAvailable)
         {
-            if(e.isAvailable)
-            {
-                return YES;
-            }
+            r = YES;
         }
     }
-    return NO;
+    [_lock unlock];
+    return r;
 }
 
 - (SccpNextHop *)pickHopUsingProviders:(UMSynchronizedDictionary *)allProviders
@@ -64,7 +65,9 @@
         useableNextHops[prio] = [[NSMutableArray alloc]init];
     }
     
-    @synchronized(_entries)
+    [_lock lock];
+
+    @try
     {
         NSArray *keys = [allProviders allKeys];
         for(NSString *providerName in keys)
@@ -82,6 +85,10 @@
                 }
             }
         }
+    }
+    @finally
+    {
+        [_lock unlock];
     }
     
     for(int prio=0;prio<8;prio++)

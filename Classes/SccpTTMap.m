@@ -25,21 +25,15 @@
 
 - (void)setMap:(int)in to:(int)to
 {
-    @synchronized(self)
+    if((in>=0) && (in < 256))
     {
-        if((in>=0) && (in < 256))
-        {
-            _ttmap[in] = to;
-        }
+        _ttmap[in] = to;
     }
 }
 
 - (int)map:(int)in
 {
-    @synchronized(self)
-    {
-        return _ttmap[in];
-    }
+    return _ttmap[in];
 }
 
 @end
