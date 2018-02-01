@@ -235,8 +235,12 @@
     {
         return [self initWithInt:SCCP_SSN_800_NUMBER_TRANSLATION_TCAP];
     }
-
-    return [self initWithInt:[n intValue]];
+    int k = [n intValue];
+    if(k==0)
+    {
+        return NULL;
+    }
+    return [self initWithInt:k];
 }
 
 

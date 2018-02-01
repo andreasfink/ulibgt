@@ -212,6 +212,7 @@ int sccp_digit_to_nibble(int digit, int def)
     {
         ai.subSystemIndicator = NO;
     }
+    
     if((variant==SCCP_VARIANT_ITU) && (nai_pres) && (np_pres) && (gt_pres) &&(tt_pres) )
     {
         ai.nationalReservedBit=NO;
