@@ -204,7 +204,7 @@ int sccp_digit_to_nibble(int digit, int def)
         gt_pres=1;
         ai.routingIndicatorBit = NO;
     }
-    if((ssn) && (ssn.ssn!=0))
+    if(ssn)
     {
         ai.subSystemIndicator = YES;
     }

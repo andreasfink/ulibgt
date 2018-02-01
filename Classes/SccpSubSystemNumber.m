@@ -123,6 +123,10 @@
     {
         return NULL;
     }
+    if(n.length == 0)
+    {
+        return NULL;
+    }
     else if ([n caseInsensitiveCompare:@"SCCP_MG"] == NSOrderedSame)
     {
         return [self initWithInt:SCCP_SSN_SCCP_MG];
@@ -236,10 +240,6 @@
         return [self initWithInt:SCCP_SSN_800_NUMBER_TRANSLATION_TCAP];
     }
     int k = [n intValue];
-    if(k==0)
-    {
-        return NULL;
-    }
     return [self initWithInt:k];
 }
 
