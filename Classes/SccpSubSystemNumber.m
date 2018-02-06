@@ -239,6 +239,10 @@
     {
         return [self initWithInt:SCCP_SSN_800_NUMBER_TRANSLATION_TCAP];
     }
+    else if ([n caseInsensitiveCompare:@"MISSING"] == NSOrderedSame)
+    {
+        return NULL;
+    }
     int k = [n intValue];
     return [self initWithInt:k];
 }
