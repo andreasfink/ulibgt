@@ -23,7 +23,7 @@
     if(self)
     {
         _entries = [[NSMutableArray alloc]init];
-        _lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:@"sccp-application-group-lock"];
     }
     return self;
 }
