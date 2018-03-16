@@ -14,9 +14,9 @@
 /* a GTT Selector is basically a SCCP routing table */
 
 @class SccpApplicationGroup;
-@class SccpNextHop;
 @class SccpL3Provider;
 @class SccpGttRoutingTable;
+@class SccpDestinationEntry;
 
 @interface SccpGttSelector : UMObject
 {
@@ -28,14 +28,14 @@
     int             _external;
     int             _internal;
     SccpGttRoutingTable *_routingTable;
-    SccpNextHop     *_defaultEntry;
-    NSDictionary    *_statusOfProviders;
+    SccpDestinationEntry     *_defaultEntry;
+    NSDictionary        *_statusOfProviders;
 }
 
 @property(readwrite,strong,atomic) NSString        *sccp_instance;
 
-@property(readwrite,strong) SccpNextHop *defaultEntry;
--(SccpNextHop *) routeToProvider:(NSString *)digits;
+@property(readwrite,strong) SccpDestinationEntry *defaultEntry;
+-(SccpDestinationEntry *) routeToProvider:(NSString *)digits;
 
 @property(readwrite,strong,atomic)  NSString        *gtt_selector;
 @property(readwrite,assign,atomic)  int             tt;

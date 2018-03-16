@@ -55,11 +55,11 @@
 }
 
 
--(SccpNextHop *) routeToProvider:(NSString *)digits
+-(SccpDestinationEntry *) routeToProvider:(NSString *)digits
 {
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntry:digits];
 
-    SccpNextHop *nextHop = routingTableEntry.nextHop;
+    SccpDestinationEntry *nextHop = routingTableEntry.nextHop;
     if(nextHop == NULL)
     {
         nextHop = defaultEntry;

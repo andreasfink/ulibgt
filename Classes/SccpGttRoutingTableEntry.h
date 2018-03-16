@@ -14,8 +14,8 @@
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
-    NSString *_digits;
-    SccpNextHop *_nextHop;
+    NSString             *_digits;
+    SccpDestinationEntry *_nextHop;
 }
 
 @property(readwrite,atomic,strong)  NSString *digits;
