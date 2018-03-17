@@ -9,6 +9,7 @@
 // Version 3 from 29 June 2007 and other commercial licenses available by
 // the author.
 
+#if 0
 #import <ulib/ulib.h>
 #import <ulibmtp3/ulibmtp3.h>
 
@@ -42,3 +43,5 @@
                     dpc:(UMMTP3PointCode *)dpc;
 -(int) maxPduSize;
 @end
+
+#endif

@@ -61,10 +61,10 @@
 		A6D43A2D1B3143600090FC94 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A6D43A2C1B3143600090FC94 /* VERSION */; };
 		A6D83D101E4C562900D04652 /* SccpGttRoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D83D0E1E4C562900D04652 /* SccpGttRoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D83D111E4C562900D04652 /* SccpGttRoutingTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D83D0F1E4C562900D04652 /* SccpGttRoutingTableEntry.m */; };
-		A6E6E8A0205C842E00342810 /* SccpDestinationGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E6E89E205C842E00342810 /* SccpDestinationGroup.h */; };
+		A6E6E8A0205C842E00342810 /* SccpDestinationGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E6E89E205C842E00342810 /* SccpDestinationGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E6E8A1205C842E00342810 /* SccpDestinationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E6E89F205C842E00342810 /* SccpDestinationGroup.m */; };
-		A6E6E8A4205C843800342810 /* SccpDestinationEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E6E8A2205C843800342810 /* SccpDestinationEntry.h */; };
-		A6E6E8A5205C843800342810 /* SccpDestinationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E6E8A3205C843800342810 /* SccpDestinationEntry.m */; };
+		A6E6E8A4205C843800342810 /* SccpDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E6E8A2205C843800342810 /* SccpDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E6E8A5205C843800342810 /* SccpDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E6E8A3205C843800342810 /* SccpDestination.m */; };
 		A6E7BF4C1FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF471FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf */; };
 		A6E7BF4D1FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF481FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf */; };
 		A6E7BF4E1FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF491FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf */; };
@@ -136,8 +136,8 @@
 		A6D83D0F1E4C562900D04652 /* SccpGttRoutingTableEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpGttRoutingTableEntry.m; sourceTree = "<group>"; };
 		A6E6E89E205C842E00342810 /* SccpDestinationGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpDestinationGroup.h; sourceTree = "<group>"; };
 		A6E6E89F205C842E00342810 /* SccpDestinationGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpDestinationGroup.m; sourceTree = "<group>"; };
-		A6E6E8A2205C843800342810 /* SccpDestinationEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpDestinationEntry.h; sourceTree = "<group>"; };
-		A6E6E8A3205C843800342810 /* SccpDestinationEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpDestinationEntry.m; sourceTree = "<group>"; };
+		A6E6E8A2205C843800342810 /* SccpDestination.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpDestination.h; sourceTree = "<group>"; };
+		A6E6E8A3205C843800342810 /* SccpDestination.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpDestination.m; sourceTree = "<group>"; };
 		A6E7BF471FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-200702-S!Amd1!PDF-E.pdf"; sourceTree = "<group>"; };
 		A6E7BF481FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-200805-I!!PDF-E-2.pdf"; sourceTree = "<group>"; };
 		A6E7BF491FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-201011-I!Amd2!PDF-E.pdf"; sourceTree = "<group>"; };
@@ -233,8 +233,8 @@
 				A6D03BE31CA49E0700211137 /* SccpSubSystemNumber.m */,
 				A6E6E89E205C842E00342810 /* SccpDestinationGroup.h */,
 				A6E6E89F205C842E00342810 /* SccpDestinationGroup.m */,
-				A6E6E8A2205C843800342810 /* SccpDestinationEntry.h */,
-				A6E6E8A3205C843800342810 /* SccpDestinationEntry.m */,
+				A6E6E8A2205C843800342810 /* SccpDestination.h */,
+				A6E6E8A3205C843800342810 /* SccpDestination.m */,
 				A6ADC5D91CADBB2F00211137 /* SccpTranslationTableNumber.h */,
 				A6ADC5DA1CADBB2F00211137 /* SccpTranslationTableNumber.m */,
 				A6D03BD61CA4959600211137 /* SccpAddress.h */,
@@ -305,7 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D03BE01CA49DCD00211137 /* SccpNatureOfAddressIndicator.h in Headers */,
-				A6E6E8A4205C843800342810 /* SccpDestinationEntry.h in Headers */,
+				A6E6E8A4205C843800342810 /* SccpDestination.h in Headers */,
 				A666EF761E89C73C004804CB /* UMSyntaxGT_applicationGroup.h in Headers */,
 				A68A22A21B18B93D00854472 /* SccpNextHop.h in Headers */,
 				A6D03BD81CA4959600211137 /* SccpAddress.h in Headers */,
@@ -455,7 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6E6E8A5205C843800342810 /* SccpDestinationEntry.m in Sources */,
+				A6E6E8A5205C843800342810 /* SccpDestination.m in Sources */,
 				A666EF771E89C73C004804CB /* UMSyntaxGT_applicationGroup.m in Sources */,
 				A68A22971B18B93D00854472 /* SccpApplicationGroup.m in Sources */,
 				A6ADC5DC1CADBB2F00211137 /* SccpTranslationTableNumber.m in Sources */,

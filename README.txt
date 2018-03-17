@@ -22,14 +22,12 @@ with the numbers before processing
 
 5. The SccpGttSelector is holding a SccpGttRoutingTable which is a digit tree
 it will walk through digit by digit. Every entry is a SccpGttRoutingTableEntry
-object and can have an action attached.
+object and can have an route attached.
 
-6. An action then can map to a SccpApplicationGroup or a SccpNextHop or simply
-point to a next digit.
+6. An route then maps to a SccpDestination which can point to a m3ua application server or a mtp3 pointcode.
 
-
-7. A SccpNextHop specifies where to forward the message next.
-A SccpApplicationGroup is basically a list of SccpNextHop objects
+7. A SccpDestination specifies where to forward the message next.
+A SccpDestinationGroup is basically a list of SccpDestination objects
 with priorities
 
 

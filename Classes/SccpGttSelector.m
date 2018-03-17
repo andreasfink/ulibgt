@@ -12,7 +12,7 @@
 #import "SccpGttSelector.h"
 #import "SccpL3Provider.h"
 #import "SccpApplicationGroup.h"
-#import "SccpNextHop.h"
+#import "SccpDestination.h"
 #import "SccpL3Provider.h"
 #import "SccpGttRoutingTable.h"
 
@@ -55,11 +55,10 @@
 }
 
 
--(SccpDestinationEntry *) routeToProvider:(NSString *)digits
+-(SccpDestination *) routeToProvider:(NSString *)digits
 {
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntry:digits];
-
-    SccpDestinationEntry *nextHop = routingTableEntry.nextHop;
+    SccpDestination *nextHop = routingTableEntry.routeTo;
     if(nextHop == NULL)
     {
         nextHop = defaultEntry;

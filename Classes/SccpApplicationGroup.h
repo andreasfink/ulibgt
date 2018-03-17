@@ -9,6 +9,7 @@
 // Version 3 from 29 June 2007 and other commercial licenses available by
 // the author.
 
+#if 0
 #import <ulib/ulib.h>
 
 #import "SccpNextHop.h"
@@ -22,3 +23,5 @@
 - (void)addNextHop:(SccpNextHop *)hop;
 - (SccpNextHop *)pickHopUsingProviders:(UMSynchronizedDictionary *)allProviders;
 @end
+#endif
+

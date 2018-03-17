@@ -9,6 +9,7 @@
 // Version 3 from 29 June 2007 and other commercial licenses available by
 // the author.
 
+#if 0
 #import "SccpL3Provider.h"
 
 @implementation SccpL3Provider
@@ -109,3 +110,6 @@
     return mtp3Layer.maxPduSize;
 }
 @end
+
+#endif
+

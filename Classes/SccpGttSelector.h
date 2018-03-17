@@ -16,7 +16,7 @@
 @class SccpApplicationGroup;
 @class SccpL3Provider;
 @class SccpGttRoutingTable;
-@class SccpDestinationEntry;
+@class SccpDestination;
 
 @interface SccpGttSelector : UMObject
 {
@@ -28,14 +28,14 @@
     int             _external;
     int             _internal;
     SccpGttRoutingTable *_routingTable;
-    SccpDestinationEntry     *_defaultEntry;
+    SccpDestination     *_defaultEntry;
     NSDictionary        *_statusOfProviders;
 }
 
 @property(readwrite,strong,atomic) NSString        *sccp_instance;
 
-@property(readwrite,strong) SccpDestinationEntry *defaultEntry;
--(SccpDestinationEntry *) routeToProvider:(NSString *)digits;
+@property(readwrite,strong) SccpDestination *defaultEntry;
+-(SccpDestination *) routeToProvider:(NSString *)digits;
 
 @property(readwrite,strong,atomic)  NSString        *gtt_selector;
 @property(readwrite,assign,atomic)  int             tt;

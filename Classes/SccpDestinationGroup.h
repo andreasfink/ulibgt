@@ -7,9 +7,9 @@
 //
 
 #import <ulib/ulib.h>
-#import "SccpDestinationEntry.h"
+#import "SccpDestination.h"
 
-@interface SccpDestinationGroup : SccpDestinationEntry
+@interface SccpDestinationGroup : SccpDestination
 {
     UMSynchronizedArray *_entries;
 }

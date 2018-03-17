@@ -9,17 +9,17 @@
 #import <ulib/ulib.h>
 
 @class SccpGttRoutingTableAction;
-@class SccpNextHop;
+@class SccpDestination;
 @class SccpApplicationGroup;
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
-    NSString             *_digits;
-    SccpDestinationEntry *_nextHop;
+    NSString            *_digits;
+    SccpDestination     *_routeTo;
 }
 
 @property(readwrite,atomic,strong)  NSString *digits;
-@property(readwrite,atomic,strong)  SccpNextHop *nextHop;
+@property(readwrite,atomic,strong)  SccpDestination *routeTo;
 
 @end
 
