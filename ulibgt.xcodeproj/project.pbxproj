@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		A6091FCA1CB567630076BD59 /* SccpVariant.h in Headers */ = {isa = PBXBuildFile; fileRef = A6091FC81CB567620076BD59 /* SccpVariant.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6322090205FD0AE006CC06A /* SccpL3RoutingTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A632208E205FD0AE006CC06A /* SccpL3RoutingTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6322091205FD0AE006CC06A /* SccpL3RoutingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A632208F205FD0AE006CC06A /* SccpL3RoutingTable.m */; };
+		A6322094205FD0CE006CC06A /* SccpL3RoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6322095205FD0CE006CC06A /* SccpL3RoutingTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */; };
+		A6322098205FD186006CC06A /* SccpL3RouteStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322096205FD186006CC06A /* SccpL3RouteStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A661D19F1E89218D00A5140C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = A661D19E1E89218D00A5140C /* README.txt */; };
 		A661D1A21E89234E00A5140C /* SccpTTMap.h in Headers */ = {isa = PBXBuildFile; fileRef = A661D1A01E89234E00A5140C /* SccpTTMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A661D1A31E89234E00A5140C /* SccpTTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = A661D1A11E89234E00A5140C /* SccpTTMap.m */; };
@@ -84,6 +89,11 @@
 
 /* Begin PBXFileReference section */
 		A6091FC81CB567620076BD59 /* SccpVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpVariant.h; sourceTree = "<group>"; };
+		A632208E205FD0AE006CC06A /* SccpL3RoutingTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpL3RoutingTable.h; sourceTree = "<group>"; };
+		A632208F205FD0AE006CC06A /* SccpL3RoutingTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpL3RoutingTable.m; sourceTree = "<group>"; };
+		A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpL3RoutingTableEntry.h; sourceTree = "<group>"; };
+		A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpL3RoutingTableEntry.m; sourceTree = "<group>"; };
+		A6322096205FD186006CC06A /* SccpL3RouteStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpL3RouteStatus.h; sourceTree = "<group>"; };
 		A661D19E1E89218D00A5140C /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		A661D1A01E89234E00A5140C /* SccpTTMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpTTMap.h; sourceTree = "<group>"; };
 		A661D1A11E89234E00A5140C /* SccpTTMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpTTMap.m; sourceTree = "<group>"; };
@@ -251,6 +261,11 @@
 				A6D83D0F1E4C562900D04652 /* SccpGttRoutingTableEntry.m */,
 				A661D1A41E892D9300A5140C /* SccpGttRoutingTableDigitNode.h */,
 				A661D1A51E892D9300A5140C /* SccpGttRoutingTableDigitNode.m */,
+				A6322096205FD186006CC06A /* SccpL3RouteStatus.h */,
+				A632208E205FD0AE006CC06A /* SccpL3RoutingTable.h */,
+				A632208F205FD0AE006CC06A /* SccpL3RoutingTable.m */,
+				A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */,
+				A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */,
 				A68A22921B18B93D00854472 /* SccpL3Provider.h */,
 				A68A22931B18B93D00854472 /* SccpL3Provider.m */,
 				A68A22941B18B93D00854472 /* SccpNextHop.h */,
@@ -305,12 +320,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D03BE01CA49DCD00211137 /* SccpNatureOfAddressIndicator.h in Headers */,
+				A6322094205FD0CE006CC06A /* SccpL3RoutingTableEntry.h in Headers */,
 				A6E6E8A4205C843800342810 /* SccpDestination.h in Headers */,
 				A666EF761E89C73C004804CB /* UMSyntaxGT_applicationGroup.h in Headers */,
 				A68A22A21B18B93D00854472 /* SccpNextHop.h in Headers */,
 				A6D03BD81CA4959600211137 /* SccpAddress.h in Headers */,
 				A66233C11E4C46C60095B5D8 /* SccpGttRoutingTable.h in Headers */,
 				A6091FCA1CB567630076BD59 /* SccpVariant.h in Headers */,
+				A6322090205FD0AE006CC06A /* SccpL3RoutingTable.h in Headers */,
 				A6D03BE41CA49E0700211137 /* SccpSubSystemNumber.h in Headers */,
 				A6D03BDC1CA497D200211137 /* SccpAddressIndicator.h in Headers */,
 				A661D1A21E89234E00A5140C /* SccpTTMap.h in Headers */,
@@ -325,6 +342,7 @@
 				A666EF7A1E89C760004804CB /* UMSyntaxGT_selector.h in Headers */,
 				A666EF6E1E89C54C004804CB /* UMSyntaxGT.h in Headers */,
 				A6D83D101E4C562900D04652 /* SccpGttRoutingTableEntry.h in Headers */,
+				A6322098205FD186006CC06A /* SccpL3RouteStatus.h in Headers */,
 				A6D03BE81CA49F0F00211137 /* SccpTypeOfNumberIndicator.h in Headers */,
 				A666EF721E89C71F004804CB /* UMSyntaxGT_addressConversion.h in Headers */,
 				A6E6E8A0205C842E00342810 /* SccpDestinationGroup.h in Headers */,
@@ -466,8 +484,10 @@
 				A66233C21E4C46C60095B5D8 /* SccpGttRoutingTable.m in Sources */,
 				A661D1A31E89234E00A5140C /* SccpTTMap.m in Sources */,
 				A68A22A01B18B93D00854472 /* SccpL3Provider.m in Sources */,
+				A6322091205FD0AE006CC06A /* SccpL3RoutingTable.m in Sources */,
 				A6D03BE51CA49E0700211137 /* SccpSubSystemNumber.m in Sources */,
 				A6D03BED1CA4A0E800211137 /* SccpNumberPlanIndicator.m in Sources */,
+				A6322095205FD0CE006CC06A /* SccpL3RoutingTableEntry.m in Sources */,
 				A6D83D111E4C562900D04652 /* SccpGttRoutingTableEntry.m in Sources */,
 				A666EF6F1E89C54C004804CB /* UMSyntaxGT.m in Sources */,
 				A68A22A31B18B93D00854472 /* SccpNextHop.m in Sources */,

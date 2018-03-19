@@ -12,7 +12,7 @@
 #import <ulib/ulib.h>
 #import <ulibmtp3/ulibmtp3.h>
 
-@class SccpL3Provider;
+//@class SccpL3Provider;
 
 /* this identifies the next hop of a SCCP message */
 @interface SccpNextHop : UMObject

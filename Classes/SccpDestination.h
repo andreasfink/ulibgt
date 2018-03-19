@@ -6,7 +6,7 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import <ulibmtp3/ulibmtp3.h>
 @class UMMTP3PointCode;
 @class UMLayerSCCP;
 
@@ -18,7 +18,6 @@
     NSString        *_m3uaAs;           /* send to m3ua application servber */
     int             _priority;          /* priority group 0...7 of this route */
     int             _weight;            /* weight of this route used for load distribution among equal priority entries */
-
 }
 
 @property(readwrite,strong,atomic)  NSNumber        *ssn;
@@ -27,6 +26,6 @@
 @property(readwrite,assign,atomic)  int             priority;
 @property(readwrite,assign,atomic)  int             weight;
 
-
+- (SccpDestination *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
 
 @end

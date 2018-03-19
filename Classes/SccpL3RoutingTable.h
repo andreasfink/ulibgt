@@ -6,8 +6,15 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import <ulibmtp3/ulibmtp3.h>
+#import "SccpL3RouteStatus.h"
 
 @interface SccpL3RoutingTable : UMObject
+{
+    UMSynchronizedDictionary *_entries;
+}
 
+
+- (void)setStatus:(SccpL3RouteStatus) status forPointCode:(UMMTP3PointCode *)pointCode;
+- (SccpL3RouteStatus )getStatusForPointCode:(UMMTP3PointCode *)pointCode;
 @end

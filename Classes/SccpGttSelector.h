@@ -14,7 +14,6 @@
 /* a GTT Selector is basically a SCCP routing table */
 
 @class SccpApplicationGroup;
-@class SccpL3Provider;
 @class SccpGttRoutingTable;
 @class SccpDestination;
 

@@ -6,8 +6,17 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import <ulibmtp3/ulibmtp3.h>
+#import "SccpL3RouteStatus.h"
+
 
 @interface SccpL3RoutingTableEntry : UMObject
+{
+    UMMTP3PointCode *_pc;
+    SccpL3RouteStatus _status;
+}
 
-@end
+@property(readwrite,atomic,strong)  UMMTP3PointCode *pc;
+@property(readwrite,atomic,assign)  SccpL3RouteStatus status;
+
+@end;
