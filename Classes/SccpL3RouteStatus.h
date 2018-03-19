@@ -6,8 +6,13 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
 
-@interface SccpL3RouteStatus : UMObject
 
-@end
+typedef enum SccpL3RouteStatus
+{
+    SccpL3RouteStatus_unknown,
+    SccpL3RouteStatus_available,
+    SccpL3RouteStatus_restricted,
+    SccpL3RouteStatus_unavailable
+} SccpL3RouteStatus;
+
