@@ -54,7 +54,6 @@
     return NO;
 }
 
-
 - (SccpNextHop *)pickHopUsingProviders:(UMSynchronizedDictionary *)allProviders
 {
     NSArray *keys = [allProviders allKeys];
