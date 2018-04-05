@@ -11,6 +11,7 @@
 #import "SccpL3RoutingTable.h"
 #import <ulibmtp3/ulibmtp3.h>
 #import "SccpL3RouteStatus.h"
+#import "SccpL3RoutingTableEntry.h"
 
 @implementation SccpDestination
 
@@ -49,14 +50,15 @@
     }
 }
 
-- (UMMTP3PointCode *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
+
+- (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
 {
-    SccpL3RouteStatus status = [rt getStatusForPointCode:self.dpc];
-    if(status==SccpL3RouteStatus_unavailable)
+    SccpL3RoutingTableEntry *entry = [rt getEntryForPointCode:self.dpc];
+    if(entry.status==SccpL3RouteStatus_unavailable)
     {
         return NULL;
     }
-    return self.dpc;
+    return self;
 }
 
 @end

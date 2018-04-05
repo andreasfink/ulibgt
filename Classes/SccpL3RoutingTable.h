@@ -8,13 +8,14 @@
 
 #import <ulibmtp3/ulibmtp3.h>
 #import "SccpL3RouteStatus.h"
+@class SccpL3RoutingTableEntry;
 
 @interface SccpL3RoutingTable : UMObject
 {
     UMSynchronizedDictionary *_entries;
 }
 
-
+- (SccpL3RoutingTableEntry *)getEntryForPointCode:(UMMTP3PointCode *)pointCode;
 - (void)setStatus:(SccpL3RouteStatus) status forPointCode:(UMMTP3PointCode *)pointCode;
 - (SccpL3RouteStatus )getStatusForPointCode:(UMMTP3PointCode *)pointCode;
 @end

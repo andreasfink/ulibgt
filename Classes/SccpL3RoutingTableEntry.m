@@ -10,5 +10,4 @@
 
 
 @implementation SccpL3RoutingTableEntry
-
 @end

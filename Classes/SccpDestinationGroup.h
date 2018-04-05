@@ -17,5 +17,5 @@
 
 - (void)addEntry:(SccpDestination *)dst;
 - (SccpDestinationGroup *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
-- (UMMTP3PointCode *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
+- (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
 @end

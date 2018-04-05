@@ -8,6 +8,7 @@
 
 #import "SccpDestinationGroup.h"
 #import "SccpL3RouteStatus.h"
+#import "SccpL3RoutingTableEntry.h"
 
 @implementation SccpDestinationGroup
 {
@@ -46,7 +47,7 @@
 }
 
 
-- (UMMTP3PointCode *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
+- (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
 {
     NSMutableArray *availEntries = [[NSMutableArray alloc]init];
     NSMutableArray *availAndRestrictedEntries = [[NSMutableArray alloc]init];
@@ -57,22 +58,17 @@
 
     for(SccpDestination *e in entries)
     {
-        SccpL3RouteStatus status = [rt getStatusForPointCode:e.dpc];
-        if(status==SccpL3RouteStatus_available)
+
+        SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
+        if(rtentry.status==SccpL3RouteStatus_available)
         {
             availSeen = YES;
-        }
-        else if(status==SccpL3RouteStatus_restricted)
-        {
-            restrictedSeen = YES;
-        }
-        if(status==SccpL3RouteStatus_available)
-        {
-            [availEntries addObject:e];
+            [availEntries addObject:rtentry];
             [availAndRestrictedEntries addObject:e];
         }
-        else if(status==SccpL3RouteStatus_restricted)
+        else if(rtentry.status==SccpL3RouteStatus_restricted)
         {
+            restrictedSeen = YES;
             [availAndRestrictedEntries addObject:e];
         }
     }
@@ -89,7 +85,7 @@
     if(validEntries.count==1)
     {
         SccpDestination *e = validEntries[0];
-        return e.dpc;
+        return e;
     }
 
     /* if we get here, we have more than one option. so we must take weight and priority into consideration */
@@ -121,18 +117,16 @@
     }
 
     uint32_t pickWeight = [UMUtil random:totalWeight];
-
     uint32_t currentWeight = 0;
     for(SccpDestination *e in highestPrioEntries)
     {
         if((currentWeight < pickWeight) && (pickWeight <= (currentWeight+ e.weight)))
         {
-            return e.dpc;
+            return e;
         }
         currentWeight += e.weight;
     }
     /* we basically shoud never get here */
-
     return NULL;
 }
 

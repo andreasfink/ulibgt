@@ -43,6 +43,9 @@
 
 */
 
+#define ROUTE_BY_SUBSYSTEM      YES
+#define ROUTE_BY_GLOBAL_TITLE   NO
+
 @interface SccpAddressIndicator : UMObject
 {
     BOOL nationalReservedBit;

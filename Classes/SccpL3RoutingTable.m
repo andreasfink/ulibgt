@@ -20,18 +20,21 @@
     }
     return self;
 }
+
 - (void)setStatus:(SccpL3RouteStatus) status forPointCode:(UMMTP3PointCode *)pointCode
 {
-    SccpL3RoutingTableEntry *entry = _entries[pointCode.stringValue];
-    if(entry==NULL)
-    {
-        entry = [[SccpL3RoutingTableEntry alloc]init];
-        entry.pc = pointCode;
-    }
+    SccpL3RoutingTableEntry *entry = [self getEntryForPointCode:pointCode];
     entry.status = status;
 }
 
 - (SccpL3RouteStatus )getStatusForPointCode:(UMMTP3PointCode *)pointCode
+{
+    SccpL3RoutingTableEntry *entry = [self getEntryForPointCode:pointCode];
+    return entry.status;
+}
+
+
+- (SccpL3RoutingTableEntry *)getEntryForPointCode:(UMMTP3PointCode *)pointCode
 {
     SccpL3RoutingTableEntry *entry = _entries[pointCode.stringValue];
     if(entry==NULL)
@@ -39,8 +42,9 @@
         entry = [[SccpL3RoutingTableEntry alloc]init];
         entry.pc = pointCode;
         entry.status = SccpL3RouteStatus_available;
+        _entries[pointCode.stringValue] = entry;
     }
-    return entry.status;
+    return  entry;
 }
 
 @end

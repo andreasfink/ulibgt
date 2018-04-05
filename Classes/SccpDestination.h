@@ -9,6 +9,8 @@
 #import <ulibmtp3/ulibmtp3.h>
 @class UMMTP3PointCode;
 @class UMLayerSCCP;
+@class SccpL3RoutingTableEntry;
+@class SccpL3RoutingTable;
 
 @interface SccpDestination : UMObject
 {
@@ -27,5 +29,6 @@
 @property(readwrite,assign,atomic)  int             weight;
 
 - (SccpDestination *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
+- (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
 
 @end

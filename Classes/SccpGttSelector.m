@@ -55,14 +55,24 @@
 }
 
 
--(SccpDestination *) routeToProvider:(NSString *)digits
+- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt digits:(NSString *)digits
 {
+    SccpDestination *nextHop;
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntry:digits];
-    SccpDestination *nextHop = routingTableEntry.routeTo;
-    if(nextHop == NULL)
+    if(routingTableEntry==NULL)
     {
         nextHop = defaultEntry;
     }
+    else
+    {
+        nextHop = routingTableEntry.routeTo;
+    }
+    /* This will return:
+       If its a group, pick a specific entry in the group which is available.
+       If none in the group is available, return NULL,
+       If its a single destination and its not available, return NULL
+    */
+    nextHop = [nextHop chooseNextHopWithRoutingTable:rt];
     return nextHop;
 }
 
