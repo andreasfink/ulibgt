@@ -13,7 +13,6 @@
 		A6322094205FD0CE006CC06A /* SccpL3RoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6322095205FD0CE006CC06A /* SccpL3RoutingTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */; };
 		A6322098205FD186006CC06A /* SccpL3RouteStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322096205FD186006CC06A /* SccpL3RouteStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A661D19F1E89218D00A5140C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = A661D19E1E89218D00A5140C /* README.txt */; };
 		A661D1A21E89234E00A5140C /* SccpTTMap.h in Headers */ = {isa = PBXBuildFile; fileRef = A661D1A01E89234E00A5140C /* SccpTTMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A661D1A31E89234E00A5140C /* SccpTTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = A661D1A11E89234E00A5140C /* SccpTTMap.m */; };
 		A661D1A61E892D9300A5140C /* SccpGttRoutingTableDigitNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A661D1A41E892D9300A5140C /* SccpGttRoutingTableDigitNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,18 +62,12 @@
 		A6D03BE91CA49F0F00211137 /* SccpTypeOfNumberIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D03BE71CA49F0F00211137 /* SccpTypeOfNumberIndicator.m */; };
 		A6D03BEC1CA4A0E800211137 /* SccpNumberPlanIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D03BEA1CA4A0E800211137 /* SccpNumberPlanIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D03BED1CA4A0E800211137 /* SccpNumberPlanIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D03BEB1CA4A0E800211137 /* SccpNumberPlanIndicator.m */; };
-		A6D43A2D1B3143600090FC94 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A6D43A2C1B3143600090FC94 /* VERSION */; };
 		A6D83D101E4C562900D04652 /* SccpGttRoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D83D0E1E4C562900D04652 /* SccpGttRoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D83D111E4C562900D04652 /* SccpGttRoutingTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D83D0F1E4C562900D04652 /* SccpGttRoutingTableEntry.m */; };
 		A6E6E8A0205C842E00342810 /* SccpDestinationGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E6E89E205C842E00342810 /* SccpDestinationGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E6E8A1205C842E00342810 /* SccpDestinationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E6E89F205C842E00342810 /* SccpDestinationGroup.m */; };
 		A6E6E8A4205C843800342810 /* SccpDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E6E8A2205C843800342810 /* SccpDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E6E8A5205C843800342810 /* SccpDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E6E8A3205C843800342810 /* SccpDestination.m */; };
-		A6E7BF4C1FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF471FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf */; };
-		A6E7BF4D1FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF481FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf */; };
-		A6E7BF4E1FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF491FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf */; };
-		A6E7BF4F1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF4A1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf */; };
-		A6E7BF501FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A6E7BF4B1FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,13 +424,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6E7BF4E1FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf in Resources */,
-				A661D19F1E89218D00A5140C /* README.txt in Resources */,
-				A6E7BF4C1FBECE4600C53765 /* E.212-200702-S!Amd1!PDF-E.pdf in Resources */,
-				A6E7BF4D1FBECE4600C53765 /* E.212-200805-I!!PDF-E-2.pdf in Resources */,
-				A6D43A2D1B3143600090FC94 /* VERSION in Resources */,
-				A6E7BF501FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf in Resources */,
-				A6E7BF4F1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +558,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -623,7 +609,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -650,7 +636,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulibgt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -675,7 +661,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulibgt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
