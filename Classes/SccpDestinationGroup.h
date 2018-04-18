@@ -1,5 +1,5 @@
 //
-//  SccpDestination.h
+//  SccpDestinationGroup.h
 //  ulibgt
 //
 //  Created by Andreas Fink on 17.03.18.
@@ -16,6 +16,9 @@
 }
 
 - (void)addEntry:(SccpDestination *)dst;
+- (SccpDestination *)entryAtIndex:(int)idx;
+
 - (SccpDestinationGroup *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
+- (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext;
 @end

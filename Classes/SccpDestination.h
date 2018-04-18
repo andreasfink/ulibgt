@@ -1,5 +1,5 @@
 //
-//  SccpDestinationEntry.h
+//  SccpDestination.h
 //  ulibgt
 //
 //  Created by Andreas Fink on 17.03.18.
@@ -14,6 +14,7 @@
 
 @interface SccpDestination : UMObject
 {
+    NSString *_name;
     /* one of these should be set but only one */
     NSNumber        *_ssn;              /* send to internal subsystem       */
     UMMTP3PointCode *_dpc;              /* send to pointcode                */
@@ -22,13 +23,17 @@
     int             _weight;            /* weight of this route used for load distribution among equal priority entries */
 }
 
+@property(readwrite,strong,atomic)  NSString        *name;
 @property(readwrite,strong,atomic)  NSNumber        *ssn;
 @property(readwrite,strong,atomic)  UMMTP3PointCode *dpc;
 @property(readwrite,strong,atomic)  NSString        *m3uaAs;
 @property(readwrite,assign,atomic)  int             priority;
 @property(readwrite,assign,atomic)  int             weight;
 
+- (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext;
+
 - (SccpDestination *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict;
 
 @end

@@ -26,6 +26,36 @@
     return self;
 }
 
+
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict
+{
+    self = [super init];
+    if(self)
+    {
+        _priority = 4;
+        _weight   = 100;
+        if(dict[@"ssn"])
+        {
+            _ssn = @(  [dict[@"ssn"] intValue] );
+        }
+        if(dict[@"pc"])
+        {
+            _dpc = [[UMMTP3PointCode alloc]initWithString: [dict[@"pc"] stringValue] variant:UMMTP3Variant_Undefined];
+        }
+        if(dict[@"priority"])
+        {
+            _priority =[dict[@"ssn"] intValue];
+
+        }
+        if(dict[@"weight"])
+        {
+            _weight =[dict[@"weight"] intValue];
+
+        }
+    }
+    return self;
+}
+
 - (SccpDestination *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant
 {
     NSArray *array = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \t;"]];
@@ -59,6 +89,11 @@
         return NULL;
     }
     return self;
+}
+
+- (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext
+{
+    _name = cfg[@"name"];
 }
 
 @end

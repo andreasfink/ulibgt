@@ -20,6 +20,14 @@
     [_entries addObject:dst];
 }
 
+- (SccpDestination *)entryAtIndex:(int)idx
+{
+    if((idx >=0) && (idx <_entries.count ))
+    {
+        return [_entries objectAtIndex:idx];
+    }
+    return NULL;
+}
 
 - (SccpDestinationGroup *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant
 {
@@ -129,5 +137,11 @@
     /* we basically shoud never get here */
     return NULL;
 }
+
+- (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext
+{
+    _name = [cfg[@"name"] stringValue];
+}
+
 
 @end
