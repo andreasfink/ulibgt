@@ -25,6 +25,7 @@
 #import "SccpGttSelector.h"
 #import "SccpGttRoutingTable.h"
 #import "SccpGttRoutingTableEntry.h"
+#import "SccpL3RoutingTableEntry.h"
 #import "SccpGttRoutingTableDigitNode.h"
 #import "SccpDestination.h"
 #import "SccpDestinationGroup.h"
