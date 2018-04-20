@@ -7,14 +7,21 @@
 //
 
 #import <ulib/ulib.h>
+@class SccpNumberTranslationEntry;
+
+@class SccpAddress;
 
 @interface SccpNumberTranslation : UMObject
 {
     NSString *_name;
-    NSArray *_entries;
+    NSMutableArray *_entries;
 }
 
+@property(readwrite,strong,atomic)     NSString *name;
+
+- (SccpNumberTranslation *)initWithConfig:(NSDictionary *)cfg;
 - (SccpAddress *)translateAddress:(SccpAddress *)in;
+- (void)addEntry:(SccpNumberTranslationEntry *)entry;
 
 @end
 

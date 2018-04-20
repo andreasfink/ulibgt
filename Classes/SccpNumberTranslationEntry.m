@@ -45,6 +45,16 @@ if(dict[name]) \
 @implementation SccpNumberTranslationEntry
 
 
+- (SccpNumberTranslationEntry *)initWithConfig:(NSDictionary *)cfg
+{
+    self = [super init];
+    if(self)
+    {
+        [self setConfig:cfg];
+    }
+    return self;
+}
+
 - (void)setConfig:(NSDictionary *)dict
 {
     SET_DICT_STRING(dict,@"in-address",_inAddress);
@@ -56,7 +66,7 @@ if(dict[name]) \
 
 - (SccpAddress *)translateAddress:(SccpAddress *)in
 {
-    doTranslate = NO;
+    BOOL doTranslate = NO;
     NSString *matchingDigits;
     NSString *remainingDigits;
     
@@ -79,16 +89,15 @@ if(dict[name]) \
     }
     if(doTranslate == NO)
     {
-        return inAddr;
+        return in;
     }
     
-    SccpAddress *out = [inAddr copy];
+    SccpAddress *out = [in copy];
 
-    NSMutableString *outStr =[matchingDigits mutableCopy];
-    [outStr appendString:remainingDigits];
+    NSString *outStr = [NSString stringWithFormat: @"%@%@",_outAddress ,remainingDigits];
     if(_removeDigits)
     {
-        outStr = [outStr substringFromIndex:_removeDigits.integerValue];
+        outStr = [[outStr substringFromIndex:_removeDigits.integerValue] mutableCopy];
     }
     out.address = outStr;
 
@@ -96,17 +105,17 @@ if(dict[name]) \
     {
         if(out.npi == NULL)
         {
-            out.npi = [[SccpNatureOfAddressIndicator alloc]init];
+            out.npi = [[SccpNumberPlanIndicator alloc]init];
         }
-        out.npi.npi = _replacementNP.integerValue;
+        out.npi.npi = _replacementNP.intValue;
     }
     if(_replacementNAI)
     {
         if(out.nai ==NULL)
         {
-            out.nai = [[SccpNumberPlanIndicator alloc]init];
+            out.nai = [[SccpNatureOfAddressIndicator alloc]init];
         }
-        out.nai.nai = _replacementNAI.integerValue;
+        out.nai.nai = _replacementNAI.intValue;
     }
     return out;
 }

@@ -31,5 +31,6 @@
 
 - (void)entriesToDigitTree;
 - (SccpGttRoutingTableEntry *)findEntry:(NSString *)digits;
+- (void)addEntry:(SccpGttRoutingTableEntry *)entry;
 
 @end

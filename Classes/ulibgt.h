@@ -29,6 +29,8 @@
 #import "SccpGttRoutingTableDigitNode.h"
 #import "SccpDestination.h"
 #import "SccpDestinationGroup.h"
+#import "SccpNumberTranslation.h"
+#import "SccpNumberTranslationEntry.h"
 
 #import "UMSyntaxGT.h"
 #import "UMSyntaxGT_addressConversion.h"

@@ -18,6 +18,13 @@
 @class SccpDestination;
 @class SccpL3RoutingTable;
 @class SccpNumberTranslation;
+@class SccpAddress;
+@class SccpDestinationGroup;
+
+@protocol getSCCPDestinationDelegateProtocol
+- (SccpDestinationGroup *)getSCCPDestination:(NSString *)name;
+@end
+
 @interface SccpGttSelector : UMObject
 {
     NSString        *_sccp_instance;
@@ -29,14 +36,22 @@
     int             _internal;
     SccpGttRoutingTable *_routingTable;
     SccpDestination     *_defaultEntry;
+    NSString            *_defaultEntryName;
     NSDictionary        *_statusOfProviders;
+    NSString              *_preTranslationName;
+    NSString              *_postTranslationName;
     SccpNumberTranslation *_preTranslation;
     SccpNumberTranslation *_postTranslation;
+    id                    _getSCCPDestinationDelegate;
 }
 
 @property(readwrite,strong,atomic) NSString        *sccp_instance;
+@property(readwrite,strong,atomic)  NSString *preTranslationName;
+@property(readwrite,strong,atomic)  NSString *postTranslationName;
 @property(readwrite,strong,atomic)  SccpNumberTranslation *preTranslation;
 @property(readwrite,strong,atomic)  SccpNumberTranslation *postTranslation;
+@property(readwrite,strong,atomic) id getSCCPDestinationDelegate;
+@property(readwrite,strong,atomic) NSString *defaultEntryName;
 
 @property(readwrite,strong) SccpDestination *defaultEntry;
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt destination:(SccpAddress **)dst;
@@ -52,7 +67,9 @@
 - (NSString *)selectorKey;
 + (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai;
 
-
 - (SccpGttSelector *)initWithInstanceNameE164:(NSString *)name;
+- (SccpGttSelector *)initWithConfig:(NSDictionary *)config;
+
+- (SccpDestination *)getDestination:(NSString *)name;
 
 @end

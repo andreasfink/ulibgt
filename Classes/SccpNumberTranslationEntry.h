@@ -18,6 +18,8 @@
     NSNumber *_removeDigits;
 }
 
+- (SccpNumberTranslationEntry *)initWithConfig:(NSDictionary *)cfg;
+
 @property(readwrite,strong,atomic)  NSString *inAddress;
 @property(readwrite,strong,atomic)  NSString *outAddress;
 @property(readwrite,strong,atomic)  NSNumber *replacementNAI;

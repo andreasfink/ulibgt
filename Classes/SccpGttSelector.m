@@ -16,6 +16,8 @@
 #import "SccpL3Provider.h"
 #import "SccpGttRoutingTable.h"
 #import "SccpNumberTranslation.h"
+#import "SccpAddress.h"
+#import "SccpDestinationGroup.h"
 
 @implementation SccpGttSelector
 
@@ -32,10 +34,57 @@
         _np = 1;
         _nai =4;
         _external = 1;
+        _routingTable = [[SccpGttRoutingTable alloc]init];
+
     }
     return self;
 }
 
+-(SccpGttSelector *)initWithConfig:(NSDictionary *)config
+{
+    self = [super init];
+    if(self)
+    {
+        _gti =4;
+        _np = 1;
+        _nai =4;
+        _external = 1;
+        _routingTable = [[SccpGttRoutingTable alloc]init];
+        if(config[@"sccp"])
+        {
+            _sccp_instance = [config[@"sccp"] stringValue];
+        }
+        if(config[@"tt"])
+        {
+            _tt = [config[@"tt"] intValue];
+        }
+        if(config[@"gti"])
+        {
+            _gti = [config[@"gti"] intValue];
+        }
+        if(config[@"np"])
+        {
+            _np = [config[@"np"] intValue];
+        }
+        if(config[@"nai"])
+        {
+            _nai = [config[@"nai"] intValue];
+        }
+        if(config[@"pre-translation"])
+        {
+            _preTranslationName = [config[@"pre-translation"] stringValue];
+        }
+        if(config[@"post-translation"])
+        {
+            _postTranslationName = [config[@"post-translation"] stringValue];
+        }
+        if(config[@"default-destination"])
+        {
+            _defaultEntryName = [config[@"default-destination"] stringValue];
+        }
+    }
+    return self;
+}
 
 - (NSString *)selectorKey
 {
@@ -55,6 +104,10 @@
     }
 }
 
+- (SccpDestinationGroup *)getDestination:(NSString *)name
+{
+    return [_getSCCPDestinationDelegate getSCCPDestination:name];
+}
 
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt destination:(SccpAddress **)dst;
 {
@@ -72,6 +125,10 @@
     }
     else
     {
+        if((routingTableEntry.routeTo == NULL) && (routingTableEntry.routeToName!=NULL))
+        {
+           routingTableEntry.routeTo = [self getDestination:routingTableEntry.routeToName];
+        }
         nextHop = routingTableEntry.routeTo;
     }
     /* This will return:

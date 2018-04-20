@@ -50,9 +50,9 @@
 		A6ADC5DB1CADBB2F00211137 /* SccpTranslationTableNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ADC5D91CADBB2F00211137 /* SccpTranslationTableNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6ADC5DC1CADBB2F00211137 /* SccpTranslationTableNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = A6ADC5DA1CADBB2F00211137 /* SccpTranslationTableNumber.m */; };
 		A6ADC5DE1CADEA2C00211137 /* ulibmtp3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6ADC5DD1CADEA2C00211137 /* ulibmtp3.framework */; };
-		A6C0AFB82089F90C00DAB157 /* SccpNumberTranslation.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C0AFB62089F90C00DAB157 /* SccpNumberTranslation.h */; };
+		A6C0AFB82089F90C00DAB157 /* SccpNumberTranslation.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C0AFB62089F90C00DAB157 /* SccpNumberTranslation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6C0AFB92089F90C00DAB157 /* SccpNumberTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C0AFB72089F90C00DAB157 /* SccpNumberTranslation.m */; };
-		A6C0AFBC2089F91A00DAB157 /* SccpNumberTranslationEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C0AFBA2089F91A00DAB157 /* SccpNumberTranslationEntry.h */; };
+		A6C0AFBC2089F91A00DAB157 /* SccpNumberTranslationEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C0AFBA2089F91A00DAB157 /* SccpNumberTranslationEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6C0AFBD2089F91A00DAB157 /* SccpNumberTranslationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C0AFBB2089F91A00DAB157 /* SccpNumberTranslationEntry.m */; };
 		A6D03BD81CA4959600211137 /* SccpAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D03BD61CA4959600211137 /* SccpAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D03BD91CA4959600211137 /* SccpAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D03BD71CA4959600211137 /* SccpAddress.m */; };

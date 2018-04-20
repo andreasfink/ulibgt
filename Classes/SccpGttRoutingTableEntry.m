@@ -10,4 +10,25 @@
 
 @implementation SccpGttRoutingTableEntry
 
+- (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg
+{
+    self = [super init];
+    if(self)
+    {
+        if(cfg[@"gta"])
+        {
+            _digits = [cfg[@"gta"] stringValue];
+        }
+
+        if(cfg[@"destination"])
+        {
+            _routeToName = [cfg[@"destination"] stringValue];
+        }
+        if(cfg[@"post-translation"])
+        {
+            _postTranslationName = [cfg[@"post-translation"] stringValue];
+        }
+    }
+    return self;
+}
 @end

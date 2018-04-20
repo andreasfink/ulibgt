@@ -7,8 +7,31 @@
 //
 
 #import "SccpNumberTranslation.h"
+#import "SccpAddress.h"
+#import "SccpNumberTranslationEntry.h"
 
 @implementation SccpNumberTranslation
+
+
+- (SccpNumberTranslation *)initWithConfig:(NSDictionary *)cfg
+{
+    self = [super init];
+    if(self)
+    {
+        if(cfg[@"name"])
+        {
+            _name = [cfg[@"name"] stringValue];
+            _entries = [[NSMutableArray alloc]init];
+        }
+    }
+    return self;
+}
+
+
+- (void)addEntry:(SccpNumberTranslationEntry *)entry
+{
+    [_entries addObject:entry];
+}
 
 - (SccpAddress *)translateAddress:(SccpAddress *)in
 {

@@ -59,5 +59,25 @@
     return currentNode.entry;
 }
 
+- (void)addEntry:(SccpGttRoutingTableEntry *)entry
+{
+    NSString *digits = entry.digits;
+    const char *str = digits.UTF8String;
+    int n = (int)strlen(str);
+
+    if(_rootNode == NULL)
+    {
+        _rootNode = [[SccpGttRoutingTableDigitNode alloc]init];
+    }
+    SccpGttRoutingTableDigitNode *currentNode = _rootNode;
+
+    for(int i = 0;i<n;i++)
+    {
+        int c = str[i];
+        currentNode = [currentNode nextNode:c create:YES];
+    }
+    currentNode.entry = entry;
+}
+
 
 @end
