@@ -29,6 +29,18 @@
     return NULL;
 }
 
+- (SccpDestinationGroup *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _entries = [[UMSynchronizedArray alloc]init];
+    }
+    return self;
+}
+
+
+#if 0
 - (SccpDestinationGroup *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant
 {
     NSArray *array = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \t;"]];
@@ -40,8 +52,7 @@
     self = [super init];
     if(self)
     {
-        _priority = 4;
-        _weight   = 100;
+        _entries = [[UMSynchronizedArray alloc]init];
         for(NSString *dpc in array)
         {
             SccpDestination *dst = [[SccpDestination alloc]initWithDpcString:dpc variant:variant];
@@ -53,6 +64,7 @@
     }
     return self;
 }
+#endif
 
 
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
@@ -71,7 +83,7 @@
         if(rtentry.status==SccpL3RouteStatus_available)
         {
             availSeen = YES;
-            [availEntries addObject:rtentry];
+            [availEntries addObject:e];
             [availAndRestrictedEntries addObject:e];
         }
         else if(rtentry.status==SccpL3RouteStatus_restricted)

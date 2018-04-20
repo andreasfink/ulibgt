@@ -30,10 +30,9 @@
 @property(readwrite,assign,atomic)  int             priority;
 @property(readwrite,assign,atomic)  int             weight;
 
-- (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext;
-
-- (SccpDestination *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
-- (SccpDestination *)initWithConfig:(NSDictionary *)dict;
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant;
+- (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant;
+
 
 @end

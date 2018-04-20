@@ -27,35 +27,20 @@
 }
 
 
-- (SccpDestination *)initWithConfig:(NSDictionary *)dict
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant;
 {
     self = [super init];
     if(self)
     {
         _priority = 4;
         _weight   = 100;
-        if(dict[@"ssn"])
-        {
-            _ssn = @(  [dict[@"ssn"] intValue] );
-        }
-        if(dict[@"pc"])
-        {
-            _dpc = [[UMMTP3PointCode alloc]initWithString: [dict[@"pc"] stringValue] variant:UMMTP3Variant_Undefined];
-        }
-        if(dict[@"priority"])
-        {
-            _priority =[dict[@"ssn"] intValue];
-
-        }
-        if(dict[@"weight"])
-        {
-            _weight =[dict[@"weight"] intValue];
-
-        }
+        [self setConfig:dict variant:variant];
     }
     return self;
 }
 
+
+#if 0
 - (SccpDestination *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant
 {
     NSArray *array = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \t;"]];
@@ -79,6 +64,7 @@
         return [[SccpDestinationGroup alloc]initWithDpcString:string variant:variant];
     }
 }
+#endif
 
 
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
@@ -91,9 +77,30 @@
     return self;
 }
 
-- (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext
+- (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant
 {
-    _name = cfg[@"name"];
+    if(cfg[@"name"])
+    {
+        _name = [cfg[@"name"] stringValue];
+    }
+    if(cfg[@"ssn"])
+    {
+        _ssn = @(  [cfg[@"ssn"] intValue] );
+    }
+    if(cfg[@"point-code"])
+    {
+        _dpc = [[UMMTP3PointCode alloc]initWithString: [cfg[@"point-code"] stringValue] variant:variant];
+    }
+    if(cfg[@"priority"])
+    {
+        _priority =[cfg[@"ssn"] intValue];
+
+    }
+    if(cfg[@"weight"])
+    {
+        _weight =[cfg[@"weight"] intValue];
+
+    }
 }
 
 @end

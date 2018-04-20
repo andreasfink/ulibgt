@@ -9,21 +9,21 @@
 #import <ulib/ulib.h>
 
 @class SccpGttRoutingTableAction;
-@class SccpDestination;
+@class SccpDestinationGroup;
 @class SccpApplicationGroup;
 @class SccpNumberTranslation;
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
     NSString            *_digits;
-    SccpDestination     *_routeTo;
+    SccpDestinationGroup     *_routeTo;
     NSString            *_routeToName;
     NSString            *_postTranslationName;
     SccpNumberTranslation *_postTranslation;
 }
 
 @property(readwrite,atomic,strong)  NSString *digits;
-@property(readwrite,atomic,strong)  SccpDestination *routeTo;
+@property(readwrite,atomic,strong)  SccpDestinationGroup *routeTo;
 @property(readwrite,atomic,strong)  NSString *routeToName;
 @property(readwrite,atomic,strong)  NSString    *postTranslationName;
 @property(readwrite,atomic,strong)  SccpNumberTranslation *postTranslation;

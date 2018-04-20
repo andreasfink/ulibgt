@@ -35,7 +35,6 @@
         _nai =4;
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]init];
-
     }
     return self;
 }
@@ -104,11 +103,6 @@
     }
 }
 
-- (SccpDestinationGroup *)getDestination:(NSString *)name
-{
-    return [_getSCCPDestinationDelegate getSCCPDestination:name];
-}
-
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt destination:(SccpAddress **)dst;
 {
     SccpAddress *addr = *dst;
@@ -121,22 +115,18 @@
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntry:digits];
     if(routingTableEntry==NULL)
     {
-        nextHop = defaultEntry;
+        nextHop = [defaultEntry chooseNextHopWithRoutingTable:rt];
     }
     else
     {
-        if((routingTableEntry.routeTo == NULL) && (routingTableEntry.routeToName!=NULL))
-        {
-           routingTableEntry.routeTo = [self getDestination:routingTableEntry.routeToName];
-        }
-        nextHop = routingTableEntry.routeTo;
+        SccpDestinationGroup *nextHopGroup = routingTableEntry.routeTo;
+        nextHop = [nextHopGroup chooseNextHopWithRoutingTable:rt];
     }
     /* This will return:
        If its a group, pick a specific entry in the group which is available.
        If none in the group is available, return NULL,
        If its a single destination and its not available, return NULL
     */
-    nextHop = [nextHop chooseNextHopWithRoutingTable:rt];
     if(_postTranslation)
     {
         addr = [_postTranslation translateAddress:addr];
