@@ -17,7 +17,7 @@
 @class SccpGttRoutingTable;
 @class SccpDestination;
 @class SccpL3RoutingTable;
-
+@class SccpNumberTranslation;
 @interface SccpGttSelector : UMObject
 {
     NSString        *_sccp_instance;
@@ -30,12 +30,16 @@
     SccpGttRoutingTable *_routingTable;
     SccpDestination     *_defaultEntry;
     NSDictionary        *_statusOfProviders;
+    SccpNumberTranslation *_preTranslation;
+    SccpNumberTranslation *_postTranslation;
 }
 
 @property(readwrite,strong,atomic) NSString        *sccp_instance;
+@property(readwrite,strong,atomic)  SccpNumberTranslation *preTranslation;
+@property(readwrite,strong,atomic)  SccpNumberTranslation *postTranslation;
 
 @property(readwrite,strong) SccpDestination *defaultEntry;
-- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt digits:(NSString *)digits;
+- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt destination:(SccpAddress **)dst;
 
 @property(readwrite,strong,atomic)  NSString        *gtt_selector;
 @property(readwrite,assign,atomic)  int             tt;

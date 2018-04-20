@@ -15,6 +15,7 @@
 #import "SccpDestination.h"
 #import "SccpL3Provider.h"
 #import "SccpGttRoutingTable.h"
+#import "SccpNumberTranslation.h"
 
 @implementation SccpGttSelector
 
@@ -55,8 +56,14 @@
 }
 
 
-- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt digits:(NSString *)digits
+- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt destination:(SccpAddress **)dst;
 {
+    SccpAddress *addr = *dst;
+    if(_preTranslation)
+    {
+        addr = [_preTranslation translateAddress:addr];
+    }
+    NSString *digits = addr.address;
     SccpDestination *nextHop;
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntry:digits];
     if(routingTableEntry==NULL)
@@ -73,6 +80,11 @@
        If its a single destination and its not available, return NULL
     */
     nextHop = [nextHop chooseNextHopWithRoutingTable:rt];
+    if(_postTranslation)
+    {
+        addr = [_postTranslation translateAddress:addr];
+    }
+    *dst = addr;
     return nextHop;
 }
 

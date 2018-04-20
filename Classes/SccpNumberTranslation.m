@@ -10,4 +10,14 @@
 
 @implementation SccpNumberTranslation
 
+- (SccpAddress *)translateAddress:(SccpAddress *)in
+{
+    SccpAddress *addr = in;
+    for(SccpNumberTranslationEntry *e in _entries)
+    {
+        addr = [e translateAddress:addr];
+    }
+    return addr;
+}
+
 @end

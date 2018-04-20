@@ -14,4 +14,7 @@
     NSArray *_entries;
 }
 
+- (SccpAddress *)translateAddress:(SccpAddress *)in;
+
 @end
+

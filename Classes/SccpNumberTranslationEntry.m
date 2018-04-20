@@ -54,12 +54,61 @@ if(dict[name]) \
     SET_DICT_INTEGER(dict,@"remove-digits",_removeDigits);
 }
 
-- (SccpAddress *)translateAddress:(SccpAddress *)inAddr
+- (SccpAddress *)translateAddress:(SccpAddress *)in
 {
+    doTranslate = NO;
+    NSString *matchingDigits;
+    NSString *remainingDigits;
+    
     if(_inAddress)
     {
-
+        if([in.address hasPrefix:_inAddress])
+        {
+            /* a matching entry */
+            matchingDigits = _inAddress;
+            remainingDigits =  [in.address substringFromIndex:_inAddress.length];
+            doTranslate = YES;
+        }
     }
+    else
+    {
+        /* a default entry */
+        matchingDigits = @"";
+        remainingDigits = in.address;
+        doTranslate = YES;
+    }
+    if(doTranslate == NO)
+    {
+        return inAddr;
+    }
+    
+    SccpAddress *out = [inAddr copy];
+
+    NSMutableString *outStr =[matchingDigits mutableCopy];
+    [outStr appendString:remainingDigits];
+    if(_removeDigits)
+    {
+        outStr = [outStr substringFromIndex:_removeDigits.integerValue];
+    }
+    out.address = outStr;
+
+    if(_replacementNP)
+    {
+        if(out.npi == NULL)
+        {
+            out.npi = [[SccpNatureOfAddressIndicator alloc]init];
+        }
+        out.npi.npi = _replacementNP.integerValue;
+    }
+    if(_replacementNAI)
+    {
+        if(out.nai ==NULL)
+        {
+            out.nai = [[SccpNumberPlanIndicator alloc]init];
+        }
+        out.nai.nai = _replacementNAI.integerValue;
+    }
+    return out;
 }
 
 @end

@@ -28,6 +28,7 @@
 
 @property(readwrite,strong,atomic)  SccpGttRoutingTableDigitNode   *rootNode;
 
+
 - (void)entriesToDigitTree;
 - (SccpGttRoutingTableEntry *)findEntry:(NSString *)digits;
 
