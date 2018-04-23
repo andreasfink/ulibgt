@@ -103,4 +103,9 @@
     }
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"SCCP Destination(name=%@,_ssn=%@,_priority=%d,_weight=%d,_dpc=%@)",_name,_ssn,_priority,_weight,_dpc ];
+}
+
 @end

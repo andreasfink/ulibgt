@@ -33,6 +33,6 @@
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
 - (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant;
 - (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant;
-
+- (NSString *)description;
 
 @end
