@@ -15,11 +15,11 @@
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
-    NSString            *_digits;
-    SccpDestinationGroup     *_routeTo;
-    NSString            *_routeToName;
-    NSString            *_postTranslationName;
-    SccpNumberTranslation *_postTranslation;
+    NSString                *_digits;
+    SccpDestinationGroup    *_routeTo;
+    NSString                *_routeToName;
+    NSString                *_postTranslationName;
+    SccpNumberTranslation   *_postTranslation;
 }
 
 @property(readwrite,atomic,strong)  NSString *digits;
