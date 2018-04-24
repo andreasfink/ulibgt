@@ -23,4 +23,5 @@
 //- (SccpDestinationGroup *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
 - (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext;
+- (SccpDestination *)pickRandom;
 @end

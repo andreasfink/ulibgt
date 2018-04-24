@@ -29,6 +29,20 @@
     return NULL;
 }
 
+- (SccpDestination *)pickRandom
+{
+    if(_entries.count == 0)
+    {
+        return NULL;
+    }
+    if(_entries.count ==1)
+    {
+        return _entries[0];
+    }
+    uint32_t idx = [UMUtil random:(uint32_t)_entries.count];
+    return [_entries objectAtIndex:idx];
+}
+
 - (SccpDestinationGroup *)init
 {
     self = [super init];
