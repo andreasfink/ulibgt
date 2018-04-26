@@ -67,7 +67,7 @@ if(dict[name]) \
 - (SccpAddress *)translateAddress:(SccpAddress *)in
 {
     BOOL doTranslate = NO;
-    NSString *matchingDigits;
+    //NSString *matchingDigits;
     NSString *remainingDigits;
     
     if(_inAddress)
@@ -75,7 +75,7 @@ if(dict[name]) \
         if([in.address hasPrefix:_inAddress])
         {
             /* a matching entry */
-            matchingDigits = _inAddress;
+            //matchingDigits = _inAddress;
             remainingDigits =  [in.address substringFromIndex:_inAddress.length];
             doTranslate = YES;
         }
@@ -83,7 +83,7 @@ if(dict[name]) \
     else
     {
         /* a default entry */
-        matchingDigits = @"";
+        //matchingDigits = @"";
         remainingDigits = in.address;
         doTranslate = YES;
     }
