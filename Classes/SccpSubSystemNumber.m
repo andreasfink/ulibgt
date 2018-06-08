@@ -111,6 +111,9 @@
         case SCCP_SSN_800_NUMBER_TRANSLATION_TCAP:
             str = @"800_NUMBER_TRANSLATION_TCAP";
             break;
+        case SCCP_SSN_ULIBTRANSPORT:
+            str = @"ULBITRANSPORT";
+            break;
         default:
             return [NSString stringWithFormat:@"SSN_%d",ssn];
     }
