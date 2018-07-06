@@ -89,7 +89,7 @@ if(dict[name]) \
     }
     if(doTranslate == NO)
     {
-        return in;
+        return NULL;
     }
     
     SccpAddress *out = [in copy];
