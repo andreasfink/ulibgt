@@ -38,7 +38,12 @@
     SccpAddress *addr = in;
     for(SccpNumberTranslationEntry *e in _entries)
     {
-        addr = [e translateAddress:addr];
+        SccpAddress *addr2 = [e translateAddress:addr];
+        if(addr2)
+        {
+            addr = addr2;
+            break;
+        }
     }
     return addr;
 }
