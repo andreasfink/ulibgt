@@ -13,14 +13,13 @@
 
 @implementation SccpSubSystemNumber
 
-@synthesize ssn;
 
 - (SccpSubSystemNumber *)initWithInt:(int)i
 {
     self = [super init];
     if(self)
     {
-        ssn = i;
+        _ssn = i;
     }
     return self;
 }
@@ -28,7 +27,7 @@
 -(NSString *)description
 {
     NSString *str = @"";
-    switch (ssn)
+    switch (_ssn)
     {
         case SCCP_SSN_ISUP:
             str = @"ISUP";
@@ -115,7 +114,7 @@
             str = @"ULBITRANSPORT";
             break;
         default:
-            return [NSString stringWithFormat:@"SSN_%d",ssn];
+            return [NSString stringWithFormat:@"SSN_%d",_ssn];
     }
     return [NSString stringWithFormat:@"SSN_%@",str];
 }
@@ -250,10 +249,11 @@
     return [self initWithInt:k];
 }
 
-
 - (SccpSubSystemNumber *)copyWithZone:(NSZone *)zone
 {
-    return [[SccpSubSystemNumber allocWithZone:zone]initWithInt:ssn];
+    SccpSubSystemNumber *s = [[SccpSubSystemNumber allocWithZone:zone]init];
+    s.ssn = _ssn;
+    return s;
 }
 
 @end
