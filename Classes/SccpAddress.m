@@ -455,7 +455,9 @@ int sccp_digit_to_nibble(int digit, int def)
 
     int p=0;
     const uint8_t *bytes = pdu.bytes;
-    [self setAiFromInt:bytes[p++]];
+    int aibyte = bytes[p] & 0x7F; /* we clear national reserved bit because this should not be set in ITU */
+    p++;
+    [self setAiFromInt:aibyte];
 
     /* first in order is pointcode if present */
     if(ai.pointCodeIndicator)	/* pointcode present */
