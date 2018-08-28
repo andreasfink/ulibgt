@@ -21,7 +21,6 @@
 
 @implementation SccpGttSelector
 
-
 @synthesize defaultEntry;
 
 -(SccpGttSelector *)initWithInstanceNameE164:(NSString *)name
@@ -133,6 +132,22 @@
     }
     *dst = addr;
     return nextHop;
+}
+
+- (UMSynchronizedSortedDictionary *)config
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+	(_sccp_instance!=NULL) ? [dict addObject:_sccp_instance forKey:@"sccp"] : "";
+	[dict addObject:[NSNumber numberWithInt:_tt] forKey:@"tt"]; 			// tt is integer and zero (e.g. 0) is a valid number
+	[dict addObject:[NSNumber numberWithInt:_gti] forKey:@"gti"];			//     	-//-
+	[dict addObject:[NSNumber numberWithInt:_np] forKey:@"np"];				//		-//-
+	[dict addObject:[NSNumber numberWithInt:_nai] forKey:@"nai"];			//		-//-
+	[dict addObject:[NSNumber numberWithInt:_external] forKey:@"external"];	//		-//-	
+	[dict addObject:[NSNumber numberWithInt:_internal] forKey:@"internal"];	//		-//-
+	(_preTranslationName!=NULL) ? [dict addObject:_preTranslationName forKey:@"pre-translation"] : "";
+	(_postTranslationName!=NULL) ? [dict addObject:_postTranslationName forKey:@"post-translation"] : "";
+	(_defaultEntryName!=NULL) ? [dict addObject:_defaultEntryName forKey:@"default-destination"] : "";
+    return dict;
 }
 
 @end

@@ -66,4 +66,6 @@
 - (SccpGttSelector *)initWithInstanceNameE164:(NSString *)name;
 - (SccpGttSelector *)initWithConfig:(NSDictionary *)config;
 
+- (UMSynchronizedSortedDictionary *)config;
+
 @end
