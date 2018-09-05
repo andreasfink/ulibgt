@@ -44,7 +44,7 @@
 
 @interface SccpSubSystemNumber : UMObject
 {
-    int ssn;
+    int _ssn;
 }
 
 @property(readwrite,assign) int ssn;
