@@ -60,6 +60,7 @@
 @property(readwrite,assign,atomic)  int             external;
 @property(readwrite,assign,atomic)  int             internal;
 @property(readwrite,strong,atomic)  SccpGttRoutingTable *routingTable;
+
 - (NSString *)selectorKey;
 + (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai;
 
@@ -67,5 +68,7 @@
 - (SccpGttSelector *)initWithConfig:(NSDictionary *)config;
 
 - (UMSynchronizedSortedDictionary *)config;
+
+- (UMSynchronizedSortedDictionary *)statisticalInfo;
 
 @end

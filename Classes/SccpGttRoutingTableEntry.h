@@ -20,6 +20,8 @@
     NSString                *_routeToName;
     NSString                *_postTranslationName;
     SccpNumberTranslation   *_postTranslation;
+	
+	UMThroughputCounter *_incomingSpeed;
 }
 
 @property(readwrite,atomic,strong)  NSString *digits;
@@ -27,7 +29,11 @@
 @property(readwrite,atomic,strong)  NSString *routeToName;
 @property(readwrite,atomic,strong)  NSString    *postTranslationName;
 @property(readwrite,atomic,strong)  SccpNumberTranslation *postTranslation;
+@property(readwrite,strong,atomic)  UMThroughputCounter *incomingSpeed;
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
+
+- (SccpDestinationGroup *)getRouteTo;
+- (NSString *)getStatistics;
 @end
 

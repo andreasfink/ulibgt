@@ -118,7 +118,7 @@
     }
     else
     {
-        SccpDestinationGroup *nextHopGroup = routingTableEntry.routeTo;
+        SccpDestinationGroup *nextHopGroup = [routingTableEntry getRouteTo];
         nextHop = [nextHopGroup chooseNextHopWithRoutingTable:rt];
     }
     /* This will return:
@@ -147,6 +147,20 @@
 	(_preTranslationName!=NULL) ? [dict addObject:_preTranslationName forKey:@"pre-translation"] : "";
 	(_postTranslationName!=NULL) ? [dict addObject:_postTranslationName forKey:@"post-translation"] : "";
 	(_defaultEntryName!=NULL) ? [dict addObject:_defaultEntryName forKey:@"default-destination"] : "";
+    return dict;
+}
+
+- (UMSynchronizedSortedDictionary *)statisticalInfo
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    
+	UMSynchronizedSortedDictionary *entries = [_routingTable list];
+	NSArray *keys = [entries allKeys];
+    for(id key in keys)
+    {
+        SccpGttRoutingTableEntry *routingTableEntry = entries[key];
+        dict[key] = [routingTableEntry getStatistics];
+    }
     return dict;
 }
 

@@ -79,5 +79,9 @@
     currentNode.entry = entry;
 }
 
+- (UMSynchronizedSortedDictionary *)list
+{
+	return _entries;
+}
 
 @end

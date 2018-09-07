@@ -33,4 +33,6 @@
 - (SccpGttRoutingTableEntry *)findEntry:(NSString *)digits;
 - (void)addEntry:(SccpGttRoutingTableEntry *)entry;
 
+-(UMSynchronizedSortedDictionary *)list;
+
 @end
