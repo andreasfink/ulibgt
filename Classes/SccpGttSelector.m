@@ -34,6 +34,7 @@
         _nai =4;
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]init];
+		_active=NO;
     }
     return self;
 }
@@ -48,6 +49,7 @@
         _nai =4;
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]init];
+		_active=NO;
         if(config[@"sccp"])
         {
             _sccp_instance = [config[@"sccp"] stringValue];
@@ -147,6 +149,7 @@
 	(_preTranslationName!=NULL) ? [dict addObject:_preTranslationName forKey:@"pre-translation"] : "";
 	(_postTranslationName!=NULL) ? [dict addObject:_postTranslationName forKey:@"post-translation"] : "";
 	(_defaultEntryName!=NULL) ? [dict addObject:_defaultEntryName forKey:@"default-destination"] : "";
+	dict[@"active"] = [NSNumber numberWithBool:_active];
     return dict;
 }
 
@@ -156,12 +159,18 @@
     
 	UMSynchronizedSortedDictionary *entries = [_routingTable list];
 	NSArray *keys = [entries allKeys];
+	dict[@"active"] = [NSNumber numberWithBool:_active];
     for(id key in keys)
     {
         SccpGttRoutingTableEntry *routingTableEntry = entries[key];
         dict[key] = [routingTableEntry getStatistics];
     }
     return dict;
+}
+
+- (void)activate:(BOOL)on
+{
+	_active = on;
 }
 
 @end

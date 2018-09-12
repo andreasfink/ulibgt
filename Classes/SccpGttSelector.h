@@ -39,6 +39,7 @@
     NSString              *_postTranslationName;
     SccpNumberTranslation *_preTranslation;
     SccpNumberTranslation *_postTranslation;
+	BOOL 		  	_active;
 }
 
 @property(readwrite,strong,atomic) NSString        *sccp_instance;
@@ -60,6 +61,7 @@
 @property(readwrite,assign,atomic)  int             external;
 @property(readwrite,assign,atomic)  int             internal;
 @property(readwrite,strong,atomic)  SccpGttRoutingTable *routingTable;
+@property(readwrite,assign,atomic)  BOOL            active;
 
 - (NSString *)selectorKey;
 + (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai;
@@ -70,5 +72,7 @@
 - (UMSynchronizedSortedDictionary *)config;
 
 - (UMSynchronizedSortedDictionary *)statisticalInfo;
+
+- (void)activate:(BOOL)on;
 
 @end
