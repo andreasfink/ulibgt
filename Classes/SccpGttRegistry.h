@@ -29,6 +29,7 @@
                                      nai:(int)nai;
 
 - (void)addEntry:(SccpGttSelector *)sel;
+- (void)removeEntry:(SccpGttSelector *)sel;
 - (void)initWithConfigLines:(NSArray *)lines;
 
 @end

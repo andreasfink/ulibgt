@@ -21,7 +21,6 @@
 
 @implementation SccpGttSelector
 
-
 @synthesize defaultEntry;
 
 -(SccpGttSelector *)initWithInstanceNameE164:(NSString *)name
@@ -35,6 +34,7 @@
         _nai =4;
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]init];
+		_active=NO;
     }
     return self;
 }
@@ -49,6 +49,7 @@
         _nai =4;
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]init];
+		_active=NO;
         if(config[@"sccp"])
         {
             _sccp_instance = [config[@"sccp"] stringValue];
@@ -119,7 +120,7 @@
     }
     else
     {
-        SccpDestinationGroup *nextHopGroup = routingTableEntry.routeTo;
+        SccpDestinationGroup *nextHopGroup = [routingTableEntry getRouteTo];
         nextHop = [nextHopGroup chooseNextHopWithRoutingTable:rt];
     }
     /* This will return:
@@ -133,6 +134,43 @@
     }
     *dst = addr;
     return nextHop;
+}
+
+- (UMSynchronizedSortedDictionary *)config
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+	(_sccp_instance!=NULL) ? [dict addObject:_sccp_instance forKey:@"sccp"] : "";
+	[dict addObject:[NSNumber numberWithInt:_tt] forKey:@"tt"]; 			// tt is integer and zero (e.g. 0) is a valid number
+	[dict addObject:[NSNumber numberWithInt:_gti] forKey:@"gti"];			//     	-//-
+	[dict addObject:[NSNumber numberWithInt:_np] forKey:@"np"];				//		-//-
+	[dict addObject:[NSNumber numberWithInt:_nai] forKey:@"nai"];			//		-//-
+	[dict addObject:[NSNumber numberWithInt:_external] forKey:@"external"];	//		-//-	
+	[dict addObject:[NSNumber numberWithInt:_internal] forKey:@"internal"];	//		-//-
+	(_preTranslationName!=NULL) ? [dict addObject:_preTranslationName forKey:@"pre-translation"] : "";
+	(_postTranslationName!=NULL) ? [dict addObject:_postTranslationName forKey:@"post-translation"] : "";
+	(_defaultEntryName!=NULL) ? [dict addObject:_defaultEntryName forKey:@"default-destination"] : "";
+	dict[@"active"] = [NSNumber numberWithBool:_active];
+    return dict;
+}
+
+- (UMSynchronizedSortedDictionary *)statisticalInfo
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    
+	UMSynchronizedSortedDictionary *entries = [_routingTable list];
+	NSArray *keys = [entries allKeys];
+	dict[@"active"] = [NSNumber numberWithBool:_active];
+    for(id key in keys)
+    {
+        SccpGttRoutingTableEntry *routingTableEntry = entries[key];
+        dict[key] = [routingTableEntry getStatistics];
+    }
+    return dict;
+}
+
+- (void)activate:(BOOL)on
+{
+	_active = on;
 }
 
 @end

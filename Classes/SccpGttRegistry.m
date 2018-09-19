@@ -50,6 +50,15 @@ static SccpGttRegistry *g_registry;
     }
 }
 
+- (void)removeEntry:(SccpGttSelector *)gsel
+{
+    @synchronized(self)
+    {
+        NSString *key = gsel.selectorKey;
+		[_entries removeObjectForKey:key];
+    }
+}
+
 - (void)initWithConfigLines:(NSArray *)lines
 {
     /* this will process a cisco ITP style GTT configuration */
