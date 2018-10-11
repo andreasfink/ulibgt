@@ -64,7 +64,7 @@ static SccpGttRegistry *g_registry;
     /* this will process a cisco ITP style GTT configuration */
     /* first we look for config lines starting with "cs7" */
 
-    NSCharacterSet *whitespace  = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSCharacterSet *whitespace  = [UMObject whitespaceAndNewlineCharacterSet];
 
     for(NSString *line in lines)
     {
