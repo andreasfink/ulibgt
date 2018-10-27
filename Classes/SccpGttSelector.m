@@ -10,10 +10,8 @@
 // the author.
 
 #import "SccpGttSelector.h"
-#import "SccpL3Provider.h"
 #import "SccpApplicationGroup.h"
 #import "SccpDestination.h"
-#import "SccpL3Provider.h"
 #import "SccpGttRoutingTable.h"
 #import "SccpNumberTranslation.h"
 #import "SccpAddress.h"
