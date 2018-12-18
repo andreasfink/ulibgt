@@ -14,9 +14,9 @@
 
 @interface SccpDestination : UMObject
 {
-    NSString *_name;
+    NSString        *_name;
     /* one of these should be set but only one */
-    NSNumber        *_ssn;              /* send to internal subsystem       */
+    NSNumber        *_ssn;              /* send to internal subsystem. 0 if subsystem is 'any'    */
     UMMTP3PointCode *_dpc;              /* send to pointcode                */
     NSString        *_m3uaAs;           /* send to m3ua application servber */
     int             _priority;          /* priority group 0...7 of this route */
