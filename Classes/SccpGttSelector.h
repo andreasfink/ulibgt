@@ -24,6 +24,7 @@
 
 @interface SccpGttSelector : UMObject
 {
+    NSString        *_name;
     NSString        *_sccp_instance;
     int             _tt;
     int             _gti;
@@ -42,6 +43,7 @@
 	BOOL 		  	_active;
 }
 
+@property(readwrite,strong,atomic) NSString        *name;
 @property(readwrite,strong,atomic) NSString        *sccp_instance;
 @property(readwrite,strong,atomic)  NSString *preTranslationName;
 @property(readwrite,strong,atomic)  NSString *postTranslationName;

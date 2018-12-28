@@ -80,6 +80,14 @@
         {
             _defaultEntryName = [config[@"default-destination"] stringValue];
         }
+        if(config[@"name"])
+        {
+            _name = [config[@"name"] stringValue];
+        }
+        else
+        {
+            _name = [self selectorKey];
+        }
     }
     return self;
 }
@@ -102,7 +110,8 @@
     }
 }
 
-- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt destination:(SccpAddress **)dst;
+- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
+                                         destination:(SccpAddress **)dst;
 {
     SccpAddress *addr = *dst;
     if(_preTranslation)
