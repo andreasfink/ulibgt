@@ -59,6 +59,36 @@ static SccpGttRegistry *g_registry;
     }
 }
 
+- (NSArray *)listSelectorNames
+{
+    NSMutableArray *a = [[NSMutableArray alloc]init];
+    NSArray *keys = [_entries allKeys];
+    for(NSString *key in keys)
+    {
+        SccpGttSelector *s =  _entries[key];
+        if(s)
+        {
+            [a addObject:s.name];
+        }
+    }
+    return a;
+}
+
+- (SccpGttSelector *)getSelectorByName:(NSString *)name;
+{
+    NSArray *keys = [_entries allKeys];
+    for(NSString *key in keys)
+    {
+        SccpGttSelector *s =  _entries[key];
+        if([s.name isEqualToString:name])
+        {
+            return s;
+        }
+    }
+    return NULL;
+}
+
+
 - (void)initWithConfigLines:(NSArray *)lines
 {
     /* this will process a cisco ITP style GTT configuration */
@@ -76,4 +106,24 @@ static SccpGttRegistry *g_registry;
         }
     }
 }
+
+- (UMSynchronizedSortedDictionary *)config
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    NSArray *arr = [self listSelectorNames];
+    for(NSString *name in arr)
+    {
+        SccpGttSelector *sel = [self getSelectorByName:name];
+        if(sel)
+        {
+            UMSynchronizedSortedDictionary *selectorConfig = [sel config];
+            if(selectorConfig)
+            {
+                dict[name] = selectorConfig;
+            }
+        }
+    }
+    return dict;
+}
+
 @end

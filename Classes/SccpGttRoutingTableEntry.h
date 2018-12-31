@@ -15,6 +15,9 @@
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
+    NSString                *_name;
+    NSString                *_table;
+
     NSString                *_digits;
     SccpDestinationGroup    *_routeTo;
     NSString                *_routeToName;
@@ -24,6 +27,10 @@
 	UMThroughputCounter *_incomingSpeed;
 }
 
+
+@property(readwrite,atomic,strong)  NSString                *name;
+@property(readwrite,atomic,strong)  NSString                *table;
+
 @property(readwrite,atomic,strong)  NSString *digits;
 @property(readwrite,atomic,strong)  SccpDestinationGroup *routeTo;
 @property(readwrite,atomic,strong)  NSString *routeToName;
@@ -32,7 +39,7 @@
 @property(readwrite,strong,atomic)  UMThroughputCounter *incomingSpeed;
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
-
+- (UMSynchronizedSortedDictionary *)config;
 - (SccpDestinationGroup *)getRouteTo;
 - (NSString *)getStatistics;
 @end

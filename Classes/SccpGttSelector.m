@@ -1,5 +1,5 @@
 //
-//  SccpRoutingTable.m
+//  SccpGttSelector.m
 //  ulibgt
 //
 //  Created by Andreas Fink on 22/05/15.
@@ -120,7 +120,7 @@
     }
     NSString *digits = addr.address;
     SccpDestination *nextHop;
-    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntry:digits];
+    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits];
     if(routingTableEntry==NULL)
     {
         nextHop = [defaultEntry chooseNextHopWithRoutingTable:rt];
@@ -146,17 +146,31 @@
 - (UMSynchronizedSortedDictionary *)config
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-	(_sccp_instance!=NULL) ? [dict addObject:_sccp_instance forKey:@"sccp"] : "";
-	[dict addObject:[NSNumber numberWithInt:_tt] forKey:@"tt"]; 			// tt is integer and zero (e.g. 0) is a valid number
-	[dict addObject:[NSNumber numberWithInt:_gti] forKey:@"gti"];			//     	-//-
-	[dict addObject:[NSNumber numberWithInt:_np] forKey:@"np"];				//		-//-
-	[dict addObject:[NSNumber numberWithInt:_nai] forKey:@"nai"];			//		-//-
-	[dict addObject:[NSNumber numberWithInt:_external] forKey:@"external"];	//		-//-	
-	[dict addObject:[NSNumber numberWithInt:_internal] forKey:@"internal"];	//		-//-
-	(_preTranslationName!=NULL) ? [dict addObject:_preTranslationName forKey:@"pre-translation"] : "";
-	(_postTranslationName!=NULL) ? [dict addObject:_postTranslationName forKey:@"post-translation"] : "";
-	(_defaultEntryName!=NULL) ? [dict addObject:_defaultEntryName forKey:@"default-destination"] : "";
-	dict[@"active"] = [NSNumber numberWithBool:_active];
+    if(_sccp_instance)
+    {
+        [dict addObject:_sccp_instance forKey:@"sccp"];
+    }
+    dict[@"tt"] = @(_tt);
+    dict[@"gti"] = @(_gti);
+    dict[@"np"] = @(_np);
+    dict[@"nai"] = @(_nai);
+    if(_preTranslationName)
+    {
+        dict[@"pre-translation"] = _preTranslationName;
+    }
+    if(_postTranslationName)
+    {
+        dict[@"post-translation"] = _postTranslationName;
+    }
+    if(_defaultEntryName)
+    {
+        dict[@"default-destination"] = _defaultEntryName;
+    }
+	dict[@"active"] = @(_active);
+
+
+    dict[@"gt-destination"] = _defaultEntryName;
+
     return dict;
 }
 

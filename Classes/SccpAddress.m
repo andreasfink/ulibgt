@@ -50,7 +50,7 @@ int sccp_digit_to_nibble(int digit, int def)
             return 0x0C;
         case 'D':
         case 'd':
-            return 0x0d;
+            return 0x0D;
         case 'E':
         case 'e':
             return 0x0E;

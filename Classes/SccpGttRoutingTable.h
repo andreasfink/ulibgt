@@ -30,7 +30,12 @@
 
 
 - (void)entriesToDigitTree;
-- (SccpGttRoutingTableEntry *)findEntry:(NSString *)digits;
+- (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits;
+- (SccpGttRoutingTableEntry *)findEntryByName:(NSString *)name;
+- (void)deleteEntryByName:(NSString *)name;
+- (void)deleteEntryByDigits:(NSString *)digits;
+
+
 - (void)addEntry:(SccpGttRoutingTableEntry *)entry;
 
 -(UMSynchronizedSortedDictionary *)list;

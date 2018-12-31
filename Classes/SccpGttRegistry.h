@@ -28,8 +28,12 @@
                                       np:(int)np
                                      nai:(int)nai;
 
+
 - (void)addEntry:(SccpGttSelector *)sel;
 - (void)removeEntry:(SccpGttSelector *)sel;
 - (void)initWithConfigLines:(NSArray *)lines;
+- (NSArray *)listSelectorNames;
+- (SccpGttSelector *)getSelectorByName:(NSString *)name;
+- (UMSynchronizedSortedDictionary *)config;
 
 @end
