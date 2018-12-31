@@ -47,15 +47,30 @@
     SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
     for(NSInteger i = 0;i<n;i++)
     {
+        if(currentNode.entry.enabled==NO)
+        {
+            break;
+        }
         unichar uc = [digits characterAtIndex:i];
         SccpGttRoutingTableDigitNode *nextNode = [currentNode nextNode:(int)uc create:NO];
         if(nextNode == NULL)
         {
             break;
         }
-        currentNode = nextNode;
+        if(currentNode.entry.enabled==YES)
+        {
+            currentNode = nextNode;
+        }
+        else
+        {
+            break;
+        }
     }
-    return currentNode.entry;
+    if(currentNode.entry.enabled == YES)
+    {
+        return currentNode.entry;
+    }
+    return NULL;
 }
 
 - (SccpGttRoutingTableEntry *)findEntryByName:(NSString *)name

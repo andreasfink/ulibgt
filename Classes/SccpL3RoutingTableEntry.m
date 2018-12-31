@@ -10,4 +10,28 @@
 
 
 @implementation SccpL3RoutingTableEntry
+
+
+- (UMSynchronizedSortedDictionary *)statusDict
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"point-code"] = [_pc stringValue];
+
+    switch(_status)
+    {
+        case SccpL3RouteStatus_unknown:
+            dict[@"status"] = @"unknown";
+            break;
+        case SccpL3RouteStatus_available:
+            dict[@"status"] = @"available";
+            break;
+        case SccpL3RouteStatus_restricted:
+            dict[@"status"] = @"restricted";
+            break;
+        case SccpL3RouteStatus_unavailable:
+            dict[@"status"] = @"unavailable";
+            break;
+    }
+    return dict;
+}
 @end

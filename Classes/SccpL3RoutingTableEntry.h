@@ -19,4 +19,6 @@
 @property(readwrite,atomic,strong)  UMMTP3PointCode *pc;
 @property(readwrite,atomic,assign)  SccpL3RouteStatus status;
 
+- (UMSynchronizedSortedDictionary *)statusDict;
+
 @end;

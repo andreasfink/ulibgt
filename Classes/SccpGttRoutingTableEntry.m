@@ -7,8 +7,20 @@
 //
 
 #import "SccpGttRoutingTableEntry.h"
+#import "SccpDestinationGroup.h"
 
 @implementation SccpGttRoutingTableEntry
+
+- (SccpGttRoutingTableEntry *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _incomingSpeed = [[UMThroughputCounter alloc]init];
+        _enabled=YES;
+    }
+    return self;
+}
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg
 {
@@ -37,6 +49,7 @@
         {
             _postTranslationName = [cfg[@"post-translation"] stringValue];
         }
+        _enabled=YES;
     }
     return self;
 }
@@ -77,4 +90,23 @@
     }
     return dict;
 }
+
++ (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName
+{
+    return [NSString stringWithFormat:@"%@:%@",tableName,gta ];
+}
+
+- (UMSynchronizedSortedDictionary *)status
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"config"] = [self config];
+    dict[@"enabled"] = @(_enabled);
+    dict[@"incoming-speed"] = [_incomingSpeed getSpeedTripleJson];
+    if(_routeTo)
+    {
+        dict[@"destination-status"] = [_routeTo status];
+    }
+    return dict;
+}
+
 @end

@@ -24,4 +24,7 @@
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
 - (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext;
 - (SccpDestination *)pickRandom;
+- (UMSynchronizedSortedDictionary *)status;
+- (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
+
 @end

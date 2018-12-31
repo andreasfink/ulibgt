@@ -20,8 +20,6 @@
     self = [super init];
     if(self)
     {
-        _priority = 4;
-        _weight   = 100;
     }
     return self;
 }
@@ -32,8 +30,6 @@
     self = [super init];
     if(self)
     {
-        _priority = 4;
-        _weight   = 100;
         [self setConfig:dict variant:variant];
     }
     return self;
@@ -53,8 +49,6 @@
         self = [super init];
         if(self)
         {
-            _priority = 4;
-            _weight   = 100;
             _dpc = [[UMMTP3PointCode alloc]initWithString:array[0] variant:variant];
         }
         return self;
@@ -83,29 +77,95 @@
     {
         _name = [cfg[@"name"] stringValue];
     }
-    if(cfg[@"ssn"])
+    if(cfg[@"destination"])
     {
-        _ssn = @(  [cfg[@"ssn"] intValue] );
+        _destination = [cfg[@"destination"] stringValue];
+    }
+    if(cfg[@"subsystem"])
+    {
+        _ssn = @(  [cfg[@"subsystem"] intValue] );
     }
     if(cfg[@"point-code"])
     {
         _dpc = [[UMMTP3PointCode alloc]initWithString: [cfg[@"point-code"] stringValue] variant:variant];
     }
+    if(cfg[@"application-server"])
+    {
+        _m3uaAs =[cfg[@"application-server"] stringValue];
+    }
+
     if(cfg[@"priority"])
     {
-        _priority =[cfg[@"ssn"] intValue];
+        _priority =@([cfg[@"ssn"] intValue]);
 
     }
     if(cfg[@"weight"])
     {
-        _weight =[cfg[@"weight"] intValue];
-
+        _weight =@([cfg[@"weight"] intValue]);
     }
+    if(cfg[@"ntt"])
+    {
+        _ntt = @([cfg[@"ntt"] intValue]);
+    }
+    if(cfg[@"add-prefix"])
+    {
+        _addPrefix = [cfg[@"add-prefix"] stringValue];
+    }
+}
+
+
+- (UMSynchronizedSortedDictionary *)config
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+
+    if(_name)
+    {
+        dict[@"name"] = _name;
+    }
+    if(_destination)
+    {
+        dict[@"destination"] = _destination;
+    }
+    if(_ssn)
+    {
+        dict[@"subsystem"] = _ssn;
+    }
+    if(_dpc)
+    {
+        dict[@"point-code"] = _dpc;
+    }
+    if(_m3uaAs)
+    {
+        dict[@"application-server"] = _m3uaAs;
+    }
+    if(_priority)
+    {
+        dict[@"priority"] = _priority;
+    }
+    if(_weight)
+    {
+        dict[@"weight"] = _weight;
+    }
+    if(_ntt)
+    {
+        dict[@"ntt"] = _ntt;
+    }
+    if(_addPrefix)
+    {
+        dict[@"add-prefix"] = _addPrefix;
+    }
+    return dict;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"SCCP Destination(name=%@,_ssn=%@,_priority=%d,_weight=%d,_dpc=%@)",_name,_ssn,_priority,_weight,_dpc ];
+    return [NSString stringWithFormat:@"SCCP Destination(name=%@,_ssn=%@,_priority=%@,_weight=%@,_dpc=%@)",_name,_ssn,_priority,_weight,_dpc ];
 }
 
+- (UMSynchronizedSortedDictionary *)statusDict
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"config"] = [self config];
+    return dict;
+}
 @end

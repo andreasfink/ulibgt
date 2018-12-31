@@ -128,37 +128,54 @@
     NSMutableArray *highestPrioEntries = [[NSMutableArray alloc]init];
     for(SccpDestination *e in validEntries)
     {
-        if(e.priority < highestPrio)
+        int priority = 4;
+        if(e.priority)
+        {
+            priority = e.priority.intValue;
+        }
+
+        if(priority < highestPrio)
         {
             continue;
         }
-        if(e.priority == highestPrio)
+        if(priority == highestPrio)
         {
             [highestPrioEntries addObject:e];
         }
-        if(e.priority > highestPrio)
+        if(priority > highestPrio)
         {
             highestPrioEntries = [[NSMutableArray alloc]init];
             [highestPrioEntries addObject:e];
-            highestPrio = e.priority;
+            highestPrio = priority;
         }
     }
 
     uint32_t totalWeight = 0;
     for(SccpDestination *e in highestPrioEntries)
     {
-        totalWeight = totalWeight + e.weight;
+        int weight = 100;
+        if(e.weight)
+        {
+            weight = e.weight.intValue;
+        }
+        totalWeight += weight;
     }
 
     uint32_t pickWeight = [UMUtil random:totalWeight];
     uint32_t currentWeight = 0;
     for(SccpDestination *e in highestPrioEntries)
     {
-        if((currentWeight < pickWeight) && (pickWeight <= (currentWeight+ e.weight)))
+        int weight = 100;
+        if(e.weight)
+        {
+            weight = e.weight.intValue;
+        }
+
+        if((currentWeight < pickWeight) && (pickWeight <= (currentWeight + weight)))
         {
             return e;
         }
-        currentWeight += e.weight;
+        currentWeight += weight;
     }
     /* we basically shoud never get here */
     return NULL;
@@ -167,6 +184,60 @@
 - (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext
 {
     _name = [cfg[@"name"] stringValue];
+}
+
+
+- (UMSynchronizedSortedDictionary *)status
+{
+    return [self statusForL3RoutingTable:NULL];
+}
+
+- (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"name"] = _name;
+
+    NSMutableArray *availEntries                = [[NSMutableArray alloc]init];
+    NSMutableArray *restrictedEntries           = [[NSMutableArray alloc]init];
+    NSMutableArray *unavailableEntries          = [[NSMutableArray alloc]init];
+    NSMutableArray *unknownEntries              = [[NSMutableArray alloc]init];
+
+    NSArray *entries = [_entries arrayCopy];
+
+    for(SccpDestination *e in entries)
+    {
+        if(rt==NULL)
+        {
+            [unknownEntries addObject:e.statusDict];
+        }
+        else
+        {
+            SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
+            UMSynchronizedSortedDictionary *d = [[UMSynchronizedSortedDictionary alloc]init];
+            d[@"destination-status"] = e.statusDict;
+            if(rtentry)
+            {
+                d[@"destination-route-status"] = rtentry.statusDict;
+            }
+            if(rtentry.status==SccpL3RouteStatus_available)
+            {
+                [availEntries addObject:d];
+            }
+            else if(rtentry.status==SccpL3RouteStatus_restricted)
+            {
+                [restrictedEntries addObject:d];
+            }
+            else
+            {
+                [unavailableEntries addObject:d];
+            }
+        }
+    }
+    dict[@"valid-entries"] = availEntries;
+    dict[@"available-entries"] = availEntries;
+    dict[@"restricted-entries"] = restrictedEntries;
+    dict[@"unavailable-entries"] = unavailableEntries;
+    return dict;
 }
 
 

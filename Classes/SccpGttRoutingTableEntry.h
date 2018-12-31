@@ -24,7 +24,8 @@
     NSString                *_postTranslationName;
     SccpNumberTranslation   *_postTranslation;
 	
-	UMThroughputCounter *_incomingSpeed;
+	UMThroughputCounter     *_incomingSpeed;
+    BOOL                    _enabled;
 }
 
 
@@ -36,11 +37,16 @@
 @property(readwrite,atomic,strong)  NSString *routeToName;
 @property(readwrite,atomic,strong)  NSString    *postTranslationName;
 @property(readwrite,atomic,strong)  SccpNumberTranslation *postTranslation;
-@property(readwrite,strong,atomic)  UMThroughputCounter *incomingSpeed;
+@property(readwrite,atomic,strong)  UMThroughputCounter *incomingSpeed;
+@property(readwrite,atomic,assign)  BOOL                    enabled;
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
 - (UMSynchronizedSortedDictionary *)config;
 - (SccpDestinationGroup *)getRouteTo;
 - (NSString *)getStatistics;
+- (UMSynchronizedSortedDictionary *)status;
+
++ (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName;
+
 @end
 
