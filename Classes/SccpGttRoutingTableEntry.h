@@ -12,6 +12,7 @@
 @class SccpDestinationGroup;
 @class SccpApplicationGroup;
 @class SccpNumberTranslation;
+@class SccpL3RoutingTable;
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
@@ -45,6 +46,7 @@
 - (SccpDestinationGroup *)getRouteTo;
 - (NSString *)getStatistics;
 - (UMSynchronizedSortedDictionary *)status;
+- (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
 
 + (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName;
 

@@ -8,6 +8,7 @@
 
 #import "SccpGttRoutingTableEntry.h"
 #import "SccpDestinationGroup.h"
+#import "SccpL3RoutingTable.h"
 
 @implementation SccpGttRoutingTableEntry
 
@@ -105,6 +106,19 @@
     if(_routeTo)
     {
         dict[@"destination-status"] = [_routeTo status];
+    }
+    return dict;
+}
+
+- (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"config"] = [self config];
+    dict[@"enabled"] = @(_enabled);
+    dict[@"incoming-speed"] = [_incomingSpeed getSpeedTripleJson];
+    if(_routeTo)
+    {
+        dict[@"destination-status"] = [_routeTo statusForL3RoutingTable:rt];
     }
     return dict;
 }
