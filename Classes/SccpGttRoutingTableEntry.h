@@ -27,8 +27,8 @@
 	
 	UMThroughputCounter     *_incomingSpeed;
     BOOL                    _enabled;
+    UMLogLevel              _logLevel;
 }
-
 
 @property(readwrite,atomic,strong)  NSString                *name;
 @property(readwrite,atomic,strong)  NSString                *table;
@@ -39,7 +39,8 @@
 @property(readwrite,atomic,strong)  NSString    *postTranslationName;
 @property(readwrite,atomic,strong)  SccpNumberTranslation *postTranslation;
 @property(readwrite,atomic,strong)  UMThroughputCounter *incomingSpeed;
-@property(readwrite,atomic,assign)  BOOL                    enabled;
+@property(readwrite,atomic,assign)  BOOL        enabled;
+@property(readwrite,atomic,assign)  UMLogLevel  logLevel;
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
 - (UMSynchronizedSortedDictionary *)config;

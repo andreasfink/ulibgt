@@ -21,12 +21,14 @@
 
 @interface SccpGttRoutingTable : UMObject
 {
+    UMLogLevel                      _logLevel;
     UMSynchronizedSortedDictionary *_entries;
     SccpGttRoutingTableDigitNode   *_rootNode;
 }
 
 
-@property(readwrite,strong,atomic)  SccpGttRoutingTableDigitNode   *rootNode;
+@property(readwrite,strong,atomic) SccpGttRoutingTableDigitNode   *rootNode;
+@property(readwrite,assign,atomic) UMLogLevel logLevel;
 
 
 - (void)entriesToDigitTree;

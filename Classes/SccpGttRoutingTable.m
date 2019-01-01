@@ -24,6 +24,41 @@
     return self;
 }
 
+- (void)setLogLevel:(UMLogLevel)newLogLevel
+{
+    _logLevel = newLogLevel;
+
+    NSArray *keys = [_entries allKeys];
+    for(id key in keys)
+    {
+        SccpGttRoutingTableEntry *entry = _entries[key];
+        entry.logLevel = newLogLevel;
+    }
+}
+
+
+- (UMLogLevel) logLevel
+{
+    return _logLevel;
+}
+
+- (void)setLogFeed:(UMLogFeed *)newLogFeed
+{
+    self.logFeed = newLogFeed;
+    NSArray *keys = [_entries allKeys];
+    for(id key in keys)
+    {
+        SccpGttRoutingTableEntry *entry = _entries[key];
+        entry.logFeed = newLogFeed;
+    }
+}
+
+- (UMLogFeed *) logFeed
+{
+    return [super logFeed];
+}
+
+
 - (void)entriesToDigitTree
 {
     SccpGttRoutingTableDigitNode *newRoot = [[SccpGttRoutingTableDigitNode alloc]init];
@@ -53,11 +88,27 @@
 {
     NSInteger n = [digits length];
 
+    if(_logLevel <=UMLOG_DEBUG)
+    {
+        NSString *s = [NSString stringWithFormat:@"called findEntryByDigits:%@",digits];
+        [self.logFeed debugText:s];
+    }
     SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
     for(NSInteger i = 0;i<n;i++)
     {
+        if(_logLevel <=UMLOG_DEBUG)
+        {
+            NSString *s = [NSString stringWithFormat:@" checking digit nr  %d",(int)i];
+            [self.logFeed debugText:s];
+        }
+
         if(currentNode.entry.enabled==NO)
         {
+            if(_logLevel <=UMLOG_DEBUG)
+            {
+                NSString *s = [NSString stringWithFormat:@" currentNode.entry.enabled == NO"];
+                [self.logFeed debugText:s];
+            }
             break;
         }
         unichar uc = [digits characterAtIndex:i];

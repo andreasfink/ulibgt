@@ -92,6 +92,32 @@
     return self;
 }
 
+
+
+- (void)setLogLevel:(UMLogLevel)newLogLevel
+{
+    _logLevel = newLogLevel;
+    _routingTable.logLevel = newLogLevel;
+}
+
+- (UMLogLevel) logLevel
+{
+    return _logLevel;
+}
+
+- (void)setLogFeed:(UMLogFeed *)newLogFeed
+{
+    self.logFeed = newLogFeed;
+    _routingTable.logFeed = newLogFeed;
+}
+
+- (UMLogFeed *) logFeed
+{
+    return [super logFeed];
+}
+
+
+
 - (NSString *)selectorKey
 {
     return [SccpGttSelector selectorKeyForTT:_tt gti:_gti np:_np nai:_nai];
