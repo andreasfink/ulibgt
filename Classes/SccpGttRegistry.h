@@ -16,11 +16,13 @@
 
 @interface SccpGttRegistry : UMObject
 {
+    UMLogLevel                _logLevel;
     UMSynchronizedDictionary *_entries;
     UMSynchronizedDictionary *_linksetTranslationsIncoming;
     UMSynchronizedDictionary *_linksetTranslationsOutgoing;
 }
 
+@property(readwrite,assign,atomic)      UMLogLevel logLevel;
 
 - (SccpGttSelector *)selectorForInstance:(NSString *)instance
                                       tt:(int)tt
@@ -35,5 +37,7 @@
 - (NSArray *)listSelectorNames;
 - (SccpGttSelector *)getSelectorByName:(NSString *)name;
 - (UMSynchronizedSortedDictionary *)config;
+- (void)updateLogLevel:(UMLogLevel)newLogLevel;
+- (void)updateLogFeed:(UMLogFeed *)newLogFeed;
 
 @end

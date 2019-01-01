@@ -26,6 +26,36 @@ static SccpGttRegistry *g_registry;
     return self;
 }
 
+- (void)updateLogLevel:(UMLogLevel)newLogLevel
+{
+    self.logLevel = newLogLevel;
+
+    NSArray *keys = [_entries allKeys];
+    for(NSString *key in keys)
+    {
+        SccpGttSelector *s =  _entries[key];
+        if(s)
+        {
+            s.logLevel = newLogLevel;
+        }
+    }
+}
+
+
+- (void)updateLogFeed:(UMLogFeed *)newLogFeed
+{
+    self.logFeed = newLogFeed;
+
+    NSArray *keys = [_entries allKeys];
+    for(NSString *key in keys)
+    {
+        SccpGttSelector *s =  _entries[key];
+        if(s)
+        {
+            s.logFeed = newLogFeed;
+        }
+    }
+}
 
 - (SccpGttSelector *)selectorForInstance:(NSString *)instance
                                       tt:(int)tt
@@ -43,20 +73,16 @@ static SccpGttRegistry *g_registry;
 
 - (void)addEntry:(SccpGttSelector *)gsel
 {
-    @synchronized(self)
-    {
-        NSString *key = gsel.selectorKey;
-        _entries[key]=gsel;
-    }
+    gsel.logLevel   = self.logLevel;
+    gsel.logFeed    = self.logFeed;
+    NSString *key = gsel.selectorKey;
+    _entries[key]=gsel;
 }
 
 - (void)removeEntry:(SccpGttSelector *)gsel
 {
-    @synchronized(self)
-    {
-        NSString *key = gsel.selectorKey;
-		[_entries removeObjectForKey:key];
-    }
+    NSString *key = gsel.selectorKey;
+    [_entries removeObjectForKey:key];
 }
 
 - (NSArray *)listSelectorNames
