@@ -233,12 +233,23 @@
             }
         }
     }
-    dict[@"valid-entries"] = availEntries;
-    dict[@"available-entries"] = availEntries;
-    dict[@"restricted-entries"] = restrictedEntries;
-    dict[@"unavailable-entries"] = unavailableEntries;
+    if(unknownEntries.count > 0)
+    {
+        dict[@"unknown-entries"] = [NSArray arrayWithArray:unknownEntries];
+    }
+    if(availEntries.count > 0)
+    {
+        dict[@"available-entries"] = [NSArray arrayWithArray:availEntries];
+    }
+    if(restrictedEntries.count > 0)
+    {
+        dict[@"restricted-entries"] = [NSArray arrayWithArray:restrictedEntries];
+    }
+    if(unavailableEntries.count > 0)
+    {
+        dict[@"unavailable-entries"] = [NSArray arrayWithArray:unavailableEntries];
+    }
     return dict;
 }
-
 
 @end
