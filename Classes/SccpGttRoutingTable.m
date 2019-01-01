@@ -14,6 +14,15 @@
 
 @implementation SccpGttRoutingTable
 
+- (SccpGttRoutingTable *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _entries = [[UMSynchronizedSortedDictionary alloc]init];
+    }
+    return self;
+}
 
 - (void)entriesToDigitTree
 {
@@ -147,6 +156,7 @@
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
     currentNode.entry = entry;
+    _entries [entry.name] = entry;
 }
 
 - (UMSynchronizedSortedDictionary *)list

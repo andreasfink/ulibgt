@@ -32,7 +32,7 @@
         _nai =4;
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]init];
-		_active=NO;
+		_active=YES;
     }
     return self;
 }
@@ -47,7 +47,7 @@
         _nai =4;
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]init];
-		_active=NO;
+		_active=YES;
         if(config[@"sccp"])
         {
             _sccp_instance = [config[@"sccp"] stringValue];
@@ -146,9 +146,13 @@
 - (UMSynchronizedSortedDictionary *)config
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    if(_name)
+    {
+        dict[@"name"] = _name;
+    }
     if(_sccp_instance)
     {
-        [dict addObject:_sccp_instance forKey:@"sccp"];
+        dict[@"sccp"] = _sccp_instance;
     }
     dict[@"tt"] = @(_tt);
     dict[@"gti"] = @(_gti);

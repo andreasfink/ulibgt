@@ -29,10 +29,6 @@
     if(self)
     {
 		_incomingSpeed = [[UMThroughputCounter alloc]init];
-        if(cfg[@"name"])
-        {
-            _name = [cfg[@"name"] stringValue];
-        }
         if(cfg[@"table"])
         {
             _table = [cfg[@"table"] stringValue];
@@ -51,6 +47,7 @@
             _postTranslationName = [cfg[@"post-translation"] stringValue];
         }
         _enabled=YES;
+        _name = [SccpGttRoutingTableEntry entryNameForGta:_digits tableName:_table];
     }
     return self;
 }
