@@ -47,4 +47,31 @@
     return  entry;
 }
 
+- (UMSynchronizedSortedDictionary *)status
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+
+    NSArray *allKeys = [_entries allKeys];
+
+    for(SccpL3RoutingTableEntry *entry  in allKeys)
+    {
+        switch(entry.status)
+        {
+            case SccpL3RouteStatus_available:
+                dict[entry.pc.stringValue] = @"available";
+                break;
+            case SccpL3RouteStatus_restricted:
+                dict[entry.pc.stringValue] = @"restricted";
+                break;
+            case SccpL3RouteStatus_unavailable:
+                dict[entry.pc.stringValue] = @"unavailable";
+                break;
+            default:
+                dict[entry.pc.stringValue] = @"unknown";
+                break;
+        }
+    }
+    return dict;
+}
+
 @end

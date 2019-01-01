@@ -53,7 +53,9 @@
 @property(readwrite,strong,atomic) NSString *defaultEntryName;
 
 @property(readwrite,strong) SccpDestinationGroup *defaultEntry;
-- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt destination:(SccpAddress **)dst;
+- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
+                                         destination:(SccpAddress **)dst
+                                     incomingLinkset:(NSString *)incomingLinkset;
 
 @property(readwrite,strong,atomic)  NSString        *gtt_selector;
 @property(readwrite,assign,atomic)  int             tt;

@@ -111,7 +111,8 @@
 }
 
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
-                                         destination:(SccpAddress **)dst;
+                                         destination:(SccpAddress **)dst
+                                     incomingLinkset:(NSString *)incomingLinkset
 {
     SccpAddress *addr = *dst;
     if(_preTranslation)

@@ -18,4 +18,6 @@
 - (SccpL3RoutingTableEntry *)getEntryForPointCode:(UMMTP3PointCode *)pointCode;
 - (void)setStatus:(SccpL3RouteStatus) status forPointCode:(UMMTP3PointCode *)pointCode;
 - (SccpL3RouteStatus )getStatusForPointCode:(UMMTP3PointCode *)pointCode;
+- (UMSynchronizedSortedDictionary *)status;
+
 @end
