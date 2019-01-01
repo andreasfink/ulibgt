@@ -53,21 +53,23 @@
 
     NSArray *allKeys = [_entries allKeys];
 
-    for(SccpL3RoutingTableEntry *entry  in allKeys)
+    for(NSString *key in allKeys)
     {
+        SccpL3RoutingTableEntry *entry = _entries[key];
+        NSString *pc = entry.pc.stringValue;
         switch(entry.status)
         {
             case SccpL3RouteStatus_available:
-                dict[entry.pc.stringValue] = @"available";
+                dict[pc] = @"available";
                 break;
             case SccpL3RouteStatus_restricted:
-                dict[entry.pc.stringValue] = @"restricted";
+                dict[pc] = @"restricted";
                 break;
             case SccpL3RouteStatus_unavailable:
-                dict[entry.pc.stringValue] = @"unavailable";
+                dict[pc] = @"unavailable";
                 break;
             default:
-                dict[entry.pc.stringValue] = @"unknown";
+                dict[pc] = @"unknown";
                 break;
         }
     }
