@@ -41,6 +41,7 @@
     SccpNumberTranslation *_preTranslation;
     SccpNumberTranslation *_postTranslation;
 	BOOL 		  	_active;
+    UMLogLevel          _logLevel;
 }
 
 @property(readwrite,strong,atomic) NSString        *name;
@@ -66,6 +67,8 @@
 @property(readwrite,assign,atomic)  int             internal;
 @property(readwrite,strong,atomic)  SccpGttRoutingTable *routingTable;
 @property(readwrite,assign,atomic)  BOOL            active;
+@property(readwrite,assign,atomic)  UMLogLevel      logLevel;
+
 
 - (NSString *)selectorKey;
 + (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai;

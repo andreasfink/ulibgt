@@ -117,19 +117,43 @@
     SccpAddress *addr = *dst;
     if(_preTranslation)
     {
-        addr = [_preTranslation translateAddress:addr];
+        SccpAddress *addr2 = [_preTranslation translateAddress:addr];
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"pre-translation: %@->%@",addr,addr2]];
+        }
+        addr = addr2;
     }
     NSString *digits = addr.address;
     SccpDestination *nextHop;
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits];
     if(routingTableEntry==NULL)
     {
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"_routingTable findEntryByDigits:%@ returns NULL. Taking default route",digits]];
+        }
+
         nextHop = [defaultEntry chooseNextHopWithRoutingTable:rt];
     }
     else
     {
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"_routingTable findEntryByDigits:%@ returns routingTableEntry:%@",digits,routingTableEntry.name]];
+        }
         SccpDestinationGroup *nextHopGroup = [routingTableEntry getRouteTo];
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"destinationGroup = %@",nextHopGroup.name]];
+        }
+
         nextHop = [nextHopGroup chooseNextHopWithRoutingTable:rt];
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"nextHop = %@",nextHopGroup.name]];
+        }
+
     }
     /* This will return:
        If its a group, pick a specific entry in the group which is available.
@@ -138,7 +162,12 @@
     */
     if(_postTranslation)
     {
-        addr = [_postTranslation translateAddress:addr];
+        SccpAddress *addr2 = [_postTranslation translateAddress:addr];
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"post-translation: %@->%@",addr,addr2]];
+        }
+        addr = addr2;
     }
     *dst = addr;
     return nextHop;
