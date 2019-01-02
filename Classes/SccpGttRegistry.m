@@ -28,7 +28,7 @@ static SccpGttRegistry *g_registry;
 
 - (void)updateLogLevel:(UMLogLevel)newLogLevel
 {
-    [super setLogLevel:newLogLevel];
+    _logLevel = newLogLevel;
 
     NSArray *keys = [_entries allKeys];
     for(NSString *key in keys)

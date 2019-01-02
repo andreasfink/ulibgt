@@ -26,7 +26,7 @@
 
 - (void)setLogLevel:(UMLogLevel)newLogLevel
 {
-    [super setLogLevel:newLogLevel];
+    _logLevel = newLogLevel;
 
     NSArray *keys = [_entries allKeys];
     for(id key in keys)

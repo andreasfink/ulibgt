@@ -96,7 +96,7 @@
 
 - (void)setLogLevel:(UMLogLevel)newLogLevel
 {
-    [super setLogLevel:newLogLevel];
+    _logLevel = newLogLevel;
     _routingTable.logLevel = newLogLevel;
 }
 
