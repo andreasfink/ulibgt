@@ -31,7 +31,7 @@
         _np = 1;
         _nai =4;
         _external = 1;
-        _routingTable = [[SccpGttRoutingTable alloc]init];
+        _routingTable = [[SccpGttRoutingTable alloc]initWithName:name];
 		_active=YES;
     }
     return self;
@@ -46,7 +46,6 @@
         _np = 1;
         _nai =4;
         _external = 1;
-        _routingTable = [[SccpGttRoutingTable alloc]init];
 		_active=YES;
         if(config[@"sccp"])
         {
@@ -88,6 +87,7 @@
         {
             _name = [self selectorKey];
         }
+        _routingTable = [[SccpGttRoutingTable alloc]initWithName:_name];
     }
     return self;
 }
@@ -151,7 +151,7 @@
         addr = addr2;
     }
     NSString *digits = addr.address;
-    SccpDestination *nextHop;
+    SccpDestination *nextHop = NULL;
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits];
     if(routingTableEntry==NULL)
     {

@@ -11,6 +11,7 @@
 // the author.
 
 #import "SccpGttRoutingTable.h"
+#import "SccpAddress.h"
 
 @implementation SccpGttRoutingTable
 
@@ -19,6 +20,17 @@
     self = [super init];
     if(self)
     {
+        _entries = [[UMSynchronizedSortedDictionary alloc]init];
+    }
+    return self;
+}
+
+- (SccpGttRoutingTable *)initWithName:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        _name = name;
         _entries = [[UMSynchronizedSortedDictionary alloc]init];
     }
     return self;
@@ -93,6 +105,7 @@
         NSString *s = [NSString stringWithFormat:@"called findEntryByDigits:%@",digits];
         [self.logFeed debugText:s];
     }
+
     SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
     for(NSInteger i = 0;i<n;i++)
     {
@@ -100,31 +113,21 @@
         {
             NSString *s = [NSString stringWithFormat:@" checking digit nr  %d",(int)i];
             [self.logFeed debugText:s];
+            NSLog(@" checking digit nr  %d",(int)i);
         }
 
-        if(currentNode.entry.enabled==NO)
-        {
-            if(_logLevel <=UMLOG_DEBUG)
-            {
-                NSString *s = [NSString stringWithFormat:@" currentNode.entry.enabled == NO"];
-                [self.logFeed debugText:s];
-            }
-            break;
-        }
         unichar uc = [digits characterAtIndex:i];
+        int k = sccp_digit_to_nibble(uc,-1);
+        if(k<0)
+        {
+            continue;
+        }
         SccpGttRoutingTableDigitNode *nextNode = [currentNode nextNode:(int)uc create:NO];
         if(nextNode == NULL)
         {
             break;
         }
-        if(currentNode.entry.enabled==YES)
-        {
-            currentNode = nextNode;
-        }
-        else
-        {
-            break;
-        }
+        currentNode = nextNode;
     }
     if(currentNode.entry.enabled == YES)
     {
@@ -184,6 +187,11 @@
     for(NSInteger i = 0;i<n;i++)
     {
         unichar uc = [digits characterAtIndex:i];
+        int k = sccp_digit_to_nibble(uc,-1);
+        if(k<0)
+        {
+            continue;
+        }
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
     currentNode.entry = NULL;
@@ -199,6 +207,13 @@
     {
         _rootNode = [[SccpGttRoutingTableDigitNode alloc]init];
     }
+
+    if([digits isEqualToString:@"default"])
+    {
+        _rootNode.entry = entry;
+        return;
+    }
+
     SccpGttRoutingTableDigitNode *currentNode = _rootNode;
 
     for(NSInteger i = 0;i<n;i++)
@@ -214,5 +229,6 @@
 {
 	return _entries;
 }
+
 
 @end

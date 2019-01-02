@@ -12,7 +12,7 @@
 @implementation SccpGttRoutingTableDigitNode
 
 
-- (SccpGttRoutingTableDigitNode *)nextNode:(char)nextDigit create:(BOOL)create
+- (SccpGttRoutingTableDigitNode *)nextNode:(unichar)nextDigit create:(BOOL)create
 {
     SccpGttRoutingTableDigitNode *nextEntry = NULL;
     int index = sccp_digit_to_nibble(nextDigit,-1);

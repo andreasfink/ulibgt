@@ -67,4 +67,4 @@
 - (NSString *)stringValueE164;
 @end
 
-int sccp_digit_to_nibble(int digit, int def);
+int sccp_digit_to_nibble(unichar digit, int def);

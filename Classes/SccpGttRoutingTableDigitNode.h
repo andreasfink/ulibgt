@@ -17,6 +17,6 @@
 
 @property(readwrite,strong,atomic)  SccpGttRoutingTableEntry *entry;
 
-- (SccpGttRoutingTableDigitNode *)nextNode:(char)nextDigit create:(BOOL)create;
+- (SccpGttRoutingTableDigitNode *)nextNode:(unichar)nextDigit create:(BOOL)create;
 
 @end
