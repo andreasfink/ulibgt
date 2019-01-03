@@ -1054,17 +1054,28 @@ int sccp_digit_to_nibble(unichar digit, int def)
 
 - (NSString *)stringValueE164
 {
-    if(npi.npi != SCCP_NPI_ISDN_E164)
-        return NULL;
-    switch(nai.nai)
+    switch(npi.npi)
     {
-        case  SCCP_NAI_INTERNATIONAL:
-            return [NSString stringWithFormat:@"+%@",address];
-        case  SCCP_NAI_UNKNOWN:
-        case SCCP_NAI_SUBSCRIBER:
-        case SCCP_NAI_RESERVED:
-        case SCCP_NAI_NATIONAL:
+        case SCCP_NPI_ISDN_E164:
+        {
+            if(nai.nai == SCCP_NAI_INTERNATIONAL)
+            {
+                return [NSString stringWithFormat:@"+%@",address];
+            }
             return address;
+            break;
+        }
+
+        case SCCP_NPI_LAND_MOBILE_E212:
+        {
+            return [NSString stringWithFormat:@"imsi:%@",address];
+            break;
+        }
+        case SCCP_NPI_ISDN_MOBILE_E214:
+        {
+            return [NSString stringWithFormat:@"mgt:%@",address];
+            break;
+        }
     }
     return NULL;
 }
