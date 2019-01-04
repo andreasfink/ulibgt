@@ -531,14 +531,14 @@ int sccp_digit_to_nibble(unichar digit, int def)
             case 3: /* GT include tt npi and encoding */
                 tt = [[SccpTranslationTableNumber alloc]initWithInt:bytes[p++]];
                 x = bytes[p++];
-                npi = [[SccpNumberPlanIndicator alloc]initWithInt:((x & 0xF0) > 4)];
+                npi = [[SccpNumberPlanIndicator alloc]initWithInt:((x & 0xF0) >> 4)];
                 odd = ((x & 0x0F) == 1);
                 break;
 
             case 4: /* GT include tt npi encoding and nai(ton) */
                 tt = [[SccpTranslationTableNumber alloc]initWithInt:bytes[p++]];
                 x = bytes[p++];
-                npi = [[SccpNumberPlanIndicator alloc]initWithInt:((x & 0xF0) > 4)];
+                npi = [[SccpNumberPlanIndicator alloc]initWithInt:((x & 0xF0) >> 4)];
                 odd = ((x & 0x0F) == 1);
                 nai = [[SccpNatureOfAddressIndicator alloc]initWithInt:( bytes[p++] & 0x7F)];
                 break;
@@ -963,13 +963,13 @@ int sccp_digit_to_nibble(unichar digit, int def)
     SccpAddress *g = [[SccpAddress allocWithZone:zone]init];
     if(g)
     {
-        g->ai = [ai copy];
-        g->nai = [nai copy];
-        g->npi = [npi copy];
-        g->ssn = [ssn copy];
-        g->tt = [tt copy];
-        g->address = [address copy];
-        g->pc = [pc copy];
+        g->ai       = [ai copy];
+        g->nai      = [nai copy];
+        g->npi      = [npi copy];
+        g->ssn      = [ssn copy];
+        g->tt       = [tt copy];
+        g->address  = [address copy];
+        g->pc       = [pc copy];
     }
     return g;
 }
