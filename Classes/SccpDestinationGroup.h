@@ -10,13 +10,30 @@
 #import "SccpDestination.h"
 #import "SccpL3RoutingTable.h"
 
+typedef enum SccpDestinationGroupDistributionMethod
+{
+    SccpDestinationGroupDistributionMethod_cost = 0, /* default */
+    SccpDestinationGroupDistributionMethod_share = 1,
+    SccpDestinationGroupDistributionMethod_wrr = 2,
+    SccpDestinationGroupDistributionMethod_cgpa = 3,
+} SccpDestinationGroupDistributionMethod;
+
 @interface SccpDestinationGroup : UMObject
 {
     NSString *_name;
     UMSynchronizedArray *_entries;
+    SccpDestinationGroupDistributionMethod _distributionMethod;
+    BOOL _class1LoadBalance;
+    BOOL _distributeSccpSequencedNegate;
+    NSString *_dpcInstance;
 }
 
 @property(readwrite,strong,atomic)  NSString *name;
+@property(readwrite,assign,atomic)  SccpDestinationGroupDistributionMethod distributionMethod;
+@property(readwrite,assign,atomic)  BOOL class1LoadBalance;
+@property(readwrite,assign,atomic)  BOOL distributeSccpSequencedNegate;
+@property(readwrite,strong,atomic)  NSString *dpcInstance;
+
 - (void)addEntry:(SccpDestination *)dst;
 - (SccpDestination *)entryAtIndex:(int)idx;
 
