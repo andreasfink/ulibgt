@@ -31,9 +31,6 @@
 		A68A227A1B18B5DD00854472 /* ulibgt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A226E1B18B5DD00854472 /* ulibgt.framework */; };
 		A68A22811B18B5DD00854472 /* ulibgtTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A22801B18B5DD00854472 /* ulibgtTests.m */; };
 		A68A228B1B18B66500854472 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A228A1B18B66500854472 /* ulib.framework */; };
-		A68A22961B18B93D00854472 /* SccpApplicationGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A228C1B18B93D00854472 /* SccpApplicationGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A68A22971B18B93D00854472 /* SccpApplicationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A228D1B18B93D00854472 /* SccpApplicationGroup.m */; };
-		A68A22981B18B93D00854472 /* SccpApplicationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A228D1B18B93D00854472 /* SccpApplicationGroup.m */; };
 		A68A22991B18B93D00854472 /* SccpGttRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A228E1B18B93D00854472 /* SccpGttRegistry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A229A1B18B93D00854472 /* SccpGttRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A228F1B18B93D00854472 /* SccpGttRegistry.m */; };
 		A68A229B1B18B93D00854472 /* SccpGttRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A228F1B18B93D00854472 /* SccpGttRegistry.m */; };
@@ -107,8 +104,6 @@
 		A68A227F1B18B5DD00854472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A68A22801B18B5DD00854472 /* ulibgtTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ulibgtTests.m; sourceTree = "<group>"; };
 		A68A228A1B18B66500854472 /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = /Library/Frameworks/ulib.framework; sourceTree = "<absolute>"; };
-		A68A228C1B18B93D00854472 /* SccpApplicationGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpApplicationGroup.h; sourceTree = "<group>"; };
-		A68A228D1B18B93D00854472 /* SccpApplicationGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpApplicationGroup.m; sourceTree = "<group>"; };
 		A68A228E1B18B93D00854472 /* SccpGttRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpGttRegistry.h; sourceTree = "<group>"; };
 		A68A228F1B18B93D00854472 /* SccpGttRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpGttRegistry.m; sourceTree = "<group>"; };
 		A68A22901B18B93D00854472 /* SccpGttSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpGttSelector.h; sourceTree = "<group>"; };
@@ -244,8 +239,6 @@
 				A6C0AFBB2089F91A00DAB157 /* SccpNumberTranslationEntry.m */,
 				A6D03BD61CA4959600211137 /* SccpAddress.h */,
 				A6D03BD71CA4959600211137 /* SccpAddress.m */,
-				A68A228C1B18B93D00854472 /* SccpApplicationGroup.h */,
-				A68A228D1B18B93D00854472 /* SccpApplicationGroup.m */,
 				A68A228E1B18B93D00854472 /* SccpGttRegistry.h */,
 				A68A228F1B18B93D00854472 /* SccpGttRegistry.m */,
 				A68A22901B18B93D00854472 /* SccpGttSelector.h */,
@@ -325,7 +318,6 @@
 				A661D1A21E89234E00A5140C /* SccpTTMap.h in Headers */,
 				A6D03BEC1CA4A0E800211137 /* SccpNumberPlanIndicator.h in Headers */,
 				A68A229C1B18B93D00854472 /* SccpGttSelector.h in Headers */,
-				A68A22961B18B93D00854472 /* SccpApplicationGroup.h in Headers */,
 				A6ADC5DB1CADBB2F00211137 /* SccpTranslationTableNumber.h in Headers */,
 				A661D1A61E892D9300A5140C /* SccpGttRoutingTableDigitNode.h in Headers */,
 				A68A22991B18B93D00854472 /* SccpGttRegistry.h in Headers */,
@@ -459,7 +451,6 @@
 			files = (
 				A6E6E8A5205C843800342810 /* SccpDestination.m in Sources */,
 				A666EF771E89C73C004804CB /* UMSyntaxGT_applicationGroup.m in Sources */,
-				A68A22971B18B93D00854472 /* SccpApplicationGroup.m in Sources */,
 				A6ADC5DC1CADBB2F00211137 /* SccpTranslationTableNumber.m in Sources */,
 				A6D03BE11CA49DCD00211137 /* SccpNatureOfAddressIndicator.m in Sources */,
 				A661D1A71E892D9300A5140C /* SccpGttRoutingTableDigitNode.m in Sources */,
@@ -491,7 +482,6 @@
 				A68A22811B18B5DD00854472 /* ulibgtTests.m in Sources */,
 				A68A229E1B18B93D00854472 /* SccpGttSelector.m in Sources */,
 				A68A229B1B18B93D00854472 /* SccpGttRegistry.m in Sources */,
-				A68A22981B18B93D00854472 /* SccpApplicationGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

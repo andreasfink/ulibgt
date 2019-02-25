@@ -10,7 +10,6 @@
 // the author.
 
 #import "SccpGttSelector.h"
-#import "SccpApplicationGroup.h"
 #import "SccpDestination.h"
 #import "SccpGttRoutingTable.h"
 #import "SccpNumberTranslation.h"
@@ -254,4 +253,6 @@
 	_active = on;
 }
 
+
 @end
+

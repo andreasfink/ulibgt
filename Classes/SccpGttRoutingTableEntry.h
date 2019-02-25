@@ -10,7 +10,6 @@
 
 @class SccpGttRoutingTableAction;
 @class SccpDestinationGroup;
-@class SccpApplicationGroup;
 @class SccpNumberTranslation;
 @class SccpL3RoutingTable;
 

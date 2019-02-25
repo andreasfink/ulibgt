@@ -94,9 +94,9 @@
         _m3uaAs =[cfg[@"application-server"] stringValue];
     }
 
-    if(cfg[@"priority"])
+    if(cfg[@"cost"])
     {
-        _priority =@([cfg[@"ssn"] intValue]);
+        _cost =@([cfg[@"cost"] intValue]);
 
     }
     if(cfg[@"weight"])
@@ -138,9 +138,9 @@
     {
         dict[@"application-server"] = _m3uaAs;
     }
-    if(_priority)
+    if(_cost)
     {
-        dict[@"priority"] = _priority;
+        dict[@"cost"] = _cost;
     }
     if(_weight)
     {
@@ -159,7 +159,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"SCCP Destination(name=%@,_ssn=%@,_priority=%@,_weight=%@,_dpc=%@)",_name,_ssn,_priority,_weight,_dpc ];
+    return [NSString stringWithFormat:@"SCCP Destination(name=%@,_ssn=%@,_cost=%@,_weight=%@,_dpc=%@)",_name,_ssn,_cost,_weight,_dpc ];
 }
 
 - (UMSynchronizedSortedDictionary *)statusDict

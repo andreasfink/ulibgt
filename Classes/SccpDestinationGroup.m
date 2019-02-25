@@ -122,36 +122,36 @@
         return e;
     }
 
-    /* if we get here, we have more than one option. so we must take weight and priority into consideration */
+    /* if we get here, we have more than one option. so we must take weight and cost into consideration */
 
-    int highestPrio = -1;
-    NSMutableArray *highestPrioEntries = [[NSMutableArray alloc]init];
+    int lowestCost = 65;
+    NSMutableArray *lowestCostEntries = [[NSMutableArray alloc]init];
     for(SccpDestination *e in validEntries)
     {
-        int priority = 4;
-        if(e.priority)
+        int cost = 4;
+        if(e.cost)
         {
-            priority = e.priority.intValue;
+            cost = e.cost.intValue;
         }
 
-        if(priority < highestPrio)
+        if(cost > lowestCost)
         {
             continue;
         }
-        if(priority == highestPrio)
+        if(cost == lowestCost)
         {
-            [highestPrioEntries addObject:e];
+            [lowestCostEntries addObject:e];
         }
-        if(priority > highestPrio)
+        if(cost < lowestCost)
         {
-            highestPrioEntries = [[NSMutableArray alloc]init];
-            [highestPrioEntries addObject:e];
-            highestPrio = priority;
+            lowestCostEntries = [[NSMutableArray alloc]init];
+            [lowestCostEntries addObject:e];
+            lowestCost = cost;
         }
     }
 
     uint32_t totalWeight = 0;
-    for(SccpDestination *e in highestPrioEntries)
+    for(SccpDestination *e in lowestCostEntries)
     {
         int weight = 100;
         if(e.weight)
@@ -163,7 +163,7 @@
 
     uint32_t pickWeight = [UMUtil random:totalWeight];
     uint32_t currentWeight = 0;
-    for(SccpDestination *e in highestPrioEntries)
+    for(SccpDestination *e in lowestCostEntries)
     {
         int weight = 100;
         if(e.weight)

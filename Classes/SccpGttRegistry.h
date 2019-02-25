@@ -17,7 +17,8 @@
 @interface SccpGttRegistry : UMObject
 {
     UMLogLevel                _logLevel;
-    UMSynchronizedDictionary *_entries;
+    UMSynchronizedDictionary *_entriesByKey;
+    UMSynchronizedDictionary *_entriesByName;
     UMSynchronizedDictionary *_linksetTranslationsIncoming;
     UMSynchronizedDictionary *_linksetTranslationsOutgoing;
 }
@@ -32,6 +33,7 @@
 
 
 - (void)addEntry:(SccpGttSelector *)sel;
+- (void)updateEntry:(SccpGttSelector *)gsel;
 - (void)removeEntry:(SccpGttSelector *)sel;
 - (void)initWithConfigLines:(NSArray *)lines;
 - (NSArray *)listSelectorNames;

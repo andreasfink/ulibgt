@@ -20,7 +20,6 @@
 #import "SccpSubSystemNumber.h"
 #import "SccpTranslationTableNumber.h"
 #import "SccpAddress.h"
-#import "SccpApplicationGroup.h"
 #import "SccpGttRegistry.h"
 #import "SccpGttSelector.h"
 #import "SccpGttRoutingTable.h"

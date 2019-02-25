@@ -21,7 +21,8 @@ static SccpGttRegistry *g_registry;
     self = [super init];
     if(self)
     {
-        _entries = [[UMSynchronizedDictionary alloc]init];
+        _entriesByKey = [[UMSynchronizedDictionary alloc]init];
+        _entriesByName = [[UMSynchronizedDictionary alloc]init];
     }
     return self;
 }
@@ -30,10 +31,10 @@ static SccpGttRegistry *g_registry;
 {
     _logLevel = newLogLevel;
 
-    NSArray *keys = [_entries allKeys];
+    NSArray *keys = [_entriesByKey allKeys];
     for(NSString *key in keys)
     {
-        SccpGttSelector *s =  _entries[key];
+        SccpGttSelector *s =  _entriesByKey[key];
         if(s)
         {
             s.logLevel = newLogLevel;
@@ -46,10 +47,10 @@ static SccpGttRegistry *g_registry;
 {
     [super setLogFeed:newLogFeed];
 
-    NSArray *keys = [_entries allKeys];
+    NSArray *keys = [_entriesByKey allKeys];
     for(NSString *key in keys)
     {
-        SccpGttSelector *s =  _entries[key];
+        SccpGttSelector *s =  _entriesByKey[key];
         if(s)
         {
             s.logFeed = newLogFeed;
@@ -66,7 +67,7 @@ static SccpGttRegistry *g_registry;
     @synchronized (self)
     {
         NSString *key = [SccpGttSelector selectorKeyForTT:tt gti:gti np:np nai:nai];
-        return _entries[key];
+        return _entriesByKey[key];
     }
     return NULL;
 }
@@ -76,42 +77,40 @@ static SccpGttRegistry *g_registry;
     gsel.logLevel   = self.logLevel;
     gsel.logFeed    = self.logFeed;
     NSString *key = gsel.selectorKey;
-    _entries[key]=gsel;
+    _entriesByKey[key]=gsel;
+    _entriesByName[gsel.name] = gsel;
+}
+
+- (void)updateEntry:(SccpGttSelector *)gsel
+{
+    NSArray *keys = [_entriesByKey allKeys];
+    for(NSString *key in keys)
+    {
+        SccpGttSelector *sel = _entriesByKey[key];
+        if([sel.name isEqualToString:gsel.name])
+        {
+            [_entriesByKey removeObjectForKey:key];
+        }
+    }
+    [_entriesByName removeObjectForKey:gsel.name];
+    [self addEntry:gsel];
 }
 
 - (void)removeEntry:(SccpGttSelector *)gsel
 {
     NSString *key = gsel.selectorKey;
-    [_entries removeObjectForKey:key];
+    [_entriesByKey removeObjectForKey:key];
+    [_entriesByName removeObjectForKey:gsel.name];
 }
 
 - (NSArray *)listSelectorNames
 {
-    NSMutableArray *a = [[NSMutableArray alloc]init];
-    NSArray *keys = [_entries allKeys];
-    for(NSString *key in keys)
-    {
-        SccpGttSelector *s =  _entries[key];
-        if(s)
-        {
-            [a addObject:s.name];
-        }
-    }
-    return a;
+    return [_entriesByName allKeys];
 }
 
 - (SccpGttSelector *)getSelectorByName:(NSString *)name;
 {
-    NSArray *keys = [_entries allKeys];
-    for(NSString *key in keys)
-    {
-        SccpGttSelector *s =  _entries[key];
-        if([s.name isEqualToString:name])
-        {
-            return s;
-        }
-    }
-    return NULL;
+    return _entriesByName[name];
 }
 
 
