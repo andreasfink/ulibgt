@@ -23,36 +23,32 @@
 
 @interface SccpGttSelector : UMObject
 {
-    NSString        *_name;
-    NSString        *_sccp_instance;
-    int             _tt;
-    int             _gti;
-    int             _np;
-    int             _nai;
-    int             _external;
-    int             _internal;
-    SccpGttRoutingTable *_routingTable;
-    SccpDestinationGroup  *_defaultEntry;
-    NSString            *_defaultEntryName;
-    NSDictionary        *_statusOfProviders;
-    NSString              *_preTranslationName;
-    NSString              *_postTranslationName;
-    SccpNumberTranslation *_preTranslation;
-    SccpNumberTranslation *_postTranslation;
-	BOOL 		  	_active;
-    UMLogLevel          _logLevel;
+    NSString                *_name;
+    NSString                *_sccp_instance;
+    int                     _tt;
+    int                     _gti;
+    int                     _np;
+    int                     _nai;
+    int                     _external;
+    int                     _internal;
+    SccpGttRoutingTable     *_routingTable;
+    NSDictionary            *_statusOfProviders;
+    NSString                *_preTranslationName;
+    NSString                *_postTranslationName;
+    SccpNumberTranslation   *_preTranslation;
+    SccpNumberTranslation   *_postTranslation;
+	BOOL 		  	        _active;
+    UMLogLevel              _logLevel;
 }
 
 @property(readwrite,strong,atomic) NSString        *name;
-@property(readwrite,strong,atomic) NSString        *sccp_instance;
-@property(readwrite,strong,atomic)  NSString *preTranslationName;
-@property(readwrite,strong,atomic)  NSString *postTranslationName;
+@property(readwrite,strong,atomic) NSString               *sccp_instance;
+@property(readwrite,strong,atomic)  NSString              *preTranslationName;
+@property(readwrite,strong,atomic)  NSString              *postTranslationName;
 @property(readwrite,strong,atomic)  SccpNumberTranslation *preTranslation;
 @property(readwrite,strong,atomic)  SccpNumberTranslation *postTranslation;
 @property(readwrite,strong,atomic) id getSCCPDestinationDelegate;
-@property(readwrite,strong,atomic) NSString *defaultEntryName;
 
-@property(readwrite,strong) SccpDestinationGroup *defaultEntry;
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
                                          destination:(SccpAddress **)dst
                                      incomingLinkset:(NSString *)incomingLinkset;
@@ -72,6 +68,7 @@
 - (NSString *)selectorKey;
 + (NSString *)selectorKeyForTT:(int)tt gti:(int)gti np:(int)np nai:(int)nai;
 
+- (SccpGttSelector *)initWithInstanceName:(NSString *)name;
 - (SccpGttSelector *)initWithInstanceNameE164:(NSString *)name;
 - (SccpGttSelector *)initWithConfig:(NSDictionary *)config;
 

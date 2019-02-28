@@ -21,9 +21,15 @@
     UMSynchronizedDictionary *_entriesByName;
     UMSynchronizedDictionary *_linksetTranslationsIncoming;
     UMSynchronizedDictionary *_linksetTranslationsOutgoing;
+
+    UMSynchronizedDictionary    *_sccp_number_translations_dict;
+    UMSynchronizedDictionary    *_sccp_destinations_dict;
+
 }
 
 @property(readwrite,assign,atomic)      UMLogLevel logLevel;
+@property(readwrite,strong,atomic)      UMSynchronizedDictionary    *sccp_number_translations_dict;
+@property(readwrite,strong,atomic)      UMSynchronizedDictionary    *sccp_destinations_dict;
 
 - (SccpGttSelector *)selectorForInstance:(NSString *)instance
                                       tt:(int)tt
@@ -41,5 +47,7 @@
 - (UMSynchronizedSortedDictionary *)config;
 - (void)updateLogLevel:(UMLogLevel)newLogLevel;
 - (void)updateLogFeed:(UMLogFeed *)newLogFeed;
+- (void)finishUpdate;
+
 
 @end

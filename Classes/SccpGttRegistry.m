@@ -11,6 +11,7 @@
 
 #import "SccpGttRegistry.h"
 #import "SccpGttSelector.h"
+#import "SccpGttRoutingTable.h"
 
 static SccpGttRegistry *g_registry;
 
@@ -23,6 +24,8 @@ static SccpGttRegistry *g_registry;
     {
         _entriesByKey = [[UMSynchronizedDictionary alloc]init];
         _entriesByName = [[UMSynchronizedDictionary alloc]init];
+        _sccp_number_translations_dict = [[UMSynchronizedDictionary alloc]init];
+        _sccp_destinations_dict = [[UMSynchronizedDictionary alloc]init];
     }
     return self;
 }
@@ -149,6 +152,28 @@ static SccpGttRegistry *g_registry;
         }
     }
     return dict;
+}
+
+- (void)finishUpdate
+{
+    NSArray *arr = [self listSelectorNames];
+    for(NSString *name in arr)
+    {
+        SccpGttSelector *sel = [self getSelectorByName:name];
+        if(sel)
+        {
+            [sel.routingTable entriesToDigitTree];
+
+            if(sel.preTranslationName.length > 0)
+            {
+                sel.preTranslation = _sccp_number_translations_dict[sel.preTranslationName];
+            }
+            if(sel.postTranslationName.length > 0)
+            {
+                sel.postTranslation = _sccp_number_translations_dict[sel.postTranslationName];
+            }
+        }
+    }
 }
 
 @end

@@ -18,8 +18,6 @@
 
 @implementation SccpGttSelector
 
-@synthesize defaultEntry;
-
 -(SccpGttSelector *)initWithInstanceNameE164:(NSString *)name
 {
     self = [super init];
@@ -32,6 +30,29 @@
         _external = 1;
         _routingTable = [[SccpGttRoutingTable alloc]initWithName:name];
 		_active=YES;
+    }
+    return self;
+}
+
+-(SccpGttSelector *)initWithInstanceName:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        _sccp_instance = name;
+        _routingTable = [[SccpGttRoutingTable alloc]initWithName:name];
+        _active=YES;
+    }
+    return self;
+}
+
+-(SccpGttSelector *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _routingTable = [[SccpGttRoutingTable alloc]init];
+        _active=YES;
     }
     return self;
 }
@@ -73,10 +94,6 @@
         if(config[@"post-translation"])
         {
             _postTranslationName = [config[@"post-translation"] stringValue];
-        }
-        if(config[@"default-destination"])
-        {
-            _defaultEntryName = [config[@"default-destination"] stringValue];
         }
         if(config[@"name"])
         {
@@ -156,10 +173,9 @@
     {
         if(self.logLevel <= UMLOG_DEBUG)
         {
-            [self.logFeed debugText:[NSString stringWithFormat:@"_routingTable findEntryByDigits:%@ returns NULL. Taking default route",digits]];
+            [self.logFeed debugText:[NSString stringWithFormat:@"no routing table defined in findEntryByDigits:%@ returns NULL. Taking default route",digits]];
         }
-
-        nextHop = [defaultEntry chooseNextHopWithRoutingTable:rt];
+        nextHop = NULL;
     }
     else
     {
@@ -178,7 +194,6 @@
         {
             [self.logFeed debugText:[NSString stringWithFormat:@"nextHop = %@",nextHopGroup.name]];
         }
-
     }
     /* This will return:
        If its a group, pick a specific entry in the group which is available.
@@ -221,15 +236,7 @@
     {
         dict[@"post-translation"] = _postTranslationName;
     }
-    if(_defaultEntryName)
-    {
-        dict[@"default-destination"] = _defaultEntryName;
-    }
 	dict[@"active"] = @(_active);
-
-
-    dict[@"gt-destination"] = _defaultEntryName;
-
     return dict;
 }
 

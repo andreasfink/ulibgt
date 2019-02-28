@@ -21,12 +21,21 @@
         if(cfg[@"name"])
         {
             _name = [cfg[@"name"] stringValue];
-            _entries = [[NSMutableArray alloc]init];
         }
+        _entries = [[NSMutableArray alloc]init];
     }
     return self;
 }
 
+- (SccpNumberTranslation *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _entries = [[NSMutableArray alloc]init];
+    }
+    return self;
+}
 
 - (void)addEntry:(SccpNumberTranslationEntry *)entry
 {

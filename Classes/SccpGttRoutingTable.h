@@ -29,7 +29,7 @@
 
 
 @property(readwrite,strong,atomic) SccpGttRoutingTableDigitNode   *rootNode;
-@property(readwrite,assign,atomic) UMLogLevel logLevel;
+@property(readwrite,assign,atomic) UMLogLevel                     logLevel;
 
 - (SccpGttRoutingTable *)initWithName:(NSString *)name;
 - (void)entriesToDigitTree;

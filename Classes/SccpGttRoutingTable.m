@@ -81,17 +81,23 @@
         SccpGttRoutingTableEntry *entry = _entries[key];
 
         NSString *digits = entry.digits;
-
-        const char *str = digits.UTF8String;
-        int n = (int)strlen(str);
-
-        SccpGttRoutingTableDigitNode *currentNode = newRoot;
-        for(int i = 0;i<n;i++)
+        if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
         {
-            int c = str[i];
-            currentNode = [currentNode nextNode:c create:YES];
+            newRoot.entry = entry;
         }
-        currentNode.entry = entry;
+        else
+        {
+            const char *str = digits.UTF8String;
+            int n = (int)strlen(str);
+
+            SccpGttRoutingTableDigitNode *currentNode = newRoot;
+            for(int i = 0;i<n;i++)
+            {
+                int c = str[i];
+                currentNode = [currentNode nextNode:c create:YES];
+            }
+            currentNode.entry = entry;
+        }
     }
     self.rootNode = newRoot;
 }
@@ -100,13 +106,20 @@
 {
     NSInteger n = [digits length];
 
+
+    SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
+    SccpGttRoutingTableEntry *returnValue = currentNode.entry;
+
+    if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
+    {
+        return returnValue;
+    }
+
     if(_logLevel <=UMLOG_DEBUG)
     {
         NSString *s = [NSString stringWithFormat:@"called findEntryByDigits:%@",digits];
         [self.logFeed debugText:s];
     }
-
-    SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
     for(NSInteger i = 0;i<n;i++)
     {
         if(_logLevel <=UMLOG_DEBUG)
@@ -128,12 +141,12 @@
             break;
         }
         currentNode = nextNode;
+        if(currentNode.entry)
+        {
+            returnValue = currentNode.entry;
+        }
     }
-    if(currentNode.entry.enabled == YES)
-    {
-        return currentNode.entry;
-    }
-    return NULL;
+    return returnValue;
 }
 
 - (SccpGttRoutingTableEntry *)findEntryByName:(NSString *)name
