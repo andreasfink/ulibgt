@@ -35,32 +35,6 @@
     return self;
 }
 
-
-#if 0
-- (SccpDestination *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant
-{
-    NSArray *array = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \t;"]];
-    if(array.count==0)
-    {
-        return NULL;
-    }
-    else if(array.count==1)
-    {
-        self = [super init];
-        if(self)
-        {
-            _dpc = [[UMMTP3PointCode alloc]initWithString:array[0] variant:variant];
-        }
-        return self;
-    }
-    else
-    {
-        return [[SccpDestinationGroup alloc]initWithDpcString:string variant:variant];
-    }
-}
-#endif
-
-
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
 {
     SccpL3RoutingTableEntry *entry = [rt getEntryForPointCode:self.dpc];
@@ -154,12 +128,68 @@
     {
         dict[@"add-prefix"] = _addPrefix;
     }
+    if(_allowConversion)
+    {
+        dict[@"allow-conversion"] = _allowConversion;
+    }
+    if(_useGt)
+    {
+        dict[@"use-gt"] = @(YES);
+    }
+
+    if(_usePcssn)
+    {
+        dict[@"use-pcssn"] = @(YES);
+    }
+
     return dict;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"SCCP Destination(name=%@,_ssn=%@,_cost=%@,_weight=%@,_dpc=%@)",_name,_ssn,_cost,_weight,_dpc ];
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendFormat:@"SCCP Destination<%@>\n",_name];
+    if(_ssn)
+    {
+        [s appendFormat:@"\tssn: %@\n",_ssn];
+    }
+    if(_dpc)
+    {
+        [s appendFormat:@"\tdpc: %@\n",_dpc];
+    }
+    if(_m3uaAs)
+    {
+        [s appendFormat:@"\tapplication-server: %@\n",_m3uaAs];
+    }
+    if(_cost)
+    {
+        [s appendFormat:@"\tcost: %@\n",_cost];
+    }
+    if(_weight)
+    {
+        [s appendFormat:@"\tweigth: %@\n",_weight];
+    }
+    if(_ntt)
+    {
+        [s appendFormat:@"\tntt: %@\n",_ntt];
+    }
+    if(_addPrefix)
+    {
+        [s appendFormat:@"\taddPrefix: %@\n",_addPrefix];
+    }
+    if(_allowConversion)
+    {
+        [s appendFormat:@"\tallowConversion: %@\n",_allowConversion];
+    }
+    if(_useGt)
+    {
+        [s appendFormat:@"\tuseGT: YES\n"];
+    }
+    if(_useGt)
+    {
+        [s appendFormat:@"\tusePcssn: YES\n"];
+    }
+     return s;
 }
 
 - (UMSynchronizedSortedDictionary *)statusDict

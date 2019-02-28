@@ -25,6 +25,8 @@
     NSNumber        *_ntt;              /* send to internal subsystem. 0 if subsystem is 'any'    */
     NSString        *_addPrefix;        /* send to m3ua application servber */
     NSNumber        *_allowConversion;  /* allow XUDT to UDT or vice versa conversion */
+    BOOL            _useGt;
+    BOOL            _usePcssn;
 }
 
 @property(readwrite,strong,atomic)  NSString        *name;
@@ -37,6 +39,8 @@
 @property(readwrite,strong,atomic)  NSNumber        *ntt;
 @property(readwrite,strong,atomic)  NSString        *addPrefix;
 @property(readwrite,strong,atomic)  NSNumber        *allowConversion;
+@property(readwrite,assign,atomic)  BOOL            useGt;
+@property(readwrite,assign,atomic)  BOOL            usePcssn;
 
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
 - (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant;

@@ -17,6 +17,8 @@
 
 - (void)addEntry:(SccpDestination *)dst
 {
+    dst.name = [NSString stringWithFormat:@"%@-%d",self.name,(int)_entries.count+1];
+    dst.destination = self.name;
     [_entries addObject:dst];
 }
 
