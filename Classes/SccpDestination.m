@@ -12,6 +12,7 @@
 #import <ulibmtp3/ulibmtp3.h>
 #import "SccpL3RouteStatus.h"
 #import "SccpL3RoutingTableEntry.h"
+#import "SccpSubSystemNumber.h"
 
 @implementation SccpDestination
 
@@ -20,10 +21,12 @@
     self = [super init];
     if(self)
     {
+        _cost = @(5);
+        _weight = @(100.0);
+        _usePcssn = NO;
     }
     return self;
 }
-
 
 - (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant;
 {
@@ -57,7 +60,7 @@
     }
     if(cfg[@"subsystem"])
     {
-        _ssn = @(  [cfg[@"subsystem"] intValue] );
+        _ssn = [[SccpSubSystemNumber alloc]initWithName:cfg[@"subsystem"]];
     }
     if(cfg[@"point-code"])
     {
@@ -102,7 +105,7 @@
     }
     if(_ssn)
     {
-        dict[@"subsystem"] = _ssn;
+        dict[@"subsystem"] = @(_ssn.ssn);
     }
     if(_dpc)
     {
@@ -132,11 +135,6 @@
     {
         dict[@"allow-conversion"] = _allowConversion;
     }
-    if(_useGt)
-    {
-        dict[@"use-gt"] = @(YES);
-    }
-
     if(_usePcssn)
     {
         dict[@"use-pcssn"] = @(YES);
@@ -181,11 +179,8 @@
     {
         [s appendFormat:@"\tallowConversion: %@\n",_allowConversion];
     }
-    if(_useGt)
-    {
-        [s appendFormat:@"\tuseGT: YES\n"];
-    }
-    if(_useGt)
+
+    if(_usePcssn)
     {
         [s appendFormat:@"\tusePcssn: YES\n"];
     }

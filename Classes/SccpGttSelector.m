@@ -213,6 +213,25 @@
     return nextHop;
 }
 
+
+- (SccpDestinationGroup *)findNextHopForDestination:(SccpAddress *)dst
+{
+    NSString *digits = dst.address;
+    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits];
+    if(routingTableEntry==NULL)
+    {
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"no routing table defined in findNextHopForDestination:%@ returns NULL. Taking default route",digits]];
+        }
+        return NULL;
+    }
+    else
+    {
+        SccpDestinationGroup *nextHopGroup = [routingTableEntry getRouteTo];
+        return nextHopGroup;
+    }
+}
 - (UMSynchronizedSortedDictionary *)config
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];

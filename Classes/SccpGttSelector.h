@@ -49,6 +49,8 @@
 @property(readwrite,strong,atomic)  SccpNumberTranslation *postTranslation;
 @property(readwrite,strong,atomic) id getSCCPDestinationDelegate;
 
+
+- (SccpDestinationGroup *)findNextHopForDestination:(SccpAddress *)dst;
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
                                          destination:(SccpAddress **)dst
                                      incomingLinkset:(NSString *)incomingLinkset;
