@@ -152,9 +152,9 @@
     }
 }
 
-- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
-                                         destination:(SccpAddress **)dst
-                                     incomingLinkset:(NSString *)incomingLinkset
+- (SccpGttRoutingTableEntry *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
+                                                  destination:(SccpAddress **)dst
+                                              incomingLinkset:(NSString *)incomingLinkset
 {
     SccpAddress *addr = *dst;
     if(_preTranslation)
@@ -183,23 +183,13 @@
         {
             [self.logFeed debugText:[NSString stringWithFormat:@"_routingTable findEntryByDigits:%@ returns routingTableEntry:%@",digits,routingTableEntry.name]];
         }
-        SccpDestinationGroup *nextHopGroup = [routingTableEntry getRouteTo];
-        if(self.logLevel <= UMLOG_DEBUG)
-        {
-            [self.logFeed debugText:[NSString stringWithFormat:@"destinationGroup = %@",nextHopGroup.name]];
-        }
 
-        nextHop = [nextHopGroup chooseNextHopWithRoutingTable:rt];
+        [routingTableEntry.incomingSpeed increase];
         if(self.logLevel <= UMLOG_DEBUG)
         {
-            [self.logFeed debugText:[NSString stringWithFormat:@"nextHop = %@",nextHopGroup.name]];
+            [self.logFeed debugText:[NSString stringWithFormat:@"routingTable.routeTo = %@",routingTableEntry.routeTo]];
         }
     }
-    /* This will return:
-       If its a group, pick a specific entry in the group which is available.
-       If none in the group is available, return NULL,
-       If its a single destination and its not available, return NULL
-    */
     if(_postTranslation)
     {
         SccpAddress *addr2 = [_postTranslation translateAddress:addr];
@@ -210,11 +200,11 @@
         addr = addr2;
     }
     *dst = addr;
-    return nextHop;
+    return routingTableEntry;
 }
 
 
-- (SccpDestinationGroup *)findNextHopForDestination:(SccpAddress *)dst
+- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst
 {
     NSString *digits = dst.address;
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits];
@@ -237,8 +227,9 @@
         {
             [self.logFeed debugText:[NSString stringWithFormat:@"routing table entry in findNextHopForDestination:%@ returns NULL. Taking default route",digits]];
         }
-        SccpDestinationGroup *nextHopGroup = [routingTableEntry getRouteTo];
-        return nextHopGroup;
+
+        [routingTableEntry.incomingSpeed increase];
+        return routingTableEntry;
     }
 }
 

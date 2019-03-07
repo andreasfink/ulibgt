@@ -19,6 +19,7 @@
 @class SccpNumberTranslation;
 @class SccpAddress;
 @class SccpDestinationGroup;
+@class SccpGttRoutingTableEntry;
 
 
 @interface SccpGttSelector : UMObject
@@ -41,7 +42,7 @@
     UMLogLevel              _logLevel;
 }
 
-@property(readwrite,strong,atomic) NSString        *name;
+@property(readwrite,strong,atomic) NSString               *name;
 @property(readwrite,strong,atomic) NSString               *sccp_instance;
 @property(readwrite,strong,atomic)  NSString              *preTranslationName;
 @property(readwrite,strong,atomic)  NSString              *postTranslationName;
@@ -50,7 +51,7 @@
 @property(readwrite,strong,atomic) id getSCCPDestinationDelegate;
 
 
-- (SccpDestinationGroup *)findNextHopForDestination:(SccpAddress *)dst;
+- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst;
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
                                          destination:(SccpAddress **)dst
                                      incomingLinkset:(NSString *)incomingLinkset;

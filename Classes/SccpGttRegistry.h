@@ -13,6 +13,7 @@
 
 
 @class SccpGttSelector;
+@class SccpDestinationGroup;
 
 @interface SccpGttRegistry : UMObject
 {
@@ -48,6 +49,6 @@
 - (void)updateLogLevel:(UMLogLevel)newLogLevel;
 - (void)updateLogFeed:(UMLogFeed *)newLogFeed;
 - (void)finishUpdate;
-
+- (SccpDestinationGroup *)getDestinationByName:(NSString *)name;
 
 @end

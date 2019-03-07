@@ -176,4 +176,11 @@ static SccpGttRegistry *g_registry;
     }
 }
 
+
+- (SccpDestinationGroup *)getDestinationByName:(NSString *)name;
+{
+    return _sccp_destinations_dict[name];
+}
+
+
 @end

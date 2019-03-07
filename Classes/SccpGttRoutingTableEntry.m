@@ -52,12 +52,6 @@
     return self;
 }
 
-- (SccpDestinationGroup *)getRouteTo
-{
-	[_incomingSpeed increase];
-	return _routeTo;
-}
-
 - (NSString *)getStatistics
 {
    return [_incomingSpeed getSpeedStringTriple];

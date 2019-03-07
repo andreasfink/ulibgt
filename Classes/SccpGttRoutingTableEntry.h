@@ -33,8 +33,8 @@
 @property(readwrite,atomic,strong)  NSString                *table;
 
 @property(readwrite,atomic,strong)  NSString *digits;
-@property(readwrite,atomic,strong)  SccpDestinationGroup *routeTo;
-@property(readwrite,atomic,strong)  NSString *routeToName;
+@property(readwrite,atomic,strong)  SccpDestinationGroup    *routeTo;
+@property(readwrite,atomic,strong)  NSString                *routeToName;
 @property(readwrite,atomic,strong)  NSString    *postTranslationName;
 @property(readwrite,atomic,strong)  SccpNumberTranslation *postTranslation;
 @property(readwrite,atomic,strong)  UMThroughputCounter *incomingSpeed;
@@ -43,7 +43,6 @@
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
 - (UMSynchronizedSortedDictionary *)config;
-- (SccpDestinationGroup *)getRouteTo;
 - (NSString *)getStatistics;
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
