@@ -24,7 +24,7 @@
     UMLogLevel                      _logLevel;
     UMSynchronizedSortedDictionary *_entries;
     SccpGttRoutingTableDigitNode   *_rootNode;
-    NSString                        *_name;
+    NSString                       *_name;
 }
 
 
