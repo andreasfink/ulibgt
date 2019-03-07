@@ -122,15 +122,14 @@
     }
     for(NSInteger i = 0;i<n;i++)
     {
-        if(_logLevel <=UMLOG_DEBUG)
-        {
-            NSString *s = [NSString stringWithFormat:@" checking digit nr  %d",(int)i];
-            [self.logFeed debugText:s];
-            NSLog(@" checking digit nr  %d",(int)i);
-        }
-
         unichar uc = [digits characterAtIndex:i];
         int k = sccp_digit_to_nibble(uc,-1);
+
+        if(_logLevel <=UMLOG_DEBUG)
+        {
+            NSString *s = [NSString stringWithFormat:@" checking digit nr  %d=%d",(int)i,k];
+            [self.logFeed debugText:s];
+        }
         if(k<0)
         {
             continue;
@@ -138,6 +137,10 @@
         SccpGttRoutingTableDigitNode *nextNode = [currentNode nextNode:(int)uc create:NO];
         if(nextNode == NULL)
         {
+            if(_logLevel <=UMLOG_DEBUG)
+            {
+                [self.logFeed debugText:@" no next node found"];
+            }
             break;
         }
         currentNode = nextNode;
@@ -145,6 +148,10 @@
         {
             returnValue = currentNode.entry;
         }
+    }
+    if(_logLevel <=UMLOG_DEBUG)
+    {
+        [self.logFeed debugText:[NSString stringWithFormat:@" returning %@",returnValue]];
     }
     return returnValue;
 }
