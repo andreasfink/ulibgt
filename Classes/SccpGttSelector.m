@@ -222,16 +222,26 @@
     {
         if(self.logLevel <= UMLOG_DEBUG)
         {
-            [self.logFeed debugText:[NSString stringWithFormat:@"no routing table defined in findNextHopForDestination:%@ returns NULL. Taking default route",digits]];
+            [self.logFeed debugText:[NSString stringWithFormat:@"[_routingTable findEntryByDigits:'%@'] returns NULL",digits]];
         }
         return NULL;
     }
     else
     {
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"[_routingTable findEntryByDigits:'%@'] returns %@",digits,routingTableEntry]];
+        }
+
+        if(self.logLevel <= UMLOG_DEBUG)
+        {
+            [self.logFeed debugText:[NSString stringWithFormat:@"routing table entry in findNextHopForDestination:%@ returns NULL. Taking default route",digits]];
+        }
         SccpDestinationGroup *nextHopGroup = [routingTableEntry getRouteTo];
         return nextHopGroup;
     }
 }
+
 - (UMSynchronizedSortedDictionary *)config
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
