@@ -21,7 +21,7 @@
     return self;
 }
 
-- (void)setStatus:(SccpL3RouteStatus) status forPointCode:(UMMTP3PointCode *)pointCode
+- (void)setStatus:(SccpL3RouteStatus)status forPointCode:(UMMTP3PointCode *)pointCode
 {
     SccpL3RoutingTableEntry *entry = [self getEntryForPointCode:pointCode];
     entry.status = status;
