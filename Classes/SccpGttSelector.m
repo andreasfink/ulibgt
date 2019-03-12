@@ -222,12 +222,6 @@
         {
             [self.logFeed debugText:[NSString stringWithFormat:@"[_routingTable findEntryByDigits:'%@'] returns %@",digits,routingTableEntry]];
         }
-
-        if(self.logLevel <= UMLOG_DEBUG)
-        {
-            [self.logFeed debugText:[NSString stringWithFormat:@"routing table entry in findNextHopForDestination:%@ returns NULL. Taking default route",digits]];
-        }
-
         [routingTableEntry.incomingSpeed increase];
         return routingTableEntry;
     }
