@@ -126,58 +126,156 @@
 
     /* if we get here, we have more than one option. so we must take weight and cost into consideration */
 
-    int lowestCost = 65;
-    NSMutableArray *lowestCostEntries = [[NSMutableArray alloc]init];
-    for(SccpDestination *e in validEntries)
-    {
-        int cost = 4;
-        if(e.cost)
-        {
-            cost = e.cost.intValue;
-        }
+    _lastIndex++;
 
-        if(cost > lowestCost)
+    NSMutableArray *lowestCostEntries;
+
+    /* find the lowest cost entries if wrr or cost methods are choosen. otherwise all entries are considered */
+    if((_distributionMethod == SccpDestinationGroupDistributionMethod_cost) || (_distributionMethod == SccpDestinationGroupDistributionMethod_wrr))
+    {
+
+        int lowestCost = 65;
+        for(SccpDestination *e in validEntries)
         {
-            continue;
-        }
-        if(cost == lowestCost)
-        {
-            [lowestCostEntries addObject:e];
-        }
-        if(cost < lowestCost)
-        {
-            lowestCostEntries = [[NSMutableArray alloc]init];
-            [lowestCostEntries addObject:e];
-            lowestCost = cost;
+            int cost = 4;
+            if(e.cost)
+            {
+                cost = e.cost.intValue;
+            }
+
+            if(cost > lowestCost)
+            {
+                continue;
+            }
+            if(cost == lowestCost)
+            {
+                [lowestCostEntries addObject:e];
+            }
+            if(cost < lowestCost)
+            {
+                lowestCostEntries = [[NSMutableArray alloc]init];
+                [lowestCostEntries addObject:e];
+                lowestCost = cost;
+            }
         }
     }
+    else
+    {
+         lowestCostEntries = validEntries;
+    }
 
+    /* calculate the total weigth */
     uint32_t totalWeight = 0;
     for(SccpDestination *e in lowestCostEntries)
     {
-        int weight = 100;
+        uint32_t weight = 100;
         if(e.weight)
         {
-            weight = e.weight.intValue;
+            weight = (uint32_t)e.weight.unsignedIntegerValue;
         }
         totalWeight += weight;
     }
 
-    uint32_t pickWeight = [UMUtil random:totalWeight];
-    uint32_t currentWeight = 0;
-    for(SccpDestination *e in lowestCostEntries)
+    switch(_distributionMethod)
     {
-        int weight = 100;
-        if(e.weight)
+        case SccpDestinationGroupDistributionMethod_share:
         {
-            weight = e.weight.intValue;
-        }
+            int lowestCost = 65;
+            NSMutableArray *lowestCostEntries = validEntries;
+            for(SccpDestination *e in validEntries)
+            {
+                int cost = 4;
+                if(e.cost)
+                {
+                    cost = e.cost.intValue;
+                }
 
-        if((currentWeight < pickWeight) && (pickWeight <= (currentWeight + weight)))
-        {
-            return e;
+                if(cost > lowestCost)
+                {
+                    continue;
+                }
+                if(cost == lowestCost)
+                {
+                    [lowestCostEntries addObject:e];
+                }
+                if(cost < lowestCost)
+                {
+                    lowestCostEntries = [[NSMutableArray alloc]init];
+                    [lowestCostEntries addObject:e];
+                    lowestCost = cost;
+                }
+
+                uint32_t totalWeight = 0;
+                for(SccpDestination *e in lowestCostEntries)
+                {
+                    int weight = 100;
+                    if(e.weight)
+                    {
+                        weight = e.weight.intValue;
+                    }
+                    totalWeight += weight;
+                }
+
+                uint32_t pickWeight = [UMUtil random:totalWeight];
+                uint32_t currentWeight = 0;
+                for(SccpDestination *e in lowestCostEntries)
+                {
+                    int weight = 100;
+                    if(e.weight)
+                    {
+                        weight = e.weight.intValue;
+                    }
+
+                    if((currentWeight < pickWeight) && (pickWeight <= (currentWeight + weight)))
+                    {
+                        return e;
+                    }
+                    currentWeight += weight;
+                }
+                return NULL;
+            }
+            break;
         }
-        currentWeight += weight;
+        case SccpDestinationGroupDistributionMethod_wrr:
+        {
+            uint32_t pickWeight = [UMUtil random:totalWeight];
+            uint32_t currentWeight = 0;
+            for(SccpDestination *e in lowestCostEntries)
+            {
+                int weight = 100;
+                if(e.weight)
+                {
+                    weight = e.weight.intValue;
+                }
+
+                if((currentWeight < pickWeight) && (pickWeight <= (currentWeight + weight)))
+                {
+                    return e;
+                }
+                currentWeight += weight;
+            }
+            return NULL;
+        }
+        case SccpDestinationGroupDistributionMethod_cgpa:
+            NSLog(@"SccpDestinationGroupDistributionMethod_cgpa is not yet implemented");
+            break;
+
+        case SccpDestinationGroupDistributionMethod_cost:
+        default:
+            if(lowestCostEntries.count==0)
+            {
+                return NULL;
+            }
+            else if(lowestCostEntries.count == 1)
+            {
+                return lowestCostEntries[0];
+            }
+            else
+            {
+                _lastIndex = _lastIndex % lowestCostEntries.count;
+                return lowestCostEntries[ _lastIndex];
+            }
+            break;
     }
     /* we basically shoud never get here */
     return NULL;

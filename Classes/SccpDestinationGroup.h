@@ -12,10 +12,10 @@
 
 typedef enum SccpDestinationGroupDistributionMethod
 {
-    SccpDestinationGroupDistributionMethod_cost = 0, /* default */
-    SccpDestinationGroupDistributionMethod_share = 1,
-    SccpDestinationGroupDistributionMethod_wrr = 2,
-    SccpDestinationGroupDistributionMethod_cgpa = 3,
+    SccpDestinationGroupDistributionMethod_cost = 0,    /* equal distribution on lowest cost entries */
+    SccpDestinationGroupDistributionMethod_share = 1,   /* equal distribution on all entries */
+    SccpDestinationGroupDistributionMethod_wrr = 2,     /* weighted distribution on lowest cost entries */
+    SccpDestinationGroupDistributionMethod_cgpa = 3,    /* not implemented yet */
 } SccpDestinationGroupDistributionMethod;
 
 @interface SccpDestinationGroup : UMObject
@@ -26,6 +26,7 @@ typedef enum SccpDestinationGroupDistributionMethod
     BOOL _class1LoadBalance;
     BOOL _distributeSccpSequencedNegate;
     NSString *_dpcInstance;
+    int _lastIndex;
 }
 
 @property(readwrite,strong,atomic)  NSString *name;
