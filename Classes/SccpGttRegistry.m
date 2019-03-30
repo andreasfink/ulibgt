@@ -12,6 +12,7 @@
 #import "SccpGttRegistry.h"
 #import "SccpGttSelector.h"
 #import "SccpGttRoutingTable.h"
+#import "SccpDestinationGroup.h"
 
 static SccpGttRegistry *g_registry;
 
@@ -177,10 +178,22 @@ static SccpGttRegistry *g_registry;
 }
 
 
-- (SccpDestinationGroup *)getDestinationByName:(NSString *)name;
+- (SccpDestinationGroup *)getDestinationGroupByName:(NSString *)name;
 {
     return _sccp_destinations_dict[name];
 }
 
+- (void)addDestinationGroup:(SccpDestinationGroup *)grp
+{
+    if(grp.name)
+    {
+        _sccp_destinations_dict[grp.name] = grp;
+    }
+}
+
+- (void)removeDestinationGroup:(NSString *)name
+{
+    [_sccp_destinations_dict removeObjectForKey:name];
+}
 
 @end

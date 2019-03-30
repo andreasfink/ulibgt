@@ -17,11 +17,11 @@
 
 @interface SccpGttRegistry : UMObject
 {
-    UMLogLevel                _logLevel;
-    UMSynchronizedDictionary *_entriesByKey;
-    UMSynchronizedDictionary *_entriesByName;
-    UMSynchronizedDictionary *_linksetTranslationsIncoming;
-    UMSynchronizedDictionary *_linksetTranslationsOutgoing;
+    UMLogLevel                  _logLevel;
+    UMSynchronizedDictionary    *_entriesByKey;
+    UMSynchronizedDictionary    *_entriesByName;
+    UMSynchronizedDictionary    *_linksetTranslationsIncoming;
+    UMSynchronizedDictionary    *_linksetTranslationsOutgoing;
 
     UMSynchronizedDictionary    *_sccp_number_translations_dict;
     UMSynchronizedDictionary    *_sccp_destinations_dict;
@@ -49,6 +49,7 @@
 - (void)updateLogLevel:(UMLogLevel)newLogLevel;
 - (void)updateLogFeed:(UMLogFeed *)newLogFeed;
 - (void)finishUpdate;
-- (SccpDestinationGroup *)getDestinationByName:(NSString *)name;
-
+- (SccpDestinationGroup *)getDestinationGroupByName:(NSString *)name;
+- (void)addDestinationGroup:(SccpDestinationGroup *)grp;
+- (void)removeDestinationGroup:(NSString *)name;
 @end

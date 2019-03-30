@@ -352,4 +352,10 @@
     return dict;
 }
 
+- (NSString *)description
+{
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendFormat:@"SccpDestinationGroup<%p> %@",self,_name];
+    return s;
+}
 @end
