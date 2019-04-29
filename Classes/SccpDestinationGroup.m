@@ -134,7 +134,7 @@
     if((_distributionMethod == SccpDestinationGroupDistributionMethod_cost) || (_distributionMethod == SccpDestinationGroupDistributionMethod_wrr))
     {
 
-        int lowestCost = 65;
+        int lowestCost = 65; /* costs is a value from 1...64 */
         for(SccpDestination *e in validEntries)
         {
             int cost = 4;
