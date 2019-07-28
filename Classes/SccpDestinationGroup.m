@@ -204,36 +204,35 @@
                     [lowestCostEntries addObject:e];
                     lowestCost = cost;
                 }
-
-                uint32_t totalWeight = 0;
-                for(SccpDestination *e in lowestCostEntries)
-                {
-                    int weight = 100;
-                    if(e.weight)
-                    {
-                        weight = e.weight.intValue;
-                    }
-                    totalWeight += weight;
-                }
-
-                uint32_t pickWeight = [UMUtil random:totalWeight];
-                uint32_t currentWeight = 0;
-                for(SccpDestination *e in lowestCostEntries)
-                {
-                    int weight = 100;
-                    if(e.weight)
-                    {
-                        weight = e.weight.intValue;
-                    }
-
-                    if((currentWeight < pickWeight) && (pickWeight <= (currentWeight + weight)))
-                    {
-                        return e;
-                    }
-                    currentWeight += weight;
-                }
-                return NULL;
             }
+            uint32_t totalWeight = 0;
+            for(SccpDestination *e in lowestCostEntries)
+            {
+                int weight = 100;
+                if(e.weight)
+                {
+                    weight = e.weight.intValue;
+                }
+                totalWeight += weight;
+            }
+
+            uint32_t pickWeight = [UMUtil random:totalWeight];
+            uint32_t currentWeight = 0;
+            for(SccpDestination *e in lowestCostEntries)
+            {
+                int weight = 100;
+                if(e.weight)
+                {
+                    weight = e.weight.intValue;
+                }
+
+                if((currentWeight < pickWeight) && (pickWeight <= (currentWeight + weight)))
+                {
+                    return e;
+                }
+                currentWeight += weight;
+            }
+            return NULL;
             break;
         }
         case SccpDestinationGroupDistributionMethod_wrr:
