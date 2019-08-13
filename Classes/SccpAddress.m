@@ -1051,7 +1051,6 @@ int sccp_digit_to_nibble(unichar digit, int def)
         }
     }
     return s;
-
 }
 
 
