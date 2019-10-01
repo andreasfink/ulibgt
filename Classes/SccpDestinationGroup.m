@@ -56,32 +56,6 @@
 }
 
 
-#if 0
-- (SccpDestinationGroup *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant
-{
-    NSArray *array = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \t;"]];
-    if(array.count==0)
-    {
-        return NULL;
-    }
-
-    self = [super init];
-    if(self)
-    {
-        _entries = [[UMSynchronizedArray alloc]init];
-        for(NSString *dpc in array)
-        {
-            SccpDestination *dst = [[SccpDestination alloc]initWithDpcString:dpc variant:variant];
-            if(dst)
-            {
-                [_entries addObject:dst];
-            }
-        }
-    }
-    return self;
-}
-#endif
-
 
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
 {
@@ -94,7 +68,6 @@
 
     for(SccpDestination *e in entries)
     {
-
         SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
         if(rtentry.status==SccpL3RouteStatus_available)
         {
