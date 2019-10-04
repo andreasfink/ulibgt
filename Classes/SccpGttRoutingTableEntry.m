@@ -89,23 +89,23 @@
     [s appendFormat:@"<%@:%p>",[self className],self];
     if(_name)
     {
-        [s appendFormat:@"name=%@",_name];
+        [s appendFormat:@" name=%@",_name];
     }
     if(_table)
     {
-        [s appendFormat:@"table=%@",_table];
+        [s appendFormat:@" table=%@",_table];
     }
     if(_digits)
     {
-        [s appendFormat:@"gta=%@",_digits];
+        [s appendFormat:@" gta=%@",_digits];
     }
     if(_routeToName)
     {
-        [s appendFormat:@"destination=%@ -> (%@)",_routeToName, (_routeTo ? _routeTo.name : @"NULL" )];
+        [s appendFormat:@" destination=%@ -> (%@)",_routeToName, (_routeTo ? _routeTo.name : @"NULL" )];
     }
     if(_postTranslationName)
     {
-        [s appendFormat:@"post-translation=%@",_postTranslationName];
+        [s appendFormat:@" post-translation=%@",_postTranslationName];
     }
     return s;
 }
