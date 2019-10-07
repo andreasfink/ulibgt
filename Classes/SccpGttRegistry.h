@@ -25,7 +25,6 @@
 
     UMSynchronizedDictionary    *_sccp_number_translations_dict;
     UMSynchronizedDictionary    *_sccp_destinations_dict;
-
 }
 
 @property(readwrite,assign,atomic)      UMLogLevel logLevel;
