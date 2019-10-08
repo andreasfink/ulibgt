@@ -157,6 +157,8 @@ static SccpGttRegistry *g_registry;
 
 - (void)finishUpdate
 {
+
+
     NSArray *arr = [self listSelectorNames];
     for(NSString *name in arr)
     {
