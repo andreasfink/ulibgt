@@ -83,7 +83,7 @@
         NSString *digits = entry.digits;
         if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
         {
-            digits=@"";
+            //digits=@"";
             newRoot.entry = entry;
         }
         else
