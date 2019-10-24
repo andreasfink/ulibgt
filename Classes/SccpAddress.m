@@ -1169,7 +1169,7 @@ int sccp_digit_to_nibble(unichar digit, int def)
         if((npi.npi == SCCP_NPI_ISDN_E164) || (npi.npi == SCCP_NPI_ISDN_MOBILE_E214))
         {
             NSString *s2 = SccpCountryFromMSISDN(address);
-            if(s2.length == 0)
+            if(s2.length > 0)
             {
                 s = s2;
             }
