@@ -10,6 +10,7 @@
 
 #import "SccpAddress.h"
 #import <ulibmtp3/ulibmtp3.h>
+#import "SccpCountry.h"
 
 static int is_all_digits(const char *text, int startpos, unsigned long len);
 
@@ -1158,6 +1159,24 @@ int sccp_digit_to_nibble(unichar digit, int def)
     return a;
 }
 
+
+- (NSString *)country
+{
+    NSString *s = @"UNK";
+
+    if(nai.nai == SCCP_NAI_INTERNATIONAL)
+    {
+        if((npi.npi == SCCP_NPI_ISDN_E164) || (npi.npi == SCCP_NPI_ISDN_MOBILE_E214))
+        {
+            NSString *s2 = SccpCountryFromMSISDN(address);
+            if(s2.length == 0)
+            {
+                s = s2;
+            }
+        }
+    }
+    return s;
+}
 
 @end
 
