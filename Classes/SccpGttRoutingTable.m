@@ -83,6 +83,7 @@
         NSString *digits = entry.digits;
         if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
         {
+            //digits=@"";
             newRoot.entry = entry;
         }
         else
@@ -230,6 +231,7 @@
     if([digits isEqualToString:@"default"])
     {
         _rootNode.entry = entry;
+        _entries [entry.table] = entry;
         return;
     }
 

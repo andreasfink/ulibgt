@@ -55,6 +55,7 @@
 - (SccpAddress *)initWithData:(NSData *)data;
 - (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn variant:(UMMTP3Variant)var;
 - (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn sccpVariant:(SccpVariant)svar mtp3Variant:(UMMTP3Variant)m3var;
+- (NSString *)country;
 
 - (NSDictionary *)dictionaryValue;
 - (UMSynchronizedSortedDictionary *)objectValue;

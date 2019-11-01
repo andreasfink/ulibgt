@@ -30,6 +30,7 @@
 #import "SccpDestinationGroup.h"
 #import "SccpNumberTranslation.h"
 #import "SccpNumberTranslationEntry.h"
+#import "SccpCountry.h"
 
 #import "UMSyntaxGT.h"
 #import "UMSyntaxGT_addressConversion.h"
