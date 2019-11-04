@@ -107,7 +107,6 @@
 {
     NSInteger n = [digits length];
 
-
     SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
     SccpGttRoutingTableEntry *returnValue = currentNode.entry;
 
