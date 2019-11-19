@@ -44,5 +44,6 @@ typedef enum SccpDestinationGroupDistributionMethod
 - (SccpDestination *)pickRandom;
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
+- (NSString *)descriptionWithRt:(SccpL3RoutingTable *)rt;
 
 @end
