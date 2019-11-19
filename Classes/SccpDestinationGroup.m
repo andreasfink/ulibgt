@@ -9,6 +9,8 @@
 #import "SccpDestinationGroup.h"
 #import "SccpL3RouteStatus.h"
 #import "SccpL3RoutingTableEntry.h"
+#import "SccpSubSystemNumber.h"
+#import "SccpL3RouteStatus.h"
 
 @implementation SccpDestinationGroup
 {
@@ -326,8 +328,80 @@
 
 - (NSString *)description
 {
+    return [self descriptionWithRt:NULL];
+}
+
+- (NSString *)descriptionWithRt:(SccpL3RoutingTable *)rt
+{
     NSMutableString *s = [[NSMutableString alloc]init];
-    [s appendFormat:@"SccpDestinationGroup<%p> %@",self,_name];
+    [s appendFormat:@"SccpDestinationGroup<%p> %@\n",self,_name ? _name : @"<unnamed>"];
+    NSArray *entries = [_entries arrayCopy];
+    for(SccpDestination *e in entries)
+    {
+        [s appendString:@"  "];
+        if(e.destination.length> 0)
+        {
+            [s appendFormat:@"DST=%@ ",e.destination];
+        }
+        if(e.ssn)
+        {
+            [s appendFormat:@"SSN=%d ",e.ssn.ssn];
+        }
+        if(e.dpc)
+        {
+            [s appendFormat:@"PC=%@ ",e.dpc];
+        }
+        if(e.m3uaAs)
+        {
+            [s appendFormat:@"AS=%@ ",e.m3uaAs];
+        }
+        if(e.cost)
+        {
+            [s appendFormat:@"COST=%@ ",e.cost];
+        }
+        if(e.weight)
+        {
+            [s appendFormat:@"WEIGTH=%@ ",e.weight];
+        }
+        if(e.ntt)
+        {
+            [s appendFormat:@"NTT=%@ ",e.ntt];
+        }
+        if(rt==NULL)
+        {
+            [s appendString:@" MTP3-STATUS=unknown"];
+        }
+        else
+        {
+            SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
+            UMSynchronizedSortedDictionary *d = [[UMSynchronizedSortedDictionary alloc]init];
+            if(rtentry)
+            {
+                SccpL3RouteStatus st = rtentry.status;
+                switch(st)
+                {
+                    case SccpL3RouteStatus_unknown:
+                        [s appendString:@" MTP3-STATUS=unknown"];
+                        break;
+                    case SccpL3RouteStatus_available:
+                        [s appendString:@" MTP3-STATUS=available"];
+                        break;
+                    case SccpL3RouteStatus_restricted:
+                        [s appendString:@" MTP3-STATUS=restricted"];
+                        break;
+                    case SccpL3RouteStatus_unavailable:
+                        [s appendString:@" MTP3-STATUS=unavailable"];
+                        break;
+                }
+            }
+            else
+            {
+                [s appendString:@" MTP3-STATUS=not-in-routing-table"];
+            }
+        }
+    }
+    [s appendString:@"\n"];
     return s;
 }
+
 @end
