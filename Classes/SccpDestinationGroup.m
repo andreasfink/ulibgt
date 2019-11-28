@@ -374,7 +374,6 @@
         else
         {
             SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
-            UMSynchronizedSortedDictionary *d = [[UMSynchronizedSortedDictionary alloc]init];
             if(rtentry)
             {
                 SccpL3RouteStatus st = rtentry.status;
