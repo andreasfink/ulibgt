@@ -17,10 +17,10 @@
 {
     NSString                *_name;
     NSString                *_table;
-
     NSString                *_digits;
     SccpDestinationGroup    *_routeTo;
     NSString                *_routeToName;
+    BOOL                    _deliverLocal;
     NSString                *_postTranslationName;
     SccpNumberTranslation   *_postTranslation;
 	
@@ -31,6 +31,7 @@
 
 @property(readwrite,atomic,strong)  NSString                *name;
 @property(readwrite,atomic,strong)  NSString                *table;
+@property(readwrite,atomic,assign)  BOOL                    deliverLocal;
 
 @property(readwrite,atomic,strong)  NSString *digits;
 @property(readwrite,atomic,strong)  SccpDestinationGroup    *routeTo;
