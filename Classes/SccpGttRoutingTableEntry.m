@@ -41,7 +41,7 @@
         if(cfg[@"destination"])
         {
             _routeToName = [cfg[@"destination"] stringValue];
-            if([_routeToName isCaseInsensitiveLike:@"local"])
+            if([_routeToName isEqualToStringCaseInsensitive:@"local"])
             {
                 _deliverLocal = YES;
             }
