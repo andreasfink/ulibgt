@@ -16,7 +16,7 @@
     self = [super init];
     if(self)
     {
-        _entries =[[UMSynchronizedDictionary alloc]init];
+        _entries = [[UMSynchronizedDictionary alloc]init];
     }
     return self;
 }
@@ -56,7 +56,7 @@
     for(NSString *key in allKeys)
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
-        NSString *pc = entry.pc.stringValue;
+        NSString *pc = @(entry.pc.pc).stringValue;
         switch(entry.status)
         {
             case SccpL3RouteStatus_available:
