@@ -22,9 +22,9 @@
 #define SCCP_SSN_EIR		                    9
 #define SCCP_SSN_AUTH                           10
 #define SCCP_SSN_SMSC                           12
-#define SCCP_SSN_RANAP	                        142
-#define SCCP_SSN_RNSAP	                        143
-#define SCCP_SSN_GMLC	                        145
+#define SCCP_SSN_RANAP	                        142 /* radio access network application part */
+#define SCCP_SSN_RNSAP	                        143 /* Radio Network Subsystem Application Part */
+#define SCCP_SSN_GMLC	                        145 /* Gateway Mobile Location Centre */
 #define SCCP_SSN_CAP	                        146
 #define SCCP_SSN_GSMSCF	                        147
 #define SCCP_SSN_SIWF	                        148
