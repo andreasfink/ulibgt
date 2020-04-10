@@ -10,9 +10,9 @@
 
 typedef enum SccpL3RouteStatus
 {
-    SccpL3RouteStatus_unknown,
-    SccpL3RouteStatus_available,
-    SccpL3RouteStatus_restricted,
-    SccpL3RouteStatus_unavailable
+    SccpL3RouteStatus_unknown = 0,
+    SccpL3RouteStatus_available = 1,
+    SccpL3RouteStatus_restricted = 2,
+    SccpL3RouteStatus_unavailable = 3,
 } SccpL3RouteStatus;
 
