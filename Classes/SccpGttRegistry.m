@@ -129,7 +129,7 @@ static SccpGttRegistry *g_registry;
     {
         NSString *trimmedLine = [line stringByTrimmingCharactersInSet:whitespace];
         unichar firstChar = [trimmedLine characterAtIndex:0];
-        if((firstChar == '!') || (firstChar='#'))
+        if((firstChar == '!') || (firstChar=='#'))
         {
             continue;
         }
