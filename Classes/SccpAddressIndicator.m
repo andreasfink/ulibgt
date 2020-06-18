@@ -211,7 +211,7 @@
     }
     [s appendFormat:@"     national-reserved-bit=%d\r\n",(nationalReservedBit ? 1 : 0)];
     [s appendFormat:@"     routing-indicator-bit=%d\r\n",(routingIndicatorBit ? 1 : 0)];
-    [s appendFormat:@"     global-title-indicator=%d\r\n",(globalTitleIndicator ? 1 : 0)];
+    [s appendFormat:@"     global-title-indicator=%d\r\n",globalTitleIndicator];
     [s appendFormat:@"     sub-system-indicator=%d\r\n",(subSystemIndicator ? 1 : 0)];
     [s appendFormat:@"     point-code-indicator=%d\r\n",(pointCodeIndicator ? 1 : 0)];
     return s;
