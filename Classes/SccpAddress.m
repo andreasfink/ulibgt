@@ -304,6 +304,11 @@ int sccp_digit_to_nibble(unichar digit, int def)
     }
     else if(variant == SCCP_VARIANT_ANSI)
     {
+        tt_pres  = 0;
+        np_pres  = 0;
+        nai_pres = 0;
+        en_pres  = 0;
+        gt_pres  = 0;
         switch(gti)
         {
         case SCCP_GTI_NONE:
@@ -312,12 +317,14 @@ int sccp_digit_to_nibble(unichar digit, int def)
         case SCCP_GTI_ANSI_TT_NP_ENCODING:
             tt_pres = 1;
             np_pres = 1;
+            nai_pres = 0;
             en_pres = 1;
             break;
         case SCCP_GTI_ANSI_TT_ONLY:
             tt_pres = 1;
             gt_pres = 1;
             np_pres = 0;
+            nai_pres = 0;
             en_pres = 0;
             break;
         default:
@@ -362,7 +369,6 @@ int sccp_digit_to_nibble(unichar digit, int def)
         uint8_t byte = tt.tt;
         [packet appendByte:byte];
     }
-    
     len = [address length];
     const char *addr = (const char *)address.UTF8String;
     
