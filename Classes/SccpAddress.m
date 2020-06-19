@@ -268,6 +268,7 @@ int sccp_digit_to_nibble(unichar digit, int def)
     }
 
     int gti = ai.globalTitleIndicator;
+
     if(variant == SCCP_VARIANT_ITU)
     {
         switch(gti)	/* bits 6,5,4,3 according to Q.731 page 8 */
@@ -315,10 +316,12 @@ int sccp_digit_to_nibble(unichar digit, int def)
             break;
         case SCCP_GTI_ANSI_TT_ONLY:
             tt_pres = 1;
-            gt_pres = 0;
+            gt_pres = 1;
+            np_pres = 0;
+            en_pres = 0;
             break;
         default:
-            gt_pres = 0;
+            gt_pres = 1;
         }
     }
 
