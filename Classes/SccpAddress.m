@@ -234,12 +234,13 @@ int sccp_digit_to_nibble(unichar digit, int def)
         ai.nationalReservedBit=NO;
         ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_ONLY;
     }
-
+/* this seems not a standard case.
     else if((variant==SCCP_VARIANT_ANSI) && (np_pres))
     {
         ai.nationalReservedBit=YES;
         ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
     }
+ */
     else if(variant==SCCP_VARIANT_ANSI)
     {
         ai.nationalReservedBit=YES;
