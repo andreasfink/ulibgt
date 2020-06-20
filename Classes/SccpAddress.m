@@ -713,7 +713,14 @@ int sccp_digit_to_nibble(unichar digit, int def)
                 {
                     nai.nai = SCCP_NAI_INTERNATIONAL;
                     npi.npi = SCCP_NPI_ISDN_E164;
-                    ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                    if(svar==SCCP_VARIANT_ANSI)
+                    {
+                        ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                    }
+                    else
+                    {
+                        ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                    }
                     address = [msisdn substringFromIndex:1];
                 }
                 else if(len > 2)
@@ -723,14 +730,28 @@ int sccp_digit_to_nibble(unichar digit, int def)
                     {
                         nai.nai = SCCP_NAI_INTERNATIONAL;
                         npi.npi = SCCP_NPI_ISDN_E164;
-                        ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        if(svar==SCCP_VARIANT_ANSI)
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                        }
+                        else
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        }
                         address = [msisdn substringFromIndex:2];
                     }
                     else if(c1 == '0')
                     {
                         nai.nai = SCCP_NAI_INTERNATIONAL;
                         npi.npi = SCCP_NPI_ISDN_E164;
-                        ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        if(svar==SCCP_VARIANT_ANSI)
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                        }
+                        else
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        }
                         address = [msisdn substringFromIndex:1];
                     }
 
@@ -738,19 +759,40 @@ int sccp_digit_to_nibble(unichar digit, int def)
                     {
                         nai.nai = SCCP_NAI_UNKNOWN;
                         npi.npi = SCCP_NPI_ISDN_E164;
-                        ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        if(svar==SCCP_VARIANT_ANSI)
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                        }
+                        else
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        }
                         address = msisdn;
                     }
                     else if([msisdn hasPrefix:@"imsi:"])
                     {
-                        ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        if(svar==SCCP_VARIANT_ANSI)
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                        }
+                        else
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        }
                         npi.npi = SCCP_NPI_LAND_MOBILE_E212;
                         nai.nai= SCCP_NAI_INTERNATIONAL;
                         address = [msisdn substringFromIndex:5];
                     }
                     else if([msisdn hasPrefix:@"mgt:"])
                     {
-                        ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        if(svar==SCCP_VARIANT_ANSI)
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_TT_ONLY;
+                        }
+                        else
+                        {
+                            ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_TT_NPI_ENCODING;
+                        }
                         npi.npi = SCCP_NPI_ISDN_MOBILE_E214;
                         nai.nai= SCCP_NAI_INTERNATIONAL;
                         address = [msisdn substringFromIndex:4];
