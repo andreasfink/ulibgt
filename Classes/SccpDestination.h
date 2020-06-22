@@ -26,7 +26,16 @@
     NSNumber        *_ntt;              /* send to internal subsystem. 0 if subsystem is 'any'    */
     NSString        *_addPrefix;        /* send to m3ua application servber */
     NSNumber        *_allowConversion;  /* allow XUDT to UDT or vice versa conversion */
+    UMLayerMTP3     *_mtp3;
+    NSString        *_mtp3InstanceName;
     BOOL            _usePcssn;
+    NSNumber        *_setGti;
+    NSNumber        *_setNpi;
+    NSNumber        *_setNai;
+    NSNumber        *_setEncoding;
+    NSNumber        *_setNational;
+    NSNumber        *_ansiToItuConversion;
+    NSNumber        *_ituToAnsiConversion;
 }
 
 @property(readwrite,strong,atomic)  NSString        *name;
@@ -40,10 +49,21 @@
 @property(readwrite,strong,atomic)  NSString        *addPrefix;
 @property(readwrite,strong,atomic)  NSNumber        *allowConversion;
 @property(readwrite,assign,atomic)  BOOL            usePcssn;
+@property(readwrite,strong,atomic)  UMLayerMTP3     *mtp3;
+@property(readwrite,strong,atomic)  NSString        *mtp3InstanceName;
+@property(readwrite,strong,atomic)  NSNumber        *setGti;
+@property(readwrite,strong,atomic)  NSNumber        *setNpi;
+@property(readwrite,strong,atomic)  NSNumber        *setNai;
+@property(readwrite,strong,atomic)  NSNumber        *setNational;
+@property(readwrite,strong,atomic)  NSString        *conversion;
+@property(readwrite,strong,atomic)  NSNumber        *ansiToItuConversion;
+@property(readwrite,strong,atomic)  NSNumber        *ituToAnsiConversion;
+
 
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
-- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant;
-- (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant;
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant mtp3Instances:(UMSynchronizedDictionary *)dict;
+- (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant mtp3Instances:(UMSynchronizedDictionary *)mtp3_instances;
+
 - (NSString *)description;
 - (UMSynchronizedSortedDictionary *)statusDict;
 
