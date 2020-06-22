@@ -28,6 +28,11 @@
     return self;
 }
 
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant
+{
+    return [self initWithConfig:dict variant:variant mtp3Instances:NULL];
+
+}
 - (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant mtp3Instances:(UMSynchronizedDictionary *)mtp3_instances;
 
 {
@@ -47,6 +52,11 @@
         return NULL;
     }
     return self;
+}
+
+- (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant
+{
+    [self setConfig:cfg variant:variant mtp3Instances:NULL];
 }
 
 - (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant mtp3Instances:(UMSynchronizedDictionary *)mtp3_instances
