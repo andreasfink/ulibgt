@@ -28,12 +28,18 @@
     return self;
 }
 
-- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant;
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant
+{
+    return [self initWithConfig:dict variant:variant mtp3Instances:NULL];
+
+}
+- (SccpDestination *)initWithConfig:(NSDictionary *)dict variant:(UMMTP3Variant)variant mtp3Instances:(UMSynchronizedDictionary *)mtp3_instances;
+
 {
     self = [super init];
     if(self)
     {
-        [self setConfig:dict variant:variant];
+        [self setConfig:dict variant:variant mtp3Instances:mtp3_instances];
     }
     return self;
 }
@@ -49,6 +55,11 @@
 }
 
 - (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant
+{
+    [self setConfig:cfg variant:variant mtp3Instances:NULL];
+}
+
+- (void)setConfig:(NSDictionary *)cfg variant:(UMMTP3Variant)variant mtp3Instances:(UMSynchronizedDictionary *)mtp3_instances
 {
     if(cfg[@"name"])
     {
@@ -87,6 +98,45 @@
     if(cfg[@"add-prefix"])
     {
         _addPrefix = [cfg[@"add-prefix"] stringValue];
+    }
+    
+    if(cfg[@"set-gti"])
+    {
+        _setGti = @([cfg[@"set-gti"] intValue]);
+    }
+    if(cfg[@"set-npi"])
+    {
+        _setNpi = @([cfg[@"set-npi"] intValue]);
+    }
+    if(cfg[@"set-nai"])
+    {
+        _setNai = @([cfg[@"set-nai"] intValue]);
+    }
+    if(cfg[@"set-encoding"])
+    {
+        _setEncoding = @([cfg[@"set-encoding"] intValue]);
+    }
+    if(cfg[@"set-national"])
+    {
+        _setNational = @([cfg[@"set-national"] intValue]);
+    }
+    if(cfg[@"mtp3"])
+    {
+        _mtp3InstanceName = [cfg[@"mtp3"] stringValue];
+        _mtp3 = mtp3_instances[_mtp3InstanceName];
+        if(_mtp3 == NULL)
+        {
+            NSLog(@"Warning: mtp3 instance %@  doestn exist. Referred by sccp-destination-entry %@",_mtp3InstanceName, _destination);
+        }
+    }
+    
+    if(cfg[@"ansi-to-itu"])
+    {
+        _ansiToItuConversion = @([cfg[@"ansi-to-itu"] boolValue]);
+    }
+    if(cfg[@"itu-to-ansi"])
+    {
+        _ituToAnsiConversion = @([cfg[@"itu-to-ansi"] boolValue]);
     }
 }
 
@@ -140,6 +190,39 @@
         dict[@"use-pcssn"] = @(YES);
     }
 
+    if(_setGti)
+    {
+        dict[@"set-gti"] = _setGti;
+    }
+    if(_setNpi)
+    {
+        dict[@"set-npi"] = _setNpi;
+    }
+    if(_setNai)
+    {
+        dict[@"set-nai"] = _setNai;
+    }
+    if(_setEncoding)
+    {
+        dict[@"set-encoding"] = _setEncoding;
+    }
+    if(_setNational)
+    {
+        dict[@"set-national"] = _setNational;
+    }
+    if(_mtp3InstanceName)
+    {
+        dict[@"mtp3"] = _mtp3InstanceName;
+    }
+    if(_ansiToItuConversion)
+    {
+        dict[@"ansi-to-itu"] =_ansiToItuConversion;
+    }
+    if(_ituToAnsiConversion)
+    {
+        dict[@"itu-to-ansi"] =_ituToAnsiConversion;
+    }
+
     return dict;
 }
 
@@ -184,6 +267,39 @@
     {
         [s appendFormat:@"\tusePcssn: YES\n"];
     }
+    if(_setGti)
+    {
+        [s appendFormat:@"\tset-gti: %@\n",_setGti];
+    }
+    if(_setNpi)
+    {
+        [s appendFormat:@"\tset-npi: %@\n",_setNpi];
+    }
+    if(_setNai)
+    {
+        [s appendFormat:@"\tset-nai: %@\n",_setNai];
+    }
+    if(_setEncoding)
+    {
+        [s appendFormat:@"\tset-encoding: %@\n",_setEncoding];
+    }
+    if(_setNational)
+    {
+        [s appendFormat:@"\tset-national: %@\n",_setNational];
+    }
+    if(_mtp3InstanceName)
+    {
+        [s appendFormat:@"\tmtp3: %@\n",_mtp3InstanceName];
+    }
+    if(_ansiToItuConversion)
+    {
+        [s appendFormat:@"\tansi-to-itu: %@\n",_ansiToItuConversion];
+    }
+    if(_ituToAnsiConversion)
+    {
+        [s appendFormat:@"\titu-to-ansi: %@\n",_ituToAnsiConversion];
+    }
+
      return s;
 }
 

@@ -234,12 +234,13 @@ int sccp_digit_to_nibble(unichar digit, int def)
         ai.nationalReservedBit=NO;
         ai.globalTitleIndicator = SCCP_GTI_ITU_NAI_ONLY;
     }
-
+/* this seems not a standard case.
     else if((variant==SCCP_VARIANT_ANSI) && (np_pres))
     {
         ai.nationalReservedBit=YES;
         ai.globalTitleIndicator = SCCP_GTI_ANSI_TT_NP_ENCODING;
     }
+ */
     else if(variant==SCCP_VARIANT_ANSI)
     {
         ai.nationalReservedBit=YES;
@@ -267,6 +268,7 @@ int sccp_digit_to_nibble(unichar digit, int def)
     }
 
     int gti = ai.globalTitleIndicator;
+
     if(variant == SCCP_VARIANT_ITU)
     {
         switch(gti)	/* bits 6,5,4,3 according to Q.731 page 8 */
@@ -302,6 +304,11 @@ int sccp_digit_to_nibble(unichar digit, int def)
     }
     else if(variant == SCCP_VARIANT_ANSI)
     {
+        tt_pres  = 0;
+        np_pres  = 0;
+        nai_pres = 0;
+        en_pres  = 0;
+        gt_pres  = 0;
         switch(gti)
         {
         case SCCP_GTI_NONE:
@@ -310,14 +317,18 @@ int sccp_digit_to_nibble(unichar digit, int def)
         case SCCP_GTI_ANSI_TT_NP_ENCODING:
             tt_pres = 1;
             np_pres = 1;
+            nai_pres = 0;
             en_pres = 1;
             break;
         case SCCP_GTI_ANSI_TT_ONLY:
             tt_pres = 1;
-            gt_pres = 0;
+            gt_pres = 1;
+            np_pres = 0;
+            nai_pres = 0;
+            en_pres = 0;
             break;
         default:
-            gt_pres = 0;
+            gt_pres = 1;
         }
     }
 
@@ -358,7 +369,6 @@ int sccp_digit_to_nibble(unichar digit, int def)
         uint8_t byte = tt.tt;
         [packet appendByte:byte];
     }
-    
     len = [address length];
     const char *addr = (const char *)address.UTF8String;
     
