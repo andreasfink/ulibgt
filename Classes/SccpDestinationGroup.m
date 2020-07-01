@@ -367,6 +367,10 @@
         {
             [s appendFormat:@"NTT=%@ ",e.ntt];
         }
+        if(e.callingNtt)
+        {
+            [s appendFormat:@"set-calling-tt=%@ ",e.callingNtt];
+        }
         if(rt==NULL)
         {
             [s appendString:@" MTP3-STATUS=unknown"];

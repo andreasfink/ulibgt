@@ -95,6 +95,14 @@
     {
         _ntt = @([cfg[@"ntt"] intValue]);
     }
+    if(cfg[@"set-called-tt"])
+    {
+        _ntt = @([cfg[@"set-called-tt"] intValue]);
+    }
+    if(cfg[@"set-calling-tt"])
+    {
+        _callingNtt = @([cfg[@"set-calling-tt"] intValue]);
+    }
     if(cfg[@"add-prefix"])
     {
         _addPrefix = [cfg[@"add-prefix"] stringValue];
@@ -176,6 +184,11 @@
     if(_ntt)
     {
         dict[@"ntt"] = _ntt;
+        dict[@"set-called-tt"] = _ntt;
+    }
+    if(_callingNtt)
+    {
+        dict[@"set-calling-tt"] = _callingNtt;
     }
     if(_addPrefix)
     {
@@ -252,7 +265,11 @@
     }
     if(_ntt)
     {
-        [s appendFormat:@"\tntt: %@\n",_ntt];
+        [s appendFormat:@"\tset-called-tt: %@\n",_ntt];
+    }
+    if(_callingNtt)
+    {
+        [s appendFormat:@"\tset-calling-tt: %@\n",_callingNtt];
     }
     if(_addPrefix)
     {

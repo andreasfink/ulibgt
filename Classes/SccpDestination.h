@@ -23,8 +23,9 @@
     NSString        *_m3uaAs;           /* send to m3ua application servber */
     NSNumber        *_cost;             /* cost 1...64 of this route */
     NSNumber        *_weight;           /* weight of this route used for load distribution among equal priority entries */
-    NSNumber        *_ntt;              /* send to internal subsystem. 0 if subsystem is 'any'    */
-    NSString        *_addPrefix;        /* send to m3ua application servber */
+    NSNumber        *_ntt;              /* new translation type   */
+    NSNumber        *_callingNtt;       /* set new translation type on calling address   */
+    NSString        *_addPrefix;
     NSNumber        *_allowConversion;  /* allow XUDT to UDT or vice versa conversion */
     UMLayerMTP3     *_mtp3;
     NSString        *_mtp3InstanceName;
@@ -46,6 +47,7 @@
 @property(readwrite,strong,atomic)  NSNumber        *cost;
 @property(readwrite,strong,atomic)  NSNumber        *weight;
 @property(readwrite,strong,atomic)  NSNumber        *ntt;
+@property(readwrite,strong,atomic)  NSNumber        *callingNtt;
 @property(readwrite,strong,atomic)  NSString        *addPrefix;
 @property(readwrite,strong,atomic)  NSNumber        *allowConversion;
 @property(readwrite,assign,atomic)  BOOL            usePcssn;
