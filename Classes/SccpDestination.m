@@ -93,15 +93,15 @@
     }
     if(cfg[@"ntt"])
     {
-        _ntt = @([cfg[@"ntt"] intValue]);
+        _overrideCalledTT = @([cfg[@"ntt"] intValue]);
     }
     if(cfg[@"set-called-tt"])
     {
-        _ntt = @([cfg[@"set-called-tt"] intValue]);
+        _overrideCalledTT = @([cfg[@"set-called-tt"] intValue]);
     }
     if(cfg[@"set-calling-tt"])
     {
-        _callingNtt = @([cfg[@"set-calling-tt"] intValue]);
+        _overrideCallingTT = @([cfg[@"set-calling-tt"] intValue]);
     }
     if(cfg[@"add-prefix"])
     {
@@ -181,14 +181,13 @@
     {
         dict[@"weight"] = _weight;
     }
-    if(_ntt)
+    if(_overrideCalledTT)
     {
-        dict[@"ntt"] = _ntt;
-        dict[@"set-called-tt"] = _ntt;
+        dict[@"set-called-tt"] = _overrideCalledTT;
     }
-    if(_callingNtt)
+    if(_overrideCallingTT)
     {
-        dict[@"set-calling-tt"] = _callingNtt;
+        dict[@"set-calling-tt"] = _overrideCallingTT;
     }
     if(_addPrefix)
     {
@@ -235,7 +234,6 @@
     {
         dict[@"itu-to-ansi"] =_ituToAnsiConversion;
     }
-
     return dict;
 }
 
@@ -243,6 +241,11 @@
 {
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"SCCP Destination<%@>\n",_name];
+    if(_destination)
+    {
+        [s appendFormat:@"\tdestination: %@\n",_destination];
+    }
+
     if(_ssn)
     {
         [s appendFormat:@"\tssn: %@\n",_ssn];
@@ -263,13 +266,13 @@
     {
         [s appendFormat:@"\tweigth: %@\n",_weight];
     }
-    if(_ntt)
+    if(_overrideCalledTT)
     {
-        [s appendFormat:@"\tset-called-tt: %@\n",_ntt];
+        [s appendFormat:@"\tset-called-tt: %@\n",_overrideCalledTT];
     }
-    if(_callingNtt)
+    if(_overrideCallingTT)
     {
-        [s appendFormat:@"\tset-calling-tt: %@\n",_callingNtt];
+        [s appendFormat:@"\tset-calling-tt: %@\n",_overrideCallingTT];
     }
     if(_addPrefix)
     {
