@@ -334,46 +334,46 @@
 - (NSString *)descriptionWithRt:(SccpL3RoutingTable *)rt
 {
     NSMutableString *s = [[NSMutableString alloc]init];
-    [s appendFormat:@"SccpDestinationGroup<%p> %@\n",self,_name ? _name : @"<unnamed>"];
+    [s appendFormat:@"    sccp-destination %@ (%p)\n",_name ? _name : @"<unnamed>",self];
     NSArray *entries = [_entries arrayCopy];
     for(SccpDestination *e in entries)
     {
-        [s appendString:@"  "];
+        [s appendString:@"        --entry--\n"];
         if(e.destination.length> 0)
         {
-            [s appendFormat:@"DST=%@ ",e.destination];
+            [s appendFormat:@"        DST=%@\n",e.destination];
         }
         if(e.ssn)
         {
-            [s appendFormat:@"SSN=%d ",e.ssn.ssn];
+            [s appendFormat:@"        SSN=%d\n",e.ssn.ssn];
         }
         if(e.dpc)
         {
-            [s appendFormat:@"PC=%@ ",e.dpc];
+            [s appendFormat:@"        PC=%@\n",e.dpc];
         }
         if(e.m3uaAs)
         {
-            [s appendFormat:@"AS=%@ ",e.m3uaAs];
+            [s appendFormat:@"        AS=%@\n",e.m3uaAs];
         }
         if(e.cost)
         {
-            [s appendFormat:@"COST=%@ ",e.cost];
+            [s appendFormat:@"        COST=%@\n",e.cost];
         }
         if(e.weight)
         {
-            [s appendFormat:@"WEIGTH=%@ ",e.weight];
+            [s appendFormat:@"        WEIGTH=%@\n",e.weight];
         }
-        if(e.ntt)
+        if(e.overrideCalledTT)
         {
-            [s appendFormat:@"NTT=%@ ",e.ntt];
+            [s appendFormat:@"        set-called-tt=%@\n",e.overrideCalledTT];
         }
-        if(e.callingNtt)
+        if(e.overrideCallingTT)
         {
-            [s appendFormat:@"set-calling-tt=%@ ",e.callingNtt];
+            [s appendFormat:@"        set-calling-tt=%@\n",e.overrideCallingTT];
         }
         if(rt==NULL)
         {
-            [s appendString:@" MTP3-STATUS=unknown"];
+            [s appendString:@"        MTP3-STATUS=unknown\n"];
         }
         else
         {
@@ -384,24 +384,25 @@
                 switch(st)
                 {
                     case SccpL3RouteStatus_unknown:
-                        [s appendString:@" MTP3-STATUS=unknown"];
+                        [s appendString:@"        MTP3-STATUS=unknown\n"];
                         break;
                     case SccpL3RouteStatus_available:
-                        [s appendString:@" MTP3-STATUS=available"];
+                        [s appendString:@"        MTP3-STATUS=available\n"];
                         break;
                     case SccpL3RouteStatus_restricted:
-                        [s appendString:@" MTP3-STATUS=restricted"];
+                        [s appendString:@"        MTP3-STATUS=restricted\n"];
                         break;
                     case SccpL3RouteStatus_unavailable:
-                        [s appendString:@" MTP3-STATUS=unavailable"];
+                        [s appendString:@"        MTP3-STATUS=unavailable\n"];
                         break;
                 }
             }
             else
             {
-                [s appendString:@" MTP3-STATUS=not-in-routing-table"];
+                [s appendString:@"        MTP3-STATUS=not-in-routing-table\n"];
             }
         }
+        [s appendString:@"        ---------\n\n"];
     }
     [s appendString:@"\n"];
     return s;
