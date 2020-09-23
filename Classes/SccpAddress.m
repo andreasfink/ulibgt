@@ -251,7 +251,7 @@ int sccp_digit_to_nibble(unichar digit, int def)
     {
         ai.pointCodeIndicator = YES;
     }
-    if(ssn)
+    if((ssn) && (ssn.ssn != -1))
     {
         ai.subSystemIndicator = YES;
     }
@@ -357,10 +357,6 @@ int sccp_digit_to_nibble(unichar digit, int def)
     {
         uint8_t byte = ssn.ssn;
         [packet appendByte:byte];
-    }
-    else
-    {
-        [packet appendByte:0];
     }
     
     /* translation type */
