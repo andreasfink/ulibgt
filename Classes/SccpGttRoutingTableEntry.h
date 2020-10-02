@@ -15,6 +15,8 @@
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
+    BOOL                    _hasSubentries;
+    NSArray                 *_subentries;
     NSString                *_name;
     NSString                *_table;
     NSString                *_digits;
@@ -23,12 +25,15 @@
     BOOL                    _deliverLocal;
     NSString                *_postTranslationName;
     SccpNumberTranslation   *_postTranslation;
-	
 	UMThroughputCounter     *_incomingSpeed;
     BOOL                    _enabled;
     UMLogLevel              _logLevel;
+    NSNumber                *_tcapTransactionRangeStart;
+    NSNumber                *_tcapTransactionRangeEnd;
 }
 
+@property(readwrite,atomic,assign)  BOOL                    hasSubentries;
+@property(readwrite,atomic,strong)  NSArray                 *subentries;
 @property(readwrite,atomic,strong)  NSString                *name;
 @property(readwrite,atomic,strong)  NSString                *table;
 @property(readwrite,atomic,assign)  BOOL                    deliverLocal;
@@ -41,14 +46,18 @@
 @property(readwrite,atomic,strong)  UMThroughputCounter *incomingSpeed;
 @property(readwrite,atomic,assign)  BOOL        enabled;
 @property(readwrite,atomic,assign)  UMLogLevel  logLevel;
+@property(readwrite,atomic,strong)  NSNumber  *tcapTransactionRangeStart;
+@property(readwrite,atomic,strong)  NSNumber  *tcapTransactionRangeEnd;
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
 - (UMSynchronizedSortedDictionary *)config;
 - (NSString *)getStatistics;
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
-
 + (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName;
+- (SccpGttRoutingTableEntry *)findSubentryByTransactionNumber:(NSNumber *)tid;
+- (void)addSubentry:(SccpGttRoutingTableEntry *)subentry;
+- (BOOL) matchingTransactionNumber:(NSNumber *)tid;
 
 @end
 

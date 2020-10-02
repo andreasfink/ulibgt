@@ -51,10 +51,13 @@
 @property(readwrite,strong,atomic) id getSCCPDestinationDelegate;
 
 
-- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst;
+- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst
+                                      transactionNumber:(NSNumber *)tid;
+
 - (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
                                          destination:(SccpAddress **)dst
-                                     incomingLinkset:(NSString *)incomingLinkset;
+                                     incomingLinkset:(NSString *)incomingLinkset
+                                   transactionNumber:(NSNumber *)tid;
 
 @property(readwrite,strong,atomic)  NSString        *gtt_selector;
 @property(readwrite,assign,atomic)  int             tt;

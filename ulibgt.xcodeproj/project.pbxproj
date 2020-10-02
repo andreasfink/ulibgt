@@ -13,6 +13,9 @@
 		A6322094205FD0CE006CC06A /* SccpL3RoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6322095205FD0CE006CC06A /* SccpL3RoutingTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */; };
 		A6322098205FD186006CC06A /* SccpL3RouteStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322096205FD186006CC06A /* SccpL3RouteStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A657727F252705CE004FFFBB /* SccpGttRoutingTableSubEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A657727D252705CE004FFFBB /* SccpGttRoutingTableSubEntry.h */; };
+		A6577280252705CE004FFFBB /* SccpGttRoutingTableSubEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A657727E252705CE004FFFBB /* SccpGttRoutingTableSubEntry.m */; };
+		A6604A502527142B00D978EF /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6604A4F2527142B00D978EF /* ulib.framework */; };
 		A661D1A21E89234E00A5140C /* SccpTTMap.h in Headers */ = {isa = PBXBuildFile; fileRef = A661D1A01E89234E00A5140C /* SccpTTMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A661D1A31E89234E00A5140C /* SccpTTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = A661D1A11E89234E00A5140C /* SccpTTMap.m */; };
 		A661D1A61E892D9300A5140C /* SccpGttRoutingTableDigitNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A661D1A41E892D9300A5140C /* SccpGttRoutingTableDigitNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,14 +33,12 @@
 		A68A22741B18B5DD00854472 /* ulibgt.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A22731B18B5DD00854472 /* ulibgt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A227A1B18B5DD00854472 /* ulibgt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A226E1B18B5DD00854472 /* ulibgt.framework */; };
 		A68A22811B18B5DD00854472 /* ulibgtTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A22801B18B5DD00854472 /* ulibgtTests.m */; };
-		A68A228B1B18B66500854472 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A228A1B18B66500854472 /* ulib.framework */; };
 		A68A22991B18B93D00854472 /* SccpGttRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A228E1B18B93D00854472 /* SccpGttRegistry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A229A1B18B93D00854472 /* SccpGttRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A228F1B18B93D00854472 /* SccpGttRegistry.m */; };
 		A68A229B1B18B93D00854472 /* SccpGttRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A228F1B18B93D00854472 /* SccpGttRegistry.m */; };
 		A68A229C1B18B93D00854472 /* SccpGttSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = A68A22901B18B93D00854472 /* SccpGttSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A68A229D1B18B93D00854472 /* SccpGttSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A22911B18B93D00854472 /* SccpGttSelector.m */; };
 		A68A229E1B18B93D00854472 /* SccpGttSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = A68A22911B18B93D00854472 /* SccpGttSelector.m */; };
-		A68A22AA1B18BA8700854472 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68A228A1B18B66500854472 /* ulib.framework */; };
 		A6ADC5DB1CADBB2F00211137 /* SccpTranslationTableNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ADC5D91CADBB2F00211137 /* SccpTranslationTableNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6ADC5DC1CADBB2F00211137 /* SccpTranslationTableNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = A6ADC5DA1CADBB2F00211137 /* SccpTranslationTableNumber.m */; };
 		A6ADC5DE1CADEA2C00211137 /* ulibmtp3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6ADC5DD1CADEA2C00211137 /* ulibmtp3.framework */; };
@@ -84,6 +85,9 @@
 		A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpL3RoutingTableEntry.h; sourceTree = "<group>"; };
 		A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpL3RoutingTableEntry.m; sourceTree = "<group>"; };
 		A6322096205FD186006CC06A /* SccpL3RouteStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpL3RouteStatus.h; sourceTree = "<group>"; };
+		A657727D252705CE004FFFBB /* SccpGttRoutingTableSubEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpGttRoutingTableSubEntry.h; sourceTree = "<group>"; };
+		A657727E252705CE004FFFBB /* SccpGttRoutingTableSubEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpGttRoutingTableSubEntry.m; sourceTree = "<group>"; };
+		A6604A4F2527142B00D978EF /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/ulib.framework"; sourceTree = "<absolute>"; };
 		A661D19E1E89218D00A5140C /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		A661D1A01E89234E00A5140C /* SccpTTMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpTTMap.h; sourceTree = "<group>"; };
 		A661D1A11E89234E00A5140C /* SccpTTMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpTTMap.m; sourceTree = "<group>"; };
@@ -105,7 +109,6 @@
 		A68A22791B18B5DD00854472 /* ulibgtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ulibgtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A68A227F1B18B5DD00854472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A68A22801B18B5DD00854472 /* ulibgtTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ulibgtTests.m; sourceTree = "<group>"; };
-		A68A228A1B18B66500854472 /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = /Library/Frameworks/ulib.framework; sourceTree = "<absolute>"; };
 		A68A228E1B18B93D00854472 /* SccpGttRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpGttRegistry.h; sourceTree = "<group>"; };
 		A68A228F1B18B93D00854472 /* SccpGttRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SccpGttRegistry.m; sourceTree = "<group>"; };
 		A68A22901B18B93D00854472 /* SccpGttSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpGttSelector.h; sourceTree = "<group>"; };
@@ -154,8 +157,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6604A502527142B00D978EF /* ulib.framework in Frameworks */,
 				A6ADC5DE1CADEA2C00211137 /* ulibmtp3.framework in Frameworks */,
-				A68A228B1B18B66500854472 /* ulib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +166,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A68A22AA1B18BA8700854472 /* ulib.framework in Frameworks */,
 				A68A227A1B18B5DD00854472 /* ulibgt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +176,7 @@
 		A666EEC21E89B69E004804CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6604A4F2527142B00D978EF /* ulib.framework */,
 				A6ADC5DD1CADEA2C00211137 /* ulibmtp3.framework */,
 			);
 			name = Frameworks;
@@ -251,6 +254,8 @@
 				A66233C01E4C46C60095B5D8 /* SccpGttRoutingTable.m */,
 				A6D83D0E1E4C562900D04652 /* SccpGttRoutingTableEntry.h */,
 				A6D83D0F1E4C562900D04652 /* SccpGttRoutingTableEntry.m */,
+				A657727D252705CE004FFFBB /* SccpGttRoutingTableSubEntry.h */,
+				A657727E252705CE004FFFBB /* SccpGttRoutingTableSubEntry.m */,
 				A661D1A41E892D9300A5140C /* SccpGttRoutingTableDigitNode.h */,
 				A661D1A51E892D9300A5140C /* SccpGttRoutingTableDigitNode.m */,
 				A6322096205FD186006CC06A /* SccpL3RouteStatus.h */,
@@ -258,7 +263,6 @@
 				A632208F205FD0AE006CC06A /* SccpL3RoutingTable.m */,
 				A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */,
 				A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */,
-				A68A228A1B18B66500854472 /* ulib.framework */,
 				A6C2914A2361095200A34651 /* SccpCountry.h */,
 				A6C2914B2361095200A34651 /* SccpCountry.m */,
 			);
@@ -320,6 +324,7 @@
 				A6091FCA1CB567630076BD59 /* SccpVariant.h in Headers */,
 				A6322090205FD0AE006CC06A /* SccpL3RoutingTable.h in Headers */,
 				A6D03BE41CA49E0700211137 /* SccpSubSystemNumber.h in Headers */,
+				A657727F252705CE004FFFBB /* SccpGttRoutingTableSubEntry.h in Headers */,
 				A6C0AFB82089F90C00DAB157 /* SccpNumberTranslation.h in Headers */,
 				A6D03BDC1CA497D200211137 /* SccpAddressIndicator.h in Headers */,
 				A661D1A21E89234E00A5140C /* SccpTTMap.h in Headers */,
@@ -470,6 +475,7 @@
 				A6C0AFBD2089F91A00DAB157 /* SccpNumberTranslationEntry.m in Sources */,
 				A66233C21E4C46C60095B5D8 /* SccpGttRoutingTable.m in Sources */,
 				A661D1A31E89234E00A5140C /* SccpTTMap.m in Sources */,
+				A6577280252705CE004FFFBB /* SccpGttRoutingTableSubEntry.m in Sources */,
 				A6322091205FD0AE006CC06A /* SccpL3RoutingTable.m in Sources */,
 				A6D03BE51CA49E0700211137 /* SccpSubSystemNumber.m in Sources */,
 				A6D03BED1CA4A0E800211137 /* SccpNumberPlanIndicator.m in Sources */,
@@ -638,6 +644,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
@@ -660,6 +667,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";

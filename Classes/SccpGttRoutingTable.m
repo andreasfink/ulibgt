@@ -105,6 +105,12 @@
 
 - (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
 {
+    return [self findEntryByDigits:digits transactionNumber:NULL];
+}
+
+- (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
+                              transactionNumber:(NSNumber *)tid
+{
     NSInteger n = [digits length];
 
     SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
@@ -146,7 +152,25 @@
         currentNode = nextNode;
         if(currentNode.entry)
         {
-            returnValue = currentNode.entry;
+            if(tid==NULL)
+            {
+                returnValue = currentNode.entry;
+            }
+            else if(currentNode.entry.hasSubentries)
+            {
+                SccpGttRoutingTableEntry *e = [currentNode.entry findSubentryByTransactionNumber:tid];
+                if(e)
+                {
+                    returnValue  = e;
+                }
+            }
+            else
+            {
+                if([currentNode.entry matchingTransactionNumber:tid]==YES)
+                {
+                    returnValue  = currentNode.entry;
+                }
+            }
         }
     }
     if(_logLevel <=UMLOG_DEBUG)
@@ -242,8 +266,15 @@
         unichar uc = [digits characterAtIndex:i];
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
-    currentNode.entry = entry;
-    _entries [entry.name] = entry;
+    if(currentNode.entry != NULL)
+    {
+        [currentNode.entry addSubentry:entry];
+    }
+    else
+    {
+        currentNode.entry = entry;
+    }
+    _entries [entry.name] = currentNode.entry;
 }
 
 - (UMSynchronizedSortedDictionary *)list

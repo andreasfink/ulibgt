@@ -34,6 +34,9 @@
 - (SccpGttRoutingTable *)initWithName:(NSString *)name;
 - (void)entriesToDigitTree;
 - (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits;
+- (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
+                              transactionNumber:(NSNumber *)tid;
+
 - (SccpGttRoutingTableEntry *)findEntryByName:(NSString *)name;
 - (void)deleteEntryByName:(NSString *)name;
 - (void)deleteEntryByDigits:(NSString *)digits;

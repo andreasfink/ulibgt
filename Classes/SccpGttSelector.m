@@ -155,6 +155,7 @@
 - (SccpGttRoutingTableEntry *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
                                                   destination:(SccpAddress **)dst
                                               incomingLinkset:(NSString *)incomingLinkset
+                                            transactionNumber:(NSNumber *)tid
 {
     SccpAddress *addr = *dst;
     if(_preTranslation)
@@ -168,7 +169,7 @@
     }
     NSString *digits = addr.address;
     SccpDestination *nextHop = NULL;
-    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits];
+    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits transactionNumber:tid];
     if(routingTableEntry==NULL)
     {
         if(self.logLevel <= UMLOG_DEBUG)
@@ -204,10 +205,10 @@
 }
 
 
-- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst
+- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst transactionNumber:(NSNumber *)tid
 {
     NSString *digits = dst.address;
-    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits];
+    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits transactionNumber:tid];
     if(routingTableEntry==NULL)
     {
         if(self.logLevel <= UMLOG_DEBUG)
@@ -223,8 +224,12 @@
             [self.logFeed debugText:[NSString stringWithFormat:@"[_routingTable findEntryByDigits:'%@'] returns %@",digits,routingTableEntry]];
         }
         [routingTableEntry.incomingSpeed increase];
-        return routingTableEntry;
     }
+    if(routingTableEntry.hasSubentries)
+    {
+        routingTableEntry = [routingTableEntry findSubentryByTransactionNumber:tid];
+    }
+    return routingTableEntry;
 }
 
 - (UMSynchronizedSortedDictionary *)config
