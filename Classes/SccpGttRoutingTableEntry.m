@@ -59,9 +59,33 @@
         }
         if(cfg[@"transaction-id-end"])
         {
-            if([cfg[@"transaction-id-end"] isKindOfClass:[NSNumber class]])
+             if([cfg[@"transaction-id-end"] isKindOfClass:[NSNumber class]])
+             {
+                 _tcapTransactionRangeEnd = cfg[@"transaction-id-end"]; /* this is supposed to be a NSNumber */
+             }
+        }
+        if(cfg[@"transaction-id-range"])
+        {
+            NSString *s =[cfg[@"transaction-id-range"] stringValue];
+            NSArray *a = [s componentsSeparatedByString:@"-"];
+            if(a.count !=2)
             {
-                _tcapTransactionRangeEnd = cfg[@"transaction-id-end"];  /* this is supposed to be a NSNumber */
+                NSLog(@"config option 'transaction-id-range' ignored. should be <from> - <to>");
+            }
+            else
+            {
+                NSString *a0 = a[0];
+                NSString *a1 = a[1];
+                a0 = [a0 trim];
+                a1 = [a1 trim];
+                if(a0.length > 0)
+                {
+                    _tcapTransactionRangeStart = @([a0 intergerValueSupportingHex]);
+                }
+                if(a1.length > 0)
+                {
+                    _tcapTransactionRangeEnd = @([a1 intergerValueSupportingHex]);
+                }
             }
         }
         _enabled=YES;
@@ -219,7 +243,7 @@
     }
 
     if(((c1 == NSOrderedAscending) ||(c1 == NSOrderedSame)) &&
-       ((c2 == NSOrderedDescending) ||(c1 == NSOrderedSame)))
+       ((c2 == NSOrderedDescending) ||(c2 == NSOrderedSame)))
     {
         return YES;
     }
