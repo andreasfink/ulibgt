@@ -1,10 +1,9 @@
-ulibgt helps to do routing of SCCP messages and defines
+estpulibgt helps to do routing of SCCP messages and defines
 some basic objects used by ulibsccp. It is independent of ulibsccp
 so it can be used for non active processing such as in a tracefile analayzer
-or config tool which does not have any active links.
+or config tool which does not have any active links.estp
 
-
-The GT routing logic is as following
+The GT routing logic is as following2
 
 
 1. on a incoming MTP3 linkset, a SCCP message comes in.
