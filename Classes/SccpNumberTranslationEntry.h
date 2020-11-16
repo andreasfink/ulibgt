@@ -16,6 +16,8 @@
     NSNumber *_replacementNAI;
     NSNumber *_replacementNP;
     NSNumber *_removeDigits;
+    NSString *_appendDigits;
+
 }
 
 - (SccpNumberTranslationEntry *)initWithConfig:(NSDictionary *)cfg;
@@ -25,6 +27,7 @@
 @property(readwrite,strong,atomic)  NSNumber *replacementNAI;
 @property(readwrite,strong,atomic)  NSNumber *replacementNP;
 @property(readwrite,strong,atomic)  NSNumber *removeDigits;
+@property(readwrite,strong,atomic)  NSString *appendDigits;
 
 - (SccpAddress *)translateAddress:(SccpAddress *)inAddr;
 

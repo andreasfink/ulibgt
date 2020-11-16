@@ -62,6 +62,7 @@ if(dict[name]) \
     SET_DICT_INTEGER(dict,@"new-nai",_replacementNAI);
     SET_DICT_INTEGER(dict,@"new-np",_replacementNP);
     SET_DICT_INTEGER(dict,@"remove-digits",_removeDigits);
+    SET_DICT_STRING(dict,@"append-digits",_appendDigits);
 }
 
 - (SccpAddress *)translateAddress:(SccpAddress *)in
@@ -116,6 +117,11 @@ if(dict[name]) \
             out.nai = [[SccpNatureOfAddressIndicator alloc]init];
         }
         out.nai.nai = _replacementNAI.intValue;
+    }
+    
+    if(_appendDigits)
+    {
+        out.address = [NSString stringWithFormat:@"%@%@",out.address,_appendDigits];
     }
     return out;
 }
