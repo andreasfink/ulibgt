@@ -574,6 +574,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WARNING_CFLAGS = "-Wimplicit-fallthrough=3";
 			};
 			name = Debug;
 		};
@@ -630,6 +631,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WARNING_CFLAGS = "-Wimplicit-fallthrough=3";
 			};
 			name = Release;
 		};
