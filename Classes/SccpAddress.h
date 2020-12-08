@@ -29,6 +29,7 @@
     SccpTranslationTableNumber      *tt;
     NSString                        *address;
     UMMTP3PointCode                 *pc;
+    NSNumber                        *_encodingScheme;
 }
 
 #define MAX_SCCP_DIGITS 64
@@ -40,6 +41,7 @@
 @property(readwrite,strong)     SccpTranslationTableNumber      *tt;
 @property(readwrite,strong)     NSString                        *address;
 @property(readwrite,strong)     UMMTP3PointCode                 *pc;
+@property(readwrite,strong)     NSNumber                        *encodingScheme;
 
 - (void)setAiFromInt:(int)i;
 - (void)setNaiFromInt:(int)i;

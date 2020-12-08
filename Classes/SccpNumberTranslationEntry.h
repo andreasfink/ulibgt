@@ -17,7 +17,6 @@
     NSNumber *_replacementNP;
     NSNumber *_removeDigits;
     NSString *_appendDigits;
-
 }
 
 - (SccpNumberTranslationEntry *)initWithConfig:(NSDictionary *)cfg;

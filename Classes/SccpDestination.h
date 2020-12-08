@@ -26,15 +26,16 @@
     NSNumber        *_overrideCalledTT;              /* new translation type   */
     NSNumber        *_overrideCallingTT;       /* set new translation type on calling address   */
     NSString        *_addPrefix;
+    NSString        *_addPostfix;
     NSNumber        *_allowConversion;  /* allow XUDT to UDT or vice versa conversion */
     UMLayerMTP3     *_mtp3;
     NSString        *_mtp3InstanceName;
     BOOL            _usePcssn;
-    NSNumber        *_setGti;
-    NSNumber        *_setNpi;
-    NSNumber        *_setNai;
-    NSNumber        *_setEncoding;
-    NSNumber        *_setNational;
+    NSNumber        *_changeGti;
+    NSNumber        *_changeNpi;
+    NSNumber        *_changeNai;
+    NSNumber        *_changeEncoding;
+    NSNumber        *_changeNational;
     NSNumber        *_ansiToItuConversion;
     NSNumber        *_ituToAnsiConversion;
 }
@@ -49,14 +50,16 @@
 @property(readwrite,strong,atomic)  NSNumber        *overrideCalledTT;
 @property(readwrite,strong,atomic)  NSNumber        *overrideCallingTT;
 @property(readwrite,strong,atomic)  NSString        *addPrefix;
+@property(readwrite,strong,atomic)  NSString        *addPostfix;
 @property(readwrite,strong,atomic)  NSNumber        *allowConversion;
 @property(readwrite,assign,atomic)  BOOL            usePcssn;
 @property(readwrite,strong,atomic)  UMLayerMTP3     *mtp3;
 @property(readwrite,strong,atomic)  NSString        *mtp3InstanceName;
-@property(readwrite,strong,atomic)  NSNumber        *setGti;
-@property(readwrite,strong,atomic)  NSNumber        *setNpi;
-@property(readwrite,strong,atomic)  NSNumber        *setNai;
-@property(readwrite,strong,atomic)  NSNumber        *setNational;
+@property(readwrite,strong,atomic)  NSNumber        *changeGti;
+@property(readwrite,strong,atomic)  NSNumber        *changeNpi;
+@property(readwrite,strong,atomic)  NSNumber        *changeNai;
+@property(readwrite,strong,atomic)  NSNumber        *changeEncoding;
+@property(readwrite,strong,atomic)  NSNumber        *changeNational;
 @property(readwrite,strong,atomic)  NSString        *conversion;
 @property(readwrite,strong,atomic)  NSNumber        *ansiToItuConversion;
 @property(readwrite,strong,atomic)  NSNumber        *ituToAnsiConversion;

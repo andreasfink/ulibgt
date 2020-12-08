@@ -373,13 +373,20 @@ int sccp_digit_to_nibble(unichar digit, int def)
     /* number plan present */
     if(np_pres)
     {
-        if(odd)
+        if(_encodingScheme)
         {
-            [packet appendByte:(((npi.npi & 0x0F) << 4) | 0x01)]; /* encoding BCD odd */
+            [packet appendByte:(((npi.npi & 0x0F) << 4) | ([_encodingScheme intValue] & 0x0F))]; /* encoding BCD odd */
         }
         else
         {
-            [packet appendByte:(((npi.npi & 0x0F) << 4) | 0x02)]; /* encoding BCD even */
+            if(odd)
+            {
+                [packet appendByte:(((npi.npi & 0x0F) << 4) | 0x01)]; /* encoding BCD odd */
+            }
+            else
+            {
+                [packet appendByte:(((npi.npi & 0x0F) << 4) | 0x02)]; /* encoding BCD even */
+            }
         }
     }
     
@@ -643,12 +650,14 @@ int sccp_digit_to_nibble(unichar digit, int def)
             npi = [[SccpNumberPlanIndicator alloc]initWithInt:((x & 0xF0) > 4)];
             int encoding = (x & 0x0F);
             odd = (encoding & 0x01);
+            _encodingScheme = @(encoding);
             return;
         case 2: /* GT include tt only */
             tt = [[SccpTranslationTableNumber alloc]initWithInt:bytes[p++]];
             /* the number encoding is national specific */
             /* so we simply get the digits as usual and read including filler F's */
             odd = 0;
+            _encodingScheme = NULL;
             break;
     }
 #pragma unused(odd)

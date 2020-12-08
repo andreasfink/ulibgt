@@ -200,7 +200,36 @@
         }
         addr = addr2;
     }
+    if(nextHop.changeGti)
+    {
+        addr.ai.globalTitleIndicator = [nextHop.changeGti intValue];
+    }
+    if(nextHop.changeNai)
+    {
+        addr.nai.nai = [nextHop.changeNai intValue];
+    }
+    if(nextHop.changeNpi)
+    {
+        addr.npi.npi = [nextHop.changeNpi intValue];
+    }
+    if(nextHop.changeEncoding)
+    {
+        addr.encodingScheme = nextHop.changeEncoding;
+    }
+    if(nextHop.changeNational)
+    {
+        addr.ai.nationalReservedBit = [nextHop.changeNational boolValue];
+    }
+    if(nextHop.addPrefix)
+    {
+        addr.address = [NSString stringWithFormat:@"%@%@",nextHop.addPrefix,addr.address];
+    }
+    if(nextHop.addPostfix)
+    {
+        addr.address = [NSString stringWithFormat:@"%@%@",addr.address,nextHop.addPostfix];
+    }
     *dst = addr;
+    
     return routingTableEntry;
 }
 

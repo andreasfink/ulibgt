@@ -107,26 +107,30 @@
     {
         _addPrefix = [cfg[@"add-prefix"] stringValue];
     }
-    
+    if(cfg[@"add-postfix"])
+    {
+        _addPostfix = [cfg[@"add-postfix"] stringValue];
+    }
+
     if(cfg[@"set-gti"])
     {
-        _setGti = @([cfg[@"set-gti"] intValue]);
+        _changeGti = @([cfg[@"set-gti"] intValue]);
     }
     if(cfg[@"set-npi"])
     {
-        _setNpi = @([cfg[@"set-npi"] intValue]);
+        _changeNpi = @([cfg[@"set-npi"] intValue]);
     }
     if(cfg[@"set-nai"])
     {
-        _setNai = @([cfg[@"set-nai"] intValue]);
+        _changeNai = @([cfg[@"set-nai"] intValue]);
     }
     if(cfg[@"set-encoding"])
     {
-        _setEncoding = @([cfg[@"set-encoding"] intValue]);
+        _changeEncoding = @([cfg[@"set-encoding"] intValue]);
     }
     if(cfg[@"set-national"])
     {
-        _setNational = @([cfg[@"set-national"] intValue]);
+        _changeNational = @([cfg[@"set-national"] intValue]);
     }
     if(cfg[@"mtp3"])
     {
@@ -193,6 +197,10 @@
     {
         dict[@"add-prefix"] = _addPrefix;
     }
+    if(_addPostfix)
+    {
+        dict[@"add-postfix"] = _addPostfix;
+    }
     if(_allowConversion)
     {
         dict[@"allow-conversion"] = _allowConversion;
@@ -202,25 +210,25 @@
         dict[@"use-pcssn"] = @(YES);
     }
 
-    if(_setGti)
+    if(_changeGti)
     {
-        dict[@"set-gti"] = _setGti;
+        dict[@"set-gti"] = _changeGti;
     }
-    if(_setNpi)
+    if(_changeNpi)
     {
-        dict[@"set-npi"] = _setNpi;
+        dict[@"set-npi"] = _changeNpi;
     }
-    if(_setNai)
+    if(_changeNai)
     {
-        dict[@"set-nai"] = _setNai;
+        dict[@"set-nai"] = _changeNai;
     }
-    if(_setEncoding)
+    if(_changeEncoding)
     {
-        dict[@"set-encoding"] = _setEncoding;
+        dict[@"set-encoding"] = _changeEncoding;
     }
-    if(_setNational)
+    if(_changeNational)
     {
-        dict[@"set-national"] = _setNational;
+        dict[@"set-national"] = _changeNational;
     }
     if(_mtp3InstanceName)
     {
@@ -287,25 +295,25 @@
     {
         [s appendFormat:@"\tusePcssn: YES\n"];
     }
-    if(_setGti)
+    if(_changeGti)
     {
-        [s appendFormat:@"\tset-gti: %@\n",_setGti];
+        [s appendFormat:@"\tset-gti: %@\n",_changeGti];
     }
-    if(_setNpi)
+    if(_changeNpi)
     {
-        [s appendFormat:@"\tset-npi: %@\n",_setNpi];
+        [s appendFormat:@"\tset-npi: %@\n",_changeNpi];
     }
-    if(_setNai)
+    if(_changeNai)
     {
-        [s appendFormat:@"\tset-nai: %@\n",_setNai];
+        [s appendFormat:@"\tset-nai: %@\n",_changeNai];
     }
-    if(_setEncoding)
+    if(_changeEncoding)
     {
-        [s appendFormat:@"\tset-encoding: %@\n",_setEncoding];
+        [s appendFormat:@"\tset-encoding: %@\n",_changeEncoding];
     }
-    if(_setNational)
+    if(_changeNational)
     {
-        [s appendFormat:@"\tset-national: %@\n",_setNational];
+        [s appendFormat:@"\tset-national: %@\n",_changeNational];
     }
     if(_mtp3InstanceName)
     {
