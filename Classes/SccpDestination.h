@@ -27,6 +27,8 @@
     NSNumber        *_overrideCallingTT;       /* set new translation type on calling address   */
     NSString        *_addPrefix;
     NSString        *_addPostfix;
+    NSNumber        *_removeDigits;
+    NSNumber        *_limitDigitLength;
     NSNumber        *_allowConversion;  /* allow XUDT to UDT or vice versa conversion */
     UMLayerMTP3     *_mtp3;
     NSString        *_mtp3InstanceName;
@@ -51,6 +53,8 @@
 @property(readwrite,strong,atomic)  NSNumber        *overrideCallingTT;
 @property(readwrite,strong,atomic)  NSString        *addPrefix;
 @property(readwrite,strong,atomic)  NSString        *addPostfix;
+@property(readwrite,strong,atomic)  NSNumber        *removeDigits;
+@property(readwrite,strong,atomic)  NSNumber        *limitDigitLength;
 @property(readwrite,strong,atomic)  NSNumber        *allowConversion;
 @property(readwrite,assign,atomic)  BOOL            usePcssn;
 @property(readwrite,strong,atomic)  UMLayerMTP3     *mtp3;

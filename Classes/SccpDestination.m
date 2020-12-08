@@ -132,6 +132,16 @@
     {
         _changeNational = @([cfg[@"set-national"] intValue]);
     }
+    if(cfg[@"remove-digits"])
+    {
+        _removeDigits = @([cfg[@"remove-digits"] intValue]);
+    }
+    
+    if(cfg[@"limit-digit-length"])
+    {
+        _limitDigitLength = @([cfg[@"limit-digit-length"] intValue]);
+    }
+    
     if(cfg[@"mtp3"])
     {
         _mtp3InstanceName = [cfg[@"mtp3"] stringValue];
@@ -234,6 +244,14 @@
     {
         dict[@"mtp3"] = _mtp3InstanceName;
     }
+    if(_removeDigits)
+    {
+        dict[@"remove-digits"] = _removeDigits;
+    }
+    if(_limitDigitLength)
+    {
+        dict[@"limit-digit-length"] = _limitDigitLength;
+    }
     if(_ansiToItuConversion)
     {
         dict[@"ansi-to-itu"] =_ansiToItuConversion;
@@ -314,6 +332,15 @@
     if(_changeNational)
     {
         [s appendFormat:@"\tset-national: %@\n",_changeNational];
+    }
+    
+    if(_removeDigits)
+    {
+        [s appendFormat:@"\tremove-digits: %@\n",_removeDigits];
+    }
+    if(_limitDigitLength)
+    {
+        [s appendFormat:@"limit-digit-length: %@\n",_limitDigitLength];
     }
     if(_mtp3InstanceName)
     {

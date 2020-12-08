@@ -220,6 +220,11 @@
     {
         addr.ai.nationalReservedBit = [nextHop.changeNational boolValue];
     }
+    
+    if(nextHop.removeDigits)
+    {
+        addr.address = [addr.address substringFromIndex:nextHop.removeDigits.intValue];
+    }
     if(nextHop.addPrefix)
     {
         addr.address = [NSString stringWithFormat:@"%@%@",nextHop.addPrefix,addr.address];
@@ -227,6 +232,14 @@
     if(nextHop.addPostfix)
     {
         addr.address = [NSString stringWithFormat:@"%@%@",addr.address,nextHop.addPostfix];
+    }
+    
+    if(nextHop.limitDigitLength)
+    {
+        if(addr.address.length > [nextHop.limitDigitLength integerValue])
+        {
+            addr.address = [addr.address substringToIndex:[nextHop.limitDigitLength integerValue]];
+        }
     }
     *dst = addr;
     
