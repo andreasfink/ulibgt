@@ -1082,31 +1082,36 @@ int sccp_digit_to_nibble(unichar digit, int def)
 {
 
     NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendFormat:@"ai=%d",ai.addressIndicator];
     if(ai.globalTitleIndicator==2)
     {
-        [s appendFormat:@"tt %d",tt.tt];
+        [s appendFormat:@" gti=2 tt=%d",tt.tt];
+    }
+    else if(ai.globalTitleIndicator==4)
+    {
+        [s appendFormat:@" gti=4 tt=%d np=%d nai=%d",(int)tt.tt,(int)npi.npi,(int)nai.nai];
     }
     else
     {
-        [s appendFormat:@"tt %d np %d  nai %d",(int)tt.tt,(int)npi.npi,(int)nai.nai];
-    }
-    if(address)
-    {
-        [s appendFormat:@" gta %@",address];
+        [s appendFormat:@" gti=%d",(int)ai.globalTitleIndicator];
     }
     if(ai.pointCodeIndicator)
     {
         if(pc)
         {
-            [s appendFormat:@" pc %@",pc.stringValue];
+            [s appendFormat:@" pc=%@",pc.stringValue];
         }
     }
     if(ai.subSystemIndicator)
     {
         if(ssn.ssn)
         {
-            [s appendFormat:@" ssn %d",ssn.ssn];
+            [s appendFormat:@" ssn=%d",ssn.ssn];
         }
+    }
+    if(address)
+    {
+        [s appendFormat:@" gta=%@",address];
     }
     return s;
 }
