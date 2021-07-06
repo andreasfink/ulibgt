@@ -8,12 +8,15 @@
 Makefile
 Makefile.linux
 Makefile.osx
+Makefile.freebsd
 config.h
 config.log
 config.status
 stamp-h1
 autom4te.cache
 Classes/ulib_config.h
+BUILDNR
+make_buildnr.sh
 
 
 #########################
