@@ -84,12 +84,11 @@
 
     if(cfg[@"cost"])
     {
-        _cost =@([cfg[@"cost"] intValue]);
-
+        _cost = @([cfg[@"cost"] intValue]);
     }
     if(cfg[@"weight"])
     {
-        _weight =@([cfg[@"weight"] intValue]);
+        _weight = @([cfg[@"weight"] intValue]);
     }
     if(cfg[@"ntt"])
     {
