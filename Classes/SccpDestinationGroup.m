@@ -116,6 +116,10 @@
             if(e.cost)
             {
                 cost = e.cost.intValue;
+                if(cost >64)
+                {
+                    cost = 64;
+                }
             }
 
             if(cost > lowestCost)

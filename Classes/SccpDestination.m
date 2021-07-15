@@ -84,7 +84,15 @@
 
     if(cfg[@"cost"])
     {
-        _cost = @([cfg[@"cost"] intValue]);
+        int cost = [cfg[@"cost"] intValue];
+        if((cost >0) && (cost <=64))
+        {
+            _cost = @(cost);
+        }
+        else
+        {
+            NSLog(@"invalid value %d for cost in sccp-destination '%@' ignored. Should be 1...64",cost,self.name);
+        }
     }
     if(cfg[@"weight"])
     {
