@@ -103,13 +103,21 @@
     self.rootNode = newRoot;
 }
 
+
 - (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
 {
-    return [self findEntryByDigits:digits transactionNumber:NULL];
+    return [self findEntryByDigits:digits
+                 transactionNumber:NULL
+                               ssn:NULL
+                         operation:NULL
+                        appContext:NULL];
 }
 
 - (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
                               transactionNumber:(NSNumber *)tid
+                                            ssn:(NSNumber *)ssn
+                                      operation:(NSNumber *)op
+                                     appContext:(NSString *)ac
 {
     NSInteger n = [digits length];
 
@@ -158,7 +166,10 @@
             }
             else if(currentNode.entry.hasSubentries)
             {
-                SccpGttRoutingTableEntry *e = [currentNode.entry findSubentryByTransactionNumber:tid];
+                SccpGttRoutingTableEntry *e = [currentNode.entry  findSubentryByTransactionNumber:tid
+                                                                                              ssn:ssn
+                                                                                           opcode:op
+                                                                                       appcontext:ac];
                 if(e)
                 {
                     returnValue  = e;

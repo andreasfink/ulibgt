@@ -156,6 +156,8 @@
                                                   destination:(SccpAddress **)dst
                                               incomingLinkset:(NSString *)incomingLinkset
                                             transactionNumber:(NSNumber *)tid
+                                                    operation:(NSNumber *)op
+                                                   appContext:(NSString *)ac
 {
     SccpAddress *addr = *dst;
     if(_preTranslation)
@@ -168,8 +170,13 @@
         addr = addr2;
     }
     NSString *digits = addr.address;
+    NSNumber *ssn = @(addr.ssn.ssn);
     SccpDestination *nextHop = NULL;
-    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits transactionNumber:tid];
+    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits
+                                                                 transactionNumber:tid
+                                                                               ssn:ssn
+                                                                         operation:op
+                                                                        appContext:ac];
     if(routingTableEntry==NULL)
     {
         if(self.logLevel <= UMLOG_DEBUG)
@@ -247,10 +254,18 @@
 }
 
 
-- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst transactionNumber:(NSNumber *)tid
+- (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst
+                                      transactionNumber:(NSNumber *)tid
+                                                    ssn:(NSNumber *)ssn
+                                              operation:(NSNumber *)op
+                                             appContext:(NSString *)ac
 {
     NSString *digits = dst.address;
-    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits transactionNumber:tid];
+    SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits
+                                                                 transactionNumber:tid
+                                                                               ssn:ssn
+                                                                         operation:op
+                                                                        appContext:ac];
     if(routingTableEntry==NULL)
     {
         if(self.logLevel <= UMLOG_DEBUG)
@@ -266,10 +281,6 @@
             [self.logFeed debugText:[NSString stringWithFormat:@"[_routingTable findEntryByDigits:'%@'] returns %@",digits,routingTableEntry]];
         }
         [routingTableEntry.incomingSpeed increase];
-    }
-    if(routingTableEntry.hasSubentries)
-    {
-        routingTableEntry = [routingTableEntry findSubentryByTransactionNumber:tid];
     }
     return routingTableEntry;
 }

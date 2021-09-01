@@ -88,6 +88,104 @@
                 }
             }
         }
+        if(cfg[@"opcode"])
+        {
+            NSMutableArray *a = [[NSMutableArray alloc]init];
+
+            if([cfg[@"opcode"] isKindOfClass:[NSArray class]])
+            {
+                NSArray *b = (NSArray *)cfg[@"opcode"];
+                for(id c in b)
+                {
+                    if([c isKindOfClass:[NSString class]])
+                    {
+                        NSNumber *n = @([(NSString *)c integerValue]);
+                        [a addObject:n];
+                    }
+                    else if([c isKindOfClass:[NSNumber class]])
+                    {
+                        NSNumber *n = @([(NSNumber *)c integerValue]);
+                        [a addObject:n];
+                    }
+                }
+            }
+            else
+            {
+                id c = cfg[@"opcode"];
+                if([c isKindOfClass:[NSString class]])
+                {
+                    NSNumber *n = @([(NSString *)c integerValue]);
+                    [a addObject:n];
+                }
+                else if([c isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *n = @([(NSNumber *)c integerValue]);
+                    [a addObject:n];
+                }
+            }
+            _calledOpcodes = a;
+        }
+        if(cfg[@"ssn"])
+        {
+            NSMutableArray *a = [[NSMutableArray alloc]init];
+
+            if([cfg[@"ssn"] isKindOfClass:[NSArray class]])
+            {
+                NSArray *b = (NSArray *)cfg[@"ssn"];
+                for(id c in b)
+                {
+                    if([c isKindOfClass:[NSString class]])
+                    {
+                        NSNumber *n = @([(NSString *)c integerValue]);
+                        [a addObject:n];
+                    }
+                    else if([c isKindOfClass:[NSNumber class]])
+                    {
+                        NSNumber *n = @([(NSNumber *)c integerValue]);
+                        [a addObject:n];
+                    }
+                }
+            }
+            else
+            {
+                id c = cfg[@"ssn"];
+                if([c isKindOfClass:[NSString class]])
+                {
+                    NSNumber *n = @([(NSString *)c integerValue]);
+                    [a addObject:n];
+                }
+                else if([c isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *n = @([(NSNumber *)c integerValue]);
+                    [a addObject:n];
+                }
+            }
+            _calledSSNs = a;
+        }
+        
+        if(cfg[@"application-context"])
+        {
+
+            if([cfg[@"application-context"] isKindOfClass:[NSArray class]])
+            {
+                NSMutableArray *a = [[NSMutableArray alloc]init];
+                NSArray *b = (NSArray *)cfg[@"application-context"];
+                for(id c in b)
+                {
+                    if([c isKindOfClass:[NSString class]])
+                    {
+                        NSNumber *n = @([(NSString *)c integerValue]);
+                        [a addObject:n];
+                    }
+                }
+                _appContexts = a;
+            }
+            if([cfg[@"application-context"] isKindOfClass:[NSString class]])
+            {
+                NSString *s = (NSString *)cfg[@"application-context"];
+                _appContexts = [s componentsSeparatedByCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
+            }
+        }
         _enabled=YES;
         _name = [SccpGttRoutingTableEntry entryNameForGta:_digits tableName:_table];
     }
@@ -107,6 +205,7 @@
     }
     _hasSubentries = YES;
 }
+
 
 - (NSString *)getStatistics
 {
@@ -197,8 +296,10 @@
     return dict;
 }
 
-
 - (SccpGttRoutingTableEntry *)findSubentryByTransactionNumber:(NSNumber *)tid
+                                                          ssn:(NSNumber *)ssn
+                                                       opcode:(NSNumber *)op
+                                                   appcontext:(NSString *)ac
 {
     if(_hasSubentries == NO)
     {
@@ -206,7 +307,64 @@
     }
     for(SccpGttRoutingTableEntry *entry in _subentries)
     {
-        if([entry matchingTransactionNumber:tid])
+        if([entry matchingSSN:ssn])
+        {
+            if([entry matchingOpcode:op])
+            {
+                if([entry matchingApplicationContext:ac])
+                {
+                    if([entry matchingTransactionNumber:tid])
+                    {
+                        return entry;
+                    }
+                }
+            }
+        }
+    }
+    return self;
+}
+
+- (SccpGttRoutingTableEntry *)findSubentryByApplicationContext:(NSString *)ac
+{
+    if(_hasSubentries == NO)
+    {
+        return self;
+    }
+    for(SccpGttRoutingTableEntry *entry in _subentries)
+    {
+        if([entry matchingApplicationContext:ac])
+        {
+            return entry;
+        }
+    }
+    return self;
+}
+
+- (SccpGttRoutingTableEntry *)findSubentryBySubsystemNumber:(NSNumber *)ssn
+{
+    if(_hasSubentries == NO)
+    {
+        return self;
+    }
+    for(SccpGttRoutingTableEntry *entry in _subentries)
+    {
+        if([entry matchingSSN:ssn])
+        {
+            return entry;
+        }
+    }
+    return self;
+}
+
+- (SccpGttRoutingTableEntry *)findSubentryByOpcode:(NSNumber *)opcode
+{
+    if(_hasSubentries == NO)
+    {
+        return self;
+    }
+    for(SccpGttRoutingTableEntry *entry in _subentries)
+    {
+        if([entry matchingOpcode:opcode])
         {
             return entry;
         }
@@ -253,11 +411,60 @@
     }
 }
 
+- (BOOL) matchingApplicationContext:(NSString *)ac
+{
+    if(_appContexts.count == 0)
+    {
+        return YES;
+    }
+    for(NSString *s in _appContexts)
+    {
+        if( [s isEqualToString:ac])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
+- (BOOL) matchingSSN:(NSNumber *)ssn
+{
+    if(_calledSSNs.count == 0)
+    {
+        return YES;
+    }
+    for(NSNumber *s in _calledSSNs)
+    {
+        if( [s isEqualTo:ssn])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL) matchingOpcode:(NSNumber *)op
+{
+    if(_calledOpcodes.count == 0)
+    {
+        return YES;
+    }
+    for(NSNumber *n in _calledOpcodes)
+    {
+        if( [n isEqualTo:op])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (SccpGttRoutingTableEntry *)copyWithZone:(NSZone *)zone
 {
     SccpGttRoutingTableEntry *dst = [[SccpGttRoutingTableEntry allocWithZone:zone]init];
     dst->_hasSubentries = NO;
-    dst->_subentries = NULL;
+    dst->_subentries = [_subentries copy];
     dst->_name = _name;
     dst->_table = _table;
     dst->_digits = _digits;

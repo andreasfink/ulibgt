@@ -52,12 +52,17 @@
 
 
 - (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst
-                                      transactionNumber:(NSNumber *)tid;
+                                      transactionNumber:(NSNumber *)tid
+                                                    ssn:(NSNumber *)ssn
+                                              operation:(NSNumber *)op
+                                             appContext:(NSString *)ac;
 
-- (SccpDestination *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
-                                         destination:(SccpAddress **)dst
-                                     incomingLinkset:(NSString *)incomingLinkset
-                                   transactionNumber:(NSNumber *)tid;
+- (SccpGttRoutingTableEntry *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
+                                                  destination:(SccpAddress **)dst
+                                              incomingLinkset:(NSString *)incomingLinkset
+                                            transactionNumber:(NSNumber *)tid
+                                                    operation:(NSNumber *)op
+                                                   appContext:(NSString *)ac;
 
 @property(readwrite,strong,atomic)  NSString        *gtt_selector;
 @property(readwrite,assign,atomic)  int             tt;

@@ -30,6 +30,9 @@
     UMLogLevel              _logLevel;
     NSNumber                *_tcapTransactionRangeStart;
     NSNumber                *_tcapTransactionRangeEnd;
+    NSArray<NSNumber *>     *_calledSSNs;
+    NSArray<NSNumber *>     *_calledOpcodes;
+    NSArray<NSString *>     *_appContexts;
 }
 
 @property(readwrite,atomic,assign)  BOOL                    hasSubentries;
@@ -48,6 +51,9 @@
 @property(readwrite,atomic,assign)  UMLogLevel  logLevel;
 @property(readwrite,atomic,strong)  NSNumber  *tcapTransactionRangeStart;
 @property(readwrite,atomic,strong)  NSNumber  *tcapTransactionRangeEnd;
+@property(readwrite,atomic,strong) NSArray<NSNumber *>     *calledSSNs;
+@property(readwrite,atomic,strong) NSArray<NSNumber *>     *calledOpcodes;
+@property(readwrite,atomic,strong) NSArray<NSString *>     *appContext;
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
 - (UMSynchronizedSortedDictionary *)config;
@@ -55,7 +61,10 @@
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
 + (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName;
-- (SccpGttRoutingTableEntry *)findSubentryByTransactionNumber:(NSNumber *)tid;
+- (SccpGttRoutingTableEntry *)findSubentryByTransactionNumber:(NSNumber *)tid
+                                                          ssn:(NSNumber *)ssn
+                                                       opcode:(NSNumber *)op
+                                                   appcontext:(NSString *)ac;
 - (void)addSubentry:(SccpGttRoutingTableEntry *)subentry;
 - (BOOL) matchingTransactionNumber:(NSNumber *)tid;
 
