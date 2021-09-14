@@ -9,6 +9,7 @@
 #import "SccpGttRoutingTableEntry.h"
 #import "SccpDestinationGroup.h"
 #import "SccpL3RoutingTable.h"
+#import "SccpSubSystemNumber.h"
 
 @implementation SccpGttRoutingTableEntry
 
@@ -91,10 +92,10 @@
         if(cfg[@"opcode"])
         {
             NSMutableArray *a = [[NSMutableArray alloc]init];
-
-            if([cfg[@"opcode"] isKindOfClass:[NSArray class]])
+            id c = cfg[@"opcode"];
+            if([c isKindOfClass:[NSArray class]])
             {
-                NSArray *b = (NSArray *)cfg[@"opcode"];
+                NSArray *b = (NSArray *)c;
                 for(id c in b)
                 {
                     if([c isKindOfClass:[NSString class]])
@@ -111,11 +112,15 @@
             }
             else
             {
-                id c = cfg[@"opcode"];
                 if([c isKindOfClass:[NSString class]])
                 {
-                    NSNumber *n = @([(NSString *)c integerValue]);
-                    [a addObject:n];
+                    NSString *s = (NSString *)c;
+                    NSArray *a1 = [s componentsSeparatedByCharactersInSet:[UMObject whitespaceAndNewlineAndCommaCharacterSet]];
+                    for(NSString *s1 in a1 )
+                    {
+                        NSNumber *n = @([s1 integerValue]);
+                        [a addObject:n];
+                    }
                 }
                 else if([c isKindOfClass:[NSNumber class]])
                 {
@@ -154,6 +159,16 @@
                     NSNumber *n = @([(NSString *)c integerValue]);
                     [a addObject:n];
                 }
+                if([c isKindOfClass:[NSString class]])
+                {
+                    NSString *s = (NSString *)c;
+                    NSArray *a1 = [s componentsSeparatedByCharactersInSet:[UMObject whitespaceAndNewlineAndCommaCharacterSet]];
+                    for(NSString *s1 in a1 )
+                    {
+                        SccpSubSystemNumber *ssn = [[SccpSubSystemNumber alloc]initWithName:s1];
+                        [a addObject:@(ssn.ssn)];
+                    }
+                }
                 else if([c isKindOfClass:[NSNumber class]])
                 {
                     NSNumber *n = @([(NSNumber *)c integerValue]);
@@ -183,7 +198,7 @@
             if([cfg[@"application-context"] isKindOfClass:[NSString class]])
             {
                 NSString *s = (NSString *)cfg[@"application-context"];
-                _appContexts = [s componentsSeparatedByCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
+                _appContexts = [s componentsSeparatedByCharactersInSet:[UMObject whitespaceAndNewlineAndCommaCharacterSet]];
             }
         }
         _enabled=YES;
