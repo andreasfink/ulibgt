@@ -14,5 +14,6 @@ typedef enum SccpVariant
 {
     SCCP_VARIANT_ITU = 0,
     SCCP_VARIANT_ANSI = 1,
+    SCCP_VARIANT_UNKNOWN = -1,
 } SccpVariant;
 

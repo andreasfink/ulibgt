@@ -691,7 +691,6 @@ int sccp_digit_to_nibble(unichar digit, int def)
 - (SccpAddress *)initWithHumanReadableString:(NSString *)msisdn variant:(UMMTP3Variant)mvar
 {
     SccpVariant svar;
-    
     if(mvar == UMMTP3Variant_ANSI)
     {
         svar = SCCP_VARIANT_ANSI;
