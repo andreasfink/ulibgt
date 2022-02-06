@@ -13,9 +13,11 @@
 {
     SccpGttRoutingTableDigitNode    *_next[16];
     SccpGttRoutingTableEntry        *_entry;
+    BOOL                            _hasSubentries;
 }
 
 @property(readwrite,strong,atomic)  SccpGttRoutingTableEntry *entry;
+@property(readwrite,assign,atomic)  BOOL hasSubentries;
 
 - (SccpGttRoutingTableDigitNode *)nextNode:(unichar)nextDigit create:(BOOL)create;
 

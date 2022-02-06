@@ -53,7 +53,7 @@
 @property(readwrite,atomic,strong)  NSNumber  *tcapTransactionRangeEnd;
 @property(readwrite,atomic,strong) NSArray<NSNumber *>     *calledSSNs;
 @property(readwrite,atomic,strong) NSArray<NSNumber *>     *calledOpcodes;
-@property(readwrite,atomic,strong) NSArray<NSString *>     *appContext;
+@property(readwrite,atomic,strong) NSArray<NSString *>     *appContexts;
 
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
 - (UMSynchronizedSortedDictionary *)config;
@@ -66,6 +66,10 @@
                                                        opcode:(NSNumber *)op
                                                    appcontext:(NSString *)ac;
 - (void)addSubentry:(SccpGttRoutingTableEntry *)subentry;
+- (BOOL) matchingTransactionNumber:(NSNumber *)tid
+                               ssn:(NSNumber *)ssn
+                            opcode:(NSNumber *)op
+                        appcontext:(NSString *)ac;
 - (BOOL) matchingTransactionNumber:(NSNumber *)tid;
 
 @end

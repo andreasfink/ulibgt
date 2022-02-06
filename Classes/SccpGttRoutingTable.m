@@ -177,7 +177,12 @@
             }
             else
             {
-                if([currentNode.entry matchingTransactionNumber:tid]==YES)
+                
+               
+                if([currentNode.entry matchingTransactionNumber:tid
+                                                            ssn:ssn
+                                                         opcode:op
+                                                     appcontext:ac]==YES)
                 {
                     returnValue  = currentNode.entry;
                 }
@@ -277,9 +282,32 @@
         unichar uc = [digits characterAtIndex:i];
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
+
     if(currentNode.entry != NULL)
     {
-        [currentNode.entry addSubentry:entry];
+        if(currentNode.hasSubentries)
+        {
+            [currentNode.entry addSubentry:entry];
+        }
+        else
+        {
+            SccpGttRoutingTableEntry *superEntry = [entry copy];
+            superEntry.routeTo = NULL;
+            superEntry.routeToName = NULL;
+            superEntry.deliverLocal = NO;
+            superEntry.postTranslationName = NULL;
+            superEntry.postTranslation = NULL;
+            superEntry.enabled = YES;
+            superEntry.tcapTransactionRangeStart = NULL;
+            superEntry.tcapTransactionRangeEnd = NULL;
+            superEntry.calledSSNs = NULL;
+            superEntry.calledOpcodes = NULL;
+            superEntry.appContexts = NULL;
+            [superEntry addSubentry:currentNode.entry ];
+            [superEntry addSubentry:entry ];
+            currentNode.hasSubentries = YES;
+            currentNode.entry = superEntry;
+        }
     }
     else
     {

@@ -322,18 +322,12 @@
     }
     for(SccpGttRoutingTableEntry *entry in _subentries)
     {
-        if([entry matchingSSN:ssn])
+        if([entry matchingTransactionNumber:tid
+                                        ssn:ssn
+                                     opcode:op
+                                 appcontext:ac])
         {
-            if([entry matchingOpcode:op])
-            {
-                if([entry matchingApplicationContext:ac])
-                {
-                    if([entry matchingTransactionNumber:tid])
-                    {
-                        return entry;
-                    }
-                }
-            }
+            return entry;
         }
     }
     return self;
@@ -387,43 +381,50 @@
     return self;
 }
 
-- (BOOL) matchingTransactionNumber:(NSNumber *)tid
+- (BOOL)matchingTransactionNumber:(NSNumber *)tid
+                              ssn:(NSNumber *)ssn
+                           opcode:(NSNumber *)op
+                       appcontext:(NSString *)ac
 {
-    if((_tcapTransactionRangeStart==NULL) &&(_tcapTransactionRangeEnd == NULL))
-    {
-        return YES;
-    }
-    
-    NSComparisonResult c1;
-    NSComparisonResult c2;
-
-    if(_tcapTransactionRangeStart ==NULL)
-    {
-        c1 = NSOrderedAscending;
-    }
-    else
-    {
-        c1 = [_tcapTransactionRangeStart compare:tid];
-    }
-    
-    if(_tcapTransactionRangeEnd ==NULL)
-    {
-        c2 = NSOrderedDescending;
-    }
-    else
-    {
-        c2 = [_tcapTransactionRangeEnd compare:tid];
-    }
-
-    if(((c1 == NSOrderedAscending) ||(c1 == NSOrderedSame)) &&
-       ((c2 == NSOrderedDescending) ||(c2 == NSOrderedSame)))
-    {
-        return YES;
-    }
-    else
+    if(![self matchingTransactionNumber:tid])
     {
         return NO;
     }
+    if(![self matchingSSN:ssn])
+    {
+        return NO;
+    }
+    
+    if(![self matchingOpcode:op])
+    {
+        return NO;
+    }
+    if(![self matchingApplicationContext:ac])
+    {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL) matchingTransactionNumber:(NSNumber *)tid
+{
+    unsigned long start = 0x00000000;
+    unsigned long end   = 0xFFFFFFFF;
+    unsigned long current = tid.unsignedLongValue;
+    if(_tcapTransactionRangeStart)
+    {
+        start = _tcapTransactionRangeStart.unsignedLongValue;
+    }
+    if(_tcapTransactionRangeEnd)
+    {
+        end = _tcapTransactionRangeEnd.unsignedLongValue;
+    }
+
+    if((start <= current) && ( current <= end))
+    {
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL) matchingApplicationContext:(NSString *)ac
@@ -478,7 +479,7 @@
 - (SccpGttRoutingTableEntry *)copyWithZone:(NSZone *)zone
 {
     SccpGttRoutingTableEntry *dst = [[SccpGttRoutingTableEntry allocWithZone:zone]init];
-    dst->_hasSubentries = NO;
+    dst->_hasSubentries = _hasSubentries;
     dst->_subentries = [_subentries copy];
     dst->_name = _name;
     dst->_table = _table;
@@ -494,6 +495,5 @@
     dst->_tcapTransactionRangeEnd = _tcapTransactionRangeEnd;
     return dst;
 }
-    
 
 @end
