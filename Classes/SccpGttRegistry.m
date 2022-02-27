@@ -13,6 +13,7 @@
 #import "SccpGttSelector.h"
 #import "SccpGttRoutingTable.h"
 #import "SccpDestinationGroup.h"
+#import "SccpDestination.h"
 
 static SccpGttRegistry *g_registry;
 
@@ -157,8 +158,6 @@ static SccpGttRegistry *g_registry;
 
 - (void)finishUpdate
 {
-
-
     NSArray *arr = [self listSelectorNames];
     for(NSString *name in arr)
     {
@@ -177,6 +176,28 @@ static SccpGttRegistry *g_registry;
             }
         }
     }
+    for(NSString *name in  _sccp_destinations_dict.allKeys)
+    {
+        SccpDestinationGroup *grp = _sccp_destinations_dict[name];
+        if(grp.postTranslationName.length > 0)
+        {
+            grp.postTranslation = _sccp_number_translations_dict[grp.postTranslationName];
+        }
+        UMSynchronizedArray *entries = grp.entries;
+        for(SccpDestination *e in entries)
+        {
+            if(e.postTranslationName.length > 0)
+            {
+                e.postTranslation = _sccp_number_translations_dict[e.postTranslationName];
+            }
+        }
+    }
+        
+}
+
+- (SccpNumberTranslation *)numberTranslationByName:(NSString *)name
+{
+    return _sccp_number_translations_dict[name];
 }
 
 - (SccpDestinationGroup *)getDestinationGroupByName:(NSString *)name;

@@ -14,7 +14,7 @@
 
 @class SccpGttSelector;
 @class SccpDestinationGroup;
-
+@class SccpNumberTranslation;
 @interface SccpGttRegistry : UMObject
 {
     UMLogLevel                  _logLevel;
@@ -51,4 +51,6 @@
 - (SccpDestinationGroup *)getDestinationGroupByName:(NSString *)name;
 - (void)addDestinationGroup:(SccpDestinationGroup *)grp;
 - (void)removeDestinationGroup:(NSString *)name;
+- (SccpNumberTranslation *)numberTranslationByName:(NSString *)name;
+
 @end

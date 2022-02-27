@@ -12,6 +12,7 @@
 @class SccpL3RoutingTableEntry;
 @class SccpL3RoutingTable;
 @class SccpSubSystemNumber;
+@class SccpNumberTranslation;
 
 @interface SccpDestination : UMObject
 {
@@ -40,6 +41,8 @@
     NSNumber        *_changeNational;
     NSNumber        *_ansiToItuConversion;
     NSNumber        *_ituToAnsiConversion;
+    NSString         *_postTranslationName;
+    SccpNumberTranslation *_postTranslation;
 }
 
 @property(readwrite,strong,atomic)  NSString        *name;
@@ -67,6 +70,8 @@
 @property(readwrite,strong,atomic)  NSString        *conversion;
 @property(readwrite,strong,atomic)  NSNumber        *ansiToItuConversion;
 @property(readwrite,strong,atomic)  NSNumber        *ituToAnsiConversion;
+@property(readwrite,strong,atomic)  NSString                *postTranslationName;
+@property(readwrite,strong,atomic)  SccpNumberTranslation   *postTranslation;
 
 
 - (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
