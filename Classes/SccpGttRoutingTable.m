@@ -21,6 +21,7 @@
     if(self)
     {
         _entries = [[UMSynchronizedSortedDictionary alloc]init];
+
     }
     return self;
 }
@@ -84,7 +85,8 @@
         if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
         {
             //digits=@"";
-            newRoot.entry = entry;
+            newRoot.entries = [[UMSynchronizedArray alloc]init];
+            [newRoot.entries addObject:entry];
         }
         else
         {
@@ -97,7 +99,11 @@
                 int c = str[i];
                 currentNode = [currentNode nextNode:c create:YES];
             }
-            currentNode.entry = entry;
+            if(currentNode.entries == NULL)
+            {
+                currentNode.entries = [[UMSynchronizedArray alloc]init];
+            }
+            [currentNode.entries addObject:entry];
         }
     }
     self.rootNode = newRoot;
@@ -122,11 +128,13 @@
     NSInteger n = [digits length];
 
     SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
-    SccpGttRoutingTableEntry *returnValue = currentNode.entry;
+    SccpGttRoutingTableEntry    *myMainEntry = currentNode.mainEntry;
+    UMSynchronizedArray         *myEntries   = currentNode.entries;
+    SccpGttRoutingTableEntry    *returnValue = NULL;
 
-    if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
+    if([digits isEqualToString:@"default"])
     {
-        return returnValue;
+        digits = @"";
     }
 
     if(_logLevel <=UMLOG_DEBUG)
@@ -138,7 +146,6 @@
     {
         unichar uc = [digits characterAtIndex:i];
         int k = sccp_digit_to_nibble(uc,-1);
-
         if(_logLevel <=UMLOG_DEBUG)
         {
             NSString *s = [NSString stringWithFormat:@" checking digit nr  %d=%d",(int)i,k];
@@ -157,35 +164,34 @@
             }
             break;
         }
-        currentNode = nextNode;
-        if(currentNode.entry)
+        myMainEntry = currentNode.mainEntry;
+        myEntries   = currentNode.entries;
+    }
+
+    returnValue = myMainEntry;
+    if(myEntries.count > 0)
+    {
+        for(SccpGttRoutingTableEntry *entry in myEntries)
         {
-            if(tid==NULL)
+            if([entry isMainEntry])
             {
-                returnValue = currentNode.entry;
+                returnValue = entry; /* this is the unspecific entry by GT only */
+                myMainEntry= entry;
             }
-            else if(currentNode.entry.hasSubentries)
+        }
+
+        for(SccpGttRoutingTableEntry *entry in currentNode.entries)
+        {
+            if([entry isMainEntry])
             {
-                SccpGttRoutingTableEntry *e = [currentNode.entry  findSubentryByTransactionNumber:tid
-                                                                                              ssn:ssn
-                                                                                           opcode:op
-                                                                                       appcontext:ac];
-                if(e)
-                {
-                    returnValue  = e;
-                }
+                continue; /* We already have this default one */
             }
-            else
+            if([entry matchingTransactionNumber:tid
+                                            ssn:ssn
+                                         opcode:op
+                                     appcontext:ac])
             {
-                
-               
-                if([currentNode.entry matchingTransactionNumber:tid
-                                                            ssn:ssn
-                                                         opcode:op
-                                                     appcontext:ac]==YES)
-                {
-                    returnValue  = currentNode.entry;
-                }
+                returnValue = entry; /* setting more specific route */
             }
         }
     }
@@ -201,6 +207,9 @@
     return _entries[name];
 }
 
+
+#if 0
+this has to be revisted as we only want to delete the single entry, not any other subentries...
 
 - (void)deleteEntryByName:(NSString *)name
 {
@@ -224,10 +233,12 @@
         unichar uc = [digits characterAtIndex:i];
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
-    currentNode.entry = NULL;
+    currentNode.entries removeObject:<#(id)#> = NULL;
 }
+#endif
 
-
+/* to be revisited */
+#if 0
 - (void)deleteEntryByDigits:(NSString *)digits
 {
     SccpGttRoutingTableEntry *entry = [self findEntryByDigits:digits];
@@ -254,8 +265,9 @@
         }
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
-    currentNode.entry = NULL;
+    currentNode.entries = NULL;
 }
+#endif
 
 
 - (void)addEntry:(SccpGttRoutingTableEntry *)entry
@@ -268,10 +280,15 @@
         _rootNode = [[SccpGttRoutingTableDigitNode alloc]init];
     }
 
-    if([digits isEqualToString:@"default"])
+    if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
     {
-        _rootNode.entry = entry;
-        _entries [entry.table] = entry;
+        _rootNode.entries = [[UMSynchronizedArray alloc]init];
+        [_rootNode.entries addObject:entry];
+        if(entry.isMainEntry)
+        {
+            _rootNode.mainEntry = entry;
+        }
+        _entries[@""] = entry;
         return;
     }
 
@@ -283,37 +300,16 @@
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
 
-    if(currentNode.entry != NULL)
+    if(currentNode.entries == NULL)
     {
-        if(currentNode.hasSubentries)
-        {
-            [currentNode.entry addSubentry:entry];
-        }
-        else
-        {
-            SccpGttRoutingTableEntry *superEntry = [entry copy];
-            superEntry.routeTo = NULL;
-            superEntry.routeToName = NULL;
-            superEntry.deliverLocal = NO;
-            superEntry.postTranslationName = NULL;
-            superEntry.postTranslation = NULL;
-            superEntry.enabled = YES;
-            superEntry.tcapTransactionRangeStart = NULL;
-            superEntry.tcapTransactionRangeEnd = NULL;
-            superEntry.calledSSNs = NULL;
-            superEntry.calledOpcodes = NULL;
-            superEntry.appContexts = NULL;
-            [superEntry addSubentry:currentNode.entry ];
-            [superEntry addSubentry:entry ];
-            currentNode.hasSubentries = YES;
-            currentNode.entry = superEntry;
-        }
+        currentNode.entries = [[UMSynchronizedArray alloc]init];
     }
-    else
+    [currentNode.entries addObject:entry];
+    if(entry.isMainEntry)
     {
-        currentNode.entry = entry;
+        currentNode.mainEntry = entry;
     }
-    _entries [entry.name] = currentNode.entry;
+    _entries[entry.name] = entry;
 }
 
 - (UMSynchronizedSortedDictionary *)list

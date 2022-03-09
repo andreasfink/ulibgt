@@ -15,8 +15,6 @@
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
-    BOOL                    _hasSubentries;
-    NSArray                 *_subentries;
     NSString                *_name;
     NSString                *_table;
     NSString                *_digits;
@@ -35,8 +33,6 @@
     NSArray<NSString *>     *_appContexts;
 }
 
-@property(readwrite,atomic,assign)  BOOL                    hasSubentries;
-@property(readwrite,atomic,strong)  NSArray                 *subentries;
 @property(readwrite,atomic,strong)  NSString                *name;
 @property(readwrite,atomic,strong)  NSString                *table;
 @property(readwrite,atomic,assign)  BOOL                    deliverLocal;
@@ -55,17 +51,14 @@
 @property(readwrite,atomic,strong) NSArray<NSNumber *>     *calledOpcodes;
 @property(readwrite,atomic,strong) NSArray<NSString *>     *appContexts;
 
+- (BOOL) isMainEntry;
+
 - (SccpGttRoutingTableEntry *)initWithConfig:(NSDictionary *)cfg;
 - (UMSynchronizedSortedDictionary *)config;
 - (NSString *)getStatistics;
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
 + (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName;
-- (SccpGttRoutingTableEntry *)findSubentryByTransactionNumber:(NSNumber *)tid
-                                                          ssn:(NSNumber *)ssn
-                                                       opcode:(NSNumber *)op
-                                                   appcontext:(NSString *)ac;
-- (void)addSubentry:(SccpGttRoutingTableEntry *)subentry;
 - (BOOL) matchingTransactionNumber:(NSNumber *)tid
                                ssn:(NSNumber *)ssn
                             opcode:(NSNumber *)op

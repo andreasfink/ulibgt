@@ -206,7 +206,8 @@
     }
     return self;
 }
-
+ 
+#if 0
 - (void)addSubentry:(SccpGttRoutingTableEntry *)subentry
 {
     SccpGttRoutingTableEntry *e = [self copy];
@@ -220,7 +221,7 @@
     }
     _hasSubentries = YES;
 }
-
+#endif
 
 - (NSString *)getStatistics
 {
@@ -267,15 +268,96 @@
     }
     if(_digits)
     {
-        [s appendFormat:@" gta=%@",_digits];
+        [s appendFormat:@" digits=%@",_digits];
     }
     if(_routeToName)
     {
         [s appendFormat:@" destination=%@ -> (%@)",_routeToName, (_routeTo ? _routeTo.name : @"NULL" )];
     }
+    if(_deliverLocal)
+    {
+        [s appendFormat:@" deliverLocal=%@", _deliverLocal? @"YES" : @"NO"];
+    }
     if(_postTranslationName)
     {
         [s appendFormat:@" post-translation=%@",_postTranslationName];
+    }
+    if(_enabled == NO)
+    {
+        [s appendFormat:@" enabled=NO"];
+    }
+    
+    if(_tcapTransactionRangeStart || _tcapTransactionRangeEnd)
+    {
+        [s appendFormat:@" tcap-transaction-range="];
+        if(_tcapTransactionRangeStart)
+        {
+            [s appendFormat:@"%@-",_tcapTransactionRangeStart];
+        }
+        else
+        {
+            [s appendFormat:@"0-"];
+        }
+        if(_tcapTransactionRangeEnd)
+        {
+            [s appendFormat:@"%@",_tcapTransactionRangeEnd];
+        }
+        else
+        {
+            [s appendFormat:@"%d",0xFFFFFFFF];
+        }
+        [s appendFormat:@" enabled=NO"];
+    }
+    if(_calledSSNs.count > 0)
+    {
+        BOOL first=YES;
+        [s appendFormat:@" ssn="];
+        for(NSNumber *s1 in _calledSSNs)
+        {
+            if(first)
+            {
+                first=NO;
+                [s appendFormat:@"%@",s1];
+            }
+            else
+            {
+                [s appendFormat:@",%@",s1];
+            }
+        }
+    }
+    if(_calledOpcodes.count > 0)
+    {
+        BOOL first=YES;
+        [s appendFormat:@" opcodes="];
+        for(NSNumber *s1 in _calledOpcodes)
+        {
+            if(first)
+            {
+                first=NO;
+                [s appendFormat:@"%@",s1];
+            }
+            else
+            {
+                [s appendFormat:@",%@",s1];
+            }
+        }
+    }
+    if(_appContexts.count > 0)
+    {
+        BOOL first=YES;
+        [s appendFormat:@" app-contexts="];
+        for(NSString *s1 in _appContexts)
+        {
+            if(first)
+            {
+                first=NO;
+                [s appendFormat:@"%@",s1];
+            }
+            else
+            {
+                [s appendFormat:@",%@",s1];
+            }
+        }
     }
     return s;
 }
@@ -311,6 +393,7 @@
     return dict;
 }
 
+#if 0
 - (SccpGttRoutingTableEntry *)findSubentryByTransactionNumber:(NSNumber *)tid
                                                           ssn:(NSNumber *)ssn
                                                        opcode:(NSNumber *)op
@@ -380,6 +463,7 @@
     }
     return self;
 }
+#endif
 
 - (BOOL)matchingTransactionNumber:(NSNumber *)tid
                               ssn:(NSNumber *)ssn
@@ -479,8 +563,6 @@
 - (SccpGttRoutingTableEntry *)copyWithZone:(NSZone *)zone
 {
     SccpGttRoutingTableEntry *dst = [[SccpGttRoutingTableEntry allocWithZone:zone]init];
-    dst->_hasSubentries = _hasSubentries;
-    dst->_subentries = [_subentries copy];
     dst->_name = _name;
     dst->_table = _table;
     dst->_digits = _digits;
@@ -495,5 +577,32 @@
     dst->_tcapTransactionRangeEnd = _tcapTransactionRangeEnd;
     return dst;
 }
+
+
+- (BOOL) isMainEntry
+{
+    if(_tcapTransactionRangeStart)
+    {
+        return NO;
+    }
+    if(_tcapTransactionRangeEnd)
+    {
+        return NO;
+    }
+    if(_calledSSNs.count > 0)
+    {
+        return NO;
+    }
+    if(_calledOpcodes.count > 0)
+    {
+        return NO;
+    }
+    if(_appContexts)
+    {
+        return NO;
+    }
+    return YES;
+}
+
 
 @end

@@ -12,12 +12,12 @@
 @interface SccpGttRoutingTableDigitNode : UMObject
 {
     SccpGttRoutingTableDigitNode    *_next[16];
-    SccpGttRoutingTableEntry        *_entry;
-    BOOL                            _hasSubentries;
+    SccpGttRoutingTableEntry        *_mainEntry;
+    UMSynchronizedArray             *_entries; /* array of SccpGttRoutingTableEntry * */
 }
 
-@property(readwrite,strong,atomic)  SccpGttRoutingTableEntry *entry;
-@property(readwrite,assign,atomic)  BOOL hasSubentries;
+@property(readwrite,strong,atomic)  SccpGttRoutingTableEntry *mainEntry;
+@property(readwrite,strong,atomic)  UMSynchronizedArray *entries; /* array of SccpGttRoutingTableEntry * */
 
 - (SccpGttRoutingTableDigitNode *)nextNode:(unichar)nextDigit create:(BOOL)create;
 

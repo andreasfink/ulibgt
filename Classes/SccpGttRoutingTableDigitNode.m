@@ -11,6 +11,15 @@
 
 @implementation SccpGttRoutingTableDigitNode
 
+- (SccpGttRoutingTableDigitNode *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _entries = [[UMSynchronizedArray alloc]init];
+    }
+    return self;
+}
 
 - (SccpGttRoutingTableDigitNode *)nextNode:(unichar)nextDigit create:(BOOL)create
 {
