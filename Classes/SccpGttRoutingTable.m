@@ -109,7 +109,7 @@
     self.rootNode = newRoot;
 }
 
-
+#if 0
 - (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
 {
     return [self findEntryByDigits:digits
@@ -118,6 +118,7 @@
                          operation:NULL
                         appContext:NULL];
 }
+#endif
 
 - (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
                               transactionNumber:(NSNumber *)tid
@@ -139,7 +140,7 @@
 
     if(_logLevel <=UMLOG_DEBUG)
     {
-        NSString *s = [NSString stringWithFormat:@"called findEntryByDigits:%@",digits];
+        NSString *s = [NSString stringWithFormat:@"called findEntryByDigits:%@ transactionNumber:%@ ssn:%@ operation:%@ appContext:%@",digits,tid,ssn,op,ac];
         [self.logFeed debugText:s];
     }
     for(NSInteger i = 0;i<n;i++)
