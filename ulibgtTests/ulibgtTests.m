@@ -33,6 +33,8 @@
     SccpGttRoutingTableEntry    *_rt85513000222_ttrange2;
     SccpGttRoutingTableEntry    *_rt85513000222_ttrange3;
     SccpGttRoutingTableEntry    *_rt85513000222_default;
+    
+
 }
 @end
 
@@ -213,6 +215,10 @@
     }];
     [_routingTable addEntry:_rt85513000222_ttrange3];
 
+    _routingTable.logLevel = 0;
+    UMLogHandler *h = [[UMLogHandler alloc]initWithConsole];
+    _routingTable.logFeed = [[UMLogFeed alloc]initWithHandler:h];
+
 }
 
 - (void)tearDown
@@ -253,7 +259,6 @@
      */
 
     SccpGttRoutingTableEntry *e;
-    
     e = [_routingTable findEntryByDigits:@"999"      transactionNumber:@(99) ssn:@(11)   operation:@(00) appContext:@"aaaa"];
     XCTAssert(e ==_rtEntryDefault , @"Pass");
     
@@ -302,6 +307,5 @@
     e = [_routingTable findEntryByDigits:@"85513000222"        transactionNumber:@(800000) ssn:@(11)   operation:@(00) appContext:@"aaaa"];
     NSLog(@"85513000222 tid800000 -> %@",e.routeToName);
     XCTAssert(e ==_rt85513000222_default , @"Pass");
-
 }
 @end
