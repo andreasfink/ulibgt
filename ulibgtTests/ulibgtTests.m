@@ -175,13 +175,6 @@
     [_routingTable addEntry:_rtEntry22ac1000_2000];
     
     
-    _rt85513000222_default = [[SccpGttRoutingTableEntry alloc]initWithConfig:
-    @{
-        @"table"                : @"E164-TT0",
-        @"gta"                  : @"85513000222",
-        @"destination"          : @"default",
-    }];
-    [_routingTable addEntry:_rt85513000222_default];
     
     _rt85513000222_ttrange1 = [[SccpGttRoutingTableEntry alloc]initWithConfig:
     @{
@@ -214,6 +207,14 @@
         @"transaction-id-end"   : @(720895),
     }];
     [_routingTable addEntry:_rt85513000222_ttrange3];
+
+    _rt85513000222_default = [[SccpGttRoutingTableEntry alloc]initWithConfig:
+    @{
+        @"table"                : @"E164-TT0",
+        @"gta"                  : @"85513000222",
+        @"destination"          : @"default",
+    }];
+    [_routingTable addEntry:_rt85513000222_default];
 
     _routingTable.logLevel = 0;
     UMLogHandler *h = [[UMLogHandler alloc]initWithConsole];
