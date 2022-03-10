@@ -244,7 +244,7 @@ this has to be revisted as we only want to delete the single entry, not any othe
 #if 0
 - (void)deleteEntryByDigits:(NSString *)digits
 {
-    SccpGttRoutingTableEntry *entry = [self findEntryByDigits:digits];
+    SccpGttRoutingTableEntry *entry = [self findEntryByDigits:digits ...];
     if(entry == NULL)
     {
         return;

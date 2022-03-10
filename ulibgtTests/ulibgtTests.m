@@ -34,6 +34,12 @@
     SccpGttRoutingTableEntry    *_rt85513000222_ttrange3;
     SccpGttRoutingTableEntry    *_rt85513000222_default;
     
+    _routingTableE164
+    _routingTa
+    
+    
+    
+    
 
 }
 @end
@@ -220,6 +226,195 @@
     UMLogHandler *h = [[UMLogHandler alloc]initWithConsole];
     _routingTable.logFeed = [[UMLogFeed alloc]initWithHandler:h];
 
+    
+    _selectorE164 = [[SccpGttSelector alloc]initWithConfig:@{
+                    @"name" : @"E164-TT0",
+                    @"sccp" : @"sccp-1",
+                    @"tt" : @(0),
+                    @"gti" : @(4),
+                    @"np" : @(1),
+                    @"nai" : @(4),
+                    @"pre-translation": @"pre-translation1",
+                    @"post-translation": @"post-translation1",
+                    @"default-destination": @"default-destination",
+                    }];
+    _routingTableE164 = _selector.routingTable;
+
+    
+    NSArray *configs = @[
+    @{
+      @"table": @"e164-tt0",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"default",
+      @"destination": @"identitymobile"
+    }
+    ,
+    @{
+      @"table": @"e164-tt0",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"default",
+      @"destination": @"identitymobile"
+    }
+    ,
+    @{
+      @"table": @"e164-tt0",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"3546500491",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+     "table": @"e164-tt0",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"6797001027",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt0",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"67572210434",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt0",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"447458810179",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{$
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt0",
+      @"gta": @"85513000222",
+      @"transaction-id-range": @"655360-720895",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt0",
+      @"gta": @"85513000222",
+      @"transaction-id-range": @"1-65535",
+      @"destination": @"genesis"
+    }
+
+    @{
+      @"table": @"e164-tt0",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"841993973022",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt0",
+      @"gta": @"841993973022",
+      @"transaction-id-range": @"0-65535",
+      @"destination": @"genesis"
+    }
+    ,
+    @{
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt0",
+      @"gta": @"841993973022",
+      @"transaction-id-range": @"655360-720895",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt19",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"default",
+      @"destination": @"identitymobile"
+    }
+    ,
+    @{
+      @"table": @"e164-tt19",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"default",
+      @"destination": @"identitymobile"
+    }
+    ,
+    @{
+      @"table": @"e164-tt99",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"3546500491",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt99",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"6797001027",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt99",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"67572210434",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt99",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"447458810179",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt99",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"85513000222",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt99",
+      @"gta": @"85513000222",
+      @"transaction-id-range": @"0-65535",
+      @"destination": @"genesis"
+    }
+    ,
+    @{
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt99",
+      @"gta": @"85513000222",
+      @"transaction-id-range": @"655360-720895",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"table": @"e164-tt99",
+      @"group": @"sccp-translation-table-entry",
+      @"gta": @"841993973022",
+      @"destination": @"itp-local"
+    }
+    ,
+    @{
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt99",
+      @"gta": @"841993973022",
+      @"transaction-id-range": @"0-65535",
+      @"destination": @"genesis"
+    }
+    ,
+    @{
+      @"group": @"sccp-translation-table-entry",
+      @"table": @"e164-tt99",
+      @"gta": @"841993973022",
+      @"transaction-id-range": @"655360-720895",
+      @"destination": @"itp-local"
+    }];
+    for (NSDictionary *config in configs)
+    {
+        SccpGttRoutingTableEntry *e = [[SccpGttRoutingTableEntry alloc]initWithConfig:config];
+        [_routingTableE164 addEntry:e];
+    }
 }
 
 - (void)tearDown
@@ -306,6 +501,60 @@
     XCTAssert(e ==_rt85513000222_ttrange3 , @"Pass");
 
     e = [_routingTable findEntryByDigits:@"85513000222"        transactionNumber:@(800000) ssn:@(11)   operation:@(00) appContext:@"aaaa"];
+    NSLog(@"85513000222 tid800000 -> %@",e.routeToName);
+    XCTAssert(e ==_rt85513000222_default , @"Pass");
+}
+
+
+- (void)testRouting2
+{
+    SccpGttRoutingTableEntry *e;
+    e = [_routingTableE164 findEntryByDigits:@"999"      transactionNumber:@(99) ssn:@(11)   operation:NULL appContext:NULL];
+    XCTAssert(e ==_rtEntryDefault , @"Pass");
+    
+    e = [_routingTable findEntryByDigits:@"1"        transactionNumber:@(99) ssn:@(11)   operation:NULL appContext:NULL];];
+    XCTAssert(e ==_rtEntry1 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"2"        transactionNumber:@(99) ssn:@(11)   operation:NULL appContext:NULL];];
+    XCTAssert(e ==_rtEntry2 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(99) ssn:@(11)   operation:NULL appContext:NULL];];
+    XCTAssert(e ==_rtEntry21 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(500) ssn:@(11)   operation:NULL appContext:NULL];];
+    XCTAssert(e ==_rtEntry21tt500 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(599) ssn:@(11)   operation:NULL appContext:NULL];];
+    XCTAssert(e ==_rtEntry21 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(600) ssn:@(11)   operation:NULL appContext:NULL];
+    XCTAssert(e ==_rtEntry21tt600700 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(601) ssn:@(11)   operation:NULL appContext:NULL];
+    XCTAssert(e ==_rtEntry21tt600700 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(699) ssn:@(11)   operation:NULL appContext:NULL];
+    XCTAssert(e ==_rtEntry21tt600700 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(700) ssn:@(11)   operation:NULL appContext:NULL];
+    XCTAssert(e ==_rtEntry21tt600700 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"21"        transactionNumber:@(701) ssn:@(11)   operation:NULL appContext:NULL];
+    XCTAssert(e ==_rtEntry21 , @"Pass");
+    
+    e = [_routingTable findEntryByDigits:@"85513000222"        transactionNumber:@(701) ssn:@(11)   operation:NULL appContext:NULL];
+    NSLog(@"85513000222 tid701 -> %@",e.routeToName);
+    XCTAssert(e ==_rt85513000222_ttrange1 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"85513000222"        transactionNumber:@(655370) ssn:@(11)   operation:NULL appContext:NULL];
+    NSLog(@"85513000222 tid655370 -> %@",e.routeToName);
+    XCTAssert(e ==_rt85513000222_ttrange3 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"85513000222"        transactionNumber:@(720895) ssn:@(11)   operation:NULL appContext:NULL];
+    NSLog(@"85513000222 tid720895 -> %@",e.routeToName);
+    XCTAssert(e ==_rt85513000222_ttrange3 , @"Pass");
+
+    e = [_routingTable findEntryByDigits:@"85513000222"        transactionNumber:@(800000) ssn:@(11)   operation:NULL appContext:NULL];
     NSLog(@"85513000222 tid800000 -> %@",e.routeToName);
     XCTAssert(e ==_rt85513000222_default , @"Pass");
 }
