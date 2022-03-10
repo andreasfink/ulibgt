@@ -13,6 +13,8 @@
 		A6322094205FD0CE006CC06A /* SccpL3RoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6322095205FD0CE006CC06A /* SccpL3RoutingTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6322093205FD0CE006CC06A /* SccpL3RoutingTableEntry.m */; };
 		A6322098205FD186006CC06A /* SccpL3RouteStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322096205FD186006CC06A /* SccpL3RouteStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64BB74D27D9E55A00A5E8B6 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6604A4F2527142B00D978EF /* ulib.framework */; };
+		A64BB74E27D9E55D00A5E8B6 /* ulibmtp3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6ADC5DD1CADEA2C00211137 /* ulibmtp3.framework */; };
 		A657727F252705CE004FFFBB /* SccpGttRoutingTableSubEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A657727D252705CE004FFFBB /* SccpGttRoutingTableSubEntry.h */; };
 		A6577280252705CE004FFFBB /* SccpGttRoutingTableSubEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A657727E252705CE004FFFBB /* SccpGttRoutingTableSubEntry.m */; };
 		A6604A502527142B00D978EF /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6604A4F2527142B00D978EF /* ulib.framework */; };
@@ -166,6 +168,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A64BB74E27D9E55D00A5E8B6 /* ulibmtp3.framework in Frameworks */,
+				A64BB74D27D9E55A00A5E8B6 /* ulib.framework in Frameworks */,
 				A68A227A1B18B5DD00854472 /* ulibgt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,6 +709,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -729,6 +735,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				INFOPLIST_FILE = ulibgtTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
