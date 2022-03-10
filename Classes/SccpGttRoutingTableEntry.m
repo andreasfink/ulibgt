@@ -202,7 +202,6 @@
             }
         }
         _enabled=YES;
-        _name = [SccpGttRoutingTableEntry entryNameForGta:_digits tableName:_table];
     }
     return self;
 }
@@ -231,10 +230,7 @@
 - (UMSynchronizedSortedDictionary *)config
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    if(_name)
-    {
-        dict[@"name"] = _name;
-    }
+    dict[@"name"] = [self name];
     if(_table)
     {
         dict[@"table"] = _table;
@@ -258,10 +254,7 @@
 {
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"<%@:%p>",[self className],self];
-    if(_name)
-    {
-        [s appendFormat:@" name=%@",_name];
-    }
+    [s appendFormat:@" name=%@", [self name]];
     if(_table)
     {
         [s appendFormat:@" table=%@",_table];
@@ -362,9 +355,80 @@
     return s;
 }
 
-+ (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName
+- (NSString *)name
 {
-    return [NSString stringWithFormat:@"%@:%@",tableName,gta ];
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendFormat:@"%@:%@",_table,_digits];
+    if((_tcapTransactionRangeStart) || (_tcapTransactionRangeEnd))
+    {
+        
+        [s appendString:@":tid("];
+        if(_tcapTransactionRangeStart)
+        {
+            [s appendFormat:@"%@",_tcapTransactionRangeStart];
+        }
+        [s appendString:@"-"];
+        if(_tcapTransactionRangeEnd)
+        {
+            [s appendFormat:@"%@",_tcapTransactionRangeEnd];
+        }
+        [s appendString:@")"];
+    }
+    if( _calledSSNs)
+    {
+        [s appendString:@":ssn("];
+        BOOL first=YES;
+        for(NSNumber *n in _calledSSNs)
+        {
+            if(first)
+            {
+                first=NO;
+            }
+            else
+            {
+                [s appendString:@","];
+            }
+            [s appendFormat:@"%@",n];
+        }
+        [s appendString:@")"];
+    }
+    if(_calledOpcodes)
+    {
+        [s appendString:@":op("];
+        BOOL first=YES;
+        for(NSNumber *n in _calledOpcodes)
+        {
+            if(first)
+            {
+                first=NO;
+            }
+            else
+            {
+                [s appendString:@","];
+            }
+            [s appendFormat:@"%@",n];
+        }
+        [s appendString:@")"];
+    }
+    if(_appContexts)
+    {
+        [s appendString:@":ac("];
+        BOOL first=YES;
+        for(NSString *ac in _appContexts)
+        {
+            if(first)
+            {
+                first=NO;
+            }
+            else
+            {
+                [s appendString:@","];
+            }
+            [s appendFormat:@"%@",ac];
+        }
+        [s appendString:@")"];
+    }
+    return s;
 }
 
 - (UMSynchronizedSortedDictionary *)status
@@ -563,7 +627,6 @@
 - (SccpGttRoutingTableEntry *)copyWithZone:(NSZone *)zone
 {
     SccpGttRoutingTableEntry *dst = [[SccpGttRoutingTableEntry allocWithZone:zone]init];
-    dst->_name = _name;
     dst->_table = _table;
     dst->_digits = _digits;
     dst->_routeTo = _routeTo;

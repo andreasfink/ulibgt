@@ -15,7 +15,6 @@
 
 @interface SccpGttRoutingTableEntry : UMObject
 {
-    NSString                *_name;
     NSString                *_table;
     NSString                *_digits;
     SccpDestinationGroup    *_routeTo;
@@ -33,7 +32,7 @@
     NSArray<NSString *>     *_appContexts;
 }
 
-@property(readwrite,atomic,strong)  NSString                *name;
+@property(readonly,atomic,strong)  NSString                *name;
 @property(readwrite,atomic,strong)  NSString                *table;
 @property(readwrite,atomic,assign)  BOOL                    deliverLocal;
 
