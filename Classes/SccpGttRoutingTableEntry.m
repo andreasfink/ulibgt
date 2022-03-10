@@ -355,30 +355,49 @@
     return s;
 }
 
+
 - (NSString *)name
 {
+    return [SccpGttRoutingTableEntry entryNameForGta:_digits
+                                           tableName:_table
+                           tcapTransactionRangeStart:_tcapTransactionRangeStart
+                             tcapTransactionRangeEnd:_tcapTransactionRangeEnd
+                                          calledSSNs:(NSArray<NSNumber *>*)_calledSSNs
+                                       calledOpcodes:(NSArray<NSNumber *>*)_calledOpcodes
+                                         appContexts:(NSArray<NSNumber *>*)_appContexts];
+}
+
++ (NSString *)entryNameForGta:(NSString *)digits
+                    tableName:(NSString *)table
+    tcapTransactionRangeStart:(NSNumber *)tcapTransactionRangeStart
+      tcapTransactionRangeEnd:(NSNumber *)tcapTransactionRangeEnd
+                   calledSSNs:(NSArray<NSNumber *>*)calledSSNs
+                calledOpcodes:(NSArray<NSNumber *>*)calledOpcodes
+                  appContexts:(NSArray<NSNumber *>*)appContexts
+
+{
     NSMutableString *s = [[NSMutableString alloc]init];
-    [s appendFormat:@"%@:%@",_table,_digits];
-    if((_tcapTransactionRangeStart) || (_tcapTransactionRangeEnd))
+    [s appendFormat:@"%@:%@",table,digits];
+    if((tcapTransactionRangeStart) || (tcapTransactionRangeEnd))
     {
         
         [s appendString:@":tid("];
-        if(_tcapTransactionRangeStart)
+        if(tcapTransactionRangeStart)
         {
-            [s appendFormat:@"%@",_tcapTransactionRangeStart];
+            [s appendFormat:@"%@",tcapTransactionRangeStart];
         }
         [s appendString:@"-"];
-        if(_tcapTransactionRangeEnd)
+        if(tcapTransactionRangeEnd)
         {
-            [s appendFormat:@"%@",_tcapTransactionRangeEnd];
+            [s appendFormat:@"%@",tcapTransactionRangeEnd];
         }
         [s appendString:@")"];
     }
-    if( _calledSSNs)
+    if( calledSSNs)
     {
         [s appendString:@":ssn("];
         BOOL first=YES;
-        for(NSNumber *n in _calledSSNs)
+        for(NSNumber *n in calledSSNs)
         {
             if(first)
             {
@@ -392,11 +411,11 @@
         }
         [s appendString:@")"];
     }
-    if(_calledOpcodes)
+    if(calledOpcodes)
     {
         [s appendString:@":op("];
         BOOL first=YES;
-        for(NSNumber *n in _calledOpcodes)
+        for(NSNumber *n in calledOpcodes)
         {
             if(first)
             {
@@ -410,11 +429,11 @@
         }
         [s appendString:@")"];
     }
-    if(_appContexts)
+    if(appContexts)
     {
         [s appendString:@":ac("];
         BOOL first=YES;
-        for(NSString *ac in _appContexts)
+        for(NSString *ac in appContexts)
         {
             if(first)
             {

@@ -57,7 +57,14 @@
 - (NSString *)getStatistics;
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
-+ (NSString *)entryNameForGta:(NSString *)gta tableName:(NSString *)tableName;
++ (NSString *)entryNameForGta:(NSString *)digits
+                    tableName:(NSString *)table
+    tcapTransactionRangeStart:(NSNumber *)tcapTransactionRangeStart
+      tcapTransactionRangeEnd:(NSNumber *)tcapTransactionRangeEnd
+                   calledSSNs:(NSArray<NSNumber *>*)calledSSNs
+                calledOpcodes:(NSArray<NSNumber *>*)calledOpcodes
+                  appContexts:(NSArray<NSNumber *>*)appContexts;
+
 - (BOOL) matchingTransactionNumber:(NSNumber *)tid
                                ssn:(NSNumber *)ssn
                             opcode:(NSNumber *)op
