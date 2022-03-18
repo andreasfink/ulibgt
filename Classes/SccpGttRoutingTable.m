@@ -175,8 +175,14 @@
         }
         
         currentNode = nextNode;
-        myMainEntry = currentNode.mainEntry;
-        myEntries   = currentNode.entries;
+        if(currentNode.mainEntry)
+        {
+            myMainEntry = currentNode.mainEntry;
+        }
+        if(currentNode.entries)
+        {
+                myEntries   = currentNode.entries;
+        }
     }
 
     returnValue = myMainEntry;
