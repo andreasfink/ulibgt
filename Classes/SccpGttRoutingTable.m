@@ -165,7 +165,6 @@
             }
             break;
         }
-        
         currentNode = nextNode;
         myMainEntry = currentNode.mainEntry;
         myEntries   = currentNode.entries;
