@@ -85,6 +85,10 @@
         if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
         {
             //digits=@"";
+            if(entry.isMainEntry)
+            {
+                newRoot.mainEntry = entry;
+            }
             newRoot.entries = [[UMSynchronizedArray alloc]init];
             [newRoot.entries addObject:entry];
         }
@@ -102,6 +106,10 @@
             if(currentNode.entries == NULL)
             {
                 currentNode.entries = [[UMSynchronizedArray alloc]init];
+            }
+            if(entry.isMainEntry)
+            {
+                currentNode.mainEntry = entry;
             }
             [currentNode.entries addObject:entry];
         }
@@ -166,8 +174,14 @@
             break;
         }
         currentNode = nextNode;
-        myMainEntry = currentNode.mainEntry;
-        myEntries   = currentNode.entries;
+        if(currentNode.mainEntry)
+        {
+            myMainEntry = currentNode.mainEntry;
+        }
+        if(currentNode.entries)
+        {
+                myEntries   = currentNode.entries;
+        }
     }
 
     returnValue = myMainEntry;
