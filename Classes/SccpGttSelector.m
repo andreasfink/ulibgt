@@ -10,7 +10,7 @@
 // the author.
 
 #import "SccpGttSelector.h"
-#import "SccpDestination.h"
+#import "SccpDestinationEntry.h"
 #import "SccpGttRoutingTable.h"
 #import "SccpNumberTranslation.h"
 #import "SccpAddress.h"
@@ -171,7 +171,7 @@
     }
     NSString *digits = addr.address;
     NSNumber *ssn = @(addr.ssn.ssn);
-    SccpDestination *nextHop = NULL;
+    SccpDestinationEntry *nextHop = NULL;
     SccpGttRoutingTableEntry *routingTableEntry = [_routingTable findEntryByDigits:digits
                                                                  transactionNumber:tid
                                                                                ssn:ssn

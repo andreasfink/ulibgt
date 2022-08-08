@@ -13,7 +13,7 @@
 #import "SccpGttSelector.h"
 #import "SccpGttRoutingTable.h"
 #import "SccpDestinationGroup.h"
-#import "SccpDestination.h"
+#import "SccpDestinationEntry.h"
 
 static SccpGttRegistry *g_registry;
 
@@ -184,7 +184,7 @@ static SccpGttRegistry *g_registry;
             grp.postTranslation = _sccp_number_translations_dict[grp.postTranslationName];
         }
         UMSynchronizedArray *entries = grp.entries;
-        for(SccpDestination *e in entries)
+        for(SccpDestinationEntry *e in entries)
         {
             if(e.postTranslationName.length > 0)
             {

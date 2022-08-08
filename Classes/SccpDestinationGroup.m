@@ -17,14 +17,14 @@
 
 }
 
-- (void)addEntry:(SccpDestination *)dst
+- (void)addEntry:(SccpDestinationEntry *)dst
 {
     dst.name = [NSString stringWithFormat:@"%@-%d",self.name,(int)_entries.count+1];
     dst.destination = self.name;
     [_entries addObject:dst];
 }
 
-- (SccpDestination *)entryAtIndex:(int)idx
+- (SccpDestinationEntry *)entryAtIndex:(int)idx
 {
     if((idx >=0) && (idx <_entries.count ))
     {
@@ -33,7 +33,7 @@
     return NULL;
 }
 
-- (SccpDestination *)pickRandom
+- (SccpDestinationEntry *)pickRandom
 {
     if(_entries.count == 0)
     {
@@ -59,7 +59,7 @@
 
 
 
-- (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
+- (SccpDestinationEntry *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt
 {
     NSMutableArray *availEntries = [[NSMutableArray alloc]init];
     NSMutableArray *availAndRestrictedEntries = [[NSMutableArray alloc]init];
@@ -68,7 +68,7 @@
     BOOL availSeen = NO;
     BOOL restrictedSeen = NO;
 
-    for(SccpDestination *e in entries)
+    for(SccpDestinationEntry *e in entries)
     {
         SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
         if(rtentry.status==SccpL3RouteStatus_available)
@@ -95,7 +95,7 @@
     }
     if(validEntries.count==1)
     {
-        SccpDestination *e = validEntries[0];
+        SccpDestinationEntry *e = validEntries[0];
         return e;
     }
 
@@ -110,9 +110,9 @@
     {
 
         int lowestCost = 65; /* costs is a value from 1...64 */
-        for(SccpDestination *e in validEntries)
+        for(SccpDestinationEntry *e in validEntries)
         {
-            int cost = 4;
+            int cost = 32;
             if(e.cost)
             {
                 cost = e.cost.intValue;
@@ -145,7 +145,7 @@
 
     /* calculate the total weigth */
     uint32_t totalWeight = 0;
-    for(SccpDestination *e in lowestCostEntries)
+    for(SccpDestinationEntry *e in lowestCostEntries)
     {
         uint32_t weight = 100;
         if(e.weight)
@@ -161,7 +161,7 @@
         {
             int lowestCost = 65;
             NSMutableArray *lowestCostEntries = validEntries;
-            for(SccpDestination *e in validEntries)
+            for(SccpDestinationEntry *e in validEntries)
             {
                 int cost = 4;
                 if(e.cost)
@@ -185,7 +185,7 @@
                 }
             }
             uint32_t totalWeight = 0;
-            for(SccpDestination *e in lowestCostEntries)
+            for(SccpDestinationEntry *e in lowestCostEntries)
             {
                 int weight = 100;
                 if(e.weight)
@@ -197,7 +197,7 @@
 
             uint32_t pickWeight = [UMUtil random:totalWeight];
             uint32_t currentWeight = 0;
-            for(SccpDestination *e in lowestCostEntries)
+            for(SccpDestinationEntry *e in lowestCostEntries)
             {
                 int weight = 100;
                 if(e.weight)
@@ -218,7 +218,7 @@
         {
             uint32_t pickWeight = [UMUtil random:totalWeight];
             uint32_t currentWeight = 0;
-            for(SccpDestination *e in lowestCostEntries)
+            for(SccpDestinationEntry *e in lowestCostEntries)
             {
                 int weight = 100;
                 if(e.weight)
@@ -262,8 +262,24 @@
 - (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext
 {
     _name = [cfg[@"name"] stringValue];
+    NSString *dm =cfg[@"distribution-method"];
+    if([dm isEqualToStringCaseInsensitive:@"cost"])
+    {
+        _distributionMethod = SccpDestinationGroupDistributionMethod_cost;
+    }
+    else if([dm isEqualToStringCaseInsensitive:@"share"])
+    {
+        _distributionMethod = SccpDestinationGroupDistributionMethod_share;
+    }
+    else if([dm isEqualToStringCaseInsensitive:@"wrr"])
+    {
+        _distributionMethod = SccpDestinationGroupDistributionMethod_wrr;
+    }
+    else if([dm isEqualToStringCaseInsensitive:@"cgpa"])
+    {
+        _distributionMethod = SccpDestinationGroupDistributionMethod_cgpa;
+    }
 }
-
 
 - (UMSynchronizedSortedDictionary *)status
 {
@@ -282,7 +298,7 @@
 
     NSArray *entries = [_entries arrayCopy];
 
-    for(SccpDestination *e in entries)
+    for(SccpDestinationEntry *e in entries)
     {
         if(rt==NULL)
         {
@@ -340,7 +356,7 @@
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"    sccp-destination %@ (%p)\n",_name ? _name : @"<unnamed>",self];
     NSArray *entries = [_entries arrayCopy];
-    for(SccpDestination *e in entries)
+    for(SccpDestinationEntry *e in entries)
     {
         [s appendString:@"        --entry--\n"];
         if(e.destination.length> 0)

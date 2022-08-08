@@ -23,10 +23,10 @@ with the numbers before processing
 it will walk through digit by digit. Every entry is a SccpGttRoutingTableEntry
 object and can have an route attached.
 
-6. An route then maps to a SccpDestination which can point to a m3ua application server or a mtp3 pointcode.
+6. An route then maps to a SccpDestinationEntry which can point to a m3ua application server or a mtp3 pointcode.
 
-7. A SccpDestination specifies where to forward the message next.
-A SccpDestinationGroup is basically a list of SccpDestination objects
+7. A SccpDestinationEntry specifies where to forward the message next.
+A SccpDestinationGroup is basically a list of SccpDestinationEntry objects
 with priorities
 
 

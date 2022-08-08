@@ -7,29 +7,29 @@
 //
 
 #import <ulibmtp3/ulibmtp3.h>
-#import "SccpDestination.h"
+#import "SccpDestinationEntry.h"
 #import "SccpL3RoutingTable.h"
 @class SccpNumberTranslation;
 
 typedef enum SccpDestinationGroupDistributionMethod
 {
-    SccpDestinationGroupDistributionMethod_cost = 0,    /* equal distribution on lowest cost entries */
+    SccpDestinationGroupDistributionMethod_cost  = 0,   /* equal distribution on lowest cost entries */
     SccpDestinationGroupDistributionMethod_share = 1,   /* equal distribution on all entries */
-    SccpDestinationGroupDistributionMethod_wrr = 2,     /* weighted distribution on lowest cost entries */
-    SccpDestinationGroupDistributionMethod_cgpa = 3,    /* not implemented yet */
+    SccpDestinationGroupDistributionMethod_wrr   = 2,   /* weighted distribution on lowest cost entries */
+    SccpDestinationGroupDistributionMethod_cgpa  = 3,  /* not implemented yet */
 } SccpDestinationGroupDistributionMethod;
 
 @interface SccpDestinationGroup : UMObject
 {
-    NSString                *_name;
-    UMSynchronizedArray     *_entries;
-    SccpDestinationGroupDistributionMethod _distributionMethod;
-    BOOL                    _class1LoadBalance;
-    BOOL                    _distributeSccpSequencedNegate;
-    NSString                *_dpcInstance;
-    int                     _lastIndex;
-    NSString                *_postTranslationName;
-    SccpNumberTranslation   *_postTranslation;
+    NSString                                *_name;
+    UMSynchronizedArray                     *_entries;
+    SccpDestinationGroupDistributionMethod  _distributionMethod;
+    BOOL                                    _class1LoadBalance;
+    BOOL                                    _distributeSccpSequencedNegate;
+    NSString                                *_dpcInstance;
+    int                                     _lastIndex;
+    NSString                                *_postTranslationName;
+    SccpNumberTranslation                   *_postTranslation;
 }
 
 @property(readwrite,strong,atomic)  NSString *name;
@@ -41,13 +41,13 @@ typedef enum SccpDestinationGroupDistributionMethod
 @property(readwrite,strong,atomic)  SccpNumberTranslation *postTranslation;
 @property(readwrite,strong,atomic)  UMSynchronizedArray *entries;
 
-- (void)addEntry:(SccpDestination *)dst;
-- (SccpDestination *)entryAtIndex:(int)idx;
+- (void)addEntry:(SccpDestinationEntry *)dst;
+- (SccpDestinationEntry *)entryAtIndex:(int)idx;
 
 //- (SccpDestinationGroup *)initWithDpcString:(NSString *)string variant:(UMMTP3Variant)variant;
-- (SccpDestination *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
+- (SccpDestinationEntry *)chooseNextHopWithRoutingTable:(SccpL3RoutingTable *)rt;
 - (void)setConfig:(NSDictionary *)cfg applicationContext:(id)appContext;
-- (SccpDestination *)pickRandom;
+- (SccpDestinationEntry *)pickRandom;
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
 - (NSString *)descriptionWithRt:(SccpL3RoutingTable *)rt;
