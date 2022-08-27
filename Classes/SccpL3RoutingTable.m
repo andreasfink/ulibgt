@@ -42,7 +42,8 @@
         entry = [[SccpL3RoutingTableEntry alloc]init];
         entry.pc = pointCode;
         entry.status = SccpL3RouteStatus_available;
-        _entries[@(pointCode.pc)] = entry;
+        NSString *pcstr = [NSString stringWithFormat:@"%06d",pointCode.pc];
+        _entries[pcstr] = entry;
     }
     return  entry;
 }
@@ -60,21 +61,7 @@
     }
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
 
-    NSArray *allKeys = [_entries allKeys];
-/*
-    NSArray *allKeys = [allKeys1 sortedArrayUsingComparator: ^(SccpL3RoutingTableEntry *a, SccpL3RoutingTableEntry *b)
-                                         {
-                                             if(a.pc.pc < b.pc.pc)
-                                             {
-                                                 return NSOrderedDescending;
-                                             }
-                                             if(a.pc.pc == b.pc.pc)
-                                             {
-                                                 return NSOrderedSame;
-                                             }
-                                             return NSOrderedAscending;
-                                          }];
- */
+    NSArray *allKeys = [[_entries allKeys]sortedStringsArray];
     for(NSString *key in allKeys)
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
