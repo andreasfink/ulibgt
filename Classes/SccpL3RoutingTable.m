@@ -42,8 +42,7 @@
         entry = [[SccpL3RoutingTableEntry alloc]init];
         entry.pc = pointCode;
         entry.status = SccpL3RouteStatus_available;
-        NSString *pcstr = [NSString stringWithFormat:@"%06d",pointCode.pc];
-        _entries[pcstr] = entry;
+        _entries[@(pointCode.pc)] = entry;
     }
     return  entry;
 }
@@ -66,19 +65,20 @@
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
         NSLog(@"entry=%@",entry.statusDict);
+        NSString *pcstr = [NSString stringWithFormat:@"%d",entry.pc.pc];
         switch(entry.status)
         {
             case SccpL3RouteStatus_available:
-                dict[key] = @"available";
+                dict[pcstr] = @"available";
                 break;
             case SccpL3RouteStatus_restricted:
-                dict[key] = @"restricted";
+                dict[pcstr] = @"restricted";
                 break;
             case SccpL3RouteStatus_unavailable:
-                dict[key] = @"unavailable";
+                dict[pcstr] = @"unavailable";
                 break;
             default:
-                dict[key] = @"unknown";
+                dict[pcstr] = @"unknown";
                 break;
         }
     }
