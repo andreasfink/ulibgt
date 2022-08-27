@@ -49,6 +49,15 @@
 
 - (UMSynchronizedSortedDictionary *)status
 {
+    NSLog(@"SccpL3RoutingTable status called");
+    if(_entries==NULL)
+    {
+        NSLog(@"_entries is NULL");
+    }
+    else
+    {
+        NSLog(@"_entries.count = %d",(int)_entries.count);
+    }
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
 
     NSArray *allKeys1 = [_entries allKeys];
@@ -68,7 +77,8 @@
     for(NSString *key in allKeys)
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
-        NSString *pc = @(entry.pc.pc).stringValue;
+        NSLog(@"entry=%@",entry.statusDict);
+        NSString *pc = [NSString stringWithFormat:@"%d",entry.pc.pc];
         switch(entry.status)
         {
             case SccpL3RouteStatus_available:
