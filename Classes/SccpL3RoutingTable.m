@@ -23,7 +23,7 @@
 
 - (void)setStatus:(SccpL3RouteStatus)status forPointCode:(UMMTP3PointCode *)pointCode
 {
-    NSLog(@"set status %d for pointcode %@",pointCode, status);
+    NSLog(@"set status %d for pointcode %@",status,pointCode);
     SccpL3RoutingTableEntry *entry = [self getEntryForPointCode:pointCode];
     entry.status = status;
 }
