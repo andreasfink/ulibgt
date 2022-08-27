@@ -60,8 +60,8 @@
     }
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
 
-    NSArray *allKeys1 = [_entries allKeys];
-
+    NSArray *allKeys = [_entries allKeys];
+/*
     NSArray *allKeys = [allKeys1 sortedArrayUsingComparator: ^(SccpL3RoutingTableEntry *a, SccpL3RoutingTableEntry *b)
                                          {
                                              if(a.pc.pc < b.pc.pc)
@@ -74,6 +74,7 @@
                                              }
                                              return NSOrderedAscending;
                                           }];
+ */
     for(NSString *key in allKeys)
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
