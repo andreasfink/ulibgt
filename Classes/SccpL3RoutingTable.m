@@ -23,7 +23,6 @@
 
 - (void)setStatus:(SccpL3RouteStatus)status forPointCode:(UMMTP3PointCode *)pointCode
 {
-    NSLog(@"set status %d for pointcode %@",status,pointCode);
     SccpL3RoutingTableEntry *entry = [self getEntryForPointCode:pointCode];
     entry.status = status;
 }
@@ -50,22 +49,12 @@
 
 - (UMSynchronizedSortedDictionary *)status
 {
-    NSLog(@"SccpL3RoutingTable status called");
-    if(_entries==NULL)
-    {
-        NSLog(@"_entries is NULL");
-    }
-    else
-    {
-        NSLog(@"_entries.count = %d",(int)_entries.count);
-    }
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
 
     NSArray *allKeys = [[_entries allKeys]sortedStringsArray];
     for(NSString *key in allKeys)
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
-        NSLog(@"entry=%@",entry.statusDict);
         NSString *pcstr = [NSString stringWithFormat:@"%d",entry.pc.pc];
         switch(entry.status)
         {
