@@ -63,7 +63,6 @@
 {
     NSMutableArray *availEntries = [[NSMutableArray alloc]init];
     NSMutableArray *availAndRestrictedEntries = [[NSMutableArray alloc]init];
-
     NSArray *entries = [_entries arrayCopy];
     BOOL availSeen = NO;
     BOOL restrictedSeen = NO;
@@ -93,22 +92,23 @@
     {
         validEntries = availAndRestrictedEntries;
     }
+    else
+    {
+        return NULL;
+    }
     if(validEntries.count==1)
     {
+        /* if there is only a single entry, we take a shortcut */
         SccpDestinationEntry *e = validEntries[0];
         return e;
     }
-
+    
     /* if we get here, we have more than one option. so we must take weight and cost into consideration */
-
     _lastIndex++;
-
     NSMutableArray *lowestCostEntries;
-
     /* find the lowest cost entries if wrr or cost methods are choosen. otherwise all entries are considered */
     if((_distributionMethod == SccpDestinationGroupDistributionMethod_cost) || (_distributionMethod == SccpDestinationGroupDistributionMethod_wrr))
     {
-
         int lowestCost = 65; /* costs is a value from 1...64 */
         for(SccpDestinationEntry *e in validEntries)
         {
@@ -142,7 +142,6 @@
     {
          lowestCostEntries = validEntries;
     }
-
     /* calculate the total weigth */
     uint32_t totalWeight = 0;
     for(SccpDestinationEntry *e in lowestCostEntries)
