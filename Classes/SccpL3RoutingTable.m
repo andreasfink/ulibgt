@@ -36,7 +36,7 @@
 
 - (SccpL3RoutingTableEntry *)getEntryForPointCode:(UMMTP3PointCode *)pointCode
 {
-    SccpL3RoutingTableEntry *entry = _entries[pointCode.stringValue];
+    SccpL3RoutingTableEntry *entry = _entries[@(pointCode.pc)];
     if(entry==NULL)
     {
         entry = [[SccpL3RoutingTableEntry alloc]init];
@@ -47,28 +47,33 @@
     return  entry;
 }
 
+- (SccpL3RoutingTableEntry *)getEntryForPointCodeOrNull:(UMMTP3PointCode *)pointCode
+{
+    SccpL3RoutingTableEntry *entry = _entries[@(pointCode.pc)];
+    return  entry;
+}
+
 - (UMSynchronizedSortedDictionary *)status
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
 
-    NSArray *allKeys = [[_entries allKeys]sortedStringsArray];
+    NSArray<NSNumber *> *allKeys = [[_entries allKeys]sortedNumbersArray];
     for(NSString *key in allKeys)
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
-        NSString *pcstr = [NSString stringWithFormat:@"%d",entry.pc.pc];
         switch(entry.status)
         {
             case SccpL3RouteStatus_available:
-                dict[pcstr] = @"available";
+                dict[key] = @"available";
                 break;
             case SccpL3RouteStatus_restricted:
-                dict[pcstr] = @"restricted";
+                dict[key] = @"restricted";
                 break;
             case SccpL3RouteStatus_unavailable:
-                dict[pcstr] = @"unavailable";
+                dict[key] = @"unavailable";
                 break;
             default:
-                dict[pcstr] = @"unknown";
+                dict[key] = @"unknown";
                 break;
         }
     }

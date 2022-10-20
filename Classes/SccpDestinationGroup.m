@@ -63,11 +63,11 @@
 {
     NSMutableArray *availEntries = [[NSMutableArray alloc]init];
     NSMutableArray *availAndRestrictedEntries = [[NSMutableArray alloc]init];
-    NSArray *entries = [_entries arrayCopy];
+    //NSArray *entries = [_entries arrayCopy];
     BOOL availSeen = NO;
     BOOL restrictedSeen = NO;
 
-    for(SccpDestinationEntry *e in entries)
+    for(SccpDestinationEntry *e in _entries)
     {
         SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
         if(rtentry.status==SccpL3RouteStatus_available)
@@ -76,7 +76,7 @@
             [availEntries addObject:e];
             [availAndRestrictedEntries addObject:e];
         }
-        else if(rtentry.status==SccpL3RouteStatus_restricted)
+        else if((rtentry.status==SccpL3RouteStatus_restricted) || (rtentry.status==SccpL3RouteStatus_unknown))
         {
             restrictedSeen = YES;
             [availAndRestrictedEntries addObject:e];
@@ -250,7 +250,7 @@
             else
             {
                 _lastIndex = _lastIndex % lowestCostEntries.count;
-                return lowestCostEntries[ _lastIndex];
+                return lowestCostEntries[_lastIndex];
             }
             break;
     }
@@ -390,13 +390,9 @@
         {
             [s appendFormat:@"        set-calling-tt=%@\n",e.overrideCallingTT];
         }
-        if(rt==NULL)
+        if(rt)
         {
-            [s appendString:@"        MTP3-STATUS=unknown\n"];
-        }
-        else
-        {
-            SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCode:e.dpc];
+            SccpL3RoutingTableEntry *rtentry = [rt getEntryForPointCodeOrNull:e.dpc];
             if(rtentry)
             {
                 SccpL3RouteStatus st = rtentry.status;
