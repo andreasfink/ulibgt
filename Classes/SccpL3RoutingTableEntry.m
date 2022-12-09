@@ -16,7 +16,6 @@
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
     dict[@"point-code"] = [_pc stringValue];
-
     switch(_status)
     {
         case SccpL3RouteStatus_unknown:
@@ -31,6 +30,8 @@
         case SccpL3RouteStatus_unavailable:
             dict[@"status"] = @"unavailable";
             break;
+        default:
+            dict[@"status"] = @(_status);
     }
     return dict;
 }

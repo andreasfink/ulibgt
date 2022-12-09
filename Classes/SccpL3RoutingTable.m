@@ -61,19 +61,20 @@
     for(NSString *key in allKeys)
     {
         SccpL3RoutingTableEntry *entry = _entries[key];
+        NSString *pcnum = [key stringValue];
         switch(entry.status)
         {
             case SccpL3RouteStatus_available:
-                dict[key] = @"available";
+                dict[pcnum] = @"available";
                 break;
             case SccpL3RouteStatus_restricted:
-                dict[key] = @"restricted";
+                dict[pcnum] = @"restricted";
                 break;
             case SccpL3RouteStatus_unavailable:
-                dict[key] = @"unavailable";
+                dict[pcnum] = @"unavailable";
                 break;
             default:
-                dict[key] = @"unknown";
+                dict[pcnum] = @"unknown";
                 break;
         }
     }
