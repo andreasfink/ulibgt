@@ -36,7 +36,15 @@
         }
         if(cfg[@"gta"])
         {
-            _digits = [cfg[@"gta"] stringValue];
+            id gta_entry = cfg[@"gta"];
+            if([gta_entry isKindOfClass:[NSString class]])
+            {
+                _digits = [gta_entry stringValue];
+            }
+            if([gta_entry isKindOfClass:[NSArray class]])
+            {
+                _digits = [gta_entry[0] stringValue];
+            }
         }
 
         if(cfg[@"destination"])
@@ -367,7 +375,7 @@
                                          appContexts:(NSArray<NSNumber *>*)_appContexts];
 }
 
-+ (NSString *)entryNameForGta:(NSString *)digits
++ (NSString *)entryNameForGta:(id)digits_object  /* can be NSString or NSArray<NSString *> with exactly one object */
                     tableName:(NSString *)table
     tcapTransactionRangeStart:(NSNumber *)tcapTransactionRangeStart
       tcapTransactionRangeEnd:(NSNumber *)tcapTransactionRangeEnd
@@ -376,6 +384,16 @@
                   appContexts:(NSArray<NSNumber *>*)appContexts
 
 {
+    NSString *digits = NULL;
+
+    if([digits_object isKindOfClass:[NSString class]])
+    {
+        digits = (NSString *)digits_object;
+    }
+    else if([digits_object isKindOfClass:[NSArray class]])
+    {
+        digits = (NSString *)((NSArray <NSString *> *)digits_object[0]);
+    }
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"%@:%@",table,digits];
     if((tcapTransactionRangeStart) || (tcapTransactionRangeEnd))

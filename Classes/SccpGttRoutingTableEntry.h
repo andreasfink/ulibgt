@@ -57,7 +57,7 @@
 - (NSString *)getStatistics;
 - (UMSynchronizedSortedDictionary *)status;
 - (UMSynchronizedSortedDictionary *)statusForL3RoutingTable:(SccpL3RoutingTable *)rt;
-+ (NSString *)entryNameForGta:(NSString *)digits
++ (NSString *)entryNameForGta:(id)digits_object /* can be NSString or NSArray<NSString *> with exactly one object */
                     tableName:(NSString *)table
     tcapTransactionRangeStart:(NSNumber *)tcapTransactionRangeStart
       tcapTransactionRangeEnd:(NSNumber *)tcapTransactionRangeEnd
