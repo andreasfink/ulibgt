@@ -51,7 +51,7 @@
     self = [super init];
     if(self)
     {
-        _routingTable = [[SccpGttRoutingTable alloc]init];
+        _routingTable = [[SccpGttRoutingTable alloc]initWithName:@"untitled"];
         _active=YES;
     }
     return self;
