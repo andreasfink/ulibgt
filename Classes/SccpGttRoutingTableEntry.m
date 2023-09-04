@@ -704,5 +704,93 @@
     return YES;
 }
 
++ (UMDbTableDefinition *)routingTableEntryDbDefinition
+{
+    UMDbTableDefinition *ttTableDef = [[UMDbTableDefinition alloc] init];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"key"
+                       size:255
+                  canBeNull:NO
+                    indexed:YES
+                    primary:YES
+                        tag:1];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"translation_table"
+                       size:255
+                  canBeNull:NO
+                    indexed:YES
+                    primary:YES
+                        tag:1];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithInteger:@"gta"
+                  canBeNull:NO
+                    indexed:YES
+                    primary:YES
+                        tag:2];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"destination"
+                       size:255
+                  canBeNull:YES
+                    indexed:YES
+                    primary:NO
+                        tag:3];
 
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"post_translation"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:4];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"gt_owner"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:5];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"gt_user"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:6];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"transaction_id_start"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:7];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"transaction_id_end"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:8];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"transaction_id_range"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:9];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"ssn"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:10];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"opcode"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:11];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"application_context"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:12];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"last_modified_ts"
+                       size:32
+                  canBeNull:YES
+                    indexed:YES
+                    primary:NO
+                        tag:13];
+    return ttTableDef;
+}
 @end

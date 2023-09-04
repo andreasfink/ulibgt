@@ -9,7 +9,6 @@
 // This source is dual licensed either under the GNU GENERAL PUBLIC LICENSE
 // Version 3 from 29 June 2007 and other commercial licenses available by
 // the author.
-
 #import "SccpGttRoutingTable.h"
 #import "SccpAddress.h"
 
@@ -333,5 +332,65 @@ this has to be revisted as we only want to delete the single entry, not any othe
 	return _entries;
 }
 
-
++ (UMDbTableDefinition *)routingTableDbDefinition
+{
+    UMDbTableDefinition *ttTableDef = [[UMDbTableDefinition alloc] init];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"translation_table_name"
+                       size:255
+                  canBeNull:NO
+                    indexed:YES
+                    primary:YES
+                        tag:1];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"sccp"
+                       size:255
+                  canBeNull:NO
+                    indexed:YES
+                    primary:NO
+                        tag:2];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithInteger:@"tt"
+                  canBeNull:NO
+                    indexed:NO
+                    primary:NO
+                        tag:3];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithInteger:@"gti"
+                  canBeNull:NO
+                    indexed:NO
+                    primary:NO
+                        tag:4];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithInteger:@"np"
+                  canBeNull:NO
+                    indexed:NO
+                    primary:NO
+                        tag:5];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithInteger:@"nai"
+                  canBeNull:NO
+                    indexed:NO
+                    primary:NO
+                        tag:6];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"pre_translation"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:7];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"post_translation"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:8];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"default_destination"
+                       size:255
+                  canBeNull:YES
+                    indexed:NO
+                    primary:NO
+                        tag:9];
+    [ttTableDef addFieldDef:[UMDbFieldDefinition alloc]initWithVarchar:@"last_modified_ts"
+                       size:32
+                  canBeNull:YES
+                    indexed:YES
+                    primary:NO
+                        tag:10];
+    return ttTableDef;
+}
 @end

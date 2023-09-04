@@ -11,6 +11,7 @@
 // the author.
 
 #import <ulib/ulib.h>
+#import <ulibdb/ulibdb.h>
 #import "SccpGttRoutingTableEntry.h"
 #import "SccpGttRoutingTableDigitNode.h"
 
@@ -49,4 +50,5 @@
 
 -(UMSynchronizedSortedDictionary *)list;
 
++ (UMDbTableDefinition *)routingTableDbDefinition;
 @end

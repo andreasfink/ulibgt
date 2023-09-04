@@ -70,6 +70,7 @@
                             opcode:(NSNumber *)op
                         appcontext:(NSString *)ac;
 - (BOOL) matchingTransactionNumber:(NSNumber *)tid;
++ (UMDbTableDefinition *)routingTableEntryDbDefinition;
 
 @end
 
