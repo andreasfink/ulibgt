@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A6091FCA1CB567630076BD59 /* SccpVariant.h in Headers */ = {isa = PBXBuildFile; fileRef = A6091FC81CB567620076BD59 /* SccpVariant.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A623A9A62AE7172100DA02B3 /* ulibdb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A623A9A52AE7172100DA02B3 /* ulibdb.framework */; };
+		A623A9A72AE7172100DA02B3 /* ulibdb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A623A9A52AE7172100DA02B3 /* ulibdb.framework */; };
 		A6322090205FD0AE006CC06A /* SccpL3RoutingTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A632208E205FD0AE006CC06A /* SccpL3RoutingTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6322091205FD0AE006CC06A /* SccpL3RoutingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A632208F205FD0AE006CC06A /* SccpL3RoutingTable.m */; };
 		A6322094205FD0CE006CC06A /* SccpL3RoutingTableEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -84,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		A6091FC81CB567620076BD59 /* SccpVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SccpVariant.h; sourceTree = "<group>"; };
+		A623A9A52AE7172100DA02B3 /* ulibdb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulibdb.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/ulibdb.framework"; sourceTree = "<absolute>"; };
 		A632208E205FD0AE006CC06A /* SccpL3RoutingTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpL3RoutingTable.h; sourceTree = "<group>"; };
 		A632208F205FD0AE006CC06A /* SccpL3RoutingTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SccpL3RoutingTable.m; sourceTree = "<group>"; };
 		A6322092205FD0CE006CC06A /* SccpL3RoutingTableEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SccpL3RoutingTableEntry.h; sourceTree = "<group>"; };
@@ -164,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6604A502527142B00D978EF /* ulib.framework in Frameworks */,
+				A623A9A62AE7172100DA02B3 /* ulibdb.framework in Frameworks */,
 				A6ADC5DE1CADEA2C00211137 /* ulibmtp3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +178,7 @@
 			files = (
 				A64BB74E27D9E55D00A5E8B6 /* ulibmtp3.framework in Frameworks */,
 				A64BB74D27D9E55A00A5E8B6 /* ulib.framework in Frameworks */,
+				A623A9A72AE7172100DA02B3 /* ulibdb.framework in Frameworks */,
 				A68A227A1B18B5DD00854472 /* ulibgt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				A6604A4F2527142B00D978EF /* ulib.framework */,
+				A623A9A52AE7172100DA02B3 /* ulibdb.framework */,
 				A6ADC5DD1CADEA2C00211137 /* ulibmtp3.framework */,
 			);
 			name = Frameworks;
@@ -200,7 +206,7 @@
 				A6F694221B4E85980090FC94 /* Makefile.osx.in */,
 				A6F694231B4E85980090FC94 /* ulibgt.pc.in */,
 				A68A22711B18B5DD00854472 /* SupportingFiles */,
-				A68A22701B18B5DD00854472 /* Classes */,
+				A68A22701B18B5DD00854472 /* ulibgt */,
 				A666EEC21E89B69E004804CB /* Frameworks */,
 				A68A227D1B18B5DD00854472 /* ulibgtTests */,
 				A68A226F1B18B5DD00854472 /* Products */,
@@ -217,7 +223,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A68A22701B18B5DD00854472 /* Classes */ = {
+		A68A22701B18B5DD00854472 /* ulibgt */ = {
 			isa = PBXGroup;
 			children = (
 				A68A22731B18B5DD00854472 /* ulibgt.h */,
@@ -276,7 +282,7 @@
 				A6C2914A2361095200A34651 /* SccpCountry.h */,
 				A6C2914B2361095200A34651 /* SccpCountry.m */,
 			);
-			path = Classes;
+			path = ulibgt;
 			sourceTree = "<group>";
 		};
 		A68A22711B18B5DD00854472 /* SupportingFiles */ = {
@@ -664,16 +670,18 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
-				DSTROOT = /;
+				DSTROOT = "/Library/Application Support/";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
+				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -694,16 +702,18 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
-				DSTROOT = /;
+				DSTROOT = "/Library/Application Support/";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
+				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -729,6 +739,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
@@ -760,6 +771,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);

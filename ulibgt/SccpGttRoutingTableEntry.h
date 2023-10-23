@@ -7,6 +7,7 @@
 //
 
 #import <ulib/ulib.h>
+#import <ulibdb/ulibdb.h>
 
 @class SccpGttRoutingTableAction;
 @class SccpDestinationGroup;
