@@ -12,13 +12,13 @@
 #import <ulib/ulib.h>
 #import <ulibmtp3/ulibmtp3.h>
 
-#import "SccpAddressIndicator.h"
-#import "SccpNatureOfAddressIndicator.h"
-#import "SccpTypeOfNumberIndicator.h"
-#import "SccpNumberPlanIndicator.h"
-#import "SccpSubSystemNumber.h"
-#import "SccpTranslationTableNumber.h"
-#import "SccpVariant.h"
+#import <ulibgt/SccpAddressIndicator.h>
+#import <ulibgt/SccpNatureOfAddressIndicator.h>
+#import <ulibgt/SccpTypeOfNumberIndicator.h>
+#import <ulibgt/SccpNumberPlanIndicator.h>
+#import <ulibgt/SccpSubSystemNumber.h>
+#import <ulibgt/SccpTranslationTableNumber.h>
+#import <ulibgt/SccpVariant.h>
 
 @interface SccpAddress : UMObject
 {

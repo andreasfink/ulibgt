@@ -7,8 +7,8 @@
 //
 
 #import <ulibmtp3/ulibmtp3.h>
-#import "SccpDestinationEntry.h"
-#import "SccpL3RoutingTable.h"
+#import <ulibgt/SccpDestinationEntry.h>
+#import <ulibgt/SccpL3RoutingTable.h>
 @class SccpNumberTranslation;
 
 typedef enum SccpDestinationGroupDistributionMethod

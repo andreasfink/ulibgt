@@ -7,7 +7,7 @@
 //
 
 #import <ulibmtp3/ulibmtp3.h>
-#import "SccpL3RouteStatus.h"
+#import <ulibgt/SccpL3RouteStatus.h>
 
 
 @interface SccpL3RoutingTableEntry : UMObject

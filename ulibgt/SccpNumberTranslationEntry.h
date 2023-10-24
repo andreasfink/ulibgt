@@ -7,7 +7,7 @@
 //
 
 #import <ulib/ulib.h>
-#import "SccpAddress.h"
+#import <ulibgt/SccpAddress.h>
 
 @interface SccpNumberTranslationEntry : UMObject
 {

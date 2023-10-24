@@ -12,8 +12,8 @@
 
 #import <ulib/ulib.h>
 #import <ulibdb/ulibdb.h>
-#import "SccpGttRoutingTableEntry.h"
-#import "SccpGttRoutingTableDigitNode.h"
+#import <ulibgt/SccpGttRoutingTableEntry.h>
+#import <ulibgt/SccpGttRoutingTableDigitNode.h>
 
 /* 
  Entries are stored twice. Once by number in a dictionary so its easy to print and read from a file.
