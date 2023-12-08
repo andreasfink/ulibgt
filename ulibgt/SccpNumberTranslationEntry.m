@@ -59,6 +59,7 @@ if(dict[name]) \
 {
     SET_DICT_STRING(dict,@"in-address",_inAddress);
     SET_DICT_STRING(dict,@"out-address",_outAddress);
+    SET_DICT_INTEGER(dict,@"new-tt",_replacementTT);
     SET_DICT_INTEGER(dict,@"new-nai",_replacementNAI);
     SET_DICT_INTEGER(dict,@"new-np",_replacementNP);
     SET_DICT_INTEGER(dict,@"remove-digits",_removeDigits);
@@ -122,6 +123,10 @@ if(dict[name]) \
     if(_appendDigits)
     {
         out.address = [NSString stringWithFormat:@"%@%@",out.address,_appendDigits];
+    }
+    if(_replacementTT)
+    {
+        out.tt = [[SccpTranslationTableNumber alloc]initWithInt:_replacementTT.intValue];
     }
     return out;
 }
