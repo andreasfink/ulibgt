@@ -14,6 +14,7 @@
     NSString *_inAddress;
     NSString *_outAddress;
     NSNumber *_replacementNAI;
+    NSNumber *_replacementTT;
     NSNumber *_replacementNP;
     NSNumber *_removeDigits;
     NSString *_appendDigits;
@@ -23,6 +24,7 @@
 
 @property(readwrite,strong,atomic)  NSString *inAddress;
 @property(readwrite,strong,atomic)  NSString *outAddress;
+@property(readwrite,strong,atomic)  NSNumber *replacementTT;
 @property(readwrite,strong,atomic)  NSNumber *replacementNAI;
 @property(readwrite,strong,atomic)  NSNumber *replacementNP;
 @property(readwrite,strong,atomic)  NSNumber *removeDigits;
