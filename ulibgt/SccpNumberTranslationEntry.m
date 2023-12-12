@@ -64,9 +64,17 @@ if(dict[name]) \
     SET_DICT_INTEGER(dict,@"new-np",_replacementNP);
     SET_DICT_INTEGER(dict,@"remove-digits",_removeDigits);
     SET_DICT_STRING(dict,@"append-digits",_appendDigits);
+    SET_DICT_INTEGER(dict,@"new-calling-party-tt",_replacementCallingPartyTT);
+    SET_DICT_INTEGER(dict,@"new-called-party-tt",_replacementCalledPartyTT);
 }
 
 - (SccpAddress *)translateAddress:(SccpAddress *)in
+{
+    return [self translateAddress:in newCallingTT:NULL newCalledTT:NULL];
+}
+
+- (SccpAddress *)translateAddress:(SccpAddress *)in newCallingTT:(NSNumber **)callingPartyTT newCalledTT:(NSNumber **)calledPartyTT
+
 {
     BOOL doTranslate = NO;
     //NSString *matchingDigits;
@@ -128,7 +136,23 @@ if(dict[name]) \
     {
         out.tt = [[SccpTranslationTableNumber alloc]initWithInt:_replacementTT.intValue];
     }
+    if(_replacementCallingPartyTT)
+    {
+        if(callingPartyTT)
+        {
+            *callingPartyTT = [_replacementCallingPartyTT copy];
+        }
+    }
+    if(_replacementCalledPartyTT)
+    {
+        if(calledPartyTT)
+        {
+            *calledPartyTT = [_replacementCalledPartyTT copy];
+        }
+    }
     return out;
 }
+
+
 
 @end

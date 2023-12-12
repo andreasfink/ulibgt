@@ -21,6 +21,7 @@
 
 - (SccpNumberTranslation *)initWithConfig:(NSDictionary *)cfg;
 - (SccpAddress *)translateAddress:(SccpAddress *)in;
+- (SccpAddress *)translateAddress:(SccpAddress *)in newCallingTT:(NSNumber **)cpatt newCalledTT:(NSNumber **)cgatt;
 - (void)addEntry:(SccpNumberTranslationEntry *)entry;
 
 @end

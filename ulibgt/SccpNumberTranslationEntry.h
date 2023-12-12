@@ -15,6 +15,8 @@
     NSString *_outAddress;
     NSNumber *_replacementNAI;
     NSNumber *_replacementTT;
+    NSNumber *_replacementCallingPartyTT;
+    NSNumber *_replacementCalledPartyTT;
     NSNumber *_replacementNP;
     NSNumber *_removeDigits;
     NSString *_appendDigits;
@@ -25,11 +27,13 @@
 @property(readwrite,strong,atomic)  NSString *inAddress;
 @property(readwrite,strong,atomic)  NSString *outAddress;
 @property(readwrite,strong,atomic)  NSNumber *replacementTT;
+@property(readwrite,strong,atomic)  NSNumber *replacementCallingPartyTT;
+@property(readwrite,strong,atomic)  NSNumber *replacementCalledPartyTT;
 @property(readwrite,strong,atomic)  NSNumber *replacementNAI;
 @property(readwrite,strong,atomic)  NSNumber *replacementNP;
 @property(readwrite,strong,atomic)  NSNumber *removeDigits;
 @property(readwrite,strong,atomic)  NSString *appendDigits;
 
 - (SccpAddress *)translateAddress:(SccpAddress *)inAddr;
-
+- (SccpAddress *)translateAddress:(SccpAddress *)in newCallingTT:(NSNumber **)cpatt newCalledTT:(NSNumber **)cgatt;
 @end

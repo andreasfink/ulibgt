@@ -42,12 +42,27 @@
     [_entries addObject:entry];
 }
 
+- (SccpAddress *)translateAddress:(SccpAddress *)in newCallingTT:(NSNumber **)cpatt newCalledTT:(NSNumber **)cgatt;
+{
+    SccpAddress *addr = in;
+    for(SccpNumberTranslationEntry *e in _entries)
+    {
+        SccpAddress *addr2 = [e translateAddress:addr newCallingTT:cpatt newCalledTT:cgatt];
+        if(addr2)
+        {
+            addr = addr2;
+            break;
+        }
+    }
+    return addr;
+}
+
 - (SccpAddress *)translateAddress:(SccpAddress *)in
 {
     SccpAddress *addr = in;
     for(SccpNumberTranslationEntry *e in _entries)
     {
-        SccpAddress *addr2 = [e translateAddress:addr];
+        SccpAddress *addr2 = [e translateAddress:addr newCallingTT:NULL newCalledTT:NULL];
         if(addr2)
         {
             addr = addr2;
