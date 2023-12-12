@@ -59,6 +59,7 @@
 
 - (SccpGttRoutingTableEntry *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
                                                   destination:(SccpAddress **)dst
+                                                       source:(SccpAddress *)src
                                               incomingLinkset:(NSString *)incomingLinkset
                                             transactionNumber:(NSNumber *)tid
                                                     operation:(NSNumber *)op

@@ -154,6 +154,7 @@
 
 - (SccpGttRoutingTableEntry *)chooseNextHopWithL3RoutingTable:(SccpL3RoutingTable *)rt
                                                   destination:(SccpAddress **)dst
+                                                       source:(SccpAddress *)src
                                               incomingLinkset:(NSString *)incomingLinkset
                                             transactionNumber:(NSNumber *)tid
                                                     operation:(NSNumber *)op
@@ -162,7 +163,17 @@
     SccpAddress *addr = *dst;
     if(_preTranslation)
     {
-        SccpAddress *addr2 = [_preTranslation translateAddress:addr];
+        NSNumber *newCallingTT;
+        NSNumber *newCalledTT;
+        SccpAddress *addr2 = [_preTranslation translateAddress:addr newCallingTT:&newCallingTT newCalledTT:&newCalledTT];
+        if(newCalledTT)
+        {
+            addr.tt.tt = newCalledTT.intValue;
+        }
+        if(newCallingTT)
+        {
+            src.tt.tt = newCallingTT.intValue;
+        }
         if(self.logLevel <= UMLOG_DEBUG)
         {
             [self.logFeed debugText:[NSString stringWithFormat:@"pre-translation: %@->%@",addr,addr2]];
