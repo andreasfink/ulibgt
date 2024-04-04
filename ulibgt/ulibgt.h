@@ -31,6 +31,7 @@
 #import <ulibgt/SccpNumberTranslation.h>
 #import <ulibgt/SccpNumberTranslationEntry.h>
 #import <ulibgt/SccpCountry.h>
+#import <ulibgt/SccpDestination.h>
 
 #import <ulibgt/UMSyntaxGT.h>
 #import <ulibgt/UMSyntaxGT_addressConversion.h>
