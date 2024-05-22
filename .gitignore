@@ -5,6 +5,9 @@
 *.so
 *.d
 *.o
+install
+libulibgt.a
+libulibgt.so
 Makefile
 Makefile.linux
 Makefile.osx
