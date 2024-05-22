@@ -7,7 +7,15 @@ includedir=${prefix}/include
 
 Name: ulibgt
 Cflags: -I${includedir}
+<<<<<<< HEAD
 Libs: -lbsd -L${libdir} -l:libulibgt.so.2.0
+=======
+<<<<<<< HEAD
+Libs: -lbsd -L${libdir} -l:libulibgt.so.2.0
+=======
+Libs: -lbsd -L${libdir} -l:libulibgt..2.0
+>>>>>>> 40bb2fd54c3d45332e0cb834608c0f3f77968e85
+>>>>>>> 797b75f42bb2b684afe9aa55b54dddac53d73555
 
 Description: universal global title library
 Version: 1.5.2
