@@ -117,17 +117,6 @@
     self.rootNode = newRoot;
 }
 
-#if 0
-- (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
-{
-    return [self findEntryByDigits:digits
-                 transactionNumber:NULL
-                               ssn:NULL
-                         operation:NULL
-                        appContext:NULL];
-}
-#endif
-
 - (SccpGttRoutingTableEntry *)findEntryByDigits:(NSString *)digits
                               transactionNumber:(NSNumber *)tid
                                             ssn:(NSNumber *)ssn
@@ -136,10 +125,10 @@
 {
     NSInteger n = [digits length];
 
-    SccpGttRoutingTableDigitNode *currentNode = self.rootNode;
-    SccpGttRoutingTableEntry    *myMainEntry = currentNode.mainEntry;
-    UMSynchronizedArray         *myEntries   = currentNode.entries;
-    SccpGttRoutingTableEntry    *returnValue = NULL;
+    SccpGttRoutingTableDigitNode    *currentNode = self.rootNode;
+    SccpGttRoutingTableEntry        *myMainEntry = currentNode.mainEntry;
+    UMSynchronizedArray             *myEntries   = currentNode.entries;
+    SccpGttRoutingTableEntry        *returnValue = NULL;
 
     if([digits isEqualToString:@"default"])
     {
@@ -180,13 +169,28 @@
         }
         if(currentNode.entries)
         {
-                myEntries   = currentNode.entries;
+            myEntries   = currentNode.entries;
         }
     }
 
     returnValue = myMainEntry;
     if(myEntries.count > 0)
     {
+        /* filter for only applicable entries */
+        UMSynchronizedArray *myEntries2 = [[UMSynchronizedArray alloc]init];
+        for(SccpGttRoutingTableEntry *entry in myEntries)
+        {
+            if([entry matchingTransactionNumber:tid
+                                            ssn:ssn
+                                         opcode:op
+                                     appcontext:ac])
+                [myEntries2 addObject:myEntries];
+        }
+        /* and sort by priorities */
+        myEntries = [myEntries2 sortedArrayUsingComparator:^NSComparisonResult(SccpGttRoutingTableEntry *a, SccpGttRoutingTableEntry *b)
+                     { return [a priorityComparision:b]; } ];
+        /* now the last entry is the most specific entry */
+        returnValue = [myEntries lastObject];
         for(SccpGttRoutingTableEntry *entry in myEntries)
         {
             if([entry isMainEntry])

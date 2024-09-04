@@ -591,6 +591,7 @@
     return YES;
 }
 
+
 - (BOOL) matchingTransactionNumber:(NSNumber *)tid
 {
     unsigned long start = 0x00000000;
@@ -793,4 +794,53 @@
                         tag:13]];
     return ttTableDef;
 }
+
+/* orders entry from least specific match to most specific match */
+- (NSComparisonResult)priorityComparision:(SccpGttRoutingTableEntry *)b;
+{
+    if(_digits.length < b.digits.length)
+    {
+        return NSOrderedAscending;
+    }
+    if(_digits.length > b.digits.length)
+    {
+        return NSOrderedDescending;
+    }
+    if(     (_tcapTransactionRangeStart==NULL) && (_tcapTransactionRangeEnd==NULL)
+       &&   (b.tcapTransactionRangeStart!=NULL) && (b.tcapTransactionRangeEnd!=NULL))
+    {
+        return NSOrderedAscending;
+    }
+    if(     (_tcapTransactionRangeStart!=NULL) && (_tcapTransactionRangeEnd!=NULL)
+       &&   (b.tcapTransactionRangeStart==NULL) && (b.tcapTransactionRangeEnd==NULL))
+    {
+        return NSOrderedDescending;
+    }
+    if((_calledSSNs==NULL) && (b.calledSSNs!=NULL))
+    {
+        return NSOrderedAscending;
+    }
+    if((_calledSSNs!=NULL) && (b.calledSSNs==NULL))
+    {
+        return NSOrderedDescending;
+    }
+    if((_calledOpcodes==NULL) && (b.calledOpcodes!=NULL))
+    {
+        return NSOrderedAscending;
+    }
+    if((_calledOpcodes!=NULL) && (b.calledOpcodes==NULL))
+    {
+        return NSOrderedDescending;
+    }
+    if((_appContexts==NULL) && (b.appContexts!=NULL))
+    {
+        return NSOrderedAscending;
+    }
+    if((_appContexts!=NULL) && (b.appContexts==NULL))
+    {
+        return NSOrderedDescending;
+    }
+    return NSOrderedSame;
+}
+
 @end

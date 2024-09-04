@@ -72,6 +72,7 @@
                         appcontext:(NSString *)ac;
 - (BOOL) matchingTransactionNumber:(NSNumber *)tid;
 + (UMDbTableDefinition *)routingTableEntryDbDefinition;
+- (NSComparisonResult)priorityComparision:(SccpGttRoutingTableEntry *)b;
 
 @end
 
