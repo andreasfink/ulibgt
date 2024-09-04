@@ -42,13 +42,8 @@
                                      appContext:(NSString *)ac;
 
 - (SccpGttRoutingTableEntry *)findEntryByName:(NSString *)name;
-//- (void)deleteEntryByName:(NSString *)name;
-//- (void)deleteEntryByDigits:(NSString *)digits;
-
-
 - (void)addEntry:(SccpGttRoutingTableEntry *)entry;
-
--(UMSynchronizedSortedDictionary *)list;
+- (UMSynchronizedSortedDictionary *)list;
 
 + (UMDbTableDefinition *)routingTableDbDefinition;
 @end
