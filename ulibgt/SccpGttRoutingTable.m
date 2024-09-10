@@ -124,11 +124,15 @@
                                      appContext:(NSString *)ac
 {
     NSInteger n = [digits length];
-
+    
     SccpGttRoutingTableDigitNode    *currentNode = self.rootNode;
     SccpGttRoutingTableEntry        *myMainEntry = currentNode.mainEntry;
-    UMSynchronizedArray             *myEntries   = currentNode.entries;
     SccpGttRoutingTableEntry        *returnValue = NULL;
+    UMSynchronizedArray             *applicableEntries = [[UMSynchronizedArray alloc]init];
+    for(SccpGttRoutingTableEntry *e in currentNode.entries)
+    {
+        [applicableEntries addObject:e];
+    }
 
     if([digits isEqualToString:@"default"])
     {
@@ -166,54 +170,33 @@
         if(currentNode.mainEntry)
         {
             myMainEntry = currentNode.mainEntry;
+            [applicableEntries addObject:myMainEntry];
         }
         if(currentNode.entries)
         {
-            myEntries   = currentNode.entries;
+            for(SccpGttRoutingTableEntry *e in currentNode.entries)
+            [applicableEntries addObject:e];
         }
     }
 
     returnValue = myMainEntry;
-    if(myEntries.count > 0)
+    if(applicableEntries.count > 0)
     {
         /* filter for only applicable entries */
-        UMSynchronizedArray *myEntries2 = [[UMSynchronizedArray alloc]init];
-        for(SccpGttRoutingTableEntry *entry in myEntries)
+        UMSynchronizedArray *myEntries = [[UMSynchronizedArray alloc]init];
+        for(SccpGttRoutingTableEntry *entry in applicableEntries)
         {
             if([entry matchingTransactionNumber:tid
                                             ssn:ssn
                                          opcode:op
                                      appcontext:ac])
-                [myEntries2 addObject:myEntries];
+                [myEntries addObject:entry];
         }
         /* and sort by priorities */
-        myEntries = [myEntries2 sortedArrayUsingComparator:^NSComparisonResult(SccpGttRoutingTableEntry *a, SccpGttRoutingTableEntry *b)
+        myEntries = [myEntries sortedArrayUsingComparator:^NSComparisonResult(SccpGttRoutingTableEntry *a, SccpGttRoutingTableEntry *b)
                      { return [a priorityComparision:b]; } ];
         /* now the last entry is the most specific entry */
         returnValue = [myEntries lastObject];
-        for(SccpGttRoutingTableEntry *entry in myEntries)
-        {
-            if([entry isMainEntry])
-            {
-                returnValue = entry; /* this is the unspecific entry by GT only */
-                myMainEntry= entry;
-            }
-        }
-
-        for(SccpGttRoutingTableEntry *entry in currentNode.entries)
-        {
-            if([entry isMainEntry])
-            {
-                continue; /* We already have this default one */
-            }
-            if([entry matchingTransactionNumber:tid
-                                            ssn:ssn
-                                         opcode:op
-                                     appcontext:ac])
-            {
-                returnValue = entry; /* setting more specific route */
-            }
-        }
     }
     if(_logLevel <=UMLOG_DEBUG)
     {
