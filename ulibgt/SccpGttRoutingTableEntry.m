@@ -392,7 +392,8 @@
     }
     else if([digits_object isKindOfClass:[NSArray class]])
     {
-        digits = (NSString *)((NSArray <NSString *> *)digits_object[0]);
+        NSArray<NSString *> *a = (NSArray<NSString *> *)digits_object;
+        digits = [a componentsJoinedByString:@","];
     }
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"%@:%@",table,digits];

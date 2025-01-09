@@ -84,13 +84,19 @@
         NSString *digits = entry.digits;
         if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
         {
-            //digits=@"";
+            entry.digits=@"";
+            if(newRoot.entries==NULL)
+            {
+                newRoot.entries = [[UMSynchronizedArray alloc]init];
+            }
             if(entry.isMainEntry)
             {
                 newRoot.mainEntry = entry;
             }
-            newRoot.entries = [[UMSynchronizedArray alloc]init];
-            [newRoot.entries addObject:entry];
+            else
+            {
+                [newRoot.entries addObject:entry];
+            }
         }
         else
         {
@@ -111,7 +117,10 @@
             {
                 currentNode.mainEntry = entry;
             }
-            [currentNode.entries addObject:entry];
+            else
+            {
+                [currentNode.entries addObject:entry];
+            }
         }
     }
     self.rootNode = newRoot;
@@ -223,15 +232,17 @@
     if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
     {
         _rootNode.entries = [[UMSynchronizedArray alloc]init];
-        [_rootNode.entries addObject:entry];
         if(entry.isMainEntry)
         {
             _rootNode.mainEntry = entry;
         }
+        else
+        {
+            [_rootNode.entries addObject:entry];
+        }
         _entries[@""] = entry;
         return;
     }
-
     SccpGttRoutingTableDigitNode *currentNode = _rootNode;
 
     for(NSInteger i = 0;i<n;i++)
@@ -244,10 +255,13 @@
     {
         currentNode.entries = [[UMSynchronizedArray alloc]init];
     }
-    [currentNode.entries addObject:entry];
     if(entry.isMainEntry)
     {
         currentNode.mainEntry = entry;
+    }
+    else
+    {
+        [currentNode.entries addObject:entry];
     }
     _entries[entry.name] = entry;
 }
