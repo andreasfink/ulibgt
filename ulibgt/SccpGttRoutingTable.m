@@ -204,9 +204,12 @@
                 [myEntries addObject:entry];
         }
         /* and sort by priorities */
-        myEntries = [myEntries sortedArrayUsingComparator:^NSComparisonResult(SccpGttRoutingTableEntry *a, SccpGttRoutingTableEntry *b)
-                     { return [a priorityComparision:b]; } ];
-        /* now the last entry is the most specific entry */
+        if(myEntries.count > 1)
+        {
+            myEntries = [myEntries sortedArrayUsingComparator:^NSComparisonResult(SccpGttRoutingTableEntry *a, SccpGttRoutingTableEntry *b)
+                         { return [a priorityComparision:b]; } ];
+            /* now the last entry is the most specific entry */
+        }
         returnValue = [myEntries lastObject];
     }
     if(_logLevel <=UMLOG_DEBUG)

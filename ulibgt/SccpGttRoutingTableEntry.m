@@ -19,7 +19,6 @@
     if(self)
     {
         _incomingSpeed = [[UMThroughputCounter alloc]init];
-        _enabled=YES;
     }
     return self;
 }
@@ -209,27 +208,10 @@
                 _appContexts = [s componentsSeparatedByCharactersInSet:[UMObject whitespaceAndNewlineAndCommaCharacterSet]];
             }
         }
-        _enabled=YES;
     }
     return self;
 }
  
-#if 0
-- (void)addSubentry:(SccpGttRoutingTableEntry *)subentry
-{
-    SccpGttRoutingTableEntry *e = [self copy];
-    if(_subentries == NULL)
-    {
-        _subentries = @[subentry, e];
-    }
-    else
-    {
-        _subentries =  [_subentries arrayByAddingObject:subentry];
-    }
-    _hasSubentries = YES;
-}
-#endif
-
 - (NSString *)getStatistics
 {
    return [_incomingSpeed getSpeedStringTriple];
@@ -283,11 +265,6 @@
     {
         [s appendFormat:@" post-translation=%@",_postTranslationName];
     }
-    if(_enabled == NO)
-    {
-        [s appendFormat:@" enabled=NO"];
-    }
-    
     if(_tcapTransactionRangeStart || _tcapTransactionRangeEnd)
     {
         [s appendFormat:@" tcap-transaction-range="];
@@ -307,7 +284,6 @@
         {
             [s appendFormat:@"%d",0xFFFFFFFF];
         }
-        [s appendFormat:@" enabled=NO"];
     }
     if(_calledSSNs.count > 0)
     {
@@ -473,7 +449,6 @@
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
     dict[@"config"] = [self config];
-    dict[@"enabled"] = @(_enabled);
     dict[@"incoming-speed"] = [_incomingSpeed getSpeedTripleJson];
     if(_routeTo)
     {
@@ -486,7 +461,6 @@
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
     dict[@"config"] = [self config];
-    dict[@"enabled"] = @(_enabled);
     dict[@"incoming-speed"] = [_incomingSpeed getSpeedTripleJson];
     if(_routeTo)
     {
@@ -673,7 +647,6 @@
     dst->_deliverLocal = _deliverLocal;
     dst->_postTranslationName = _postTranslationName;
     dst->_postTranslation = _postTranslation;
-    dst->_enabled = _enabled;
     dst->_logLevel = _logLevel;
     dst->_tcapTransactionRangeStart = _tcapTransactionRangeStart;
     dst->_tcapTransactionRangeEnd = _tcapTransactionRangeEnd;

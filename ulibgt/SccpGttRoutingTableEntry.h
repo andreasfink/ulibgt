@@ -24,7 +24,6 @@
     NSString                *_postTranslationName;
     SccpNumberTranslation   *_postTranslation;
 	UMThroughputCounter     *_incomingSpeed;
-    BOOL                    _enabled;
     UMLogLevel              _logLevel;
     NSNumber                *_tcapTransactionRangeStart;
     NSNumber                *_tcapTransactionRangeEnd;
@@ -43,7 +42,6 @@
 @property(readwrite,atomic,strong)  NSString    *postTranslationName;
 @property(readwrite,atomic,strong)  SccpNumberTranslation *postTranslation;
 @property(readwrite,atomic,strong)  UMThroughputCounter *incomingSpeed;
-@property(readwrite,atomic,assign)  BOOL        enabled;
 @property(readwrite,atomic,assign)  UMLogLevel  logLevel;
 @property(readwrite,atomic,strong)  NSNumber  *tcapTransactionRangeStart;
 @property(readwrite,atomic,strong)  NSNumber  *tcapTransactionRangeEnd;
