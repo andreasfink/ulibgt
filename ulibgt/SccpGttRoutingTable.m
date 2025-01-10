@@ -184,7 +184,9 @@
         if(currentNode.entries)
         {
             for(SccpGttRoutingTableEntry *e in currentNode.entries)
-            [applicableEntries addObject:e];
+            {
+                [applicableEntries addObject:e];
+            }
         }
     }
 
