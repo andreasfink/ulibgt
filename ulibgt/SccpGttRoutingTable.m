@@ -21,7 +21,7 @@
     if(self)
     {
         _entries = [[UMSynchronizedSortedDictionary alloc]init];
-
+        
     }
     return self;
 }
@@ -40,7 +40,7 @@
 - (void)setLogLevel:(UMLogLevel)newLogLevel
 {
     _logLevel = newLogLevel;
-
+    
     NSArray *keys = [_entries allKeys];
     for(id key in keys)
     {
@@ -75,12 +75,12 @@
 - (void)entriesToDigitTree
 {
     SccpGttRoutingTableDigitNode *newRoot = [[SccpGttRoutingTableDigitNode alloc]init];
-
+    
     NSArray *keys = [_entries allKeys];
     for(id key in keys)
     {
         SccpGttRoutingTableEntry *entry = _entries[key];
-
+        
         NSString *digits = entry.digits;
         if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
         {
@@ -102,7 +102,7 @@
         {
             const char *str = digits.UTF8String;
             int n = (int)strlen(str);
-
+            
             SccpGttRoutingTableDigitNode *currentNode = newRoot;
             for(int i = 0;i<n;i++)
             {
@@ -142,12 +142,12 @@
     {
         [applicableEntries addObject:e];
     }
-
+    
     if([digits isEqualToString:@"default"])
     {
         digits = @"";
     }
-
+    
     if(_logLevel <=UMLOG_DEBUG)
     {
         NSString *s = [NSString stringWithFormat:@"called findEntryByDigits:%@ transactionNumber:%@ ssn:%@ operation:%@ appContext:%@",digits,tid,ssn,op,ac];
@@ -189,7 +189,7 @@
             }
         }
     }
-
+    
     returnValue = myMainEntry;
     if(applicableEntries.count > 0)
     {
@@ -225,12 +225,12 @@
 {
     NSString *digits = entry.digits;
     NSInteger n = [digits length];
-
+    
     if(_rootNode == NULL)
     {
         _rootNode = [[SccpGttRoutingTableDigitNode alloc]init];
     }
-
+    
     if(([digits isEqualToString:@""]) || ([digits isEqualToString:@"default"]))
     {
         _rootNode.entries = [[UMSynchronizedArray alloc]init];
@@ -246,13 +246,13 @@
         return;
     }
     SccpGttRoutingTableDigitNode *currentNode = _rootNode;
-
+    
     for(NSInteger i = 0;i<n;i++)
     {
         unichar uc = [digits characterAtIndex:i];
         currentNode = [currentNode nextNode:(int)uc create:YES];
     }
-
+    
     if(currentNode.entries == NULL)
     {
         currentNode.entries = [[UMSynchronizedArray alloc]init];
@@ -270,7 +270,7 @@
 
 - (UMSynchronizedSortedDictionary *)list
 {
-	return _entries;
+    return _entries;
 }
 
 + (UMDbTableDefinition *)routingTableDbDefinition
@@ -283,55 +283,78 @@
                                                                 primary:YES
                                                                     tag:1]];
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithVarchar:@"sccp"
-                           size:255
-                      canBeNull:NO
-                        indexed:YES
-                        primary:NO
-                            tag:2]];
+                                                                   size:255
+                                                              canBeNull:NO
+                                                                indexed:YES
+                                                                primary:NO
+                                                                    tag:2]];
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithInteger:@"tt"
-                      canBeNull:NO
-                        indexed:NO
-                        primary:NO
-                            tag:3]];
+                                                              canBeNull:NO
+                                                                indexed:NO
+                                                                primary:NO
+                                                                    tag:3]];
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithInteger:@"gti"
-                      canBeNull:NO
-                        indexed:NO
-                        primary:NO
-                            tag:4]] ;
+                                                              canBeNull:NO
+                                                                indexed:NO
+                                                                primary:NO
+                                                                    tag:4]] ;
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithInteger:@"np"
-                      canBeNull:NO
-                        indexed:NO
-                        primary:NO
-                            tag:5]];
+                                                              canBeNull:NO
+                                                                indexed:NO
+                                                                primary:NO
+                                                                    tag:5]];
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithInteger:@"nai"
-                  canBeNull:NO
-                    indexed:NO
-                    primary:NO
-                        tag:6]];
+                                                              canBeNull:NO
+                                                                indexed:NO
+                                                                primary:NO
+                                                                    tag:6]];
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithVarchar:@"pre_translation"
-                       size:255
-                  canBeNull:YES
-                    indexed:NO
-                    primary:NO
-                        tag:7]];
+                                                                   size:255
+                                                              canBeNull:YES
+                                                                indexed:NO
+                                                                primary:NO
+                                                                    tag:7]];
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithVarchar:@"post_translation"
-                       size:255
-                  canBeNull:YES
-                    indexed:NO
-                    primary:NO
-                        tag:8]];
+                                                                   size:255
+                                                              canBeNull:YES
+                                                                indexed:NO
+                                                                primary:NO
+                                                                    tag:8]];
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithVarchar:@"default_destination"
-                           size:255
-                      canBeNull:YES
-                        indexed:NO
-                        primary:NO
-                            tag:9]] ;
+                                                                   size:255
+                                                              canBeNull:YES
+                                                                indexed:NO
+                                                                primary:NO
+                                                                    tag:9]] ;
     [ttTableDef addFieldDef:[[UMDbFieldDefinition alloc]initWithVarchar:@"last_modified_ts"
-                       size:32
-                  canBeNull:YES
-                    indexed:YES
-                    primary:NO
-                        tag:10]];
+                                                                   size:32
+                                                              canBeNull:YES
+                                                                indexed:YES
+                                                                primary:NO
+                                                                    tag:10]];
     return ttTableDef;
 }
+
+
+
+- (NSString *)dumpTable
+{
+    NSMutableString *s = [[NSMutableString alloc]init];
+    NSArray *keys = [_entries allKeys];
+    
+    for(NSString *key in keys)
+    {
+        SccpGttRoutingTableEntry *entry = _entries[key];
+        [s appendString:entry.description];
+        [s appendString:@"\n"];
+    }
+    return s;
+}
+
+
+- (NSString *)dumpTree
+{
+    return [_rootNode dumpTreeEntryWithIdent:@""];
+}
+
 @end

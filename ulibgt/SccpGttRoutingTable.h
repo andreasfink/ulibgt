@@ -46,4 +46,8 @@
 - (UMSynchronizedSortedDictionary *)list;
 
 + (UMDbTableDefinition *)routingTableDbDefinition;
+
+- (NSString *)dumpTable;
+- (NSString *)dumpTree;
+
 @end

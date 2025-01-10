@@ -21,4 +21,5 @@
 
 - (SccpGttRoutingTableDigitNode *)nextNode:(unichar)nextDigit create:(BOOL)create;
 
+- (NSString *)dumpTreeEntryWithIdent:(NSString *)ident;
 @end

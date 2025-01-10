@@ -8,6 +8,7 @@
 
 #import "SccpGttRoutingTableDigitNode.h"
 #import "SccpAddress.h"
+#import "SccpGttRoutingTableEntry.h"
 
 @implementation SccpGttRoutingTableDigitNode
 
@@ -38,6 +39,40 @@
         nextEntry = _next[index] ;
     }
     return nextEntry;
+}
+
+
+- (NSString *)dumpTreeEntryWithIdent:(NSString *)ident
+{
+    NSMutableString *s = [[NSMutableString alloc]init];
+    if(_mainEntry)
+    {
+        [s appendFormat:@"%@mainEntry: %@\n",ident,_mainEntry.description];
+    }
+    if(_entries)
+    {
+        [s appendFormat:@"%@subentries:\n",ident];
+        [s appendFormat:@"%@{\n",ident];
+        for(SccpGttRoutingTableEntry *e in _entries)
+        {
+            [s appendFormat:@"%@   %@\n",ident,e.description];
+        }
+        [s appendFormat:@"%@}\n",ident];
+        for(int i=0;i<16;i++)
+        {
+            SccpGttRoutingTableDigitNode *n = _next[i];
+            if(n)
+            {
+                [s appendFormat:@"%@[%d]:\n",ident,i];
+                [s appendFormat:@"%@{\n",ident];
+                NSString *ident2 = [NSString stringWithFormat:@"%@  ",ident];
+                NSString *sub = [n dumpTreeEntryWithIdent:ident2];
+                [s appendString:sub];
+                [s appendFormat:@"%@}\n",ident];
+            }
+        }
+    }
+    return s;
 }
 
 @end
