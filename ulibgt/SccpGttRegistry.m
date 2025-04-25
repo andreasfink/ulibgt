@@ -218,4 +218,18 @@ static SccpGttRegistry *g_registry;
     [_sccp_destinations_dict removeObjectForKey:name];
 }
 
+
+- (UMSynchronizedSortedDictionary *)status
+{
+    UMSynchronizedSortedDictionary *d = [[UMSynchronizedSortedDictionary alloc]init];
+    NSArray<NSString *> *names = [_entriesByName allKeys];
+    for(NSString *name in names)
+    {
+        SccpGttSelector *sel = _entriesByName[name];
+        UMSynchronizedSortedDictionary *d2 = [sel status];
+        d[name] = d2;
+    }
+    return d;
+}
+
 @end

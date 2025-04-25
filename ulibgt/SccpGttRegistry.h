@@ -52,5 +52,6 @@
 - (void)addDestinationGroup:(SccpDestinationGroup *)grp;
 - (void)removeDestinationGroup:(NSString *)name;
 - (SccpNumberTranslation *)numberTranslationByName:(NSString *)name;
+- (UMSynchronizedSortedDictionary *)status;
 
 @end

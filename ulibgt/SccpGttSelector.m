@@ -343,6 +343,42 @@
 	_active = on;
 }
 
+- (UMSynchronizedSortedDictionary *)status
+{
+    UMSynchronizedSortedDictionary *d = [[UMSynchronizedSortedDictionary alloc]init];
+    if(_name)
+    {
+        d[@"name"] = _name;
+    }
+    if(_sccp_instance)
+    {
+        d[@"sccp-instance"] = _sccp_instance;
+    }
+    d[@"tt"] = @(_tt);
+    d[@"gti"] = @(_gti);
+    d[@"np"] = @(_np);
+    d[@"nai"] = @(_nai);
+    d[@"external"] = @(_external);
+    d[@"internal"] = @(_internal);
+    if(_routingTable)
+    {
+        d[@"routing-table"] = [_routingTable status];
+    }
+    if(_statusOfProviders)
+    {
+        d[@"status-of-providers"] = _statusOfProviders;
+    }
+    d[@"active"] = @(_active);
+    if(_preTranslationName)
+    {
+        d[@"pre-translation"] = _preTranslationName;
+    }
+    if(_postTranslationName)
+    {
+        d[@"post-translation"] = _postTranslationName;
+    }
+    return d;
+}
 
 @end
 

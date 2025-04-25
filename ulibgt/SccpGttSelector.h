@@ -90,4 +90,7 @@
 
 - (void)activate:(BOOL)on;
 
+- (UMSynchronizedSortedDictionary *)status;
+
+
 @end
