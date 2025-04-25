@@ -363,14 +363,25 @@
 - (UMSynchronizedSortedDictionary *)status
 {
     UMSynchronizedSortedDictionary *d = [[UMSynchronizedSortedDictionary alloc]init];
-    
-    NSMutableString *s = [[NSMutableString alloc]init];
-    NSArray *keys = [_entries allKeys];
-    
-    for(NSString *key in keys)
+    if(_entries==NULL)
     {
-        SccpGttRoutingTableEntry *entry = _entries[key];
-        d[key] = [entry status];
+        d[@"comment"] = @"_entries is NULL";
+    }
+    else
+    {
+        NSArray *keys = [_entries allKeys];
+        if(keys.count==0)
+        {
+            d[@"comment"] = @"_entries has zero entries";
+        }
+        else
+        {
+            for(NSString *key in keys)
+            {
+                SccpGttRoutingTableEntry *entry = _entries[key];
+                d[key] = [entry status];
+            }
+        }
     }
     return d;
 }
