@@ -227,8 +227,9 @@
 - (void)addEntry:(SccpGttRoutingTableEntry *)entry
 {
     NSString *digits = entry.digits;
-    NSInteger n = [digits length];
+    _entries[entry.name] = entry;
     
+    NSInteger n = [digits length];
     if(_rootNode == NULL)
     {
         _rootNode = [[SccpGttRoutingTableDigitNode alloc]init];
@@ -268,7 +269,6 @@
     {
         [currentNode.entries addObject:entry];
     }
-    _entries[entry.name] = entry;
 }
 
 - (UMSynchronizedSortedDictionary *)list
