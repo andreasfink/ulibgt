@@ -49,5 +49,6 @@
 
 - (NSString *)dumpTable;
 - (NSString *)dumpTree;
+- (UMSynchronizedSortedDictionary *)status;
 
 @end

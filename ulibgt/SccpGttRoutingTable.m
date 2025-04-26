@@ -227,8 +227,9 @@
 - (void)addEntry:(SccpGttRoutingTableEntry *)entry
 {
     NSString *digits = entry.digits;
-    NSInteger n = [digits length];
+    _entries[entry.name] = entry;
     
+    NSInteger n = [digits length];
     if(_rootNode == NULL)
     {
         _rootNode = [[SccpGttRoutingTableDigitNode alloc]init];
@@ -268,7 +269,6 @@
     {
         [currentNode.entries addObject:entry];
     }
-    _entries[entry.name] = entry;
 }
 
 - (UMSynchronizedSortedDictionary *)list
@@ -358,6 +358,32 @@
 - (NSString *)dumpTree
 {
     return [_rootNode dumpTreeEntryWithIdent:@""];
+}
+
+- (UMSynchronizedSortedDictionary *)status
+{
+    UMSynchronizedSortedDictionary *d = [[UMSynchronizedSortedDictionary alloc]init];
+    if(_entries==NULL)
+    {
+        d[@"comment"] = @"_entries is NULL";
+    }
+    else
+    {
+        NSArray *keys = [_entries allKeys];
+        if(keys.count==0)
+        {
+            d[@"comment"] = @"_entries has zero entries";
+        }
+        else
+        {
+            for(NSString *key in keys)
+            {
+                SccpGttRoutingTableEntry *entry = _entries[key];
+                d[key] = [entry status];
+            }
+        }
+    }
+    return d;
 }
 
 @end
