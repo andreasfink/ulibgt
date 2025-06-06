@@ -41,7 +41,7 @@
     {
         entry = [[SccpL3RoutingTableEntry alloc]init];
         entry.pc = pointCode;
-        entry.status = SccpL3RouteStatus_available;
+        entry.status = SccpL3RouteStatus_unknown;
         _entries[@(pointCode.pc)] = entry;
     }
     return  entry;
