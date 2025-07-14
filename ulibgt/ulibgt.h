@@ -26,6 +26,7 @@
 #import <ulibgt/SccpGttRoutingTableEntry.h>
 #import <ulibgt/SccpL3RoutingTableEntry.h>
 #import <ulibgt/SccpGttRoutingTableDigitNode.h>
+#import <ulibgt/SccpDestination.h>
 #import <ulibgt/SccpDestinationEntry.h>
 #import <ulibgt/SccpDestinationGroup.h>
 #import <ulibgt/SccpNumberTranslation.h>
