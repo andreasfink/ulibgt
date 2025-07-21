@@ -69,6 +69,7 @@
 - (SccpAddress *)anySsnAddress;
 
 - (NSString *)stringValueE164;
+- (id)proxyForJson;
 @end
 
 int sccp_digit_to_nibble(unichar digit, int def);
