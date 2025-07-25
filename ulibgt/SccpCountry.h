@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/ulib.h>
 
 const char *sccp_get_country_from_msisdn(const char *msisdn);
 NSString * SccpCountryFromMSISDN(NSString *msisdn);
