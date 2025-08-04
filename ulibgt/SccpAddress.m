@@ -1239,6 +1239,41 @@ int sccp_digit_to_nibble(unichar digit, int def)
     return s;
 }
 
+
+- (id)proxyForJson
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    if(ai)
+    {
+        dict[@"ai"] = ai.dictionaryValue;
+    }
+    if(nai)
+    {
+        dict[@"nai"] = @(nai.nai);
+    }
+    if(npi)
+    {
+        dict[@"npi"] = @(npi.npi);
+    }
+    if(ssn)
+    {
+        dict[@"ssn"] = @(ssn.ssn);
+    }
+    if(tt)
+    {
+        dict[@"tt"] = @(tt.tt);
+    }
+    if(address)
+    {
+        dict[@"address"] = address;
+    }
+    if(pc)
+    {
+        dict[@"pc"] = pc.description;
+    }
+    return dict;
+}
+
 @end
 
 static int is_all_digits(const char *text, int startpos, unsigned long len)

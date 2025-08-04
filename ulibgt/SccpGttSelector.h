@@ -48,7 +48,6 @@
 @property(readwrite,strong,atomic)  NSString              *postTranslationName;
 @property(readwrite,strong,atomic)  SccpNumberTranslation *preTranslation;
 @property(readwrite,strong,atomic)  SccpNumberTranslation *postTranslation;
-@property(readwrite,strong,atomic) id getSCCPDestinationDelegate;
 
 
 - (SccpGttRoutingTableEntry *)findNextHopForDestination:(SccpAddress *)dst

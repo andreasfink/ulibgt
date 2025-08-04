@@ -6,8 +6,7 @@
 //  Copyright © 2020 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/framework.h>
-
+#import <ulib/ulib.h>
 
 
 @interface SccpGttRoutingTableSubEntry : NSObject
