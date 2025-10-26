@@ -26,13 +26,11 @@
 #import <ulibgt/SccpGttRoutingTableEntry.h>
 #import <ulibgt/SccpL3RoutingTableEntry.h>
 #import <ulibgt/SccpGttRoutingTableDigitNode.h>
-#import <ulibgt/SccpDestination.h>
-#import <ulibgt/SccpDestinationEntry.h>
 #import <ulibgt/SccpDestinationGroup.h>
+#import <ulibgt/SccpDestinationEntry.h>
 #import <ulibgt/SccpNumberTranslation.h>
 #import <ulibgt/SccpNumberTranslationEntry.h>
 #import <ulibgt/SccpCountry.h>
-//#import <ulibgt/SccpDestination.h>
 
 #import <ulibgt/UMSyntaxGT.h>
 #import <ulibgt/UMSyntaxGT_addressConversion.h>
