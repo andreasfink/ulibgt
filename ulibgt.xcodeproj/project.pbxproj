@@ -26,7 +26,7 @@
 		A661D1A71E892D9300A5140C /* SccpGttRoutingTableDigitNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A661D1A51E892D9300A5140C /* SccpGttRoutingTableDigitNode.m */; };
 		A66233C11E4C46C60095B5D8 /* SccpGttRoutingTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A66233BF1E4C46C60095B5D8 /* SccpGttRoutingTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66233C21E4C46C60095B5D8 /* SccpGttRoutingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A66233C01E4C46C60095B5D8 /* SccpGttRoutingTable.m */; };
-		A66472F228A135D300765050 /* SccpDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = A66472F028A135D300765050 /* SccpDestination.h */; };
+		A66472F228A135D300765050 /* SccpDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = A66472F028A135D300765050 /* SccpDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66472F328A135D300765050 /* SccpDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = A66472F128A135D300765050 /* SccpDestination.m */; };
 		A666EF6E1E89C54C004804CB /* UMSyntaxGT.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EF6C1E89C54C004804CB /* UMSyntaxGT.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A666EF6F1E89C54C004804CB /* UMSyntaxGT.m in Sources */ = {isa = PBXBuildFile; fileRef = A666EF6D1E89C54C004804CB /* UMSyntaxGT.m */; };
