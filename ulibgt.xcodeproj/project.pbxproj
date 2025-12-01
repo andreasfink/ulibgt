@@ -26,7 +26,7 @@
 		A661D1A71E892D9300A5140C /* SccpGttRoutingTableDigitNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A661D1A51E892D9300A5140C /* SccpGttRoutingTableDigitNode.m */; };
 		A66233C11E4C46C60095B5D8 /* SccpGttRoutingTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A66233BF1E4C46C60095B5D8 /* SccpGttRoutingTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66233C21E4C46C60095B5D8 /* SccpGttRoutingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A66233C01E4C46C60095B5D8 /* SccpGttRoutingTable.m */; };
-		A66472F228A135D300765050 /* SccpDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = A66472F028A135D300765050 /* SccpDestination.h */; };
+		A66472F228A135D300765050 /* SccpDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = A66472F028A135D300765050 /* SccpDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66472F328A135D300765050 /* SccpDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = A66472F128A135D300765050 /* SccpDestination.m */; };
 		A666EF6E1E89C54C004804CB /* UMSyntaxGT.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EF6C1E89C54C004804CB /* UMSyntaxGT.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A666EF6F1E89C54C004804CB /* UMSyntaxGT.m in Sources */ = {isa = PBXBuildFile; fileRef = A666EF6D1E89C54C004804CB /* UMSyntaxGT.m */; };
@@ -155,7 +155,7 @@
 		A6E7BF491FBECE4600C53765 /* E.212-201011-I!Amd2!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-201011-I!Amd2!PDF-E.pdf"; sourceTree = "<group>"; };
 		A6E7BF4A1FBECE4600C53765 /* E.213-198811-I!!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.213-198811-I!!PDF-E.pdf"; sourceTree = "<group>"; };
 		A6E7BF4B1FBECE4600C53765 /* E.212-200805-I!!PDF-E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "E.212-200805-I!!PDF-E.pdf"; sourceTree = "<group>"; };
-		A6F693F01B4E83630090FC94 /* configure.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
+		A6F693F01B4E83630090FC94 /* configure.ac */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
 		A6F694211B4E85980090FC94 /* Makefile.linux.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
 		A6F694221B4E85980090FC94 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
 		A6F694231B4E85980090FC94 /* ulibgt.pc.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = ulibgt.pc.in; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 			children = (
 				A6D43A2C1B3143600090FC94 /* VERSION */,
 				A661D19E1E89218D00A5140C /* README.txt */,
-				A6F693F01B4E83630090FC94 /* configure.in */,
+				A6F693F01B4E83630090FC94 /* configure.ac */,
 				A6F694211B4E85980090FC94 /* Makefile.linux.in */,
 				A6F694221B4E85980090FC94 /* Makefile.osx.in */,
 				A6F694231B4E85980090FC94 /* ulibgt.pc.in */,
@@ -409,7 +409,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1620;
-				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					A68A226D1B18B5DD00854472 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -423,7 +423,7 @@
 				};
 			};
 			buildConfigurationList = A68A22681B18B5DD00854472 /* Build configuration list for PBXProject "ulibgt" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -534,12 +534,9 @@
 		A68A22821B18B5DD00854472 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					x86_64,
-					aarm64,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -567,12 +564,14 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2.1.1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 2.0.0;
+				DYLIB_CURRENT_VERSION = 2.1.1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "\"/Library/Application Support/FinkTelecomServices/frameworks\"";
@@ -592,7 +591,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 2.1.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = auto;
@@ -606,12 +606,9 @@
 		A68A22831B18B5DD00854472 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					x86_64,
-					aarm64,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -639,12 +636,14 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2.1.1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 2.0.0;
+				DYLIB_CURRENT_VERSION = 2.1.1;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "\"/Library/Application Support/FinkTelecomServices/frameworks\"";
@@ -657,7 +656,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 2.1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = auto;
@@ -677,10 +677,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = HG8655K94F;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = "/Library/Application Support";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "$(DSTROOT)/$(INSTALL_PATH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -691,21 +689,16 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
 				INSTALL_PATH = FinkTelecomServices/frameworks;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.16.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.--PRODUCT-NAME-rfc1034identifier-";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulibgt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
-				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = NO;
-				TVOS_DEPLOYMENT_TARGET = 18.0;
 			};
 			name = Debug;
 		};
@@ -718,10 +711,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = HG8655K94F;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = "/Library/Application Support";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "$(DSTROOT)/$(INSTALL_PATH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -732,21 +723,16 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SupportingFiles/Info.plist";
 				INSTALL_PATH = FinkTelecomServices/frameworks;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.16.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.--PRODUCT-NAME-rfc1034identifier-";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulibgt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
-				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = NO;
-				TVOS_DEPLOYMENT_TARGET = 18.0;
 			};
 			name = Release;
 		};

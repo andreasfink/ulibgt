@@ -8,6 +8,8 @@
 
 #import "SccpDestination.h"
 
+/* for backwards compatibility */
+
 @implementation SccpDestination
 
 @end
